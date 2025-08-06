@@ -5,7 +5,7 @@ export default function AssignmentsPage() {
       title: 'Unit 1A: Foundations of Algebra 2 - Part 1',
       description: 'Review essential algebra skills and introduce advanced concepts',
       dueDate: '2025-08-15',
-      status: 'completed',
+      status: 'current',
       topics: ['Solving equations', 'Graphing basics', 'Function notation', 'Domain and range']
     },
     {
@@ -13,7 +13,7 @@ export default function AssignmentsPage() {
       title: 'Unit 1B: Foundations of Algebra 2 - Part 2',
       description: 'Advanced algebraic techniques and function transformations',
       dueDate: '2025-08-25',
-      status: 'completed',
+      status: 'upcoming',
       topics: ['Function transformations', 'Inverse functions', 'Composition of functions', 'Piecewise functions']
     },
     {
@@ -21,7 +21,7 @@ export default function AssignmentsPage() {
       title: 'Unit 2: Quadratic Functions',
       description: 'Exploring parabolas, vertex form, and graphing quadratics',
       dueDate: '2025-09-05',
-      status: 'current',
+      status: 'upcoming',
       topics: ['Standard form', 'Vertex form', 'Graphing parabolas', 'Axis of symmetry', 'Maximum/minimum values']
     },
     {
