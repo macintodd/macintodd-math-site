@@ -1,4 +1,9 @@
+import { getUnitsWithStatus, CURRENT_UNIT, UNITS } from '../config/units'
+
 export default function Home() {
+  const unitsWithStatus = getUnitsWithStatus()
+  const currentUnit = UNITS.find(unit => unit.id === CURRENT_UNIT)
+  
   return (
     <div className="space-y-8">
       {/* Welcome Section */}
@@ -29,8 +34,8 @@ export default function Home() {
       <section className="grid md:grid-cols-3 gap-6">
         <div className="assignment-card">
           <h3 className="text-xl font-bold text-gray-800 mb-3">Latest Assignment</h3>
-          <p className="text-gray-600 mb-4">Unit 2: Quadratic Functions</p>
-          <a href="/assignments/unit2" className="text-blue-600 hover:text-blue-800">
+          <p className="text-gray-600 mb-4">Unit {currentUnit?.unit}: {currentUnit?.title}</p>
+          <a href={`/assignments/unit${currentUnit?.id?.toLowerCase()}`} className="text-blue-600 hover:text-blue-800">
             View Assignment →
           </a>
         </div>
@@ -56,16 +61,7 @@ export default function Home() {
       <section>
         <h3 className="text-2xl font-bold text-gray-800 mb-6">Course Units</h3>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {[
-            { unit: "1A", title: "Foundations of Algebra 2 - Part 1", status: "current" },
-            { unit: "1B", title: "Foundations of Algebra 2 - Part 2", status: "completed" },
-            { unit: "2", title: "Quadratic Functions", status: "completed" },
-            { unit: "3", title: "Quadratic Equations", status: "upcoming" },
-            { unit: "4A", title: "Polynomial Functions - Part 1", status: "upcoming" },
-            { unit: "4B", title: "Polynomial Functions - Part 2", status: "upcoming" },
-            { unit: "5", title: "Rational Exponents & Radical Functions", status: "upcoming" },
-            { unit: "6", title: "Exponential & Logarithmic Functions", status: "upcoming" }
-          ].map((unit) => (
+          {unitsWithStatus.map((unit) => (
             <div 
               key={unit.unit}
               className={`p-4 rounded-lg border-2 ${

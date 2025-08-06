@@ -1,54 +1,14 @@
+import { getUnitsWithStatus } from '../../config/units'
+
 export default function AssignmentsPage() {
-  const assignments = [
-    {
-      id: 'unit1a',
-      title: 'Unit 1A: Foundations of Algebra 2 - Part 1',
-      description: 'Review essential algebra skills and introduce advanced concepts',
-      dueDate: '2025-08-15',
-      status: 'current',
-      topics: ['Solving equations', 'Graphing basics', 'Function notation', 'Domain and range']
-    },
-    {
-      id: 'unit1b',
-      title: 'Unit 1B: Foundations of Algebra 2 - Part 2',
-      description: 'Advanced algebraic techniques and function transformations',
-      dueDate: '2025-08-25',
-      status: 'upcoming',
-      topics: ['Function transformations', 'Inverse functions', 'Composition of functions', 'Piecewise functions']
-    },
-    {
-      id: 'unit2',
-      title: 'Unit 2: Quadratic Functions',
-      description: 'Exploring parabolas, vertex form, and graphing quadratics',
-      dueDate: '2025-09-05',
-      status: 'upcoming',
-      topics: ['Standard form', 'Vertex form', 'Graphing parabolas', 'Axis of symmetry', 'Maximum/minimum values']
-    },
-    {
-      id: 'unit3',
-      title: 'Unit 3: Quadratic Equations',
-      description: 'Solving quadratic equations using various methods',
-      dueDate: '2025-09-15',
-      status: 'upcoming',
-      topics: ['Factoring', 'Quadratic formula', 'Completing the square', 'Discriminant', 'Complex solutions']
-    },
-    {
-      id: 'unit4a',
-      title: 'Unit 4A: Polynomial Functions - Part 1',
-      description: 'Introduction to polynomial functions and their properties',
-      dueDate: '2025-09-25',
-      status: 'upcoming',
-      topics: ['Polynomial basics', 'End behavior', 'Zeros and factors', 'Graphing polynomials']
-    },
-    {
-      id: 'unit4b',
-      title: 'Unit 4B: Polynomial Functions - Part 2',
-      description: 'Advanced polynomial operations and applications',
-      dueDate: '2025-10-05',
-      status: 'upcoming',
-      topics: ['Polynomial division', 'Remainder theorem', 'Rational root theorem', 'Real-world applications']
-    }
-  ]
+  const assignments = getUnitsWithStatus().map(unit => ({
+    id: `unit${unit.id.toLowerCase()}`,
+    title: `Unit ${unit.unit}: ${unit.title}`,
+    description: unit.description,
+    dueDate: unit.dueDate,
+    status: unit.status,
+    topics: unit.topics
+  }))
 
   return (
     <div className="space-y-8">
