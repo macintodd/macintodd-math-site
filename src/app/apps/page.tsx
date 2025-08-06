@@ -38,6 +38,36 @@ export default function AppsPage() {
             Coming Soon
           </button>
         </div>
+
+        <div className="p-6 rounded-lg border-2 border-gray-300 bg-gray-50">
+          <h3 className="text-xl font-bold text-gray-800 mb-2">Polynomial Grapher</h3>
+          <p className="text-gray-600 mb-3">Visualize polynomial functions and their properties</p>
+          <div className="flex justify-between items-center text-sm text-gray-500 mb-4">
+            <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded">Unit 4A</span>
+            <span>Intermediate</span>
+          </div>
+          <button
+            disabled
+            className="inline-block bg-gray-400 text-white px-4 py-2 rounded font-medium cursor-not-allowed"
+          >
+            Coming Soon
+          </button>
+        </div>
+
+        <div className="p-6 rounded-lg border-2 border-gray-300 bg-gray-50">
+          <h3 className="text-xl font-bold text-gray-800 mb-2">Exponential Explorer</h3>
+          <p className="text-gray-600 mb-3">Interactive exploration of exponential and logarithmic functions</p>
+          <div className="flex justify-between items-center text-sm text-gray-500 mb-4">
+            <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded">Unit 6</span>
+            <span>Advanced</span>
+          </div>
+          <button
+            disabled
+            className="inline-block bg-gray-400 text-white px-4 py-2 rounded font-medium cursor-not-allowed"
+          >
+            Coming Soon
+          </button>
+        </div>
       </div>
 
       <div className="text-center">

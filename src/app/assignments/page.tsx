@@ -1,36 +1,52 @@
 export default function AssignmentsPage() {
   const assignments = [
     {
-      id: 'unit1',
-      title: 'Unit 1: Linear Functions',
-      description: 'Practice with linear equations, slope, and graphing',
+      id: 'unit1a',
+      title: 'Unit 1A: Foundations of Algebra 2 - Part 1',
+      description: 'Review essential algebra skills and introduce advanced concepts',
       dueDate: '2025-08-15',
       status: 'completed',
-      topics: ['Slope-intercept form', 'Point-slope form', 'Graphing lines']
+      topics: ['Solving equations', 'Graphing basics', 'Function notation', 'Domain and range']
+    },
+    {
+      id: 'unit1b',
+      title: 'Unit 1B: Foundations of Algebra 2 - Part 2',
+      description: 'Advanced algebraic techniques and function transformations',
+      dueDate: '2025-08-25',
+      status: 'completed',
+      topics: ['Function transformations', 'Inverse functions', 'Composition of functions', 'Piecewise functions']
     },
     {
       id: 'unit2',
-      title: 'Unit 2: Systems of Equations',
-      description: 'Solving systems using substitution, elimination, and graphing',
-      dueDate: '2025-08-25',
-      status: 'completed',
-      topics: ['Substitution method', 'Elimination method', 'Graphing systems']
+      title: 'Unit 2: Quadratic Functions',
+      description: 'Exploring parabolas, vertex form, and graphing quadratics',
+      dueDate: '2025-09-05',
+      status: 'current',
+      topics: ['Standard form', 'Vertex form', 'Graphing parabolas', 'Axis of symmetry', 'Maximum/minimum values']
     },
     {
       id: 'unit3',
-      title: 'Unit 3: Quadratic Functions',
-      description: 'Exploring parabolas, factoring, and the quadratic formula',
-      dueDate: '2025-09-05',
-      status: 'current',
-      topics: ['Standard form', 'Vertex form', 'Factoring', 'Quadratic formula']
-    },
-    {
-      id: 'unit4',
-      title: 'Unit 4: Exponential Functions',
-      description: 'Understanding exponential growth and decay',
+      title: 'Unit 3: Quadratic Equations',
+      description: 'Solving quadratic equations using various methods',
       dueDate: '2025-09-15',
       status: 'upcoming',
-      topics: ['Exponential growth', 'Exponential decay', 'Compound interest']
+      topics: ['Factoring', 'Quadratic formula', 'Completing the square', 'Discriminant', 'Complex solutions']
+    },
+    {
+      id: 'unit4a',
+      title: 'Unit 4A: Polynomial Functions - Part 1',
+      description: 'Introduction to polynomial functions and their properties',
+      dueDate: '2025-09-25',
+      status: 'upcoming',
+      topics: ['Polynomial basics', 'End behavior', 'Zeros and factors', 'Graphing polynomials']
+    },
+    {
+      id: 'unit4b',
+      title: 'Unit 4B: Polynomial Functions - Part 2',
+      description: 'Advanced polynomial operations and applications',
+      dueDate: '2025-10-05',
+      status: 'upcoming',
+      topics: ['Polynomial division', 'Remainder theorem', 'Rational root theorem', 'Real-world applications']
     }
   ]
 

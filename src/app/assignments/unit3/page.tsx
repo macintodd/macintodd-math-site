@@ -3,14 +3,14 @@ export default function Unit3Assignment() {
     <div className="max-w-4xl mx-auto space-y-8">
       <div className="text-center">
         <h2 className="text-3xl font-bold text-gray-800 mb-2">
-          Unit 3: Quadratic Functions
+          Unit 3: Quadratic Equations
         </h2>
         <p className="text-lg text-gray-600">
-          Master quadratic functions, factoring, and the quadratic formula
+          Master solving quadratic equations using multiple methods
         </p>
         <div className="mt-4">
-          <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
-            Current Assignment
+          <span className="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">
+            Upcoming Assignment
           </span>
         </div>
       </div>
@@ -21,23 +21,23 @@ export default function Unit3Assignment() {
         <ul className="space-y-2">
           <li className="flex items-start">
             <span className="text-blue-600 mr-2">•</span>
-            Understand the standard form of quadratic functions: f(x) = ax² + bx + c
+            Solve quadratic equations by factoring
           </li>
           <li className="flex items-start">
             <span className="text-blue-600 mr-2">•</span>
-            Convert between standard form and vertex form
+            Apply the quadratic formula to solve any quadratic equation
           </li>
           <li className="flex items-start">
             <span className="text-blue-600 mr-2">•</span>
-            Factor quadratic expressions using various methods
+            Solve quadratic equations by completing the square
           </li>
           <li className="flex items-start">
             <span className="text-blue-600 mr-2">•</span>
-            Solve quadratic equations using the quadratic formula
+            Use the discriminant to determine the nature of solutions
           </li>
           <li className="flex items-start">
             <span className="text-blue-600 mr-2">•</span>
-            Graph quadratic functions and identify key features
+            Solve quadratic equations with complex solutions
           </li>
         </ul>
       </section>
