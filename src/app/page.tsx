@@ -57,9 +57,9 @@ export default function Home() {
         <h3 className="text-2xl font-bold text-gray-800 mb-6">Course Units</h3>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {[
-            { unit: "1A", title: "Foundations of Algebra 2 - Part 1", status: "completed" },
+            { unit: "1A", title: "Foundations of Algebra 2 - Part 1", status: "current" },
             { unit: "1B", title: "Foundations of Algebra 2 - Part 2", status: "completed" },
-            { unit: "2", title: "Quadratic Functions", status: "current" },
+            { unit: "2", title: "Quadratic Functions", status: "completed" },
             { unit: "3", title: "Quadratic Equations", status: "upcoming" },
             { unit: "4A", title: "Polynomial Functions - Part 1", status: "upcoming" },
             { unit: "4B", title: "Polynomial Functions - Part 2", status: "upcoming" },
