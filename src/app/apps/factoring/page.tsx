@@ -52,7 +52,7 @@ export default function FactoringApp() {
 
   useEffect(() => {
     generateNewProblem()
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const generateNewProblem = () => {
     const randomProblem = problems[Math.floor(Math.random() * problems.length)]
