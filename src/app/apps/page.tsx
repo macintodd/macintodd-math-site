@@ -68,6 +68,21 @@ export default function AppsPage() {
             Coming Soon
           </button>
         </div>
+
+        <div className="p-6 rounded-lg border-2 border-blue-300 bg-blue-50 hover:bg-blue-100 cursor-pointer">
+          <h3 className="text-xl font-bold text-gray-800 mb-2">One-Step Equation Solver</h3>
+          <p className="text-gray-600 mb-3">Practice solving one-step equations by choosing the correct operation and number.</p>
+          <div className="flex justify-between items-center text-sm text-gray-500 mb-4">
+            <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded">All Units</span>
+            <span>Beginner</span>
+          </div>
+          <a
+            href="/apps/one-step-solver"
+            className="inline-block bg-blue-600 text-white px-4 py-2 rounded font-medium hover:bg-blue-700 transition-colors"
+          >
+            Launch App
+          </a>
+        </div>
       </div>
 
       <div className="text-center">

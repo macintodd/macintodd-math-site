@@ -12,7 +12,7 @@ export default function Home() {
           Welcome to Algebra 2
         </h2>
         <p className="text-xl text-gray-600 mb-8">
-          Interactive assignments, practice apps, and progress tracking
+          Lesson Videos, Assignments, and Practice Apps
         </p>
         <div className="flex justify-center space-x-4">
           <a 
@@ -31,7 +31,7 @@ export default function Home() {
       </section>
 
       {/* Quick Links */}
-      <section className="grid md:grid-cols-3 gap-6">
+      <section className="grid md:grid-cols-4 gap-6">
         <div className="assignment-card">
           <h3 className="text-xl font-bold text-gray-800 mb-3">Latest Assignment</h3>
           <p className="text-gray-600 mb-4">Unit {currentUnit?.unit}: {currentUnit?.title}</p>
@@ -53,6 +53,14 @@ export default function Home() {
           <p className="text-gray-600 mb-4">Track your learning journey</p>
           <a href="/progress" className="text-blue-600 hover:text-blue-800">
             View Progress →
+          </a>
+        </div>
+
+        <div className="resource-card bg-purple-50 border-2 border-purple-300 rounded-lg p-6 flex flex-col justify-between">
+          <h3 className="text-xl font-bold text-gray-800 mb-3">Teaching Resources</h3>
+          <p className="text-gray-700 mb-4">Tools for teachers and worksheet creation</p>
+          <a href="/resources" className="text-purple-700 hover:underline font-medium mt-auto">
+            Go to Resources →
           </a>
         </div>
       </section>
