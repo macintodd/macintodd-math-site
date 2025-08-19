@@ -28,7 +28,7 @@ export default function RootLayout({
             <div className="flex space-x-6">
               <Link href="/" className="hover:text-blue-200 transition-colors">Home</Link>
               <Link href="/assignments" className="hover:text-blue-200 transition-colors">Assignments</Link>
-              <Link href="/apps" className="hover:text-blue-200 transition-colors">Math Apps</Link>
+              <Link href="/resources" className="hover:text-blue-200 transition-colors">Resources</Link>
               <Link href="/progress" className="hover:text-blue-200 transition-colors">Progress</Link>
             </div>
           </div>
