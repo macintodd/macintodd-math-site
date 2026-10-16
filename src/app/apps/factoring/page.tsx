@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { canonicalFactors } from '@/lib/factoring'
 
 interface Problem {
   id: number
@@ -16,6 +17,8 @@ export default function FactoringApp() {
   const [score, setScore] = useState(0)
   const [attempts, setAttempts] = useState(0)
   const [showHint, setShowHint] = useState(false)
+  const [answered, setAnswered] = useState(false)
+  const locked = useRef(false)
 
   const problems: Problem[] = [
     {
@@ -51,32 +54,34 @@ export default function FactoringApp() {
   ]
 
   useEffect(() => {
+    // Initialize random practice only after mounting in the browser.
     generateNewProblem()
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  const generateNewProblem = () => {
+  function generateNewProblem() {
     const randomProblem = problems[Math.floor(Math.random() * problems.length)]
     setCurrentProblem(randomProblem)
     setUserAnswer('')
     setFeedback('')
     setShowHint(false)
+    setAnswered(false)
+    locked.current = false
   }
 
   const checkAnswer = () => {
-    if (!currentProblem) return
+    if (!currentProblem || locked.current || !userAnswer.trim()) return
 
-    setAttempts(attempts + 1)
+    setAttempts(a => a + 1)
     
     // Normalize answers for comparison (remove spaces, convert to lowercase)
-    const userNormalized = userAnswer.replace(/\s/g, '').toLowerCase()
-    const correctNormalized = currentProblem.answer.replace(/\s/g, '').toLowerCase()
+    const userNormalized = canonicalFactors(userAnswer)
+    const correctNormalized = canonicalFactors(currentProblem.answer)
     
-    if (userNormalized === correctNormalized) {
+    if (userNormalized !== null && userNormalized === correctNormalized) {
       setFeedback('Correct! Well done! 🎉')
-      setScore(score + 1)
-      setTimeout(() => {
-        generateNewProblem()
-      }, 2000)
+      setScore(s => s + 1)
+      locked.current = true
+      setAnswered(true)
     } else {
       setFeedback(`Not quite right. Try again! The correct answer is: ${currentProblem.answer}`)
     }
@@ -132,7 +137,9 @@ export default function FactoringApp() {
               type="text"
               value={userAnswer}
               onChange={(e) => setUserAnswer(e.target.value)}
-              onKeyPress={handleKeyPress}
+              onKeyDown={handleKeyPress}
+              aria-label="Your factored expression"
+              disabled={answered}
               placeholder="Enter your factored form (e.g., (x + 2)(x + 3))"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg text-center font-mono text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
@@ -140,6 +147,7 @@ export default function FactoringApp() {
             <div className="flex justify-center space-x-4">
               <button
                 onClick={checkAnswer}
+                disabled={answered || !userAnswer.trim()}
                 className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
               >
                 Check Answer
@@ -206,7 +214,7 @@ export default function FactoringApp() {
       {/* Progress would be logged to Google Sheets here */}
       <div className="text-center">
         <p className="text-sm text-gray-500">
-          Your progress is being tracked for assignment completion
+          Scores are for this visit only. They reset when you leave or reload.
         </p>
       </div>
     </div>

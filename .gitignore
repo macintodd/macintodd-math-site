@@ -48,3 +48,6 @@ Thumbs.db
 # Google Sheets API credentials (when added)
 credentials.json
 token.json
+
+# Local source review and document previews
+/tmp/

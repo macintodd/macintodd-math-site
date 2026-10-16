@@ -1,0 +1,2 @@
+import Link from 'next/link'
+export default function NotFound() { return <div className="shell page-heading" style={{ paddingBlock: 80 }}><p className="eyebrow">LET’S FIND YOUR WAY</p><h1>This lesson isn’t here yet.</h1><p>Return to a course to see the lessons that are available.</p><div className="lesson-tags"><Link className="button button-dark" href="/courses/algebra-2">Algebra 2 →</Link><Link className="button button-light" href="/courses/precalculus">Precalculus →</Link></div></div> }

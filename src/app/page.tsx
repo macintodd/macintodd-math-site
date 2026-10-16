@@ -1,100 +1,12 @@
-import { getUnitsWithStatus, CURRENT_UNIT, UNITS } from '../config/units'
+import Link from 'next/link'
+import { courses, lessons } from '@/content/lessons'
+import { CoordinatePlane } from '@/components/CoordinatePlane'
 
 export default function Home() {
-  const unitsWithStatus = getUnitsWithStatus()
-  const currentUnit = UNITS.find(unit => unit.id === CURRENT_UNIT)
-  
-  return (
-    <div className="space-y-8">
-      {/* Welcome Section */}
-      <section className="text-center py-12">
-        <h2 className="text-4xl font-bold text-gray-800 mb-4">
-          Welcome to Algebra 2
-        </h2>
-        <p className="text-xl text-gray-600 mb-8">
-          Lesson Videos, Assignments, and Practice Apps
-        </p>
-        <div className="flex justify-center space-x-4">
-          <a 
-            href="/assignments" 
-            className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            View Assignments
-          </a>
-          <a 
-            href="/apps" 
-            className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors"
-          >
-            Practice Apps
-          </a>
-        </div>
-      </section>
-
-      {/* Quick Links */}
-      <section className="grid md:grid-cols-4 gap-6">
-        <div className="assignment-card">
-          <h3 className="text-xl font-bold text-gray-800 mb-3">Latest Assignment</h3>
-          <p className="text-gray-600 mb-4">Unit {currentUnit?.unit}: {currentUnit?.title}</p>
-          <a href={`/assignments/unit${currentUnit?.id?.toLowerCase()}`} className="text-blue-600 hover:text-blue-800">
-            View Assignment →
-          </a>
-        </div>
-
-        <div className="app-card">
-          <h3 className="text-xl font-bold text-gray-800 mb-3">Practice App</h3>
-          <p className="text-gray-600 mb-4">Factoring Quadratics</p>
-          <a href="/apps/factoring" className="text-green-600 hover:text-green-800">
-            Start Practice →
-          </a>
-        </div>
-
-        <div className="math-container">
-          <h3 className="text-xl font-bold text-gray-800 mb-3">Your Progress</h3>
-          <p className="text-gray-600 mb-4">Track your learning journey</p>
-          <a href="/progress" className="text-blue-600 hover:text-blue-800">
-            View Progress →
-          </a>
-        </div>
-
-        <div className="resource-card bg-purple-50 border-2 border-purple-300 rounded-lg p-6 flex flex-col justify-between">
-          <h3 className="text-xl font-bold text-gray-800 mb-3">Teaching Resources</h3>
-          <p className="text-gray-700 mb-4">Tools for teachers and worksheet creation</p>
-          <a href="/resources" className="text-purple-700 hover:underline font-medium mt-auto">
-            Go to Resources →
-          </a>
-        </div>
-      </section>
-
-      {/* Recent Units */}
-      <section>
-        <h3 className="text-2xl font-bold text-gray-800 mb-6">Course Units</h3>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {unitsWithStatus.map((unit) => (
-            <div 
-              key={unit.unit}
-              className={`p-4 rounded-lg border-2 ${
-                unit.status === 'current' 
-                  ? 'border-blue-500 bg-blue-50' 
-                  : unit.status === 'completed'
-                  ? 'border-green-500 bg-green-50'
-                  : 'border-gray-300 bg-gray-50'
-              }`}
-            >
-              <h4 className="font-bold">Unit {unit.unit}</h4>
-              <p className="text-sm text-gray-600">{unit.title}</p>
-              <span className={`text-xs px-2 py-1 rounded ${
-                unit.status === 'current' 
-                  ? 'bg-blue-200 text-blue-800' 
-                  : unit.status === 'completed'
-                  ? 'bg-green-200 text-green-800'
-                  : 'bg-gray-200 text-gray-800'
-              }`}>
-                {unit.status}
-              </span>
-            </div>
-          ))}
-        </div>
-      </section>
-    </div>
-  )
+  return <>
+    <section className="home-hero shell"><div className="hero-copy"><p className="eyebrow"><span className="status-dot" /> YOUR CLASSROOM, ANYWHERE</p><h1>Make sense<br />of the <em>math.</em></h1><p className="hero-description">A place to slow down, see the steps, and build your understanding. Your lessons, notes, and practice—all together.</p><a className="button button-dark" href="#courses">Find your course <span aria-hidden="true">↗</span></a><p className="hero-footnote">Open a lesson. Find your footing. Take the next step.</p></div><div className="hero-art"><div className="graph-label"><span className="small-label">A LITTLE PERSPECTIVE</span><span className="graph-pill">(x, y)</span></div><CoordinatePlane points={[{ x: 3, y: 4, label: 'A (3, 4)' }, { x: -3, y: -2, label: 'B (−3, −2)' }]} /><div className="graph-caption"><span className="graph-icon" aria-hidden="true">↗</span><p>Big ideas.<br /><strong>One clear step at a time.</strong></p></div></div></section>
+    <section id="courses" className="course-section"><div className="shell"><div className="section-heading"><div><p className="eyebrow">CHOOSE YOUR PATH</p><h2>Start with your course.</h2></div><p>Everything you need for the lesson.<br />Nothing to get in the way.</p></div><div className="course-grid">{courses.map((course, i) => <Link className={`course-tile ${course.id}`} key={course.id} href={`/courses/${course.id}`}><div className="tile-top"><span className="course-number">0{i + 1}</span><span className="circle-arrow" aria-hidden="true">↗</span></div><p className="small-label">{course.kicker}</p><h3>{course.title}</h3><p>{course.description}</p><div className="tile-bottom"><span>{lessons.filter(l => l.course === course.id).length} lesson available</span><span>Explore course →</span></div></Link>)}</div></div></section>
+    <section className="shell home-lessons"><div className="section-heading"><div><p className="eyebrow">READY WHEN YOU ARE</p><h2>Your first steps.</h2></div><span className="subtle-label">Watch. Understand. Practice.</span></div><div className="lesson-list">{lessons.map(lesson => <Link href={`/courses/${lesson.course}/${lesson.slug}`} key={lesson.slug} className="lesson-row"><span className={`lesson-icon ${lesson.course}`} aria-hidden="true">{lesson.course === 'algebra-2' ? 'x' : '(x,y)'}</span><div><p className="small-label">{courses.find(c => c.id === lesson.course)?.title} · {lesson.unit} · {lesson.number}</p><h3>{lesson.title}</h3><p>{lesson.description}</p></div><span className="row-arrow" aria-hidden="true">↗</span></Link>)}</div></section>
+    <section className="shell learning-strip"><span className="strip-number" aria-hidden="true">1 → 2 → 3</span><div><h2>A lesson that goes at your pace.</h2><p>Watch a video, work through an example, then try it yourself. All notes and answer sheets are available whenever you need them.</p></div><Link href="/courses/algebra-2">Let’s get started <span aria-hidden="true">→</span></Link></section>
+  </>
 }

@@ -1,0 +1,70 @@
+{
+  "sourceRootHint": "Documents/2026 2027 School Year",
+  "policy": "Only the files explicitly selected here are published. Never bulk-upload course folders. Review content before changing a selection. Answer sheets are public immediately.",
+  "materials": [
+    {
+      "source": "Algebra 2/Unit 1A/not used/U1 L1 Solving 1 Step Linear Equations 2026.pdf",
+      "output": "algebra-2/one-step-equations/notes.pdf",
+      "selectionReason": "Explicit exception to the not-used exclusion: first-page content matches the current Pages preview; both pages match the exercises in the completed classroom notes. LibreOffice could not export the current Pages document.",
+      "sourceSha256": "3abec329d18b5e5a7372f2ad96577fb40dec260bb5100017eb39b0dbe6a98387",
+      "publishedSha256": "8dbb067ba23f64f2729402939cf867fd04aae18a06a772f5658c2b8a1fda77e2",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/Unit 1A completed/U1L1 1 Step Equations.pdf",
+      "output": "algebra-2/one-step-equations/completed-notes.pdf",
+      "sourceSha256": "ad9a2a4a1b714faf17af0fb680c04be6349dea7241a1121fcd4c1d963a0847cc",
+      "publishedSha256": "246809048c6e78d246957630cbff0b2ec7f2e545d5a8cb0772d1060dd3daaf88",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/not used/Unit 1A L1 Practice Solving 1 step equations 2026.pdf",
+      "output": "algebra-2/one-step-equations/practice.pdf",
+      "selectionReason": "Explicit reviewed exception: first page matches current Pages preview and all 27 problems match the completed classroom practice. Problem 25 has equivalent circumference wording.",
+      "sourceSha256": "cdf872c5f617966cbdf9e0dc5bc85a532ead1b087bc8921771e0cc4e808f22b0",
+      "publishedSha256": "cae25c2a53549e6bcc24835da52d751c87800680c901bb3822770bef8c434aa6",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/Unit 1A completed/U1L1 Practice 1 Step Equations .pdf",
+      "output": "algebra-2/one-step-equations/completed-practice.pdf",
+      "sourceSha256": "f7ffd766e147c7f66142ff6deb038cb1174af10a2158e521b67f09edfae36bd5",
+      "publishedSha256": "cb60926e4ea572a4de036d489a9cbcd976393637981b8462e69339d29a8cff3d",
+      "publishedPages": 2
+    },
+    {
+      "source": "Precalculus/U1L1 Notes Rectangular Coordinates.pdf",
+      "output": "precalculus/rectangular-coordinates/notes.pdf",
+      "sourceSha256": "50f6ef9b8a8a7561255d25f1bced00bf02bb30077464744cc19c894d9477864e",
+      "publishedSha256": "4eb66a74127c5f3641110886d9735120175fa1d922afca83a57e8dec81a496d3",
+      "publishedPages": 2
+    },
+    {
+      "source": "Precalculus/Precalc 2026 Completed/PC Unit 1/PC 1.1 Rectangular Coordinates.pdf",
+      "output": "precalculus/rectangular-coordinates/completed-notes.pdf",
+      "sourceSha256": "79c1a29a39b7153c95ab041c9fc2e4f5e518fe2136926f6e10af8d09f42b8262",
+      "publishedSha256": "3736e86be65e54688c010b044072bb0ed928007847d6e94067c5e238ea44bf89",
+      "publishedPages": 2
+    },
+    {
+      "source": "Precalculus/U1L1 Practice Rectangular Coordinates.pdf",
+      "output": "precalculus/rectangular-coordinates/practice.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Third source page is entirely blank; omit it from the student PDF.",
+      "sourceSha256": "a43a9ffb3d191bdf44cee56303735d34ea165dd978c9df1e6e897f7b16cd66ad",
+      "publishedSha256": "b82e8294caa772ff6b5252e7780f1abbe88209d04dc38d3577f4c6292e161091",
+      "publishedPages": 2
+    },
+    {
+      "generated": true,
+      "output": "precalculus/rectangular-coordinates/completed-practice.pdf",
+      "generator": "scripts/create-coordinate-key.py",
+      "selectionReason": "Complete checked key based on the selected practice. The classroom scan omits plotting answers and its handwritten answer to problem 7 conflicts with the printed positive quadratic term. Preserve originals; publish a clearly identified prepared answer guide.",
+      "publishedSha256": "d9361e26d5a6df995baeb57c467d82e3a926ed60cc3c14b4fe7e57a9a9d8a2aa",
+      "publishedPages": 3
+    }
+  ]
+}

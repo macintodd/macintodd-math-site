@@ -2,12 +2,6 @@
 import React, { useState, useEffect } from "react";
 import Equation from "./Equation";
 
-// Types for future user/score integration
-interface User {
-  id: string;
-  name: string;
-}
-
 interface Attempt {
   equation: string;
   correctOperation: string;
@@ -85,7 +79,6 @@ function generateEquation(level = 1) {
       break;
     }
   }
-  console.log("Generated equation:", equation);
   return { equation, correctOperation, correctNumber };
 }
 
@@ -106,9 +99,8 @@ function toLatex(equation: string) {
 }
 
 export default function OneStepSolverApp() {
-  // Placeholder for user (for future Google login)
-  const [user] = useState<User | null>(null);
-  const [problem, setProblem] = useState<any>(null);
+  const [answered, setAnswered] = useState(false);
+  const [problem, setProblem] = useState<ReturnType<typeof generateEquation> | null>(null);
   const [userOperation, setUserOperation] = useState("");
   const [userNumber, setUserNumber] = useState("");
   const [feedback, setFeedback] = useState<string | null>(null);
@@ -117,11 +109,18 @@ export default function OneStepSolverApp() {
   const [difficulty, setDifficulty] = useState(1);
 
   useEffect(() => {
+    // Random practice must initialize in the browser rather than during SSR.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setProblem(generateEquation(difficulty));
+    setUserOperation("");
+    setUserNumber("");
+    setFeedback(null);
+    setAnswered(false);
   }, [difficulty]);
 
   function checkAnswer() {
-    if (!problem) return;
+    if (!problem || answered || !userOperation || !userNumber) return;
+    setAnswered(true);
     const isCorrect =
       userOperation === problem.correctOperation &&
       Number(userNumber) === problem.correctNumber;
@@ -149,6 +148,7 @@ export default function OneStepSolverApp() {
     setUserOperation("");
     setUserNumber("");
     setFeedback(null);
+    setAnswered(false);
   }
 
   if (!problem) return null;
@@ -156,7 +156,7 @@ export default function OneStepSolverApp() {
   return (
     <div className="max-w-xl mx-auto py-10 px-4">
       <h2 className="text-2xl font-bold mb-4 text-gray-800">One-Step Equation Solver</h2>
-      <p className="mb-6 text-gray-600">Choose the operation and number that solves for <b>x</b> in the equation below.</p>
+      <p className="mb-6 text-gray-600">Choose the operation and number that isolates the <b>variable</b> in the equation below.</p>
       <div className="flex items-center gap-4 mb-4">
         <span className="text-lg font-bold text-blue-700">Score: {score}</span>
         <label className="ml-4 font-medium text-gray-700">
@@ -179,6 +179,7 @@ export default function OneStepSolverApp() {
         <div className="flex flex-col md:flex-row gap-4 items-center mb-4">
           <select
             className="border rounded px-3 py-2"
+            aria-label="Inverse operation"
             value={userOperation}
             onChange={e => setUserOperation(e.target.value)}
           >
@@ -192,13 +193,14 @@ export default function OneStepSolverApp() {
             type="number"
             className="border rounded px-3 py-2 w-32"
             placeholder="Number"
+            aria-label="Number to apply to both sides"
             value={userNumber}
             onChange={e => setUserNumber(e.target.value)}
           />
           <button
             className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
             onClick={checkAnswer}
-            disabled={!userOperation || !userNumber}
+            disabled={answered || !userOperation || !userNumber}
           >
             Check
           </button>

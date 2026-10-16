@@ -1,8 +1,7 @@
 "use client";
-import 'katex/dist/katex.min.css';
-import { BlockMath } from 'react-katex';
+import { Math } from '@/components/Math';
 import React from 'react';
 
 export default function Equation({ latex }: { latex: string }) {
-  return <BlockMath math={latex} />;
+  return <Math display>{latex}</Math>;
 }
