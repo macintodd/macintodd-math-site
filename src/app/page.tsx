@@ -1,12 +1,13 @@
 import Link from 'next/link'
 import { courses, lessons } from '@/content/lessons'
-import { CoordinatePlane } from '@/components/CoordinatePlane'
 
 export default function Home() {
-  return <>
-    <section className="home-hero shell"><div className="hero-copy"><p className="eyebrow"><span className="status-dot" /> YOUR CLASSROOM, ANYWHERE</p><h1>Make sense<br />of the <em>math.</em></h1><p className="hero-description">A place to slow down, see the steps, and build your understanding. Your lessons, notes, and practice—all together.</p><a className="button button-dark" href="#courses">Find your course <span aria-hidden="true">↗</span></a><p className="hero-footnote">Open a lesson. Find your footing. Take the next step.</p></div><div className="hero-art"><div className="graph-label"><span className="small-label">A LITTLE PERSPECTIVE</span><span className="graph-pill">(x, y)</span></div><CoordinatePlane points={[{ x: 3, y: 4, label: 'A (3, 4)' }, { x: -3, y: -2, label: 'B (−3, −2)' }]} /><div className="graph-caption"><span className="graph-icon" aria-hidden="true">↗</span><p>Big ideas.<br /><strong>One clear step at a time.</strong></p></div></div></section>
-    <section id="courses" className="course-section"><div className="shell"><div className="section-heading"><div><p className="eyebrow">CHOOSE YOUR PATH</p><h2>Start with your course.</h2></div><p>Everything you need for the lesson.<br />Nothing to get in the way.</p></div><div className="course-grid">{courses.map((course, i) => <Link className={`course-tile ${course.id}`} key={course.id} href={`/courses/${course.id}`}><div className="tile-top"><span className="course-number">0{i + 1}</span><span className="circle-arrow" aria-hidden="true">↗</span></div><p className="small-label">{course.kicker}</p><h3>{course.title}</h3><p>{course.description}</p><div className="tile-bottom"><span>{lessons.filter(l => l.course === course.id).length} lesson available</span><span>Explore course →</span></div></Link>)}</div></div></section>
-    <section className="shell home-lessons"><div className="section-heading"><div><p className="eyebrow">READY WHEN YOU ARE</p><h2>Your first steps.</h2></div><span className="subtle-label">Watch. Understand. Practice.</span></div><div className="lesson-list">{lessons.map(lesson => <Link href={`/courses/${lesson.course}/${lesson.slug}`} key={lesson.slug} className="lesson-row"><span className={`lesson-icon ${lesson.course}`} aria-hidden="true">{lesson.course === 'algebra-2' ? 'x' : '(x,y)'}</span><div><p className="small-label">{courses.find(c => c.id === lesson.course)?.title} · {lesson.unit} · {lesson.number}</p><h3>{lesson.title}</h3><p>{lesson.description}</p></div><span className="row-arrow" aria-hidden="true">↗</span></Link>)}</div></section>
-    <section className="shell learning-strip"><span className="strip-number" aria-hidden="true">1 → 2 → 3</span><div><h2>A lesson that goes at your pace.</h2><p>Watch a video, work through an example, then try it yourself. All notes and answer sheets are available whenever you need them.</p></div><Link href="/courses/algebra-2">Let’s get started <span aria-hidden="true">→</span></Link></section>
-  </>
+  return <section id="courses" className="course-section student-home"><div className="shell">
+    <div className="section-heading"><h1>Choose your class.</h1></div>
+    <div className="course-grid">{courses.map(course => <Link className={`course-tile ${course.id}`} key={course.id} href={`/courses/${course.id}`}>
+      <div className="tile-top"><h2>{course.title}</h2><span className="circle-arrow" aria-hidden="true">→</span></div>
+      <p>Lesson notes, practice, videos, and worked examples.</p>
+      <div className="tile-bottom"><span>{lessons.filter(l => l.course === course.id).length} lesson available</span><span>View lesson index →</span></div>
+    </Link>)}</div>
+  </div></section>
 }
