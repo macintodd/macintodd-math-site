@@ -4,15 +4,21 @@ import path from 'node:path'
 import crypto from 'node:crypto'
 import katex from 'katex'
 import { lessons, courses } from '../src/content/lessons.ts'
+import { units, getUnit } from '../src/content/units.ts'
 import { canonicalFactors } from '../src/lib/factoring.ts'
 const root = path.resolve(import.meta.dirname, '..')
 const manifest = JSON.parse(fs.readFileSync(path.join(root, 'content-sources.json')))
 const published = fs.readdirSync(path.join(root, 'public/materials'), { recursive: true, withFileTypes: true }).filter(e => e.isFile()).map(e => path.relative(path.join(root, 'public/materials'), path.join(e.parentPath, e.name)))
 assert.deepEqual(published.sort(), manifest.materials.map(m => m.output).sort(), 'Unexpected file in public materials; publish only reviewed selections')
+for (const unit of units) {
+  assert(unit.skills.length > 0 && unit.relevance.length > 0, 'Unit must explain skills and relevance')
+  assert(lessons.some(l => l.course === unit.course && l.unitSlug === unit.slug), 'Do not publish empty units')
+}
 const ids = new Set()
 let formulas = 0
 for (const l of lessons) {
   assert(courses.some(c => c.id === l.course), `Unknown course: ${l.course}`)
+  assert(getUnit(l.course, l.unitSlug), `Lesson has no linked unit overview: ${l.slug}`)
   const id = `${l.course}/${l.slug}`
   assert(!ids.has(id), `Duplicate lesson: ${id}`); ids.add(id)
   assert.equal(l.materials.length, 4, `Four materials required: ${id}`)

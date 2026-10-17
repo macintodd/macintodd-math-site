@@ -1,6 +1,6 @@
 # MacIntodd Math
 
-Public Algebra 2 and Precalculus lesson library, built with Next.js, React, TypeScript, Tailwind CSS, and KaTeX. The first published lessons are one-step equations and rectangular coordinates.
+Public Algebra 2 and Precalculus lesson library, built with Next.js, React, TypeScript, Tailwind CSS, and KaTeX. The first published lessons are one-step equations and rectangular coordinates. Course tables of contents group lessons beneath linked unit headings. Unit overviews explain skills and everyday relevance. Landscape-iPad lesson readers use one video per page, with plain PDF links under a compact title, Previous/Next controls, and arrow-key navigation. Worked examples are retained in source data but are not displayed.
 
 ## Develop and verify
 
@@ -19,7 +19,7 @@ npm run build
 
 ## Update a lesson
 
-1. Edit the course and lesson records in `src/content/lessons.ts`. The shared pages render the navigation, explanations, videos, examples, and four material links.
+1. Edit the course and lesson records in `src/content/lessons.ts`. The shared paginated reader renders navigation, one video at a time, and four plain PDF links. Unit summaries live in src/content/units.ts. Add a unitSlug to each lesson to connect it to a unit.
 2. For a video replacement, change its YouTube `id`, `title`, and `author`. Guest videos are explicitly identified on the page.
 3. To update a PDF, inspect the source first and update its explicit entry in `content-sources.json`. Run `scripts/sync-materials.py --source-root '/path/to/2026 2027 School Year'` with Python and pypdf installed. This copies only allowlisted materials into `public/materials`; source files remain untouched.
 4. Run `scripts/create-coordinate-key.py` with reportlab on macOS if regenerating the prepared Precalculus answer guide. Its fonts use the system Arial family.

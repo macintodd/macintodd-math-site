@@ -2,7 +2,7 @@
 import json, sys, urllib.request, urllib.error
 from pathlib import Path
 base=sys.argv[1].rstrip('/') if len(sys.argv)>1 else 'http://127.0.0.1:3000'
-routes=['/','/courses/algebra-2','/courses/precalculus','/courses/algebra-2/one-step-equations','/courses/precalculus/rectangular-coordinates','/apps','/apps/one-step-solver','/apps/factoring','/resources']
+routes=['/','/courses/algebra-2','/courses/precalculus','/courses/algebra-2/units/unit-1a','/courses/precalculus/units/unit-1','/courses/algebra-2/one-step-equations','/courses/precalculus/rectangular-coordinates','/apps','/apps/one-step-solver','/apps/factoring','/resources']
 for route in routes:
  with urllib.request.urlopen(base+route,timeout=30) as r:
   data=r.read().decode(); assert r.status==200; assert 'MacIntodd' in data
@@ -22,4 +22,4 @@ for old,new in [('/assignments','/courses/algebra-2'),('/assignments/unit1a','/c
  except urllib.error.HTTPError as error:
   assert error.code in (307,308), error.code
   assert error.headers.get('Location')==new, error.headers
-print('Passed: 9 routes, 8 public PDFs, 2 legacy redirects.')
+print('Passed: 11 routes, 8 public PDFs, 2 legacy redirects.')

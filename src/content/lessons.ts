@@ -2,7 +2,7 @@ export type CourseId = 'algebra-2' | 'precalculus'
 export type Step = { math: string; explanation: string }
 export type Example = { id: string; title: string; category: string; prompt: string; steps: Step[]; points?: { x: number; y: number; label: string }[]; triangle?: boolean }
 export type Lesson = {
-  course: CourseId; slug: string; title: string; unit: string; number: string; description: string;
+  course: CourseId; unitSlug: string; slug: string; title: string; unit: string; number: string; description: string;
   goals: string[]; prerequisites: string; concepts: { title: string; text: string; formula?: string; note?: string }[];
   videos: { id: string; title: string; author: string }[]; examples: Example[];
   materials: { file: string; title: string; description: string; pages: number; kind: string }[];
@@ -15,7 +15,7 @@ export const courses = [
 ]
 export const lessons: Lesson[] = [
   {
-    course: 'algebra-2', slug: 'one-step-equations', title: 'One-step equations', unit: 'Unit 1A', number: 'Lesson 1',
+    course: 'algebra-2', unitSlug: 'unit-1a', slug: 'one-step-equations', title: 'One-step equations', unit: 'Unit 1A', number: 'Lesson 1',
     description: 'Keep the equation balanced. Use inverse operations to get the variable alone—and explain why each step works.',
     prerequisites: 'Signed-number arithmetic, order of operations, and adding and multiplying fractions.',
     goals: ['Solve addition, subtraction, multiplication, and division equations.', 'Use reciprocals when the coefficient is a fraction.', 'Name the property of equality and check the solution in the original equation.'],
@@ -95,7 +95,7 @@ export const lessons: Lesson[] = [
     practiceApp: '/apps/one-step-solver',
   },
   {
-    course: 'precalculus', slug: 'rectangular-coordinates', title: 'Rectangular coordinates', unit: 'Unit 1', number: 'Lesson 1 · Section 1.1',
+    course: 'precalculus', unitSlug: 'unit-1', slug: 'rectangular-coordinates', title: 'Rectangular coordinates', unit: 'Unit 1', number: 'Lesson 1 · Section 1.1',
     description: 'Give every point a place. Use coordinates to describe position, measure distance, and find the halfway point.',
     prerequisites: 'Signed numbers, absolute value, simplifying square roots, and the Pythagorean Theorem.',
     goals: ['Plot ordered pairs and identify quadrants and axes.', 'Use distance and midpoint formulas, including exact radical answers.', 'Verify right triangles and interpret coordinates in real situations.'],
@@ -106,6 +106,8 @@ export const lessons: Lesson[] = [
     ],
     videos: [
       { id: 'TkRdszaMwH8', title: 'The rectangular coordinate system and plotting', author: 'Professor Leonard' },
+      { id: 'nyZuite17Pc', title: 'Distance formula', author: 'Khan Academy' },
+      { id: 'Ez_-RwV9WVo', title: 'Midpoint formula', author: 'Khan Academy' },
     ],
     materials: [
       { file: 'precalculus/rectangular-coordinates/notes.pdf', title: 'Blank notes', description: 'Coordinate vocabulary, distance, midpoint, and applications.', pages: 2, kind: 'NOTES' },
