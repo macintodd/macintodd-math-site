@@ -15,12 +15,25 @@ const db = createServer(async (req, res) => {
     let raw = "";
     for await (const chunk of req) raw += chunk;
     const row = JSON.parse(raw);
-    if (!rows.has(row.id)) rows.set(row.id, row);
+    if (!rows.has(row.id))
+      rows.set(row.id, { ...row, created_at: new Date().toISOString() });
     res.writeHead(201);
     res.end();
   } else {
     res.setHeader("Content-Type", "application/json");
-    res.end(JSON.stringify([...rows.values()]));
+    const latest = new Map();
+    for (const row of rows.values()) {
+      const id = row.report.id,
+        old = latest.get(id);
+      if (
+        !old ||
+        row.summary.attempts > old.summary.attempts ||
+        (row.summary.attempts === old.summary.attempts &&
+          row.report.finished !== false)
+      )
+        latest.set(id, row);
+    }
+    res.end(JSON.stringify([...latest.values()]));
   }
 });
 await new Promise((resolve) => db.listen(0, "127.0.0.1", resolve));
@@ -122,9 +135,48 @@ try {
   assert.equal(saved[0].summary.correct, 1);
   assert.equal(saved[0].summary.bestStreak, 1);
   assert.equal(saved[0].report.summary, undefined);
+  const inProgress = {
+    ...report,
+    finished: false,
+    problems: [
+      ...report.problems,
+      { line: { rise: 1, run: 2, x: 0, y: 0 }, answers: [{ rise: 2, run: 4 }] },
+    ],
+  };
+  assert.equal((await post(inProgress)).status, 200);
+  assert.equal((await post(inProgress)).status, 200);
+  assert.equal(rows.size, 2);
+  let latest = (
+    await (
+      await fetch(origin + "/api/slope/results", {
+        headers: { Authorization: `Bearer ${key}` },
+      })
+    ).json()
+  ).results;
+  assert.equal(latest.length, 1);
+  assert.equal(latest[0].summary.correct, 2);
+  assert.equal(latest[0].report.finished, false);
+  assert.equal((await post({ ...inProgress, finished: true })).status, 200);
+  assert.equal((await post(report)).status, 200); // stale retry must not replace newer work
+  latest = (
+    await (
+      await fetch(origin + "/api/slope/results", {
+        headers: { Authorization: `Bearer ${key}` },
+      })
+    ).json()
+  ).results;
+  assert.equal(latest.length, 1);
+  assert.equal(latest[0].summary.correct, 2);
+  assert.equal(latest[0].report.finished, true);
   console.log(
     "Slope API integration passed: access control, origin/data checks, score recomputation, no-store responses, idempotent saves (mock database).",
   );
+  if (process.argv.includes("--serve")) {
+    console.log(
+      `Mock-backed preview at ${origin}. Teacher key: test-only-teacher-key-not-a-real-credential. Ctrl-C to stop.`,
+    );
+    await new Promise((resolve) => process.once("SIGINT", resolve));
+  }
 } finally {
   app.kill("SIGTERM");
   db.close();

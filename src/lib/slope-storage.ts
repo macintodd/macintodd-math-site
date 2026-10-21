@@ -17,9 +17,13 @@ export function teacherAuthorized(request: Request) {
     createHash("sha256").update(supplied).digest(),
   );
 }
-export async function database(path: string, init: RequestInit = {}) {
+export async function database(
+  path: string,
+  init: RequestInit = {},
+  table: "slope_results" | "slope_latest_results" = "slope_results",
+) {
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-  return fetch(`${process.env.SUPABASE_URL}/rest/v1/slope_results${path}`, {
+  return fetch(`${process.env.SUPABASE_URL}/rest/v1/${table}${path}`, {
     ...init,
     cache: "no-store",
     signal: AbortSignal.timeout(12000),

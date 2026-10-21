@@ -8,6 +8,7 @@ export type SlopeReport = {
   startedAt: string;
   finishedAt: string;
   problems: ProblemRecord[];
+  finished?: boolean;
 };
 export function gcd(a: number, b: number): number {
   return b ? gcd(b, a % b) : Math.abs(a);
@@ -24,25 +25,31 @@ export function isCorrect(line: Line, answer: Answer) {
 }
 export function points(line: Line) {
   const result: { x: number; y: number }[] = [];
-  for (let x = -9; x <= 9; x++) {
+  for (let x = -10; x <= 10; x++) {
     const numerator = line.y * line.run + (x - line.x) * line.rise;
-    if (numerator % line.run === 0 && Math.abs(numerator / line.run) <= 9)
+    if (numerator % line.run === 0 && Math.abs(numerator / line.run) <= 10)
       result.push({ x, y: numerator / line.run });
   }
   return result;
 }
-export function generateLine(random = Math.random): Line {
-  const integer = (min: number, max: number) =>
-    min + Math.floor(random() * (max - min + 1));
-  // An anchor near the center guarantees multiple visible integer intersections.
-  const rise = integer(-5, 5),
-    run = integer(1, 5),
-    divisor = gcd(rise, run);
+export function generateLine(random = Math.random, recent: Line[] = []): Line {
+  const last = recent[recent.length - 1],
+    previous = recent[recent.length - 2];
+  const blocked = last && previous && isCorrect(last, previous) ? last : null;
+  const choices: Answer[] = [];
+  for (let rise = -5; rise <= 5; rise++)
+    for (let run = 1; run <= 5; run++) {
+      if (
+        gcd(rise, run) === 1 &&
+        (!blocked || !isCorrect(blocked, { rise, run }))
+      )
+        choices.push({ rise, run });
+    }
+  const slope = choices[Math.floor(random() * choices.length)];
   return {
-    rise: rise / divisor,
-    run: run / divisor,
-    x: integer(-2, 2),
-    y: integer(-2, 2),
+    ...slope,
+    x: -2 + Math.floor(random() * 5),
+    y: -2 + Math.floor(random() * 5),
   };
 }
 export function summarize(problems: ProblemRecord[]) {
@@ -90,6 +97,8 @@ export function validateReport(value: unknown): SlopeReport {
     )
   )
     throw Error("Invalid session.");
+  if (report.finished !== undefined && typeof report.finished !== "boolean")
+    throw Error("Invalid session status.");
   const student = report.student;
   if (
     !student ||
@@ -152,6 +161,7 @@ export function validateReport(value: unknown): SlopeReport {
   }
   return {
     id: report.id,
+    ...(report.finished === undefined ? {} : { finished: report.finished }),
     student: {
       firstName: student.firstName.trim(),
       lastName: student.lastName.trim(),

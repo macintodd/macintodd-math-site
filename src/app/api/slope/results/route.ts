@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import {
   configured,
   database,
@@ -42,13 +43,18 @@ export async function POST(request: Request) {
       return reply({ error: "Invalid result." }, 400);
     }
     // Ignore any client-supplied score. Derive all totals from the submitted attempts.
+    const summary = summarize(report.problems);
+    const hash = createHash("sha256")
+      .update(`${report.id}:${summary.attempts}:${report.finished !== false}`)
+      .digest("hex");
+    const snapshotId = `${hash.slice(0, 8)}-${hash.slice(8, 12)}-${hash.slice(12, 16)}-${hash.slice(16, 20)}-${hash.slice(20, 32)}`;
     const response = await database("?on_conflict=id", {
       method: "POST",
       headers: { Prefer: "resolution=ignore-duplicates,return=minimal" },
       body: JSON.stringify({
-        id: report.id,
+        id: snapshotId,
         report,
-        summary: summarize(report.problems),
+        summary,
       }),
     });
     if (!response.ok)
@@ -66,6 +72,8 @@ export async function GET(request: Request) {
   try {
     const response = await database(
       "?select=id,created_at,report,summary&order=created_at.desc&limit=500",
+      {},
+      "slope_latest_results",
     );
     if (!response.ok) return reply({ error: "Could not load results." }, 502);
     return reply({ results: await response.json() });

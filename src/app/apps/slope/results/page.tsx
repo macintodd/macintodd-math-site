@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { summarize, validateReport, type SlopeReport } from "@/lib/slope";
 type Row = { id: string; created_at: string; report: SlopeReport };
 export default function Results() {
@@ -8,32 +8,71 @@ export default function Results() {
     [rows, setRows] = useState<Row[]>([]),
     [message, setMessage] = useState(""),
     [hour, setHour] = useState(""),
-    [busy, setBusy] = useState(false);
-  async function load(event: React.FormEvent) {
+    [busy, setBusy] = useState(false),
+    [accessKey, setAccessKey] = useState(""),
+    [search, setSearch] = useState("");
+  function load(event: React.FormEvent) {
     event.preventDefault();
-    setBusy(true);
-    setMessage("Loading…");
-    try {
-      const response = await fetch("/api/slope/results", {
-        cache: "no-store",
-        headers: { Authorization: `Bearer ${password}` },
-      });
-      const body = await response.json();
-      if (!response.ok) throw Error(body.error);
-      setRows(body.results);
-      setMessage(`Loaded ${body.results.length} results (most recent 500).`);
-    } catch (error) {
-      setMessage(
-        error instanceof Error ? error.message : "Could not load results.",
-      );
-    } finally {
-      setPassword("");
-      setBusy(false);
-    }
+    setAccessKey(password);
+    setPassword("");
   }
-  const visible = rows.filter(
-    (row) => !hour || row.report.student.hour === hour,
-  );
+  useEffect(() => {
+    if (!accessKey) return;
+    const controller = new AbortController();
+    let running = false;
+    async function refresh() {
+      if (running) return;
+      running = true;
+      setBusy(true);
+      try {
+        const response = await fetch("/api/slope/results", {
+          cache: "no-store",
+          signal: controller.signal,
+          headers: { Authorization: `Bearer ${accessKey}` },
+        });
+        const body = await response.json();
+        if (!response.ok) {
+          if (response.status === 401) setAccessKey("");
+          throw Error(body.error);
+        }
+        if (!controller.signal.aborted) {
+          setRows(body.results);
+          setMessage(
+            `Live · updated ${new Date().toLocaleTimeString()} · refreshes every 5 seconds. Showing the latest 500 sessions.`,
+          );
+        }
+      } catch (error) {
+        if (!controller.signal.aborted)
+          setMessage(
+            error instanceof Error
+              ? error.message
+              : "Could not refresh. Retrying shortly.",
+          );
+      } finally {
+        running = false;
+        setBusy(false);
+      }
+    }
+    void refresh();
+    const timer = window.setInterval(() => void refresh(), 5000);
+    return () => {
+      controller.abort();
+      window.clearInterval(timer);
+    };
+  }, [accessKey]);
+  const visible = rows
+    .filter(
+      (row) =>
+        (!hour || row.report.student.hour === hour) &&
+        row.report.student.firstName
+          .toLocaleLowerCase()
+          .includes(search.toLocaleLowerCase().trim()),
+    )
+    .sort(
+      (a, b) =>
+        a.report.student.firstName.localeCompare(b.report.student.firstName) ||
+        a.report.student.lastName.localeCompare(b.report.student.lastName),
+    );
   function csv() {
     const quote = (s: unknown) =>
       `"${String(s)
@@ -41,7 +80,7 @@ export default function Results() {
         .replace(/"/g, '""')}"`;
     const data = [
       [
-        "Date",
+        "Updated",
         "First name",
         "Last name",
         "Hour",
@@ -86,7 +125,7 @@ export default function Results() {
         <span>/</span>
         <span>Teacher results</span>
       </nav>
-      <h1>Slope practice results</h1>
+      <h1>Live slope scores</h1>
       <p>
         Online results require the teacher access key. Student names are
         self-reported; school Google accounts are not authenticated.
@@ -103,13 +142,13 @@ export default function Results() {
           />
         </label>
         <button className="slope-primary" disabled={busy}>
-          Load online results
+          Connect live scores
         </button>
       </form>
       <p>
-        Until online saving is connected, students can attach their downloaded
-        result files in Google Classroom. Import those files here to view scores
-        and export a spreadsheet. Imported files stay in this browser page.
+        Students can also attach downloaded result files in Google Classroom.
+        Import those files here to view scores and export a spreadsheet.
+        Imported files stay in this browser page.
       </p>
       <label>
         Import downloaded results
@@ -148,8 +187,28 @@ export default function Results() {
           }}
         />
       </label>
+      {accessKey && (
+        <button
+          onClick={() => {
+            setAccessKey("");
+            setRows([]);
+            setMessage("Disconnected. Results cleared from this page.");
+          }}
+        >
+          Disconnect live scores
+        </button>
+      )}
       <p role="status">{message}</p>
       <div className="slope-actions">
+        <label>
+          Find a first name
+          <input
+            type="search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Student first name"
+          />
+        </label>
         <label>
           Class hour
           <select value={hour} onChange={(e) => setHour(e.target.value)}>
@@ -164,6 +223,7 @@ export default function Results() {
         </button>
         <button
           onClick={() => {
+            setAccessKey("");
             setRows([]);
             setMessage("Results cleared from this page.");
           }}
@@ -177,14 +237,15 @@ export default function Results() {
           <thead>
             <tr>
               {[
-                "Student",
+                "First name",
+                "Last name",
                 "Hour",
-                "Date",
+                "Updated",
                 "Correct",
                 "First try",
                 "Retry",
                 "Best streak",
-                "Goal",
+                "Status",
               ].map((t) => (
                 <th key={t}>{t}</th>
               ))}
@@ -195,16 +256,21 @@ export default function Results() {
               const s = summarize(r.report.problems);
               return (
                 <tr key={r.id}>
-                  <td>
-                    {r.report.student.lastName}, {r.report.student.firstName}
-                  </td>
+                  <td>{r.report.student.firstName}</td>
+                  <td>{r.report.student.lastName}</td>
                   <td>{r.report.student.hour}</td>
                   <td>{new Date(r.created_at).toLocaleString()}</td>
                   <td>{s.correct}</td>
                   <td>{s.firstTry}</td>
                   <td>{s.retryCorrect}</td>
                   <td>{s.bestStreak}</td>
-                  <td>{s.completed ? "Reached" : "In progress"}</td>
+                  <td>
+                    {s.completed
+                      ? "Goal reached"
+                      : r.report.finished === false
+                        ? "Practicing"
+                        : "Finished"}
+                  </td>
                 </tr>
               );
             })}

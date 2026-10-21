@@ -93,3 +93,33 @@ for (const bad of [
 console.log(
   "Slope tests passed: fraction equivalence, sign/zero handling, 1,375 graph configurations, retry/streak goals, result validation.",
 );
+
+// The third identical slope is excluded even when the random source never changes.
+for (let rise = -5; rise <= 5; rise++)
+  for (let run = 1; run <= 5; run++) {
+    const repeated = { rise, run, x: 0, y: 0 };
+    assert.equal(
+      isCorrect(
+        repeated,
+        generateLine(() => 0, [repeated, repeated]),
+      ),
+      false,
+    );
+  }
+const recent = [];
+for (let i = 0; i < 10000; i++) {
+  const l = generateLine(Math.random, recent);
+  if (
+    recent.length >= 2 &&
+    isCorrect(recent[recent.length - 1], recent[recent.length - 2])
+  )
+    assert.equal(isCorrect(l, recent[recent.length - 1]), false);
+  recent.push(l);
+}
+assert.ok(
+  points({ rise: 1, run: 1, x: 0, y: 0 }).some((p) => p.x === 10 && p.y === 10),
+);
+assert.equal(validateReport({ ...report, finished: false }).finished, false);
+console.log(
+  "Repeat prevention passed: adversarial constant randomness and 10,000 sequential graphs.",
+);

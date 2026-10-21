@@ -74,7 +74,20 @@ export default function SlopePractice() {
       preventScroll: true,
     });
   }
-  async function save(result: SlopeReport) {
+  const saveQueue = useRef<Promise<void>>(Promise.resolve());
+  const pendingSaves = useRef(0);
+  function save(result: SlopeReport) {
+    pendingSaves.current++;
+    setSaving(true);
+    saveQueue.current = saveQueue.current
+      .then(() => send(result))
+      .finally(() => {
+        pendingSaves.current--;
+        setSaving(pendingSaves.current > 0);
+      });
+    return saveQueue.current;
+  }
+  async function send(result: SlopeReport) {
     if (storage !== "online") {
       setSaveStatus("Not saved online. Download your result to turn it in.");
       return;
@@ -88,13 +101,11 @@ export default function SlopePractice() {
         body: JSON.stringify(result),
       });
       if (!response.ok) throw Error();
-      setSaveStatus("Result saved for your teacher.");
+      setSaveStatus("Progress saved for your teacher.");
     } catch {
       setSaveStatus(
         "Your result was not saved. Keep this page open and retry, or download your result.",
       );
-    } finally {
-      setSaving(false);
     }
   }
   function finish(records: ProblemRecord[]) {
@@ -104,6 +115,7 @@ export default function SlopePractice() {
       student,
       finishedAt: new Date().toISOString(),
       problems: records,
+      finished: true,
     };
     setReport(result);
     void save(result);
@@ -128,7 +140,10 @@ export default function SlopePractice() {
       setPhase("correct");
       setMessage(feedback(line, answer));
       const records = [...history, { line, answers: next }];
-      if (summarize(records).completed) finish(records);
+      if (summarize(records).completed) {
+        finish(records);
+        return;
+      }
     } else if (next.length === 1) {
       setPhase("hint");
       setMessage(
@@ -140,11 +155,19 @@ export default function SlopePractice() {
         `The slope is ${fraction(line.rise, line.run)}. Compare the vertical change with the horizontal change between the marked points.`,
       );
     }
+    if (session && storage === "online")
+      void save({
+        ...session,
+        student,
+        finishedAt: new Date().toISOString(),
+        problems: [...history, { line, answers: next }],
+        finished: false,
+      });
   }
   function nextProblem() {
     if (!line) return;
     setHistory([...history, { line, answers }]);
-    setLine(generateLine());
+    setLine(generateLine(Math.random, [...history.map((p) => p.line), line]));
     setAnswers([]);
     setRise("");
     setRun("");
@@ -210,9 +233,10 @@ export default function SlopePractice() {
             retry earns a star, but does not add to your streak.
           </p>
           <p>
-            Find your own grid points on rising, falling, and horizontal lines.
-            Enter rise over run, then submit. Each square is 1 unit. These
-            graphs do not include vertical lines.
+            Tap integer grid points on the line to show their coordinates. Find
+            your own grid points on rising, falling, and horizontal lines. Enter
+            rise over run, then submit. Each square is 1 unit. These graphs do
+            not include vertical lines.
           </p>
           <div className="slope-student-fields">
             <label>
@@ -261,7 +285,7 @@ export default function SlopePractice() {
             {storage === "checking"
               ? "Checking score storage…"
               : storage === "online"
-                ? "Your name, class hour, and result will be sent to your teacher when you finish."
+                ? "Your name, class hour, and progress will be sent to your teacher after each submitted answer."
                 : "Online score saving is not connected yet. Your work stays in this page; download your result before leaving. No Google sign-in is required."}
           </p>
           <button className="slope-primary" disabled={storage === "checking"}>
@@ -358,6 +382,7 @@ export default function SlopePractice() {
                 <section className="slope-graph-panel">
                   <h2>Graph {history.length + 1}</h2>
                   <Graph
+                    key={history.length}
                     line={line}
                     hint={
                       phase !== "answer" &&
@@ -365,7 +390,10 @@ export default function SlopePractice() {
                       !isCorrect(line, answers[0])
                     }
                   />
-                  <p>Each grid square is 1 unit.</p>{" "}
+                  <p>
+                    Each grid square is 1 unit. Tap a grid point on the line to
+                    show its coordinates; tap it again to hide them.
+                  </p>{" "}
                   <div
                     ref={feedbackRef}
                     className={`slope-feedback ${phase === "correct" ? "success" : ""}`}
@@ -511,9 +539,28 @@ export default function SlopePractice() {
                       </button>
                     </div>
                   )}
+                  {storage === "online" &&
+                    saveStatus.includes("not saved") &&
+                    session && (
+                      <button
+                        disabled={saving}
+                        onClick={() =>
+                          void save({
+                            ...session,
+                            student,
+                            finishedAt: new Date().toISOString(),
+                            problems: allProblems,
+                            finished: false,
+                          })
+                        }
+                      >
+                        Retry syncing progress
+                      </button>
+                    )}
                   <p className="slope-small">
                     {storage === "online"
-                      ? "Results save when you finish."
+                      ? saveStatus ||
+                        "Progress saves after each submitted answer."
                       : "Not saved online. Finish to download your result."}{" "}
                     Keep this page open while practicing.
                   </p>

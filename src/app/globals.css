@@ -107,3 +107,5 @@ body:has(.book-reader) .site-footer{display:none}
 .slope-app .breadcrumb{padding:0;margin:0 0 14px;min-height:18px}.slope-results .breadcrumb{padding:0;margin:0 0 20px}.slope-graph-panel:has(.slope-feedback:not(:empty)) .slope-graph{max-height:calc(100dvh - 420px);min-height:260px}.slope-graph-panel .slope-feedback{text-align:left;background:#f3eee3;border-radius:7px;padding:10px}.slope-graph-panel .slope-feedback.success{background:#eaf3eb}
 @media(max-width:700px){.slope-graph-panel:has(.slope-feedback:not(:empty)) .slope-graph{max-height:none;min-height:0}}
 @media(min-width:701px){.slope-app{padding-bottom:0}.slope-graph{max-height:min(440px,calc(100dvh - 300px))}}
+.slope-point-target{cursor:pointer;touch-action:manipulation}.slope-point-target:focus-visible{outline:none;stroke:#b77900;stroke-width:3}.slope-graph-panel>p{max-width:440px;margin-inline:auto;line-height:1.35}
+.slope-selected{font-size:12px;line-height:1.4;min-height:0;margin:0;color:#16334c;overflow-wrap:anywhere}
