@@ -1,0 +1,95 @@
+import assert from "node:assert/strict";
+import { randomUUID } from "node:crypto";
+import {
+  fraction,
+  generateLine,
+  points,
+  isCorrect,
+  summarize,
+  feedback,
+  validateReport,
+} from "../src/lib/slope.ts";
+const line = { rise: 3, run: 5, x: 0, y: 0 };
+assert.equal(isCorrect(line, { rise: 6, run: 10 }), true);
+assert.equal(isCorrect(line, { rise: -6, run: -10 }), true);
+assert.equal(isCorrect(line, { rise: 3, run: 0 }), false);
+assert.equal(isCorrect(line, { rise: -3, run: 5 }), false);
+assert.equal(fraction(-6, -10), "3/5");
+assert.equal(fraction(0, 5), "0");
+assert.equal(fraction(8, 4), "2");
+assert.match(feedback(line, { rise: 6, run: 10 }), /6\/10.*simplest form 3\/5/);
+// Exhaust all generated slopes and center anchors: at least two clear lattice points.
+for (let rise = -5; rise <= 5; rise++)
+  for (let run = 1; run <= 5; run++)
+    for (let x = -2; x <= 2; x++)
+      for (let y = -2; y <= 2; y++) {
+        const ps = points({ rise, run, x, y });
+        assert.ok(ps.length >= 2);
+        for (const p of ps) assert.ok((p.y - y) * run === (p.x - x) * rise);
+      }
+for (let i = 0; i < 1000; i++) {
+  const l = generateLine();
+  assert.ok(points(l).length >= 2);
+  assert.ok(l.run > 0);
+}
+const right = { line, answers: [{ rise: 3, run: 5 }] },
+  retry = {
+    line,
+    answers: [
+      { rise: 4, run: 5 },
+      { rise: 6, run: 10 },
+    ],
+  },
+  wrong = {
+    line,
+    answers: [
+      { rise: 4, run: 5 },
+      { rise: 5, run: 5 },
+    ],
+  };
+const s = summarize([right, right, retry, right, wrong]);
+assert.deepEqual(s, {
+  correct: 4,
+  firstTry: 3,
+  retryCorrect: 1,
+  streak: 0,
+  bestStreak: 2,
+  attempts: 7,
+  completed: false,
+});
+assert.equal(summarize(Array(9).fill(right)).completed, false);
+assert.equal(summarize(Array(10).fill(retry)).completed, false);
+assert.equal(
+  summarize([...Array(5).fill(right), wrong, ...Array(5).fill(retry)])
+    .completed,
+  true,
+);
+const report = {
+  id: randomUUID(),
+  student: { firstName: "Test", lastName: "Student", hour: "3" },
+  startedAt: new Date().toISOString(),
+  finishedAt: new Date().toISOString(),
+  problems: [right, retry],
+};
+assert.deepEqual(validateReport(report), report);
+for (const bad of [
+  { ...report, student: { ...report.student, hour: "4" } },
+  { ...report, problems: [{ line, answers: [{ rise: 1, run: 0 }] }] },
+  {
+    ...report,
+    problems: [
+      {
+        line,
+        answers: [
+          { rise: 3, run: 5 },
+          { rise: 3, run: 5 },
+        ],
+      },
+    ],
+  },
+  { ...report, problems: [] },
+])
+  assert.throws(() => validateReport(bad));
+console.log(
+  "Slope tests passed: fraction equivalence, sign/zero handling, 1,375 graph configurations, retry/streak goals, result validation.",
+);
