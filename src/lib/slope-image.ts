@@ -1,13 +1,13 @@
-import { summarize, type SlopeReport } from "./slope";
+import { practiceScore, summarize, type SlopeReport } from "./slope";
 
 /** Draw a results image entirely on the student's device. No remote capture service. */
 export async function createSlopeResultsImage(
   report: SlopeReport,
 ): Promise<Blob> {
   const score = summarize(report.problems);
-  if (!score.completed)
+  if (!report.finished || practiceScore(report.problems) < 6)
     throw new Error(
-      "Complete the practice goal before saving a results image.",
+      "Submit a score of at least 6/10 before saving a results image.",
     );
   const canvas = document.createElement("canvas");
   canvas.width = 1200;
@@ -41,7 +41,7 @@ export async function createSlopeResultsImage(
   ctx.fillText("MacIntodd · Slope practice", 64, 73);
   ctx.fillStyle = "#17633c";
   ctx.font = "bold 30px sans-serif";
-  ctx.fillText("GOAL COMPLETED", 64, 177);
+  ctx.fillText(score.completed ? "GOAL COMPLETED" : "PRACTICE SUBMITTED EARLY", 64, 177);
   ctx.fillStyle = "#16334c";
   ctx.font = "bold 48px sans-serif";
   lines.forEach((text, i) => ctx.fillText(text, 64, 255 + i * 59));
@@ -50,7 +50,7 @@ export async function createSlopeResultsImage(
   ctx.fillStyle = "#d3dce0";
   ctx.fillRect(64, top + 25, 1072, 2);
   const metrics = [
-    ["Correct answers", String(score.correct), "Goal: at least 10 correct"],
+    ["Score", `${practiceScore(report.problems)}/10`, `${score.correct} correct answers total`],
     ["Best streak", String(score.bestStreak), "Goal: at least 5 in a row"],
     [
       "First-try correct",
@@ -79,7 +79,7 @@ export async function createSlopeResultsImage(
   );
   ctx.font = "23px sans-serif";
   ctx.fillText(
-    `Completed: ${new Date(report.finishedAt).toLocaleString()}`,
+    `Submitted: ${new Date(report.finishedAt).toLocaleString()}`,
     64,
     top + 337,
   );

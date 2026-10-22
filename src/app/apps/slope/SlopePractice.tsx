@@ -9,6 +9,7 @@ import {
   generateLine,
   isCorrect,
   points,
+  practiceScore,
   summarize,
   type Line,
   type ProblemRecord,
@@ -42,6 +43,7 @@ export default function SlopePractice() {
   const allProblems =
     line && answers.length ? [...history, { line, answers }] : history;
   const progress = summarize(allProblems);
+  const score = practiceScore(allProblems);
   const locked = !["answer", "retry"].includes(phase) || !!report;
   function key(value: string) {
     if (locked) return;
@@ -163,7 +165,9 @@ export default function SlopePractice() {
           <p>
             Earn 10 gold stars and reach a streak of 5 first-try answers in this
             session. Your best streak counts even if it ends later. A correct
-            retry earns a star, but does not add to your streak.
+            retry earns a star, but does not add to your streak. You can submit
+            early starting at 6/10. Your score stays at 9/10 until both goals
+            are met.
           </p>
           <p>
             Tap integer grid points on the line to show their coordinates. Find
@@ -215,8 +219,8 @@ export default function SlopePractice() {
             </label>
           </div>
           <p className="slope-storage">
-            Your name and answers stay in this browser page. When you complete
-            the goal, save a results image showing the name you entered and
+            Your name and answers stay in this browser page. When you finish
+            practice, save a results image showing the name you entered and
             submit it in Google Classroom. Reloading or leaving resets your
             practice.
           </p>
@@ -226,7 +230,7 @@ export default function SlopePractice() {
         <>
           <div className="slope-score" aria-label="Progress">
             <span>
-              <b>{progress.correct}</b> / 10 correct
+              <b>{score}</b> / 10
             </span>
             <span>
               Streak <b>{progress.streak}</b>
@@ -259,19 +263,20 @@ export default function SlopePractice() {
                 ★
               </div>
               <h2>
-                {progress.completed ? "Goal reached!" : "Practice result"}
+                {progress.completed ? "Goal reached!" : "Practice submitted early"}
               </h2>
               <p>
                 {student.firstName} {student.lastName} · Class hour{" "}
                 {student.hour}
               </p>
+              <p><strong>Score: {score}/10</strong></p>
               <p>
                 {progress.correct} correct · {progress.firstTry} on the first
                 try · {progress.retryCorrect} on a retry · best streak{" "}
                 {progress.bestStreak}
               </p>
               <p>
-                {history.length + 1} graphs · {progress.attempts} submitted
+                {report.problems.length} graphs · {progress.attempts} submitted
                 answers
               </p>
               <p>{message}</p>
@@ -453,11 +458,16 @@ export default function SlopePractice() {
                       <button className="slope-primary" onClick={nextProblem}>
                         Next graph →
                       </button>
+                      {score >= 6 && (
+                        <button onClick={() => finish(allProblems)}>
+                          Submit {score}/10
+                        </button>
+                      )}
                     </div>
                   )}
                   <p className="slope-small">
                     Your work stays on this device. Keep this page open until
-                    you complete the goal and save your results image.
+                    you submit your score and save your results image.
                   </p>
                 </section>
               </div>

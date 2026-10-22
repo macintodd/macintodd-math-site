@@ -6,6 +6,7 @@ import {
   points,
   isCorrect,
   summarize,
+  practiceScore,
   feedback,
   validateReport,
 } from "../src/lib/slope.ts";
@@ -123,3 +124,13 @@ assert.equal(validateReport({ ...report, finished: false }).finished, false);
 console.log(
   "Repeat prevention passed: adversarial constant randomness and 10,000 sequential graphs.",
 );
+
+// Early submission grades and the streak gate must match on screen and PNG.
+for (const count of [0, 5, 6, 7, 8, 9, 10, 20, 100]) {
+  assert.equal(practiceScore(Array(count).fill(retry)), Math.min(count, 9));
+}
+assert.equal(practiceScore(Array(9).fill(right)), 9);
+assert.equal(practiceScore(Array(10).fill(right)), 10);
+assert.equal(practiceScore([...Array(20).fill(retry), ...Array(5).fill(right)]), 10);
+assert.equal(practiceScore([...Array(5).fill(right), wrong, ...Array(5).fill(retry)]), 10);
+console.log("Early scores passed: 6–9/10 available, capped at 9 until the streak goal is earned.");

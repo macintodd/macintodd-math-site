@@ -81,6 +81,11 @@ export function summarize(problems: ProblemRecord[]) {
     completed: correct >= 10 && bestStreak >= 5,
   };
 }
+/** Grade stays at 9/10 until both practice goals have been earned. */
+export function practiceScore(problems: ProblemRecord[]) {
+  const progress = summarize(problems);
+  return progress.completed ? 10 : Math.min(progress.correct, 9);
+}
 export function feedback(line: Line, answer: Answer) {
   const simple = fraction(line.rise, line.run),
     entered = `${answer.rise}/${answer.run}`;
