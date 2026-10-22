@@ -1,7 +1,8 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Graph from "./Graph";
+import ResultsImage from "./ResultsImage";
 import {
   feedback,
   fraction,
@@ -34,21 +35,10 @@ export default function SlopePractice() {
   const [active, setActive] = useState<"rise" | "run">("rise");
   const [phase, setPhase] = useState<Phase>("answer"),
     [message, setMessage] = useState("");
-  const [storage, setStorage] = useState<"checking" | "online" | "offline">(
-    "checking",
-  );
   const [report, setReport] = useState<SlopeReport | null>(null);
-  const [saveStatus, setSaveStatus] = useState(""),
-    [saving, setSaving] = useState(false);
   const riseInput = useRef<HTMLInputElement>(null),
     runInput = useRef<HTMLInputElement>(null);
   const feedbackRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    fetch("/api/slope/status", { cache: "no-store" })
-      .then((r) => r.json())
-      .then((s) => setStorage(s.configured ? "online" : "offline"))
-      .catch(() => setStorage("offline"));
-  }, []);
   const allProblems =
     line && answers.length ? [...history, { line, answers }] : history;
   const progress = summarize(allProblems);
@@ -74,40 +64,6 @@ export default function SlopePractice() {
       preventScroll: true,
     });
   }
-  const saveQueue = useRef<Promise<void>>(Promise.resolve());
-  const pendingSaves = useRef(0);
-  function save(result: SlopeReport) {
-    pendingSaves.current++;
-    setSaving(true);
-    saveQueue.current = saveQueue.current
-      .then(() => send(result))
-      .finally(() => {
-        pendingSaves.current--;
-        setSaving(pendingSaves.current > 0);
-      });
-    return saveQueue.current;
-  }
-  async function send(result: SlopeReport) {
-    if (storage !== "online") {
-      setSaveStatus("Not saved online. Download your result to turn it in.");
-      return;
-    }
-    setSaving(true);
-    setSaveStatus("Saving result…");
-    try {
-      const response = await fetch("/api/slope/results", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(result),
-      });
-      if (!response.ok) throw Error();
-      setSaveStatus("Progress saved for your teacher.");
-    } catch {
-      setSaveStatus(
-        "Your result was not saved. Keep this page open and retry, or download your result.",
-      );
-    }
-  }
   function finish(records: ProblemRecord[]) {
     if (!session) return;
     const result: SlopeReport = {
@@ -118,7 +74,6 @@ export default function SlopePractice() {
       finished: true,
     };
     setReport(result);
-    void save(result);
   }
   function submit(event: React.FormEvent) {
     event.preventDefault();
@@ -155,15 +110,8 @@ export default function SlopePractice() {
         `The slope is ${fraction(line.rise, line.run)}. Compare the vertical change with the horizontal change between the marked points.`,
       );
     }
-    if (session && storage === "online")
-      void save({
-        ...session,
-        student,
-        finishedAt: new Date().toISOString(),
-        problems: [...history, { line, answers: next }],
-        finished: false,
-      });
   }
+
   function nextProblem() {
     if (!line) return;
     setHistory([...history, { line, answers }]);
@@ -175,20 +123,6 @@ export default function SlopePractice() {
     setPhase("answer");
     setMessage("");
     riseInput.current?.focus({ preventScroll: true });
-  }
-  function download() {
-    if (!report) return;
-    const blob = new Blob([JSON.stringify(report, null, 2)], {
-        type: "application/json",
-      }),
-      url = URL.createObjectURL(blob),
-      anchor = document.createElement("a");
-    anchor.href = url;
-    anchor.download = `slope-result-${report.id.slice(0, 8)}.json`;
-    document.body.appendChild(anchor);
-    anchor.click();
-    anchor.remove();
-    window.setTimeout(() => URL.revokeObjectURL(url), 60000);
   }
   const pair = line ? points(line) : [];
   return (
@@ -203,7 +137,6 @@ export default function SlopePractice() {
           <p className="eyebrow">READ THE GRAPH</p>
           <h1>Slope practice</h1>
         </div>
-        <Link href="/apps/slope/results">Teacher results</Link>
       </header>
       {!session ? (
         <form
@@ -244,7 +177,7 @@ export default function SlopePractice() {
               <input
                 required
                 maxLength={60}
-                autoComplete="given-name"
+                autoComplete="off"
                 value={student.firstName}
                 onChange={(e) =>
                   setStudent({ ...student, firstName: e.target.value })
@@ -257,7 +190,7 @@ export default function SlopePractice() {
               <input
                 required
                 maxLength={60}
-                autoComplete="family-name"
+                autoComplete="off"
                 value={student.lastName}
                 onChange={(e) =>
                   setStudent({ ...student, lastName: e.target.value })
@@ -281,16 +214,13 @@ export default function SlopePractice() {
               </select>
             </label>
           </div>
-          <p className="slope-storage" role="status">
-            {storage === "checking"
-              ? "Checking score storage…"
-              : storage === "online"
-                ? "Your name, class hour, and progress will be sent to your teacher after each submitted answer."
-                : "Online score saving is not connected yet. Your work stays in this page; download your result before leaving. No Google sign-in is required."}
+          <p className="slope-storage">
+            Your name and answers stay in this browser page. When you complete
+            the goal, save a results image showing the name you entered and
+            submit it in Google Classroom. Reloading or leaving resets your
+            practice.
           </p>
-          <button className="slope-primary" disabled={storage === "checking"}>
-            Start practice
-          </button>
+          <button className="slope-primary">Start practice</button>
         </form>
       ) : (
         <>
@@ -345,18 +275,9 @@ export default function SlopePractice() {
                 answers
               </p>
               <p>{message}</p>
-              <p role="status">{saveStatus}</p>
+              <ResultsImage report={report} />
               <div className="slope-actions">
-                {storage === "online" && (
-                  <button disabled={saving} onClick={() => void save(report)}>
-                    Retry saving
-                  </button>
-                )}
-                <button className="slope-primary" onClick={download}>
-                  Download result
-                </button>
                 <button
-                  disabled={saving}
                   onClick={() => {
                     setSession(null);
                     setReport(null);
@@ -364,15 +285,13 @@ export default function SlopePractice() {
                     setAnswers([]);
                     setStudent({ firstName: "", lastName: "", hour: "" });
                     setMessage("");
-                    setSaveStatus("");
                   }}
                 >
                   Next student / new session
                 </button>
               </div>
               <p className="slope-small">
-                Names are entered by the student; Google identity has not been
-                verified. Downloaded results can be attached in Google
+                Submit your image using your own school account in Google
                 Classroom.
               </p>
             </section>
@@ -534,35 +453,11 @@ export default function SlopePractice() {
                       <button className="slope-primary" onClick={nextProblem}>
                         Next graph →
                       </button>
-                      <button onClick={() => finish(allProblems)}>
-                        Finish & get result
-                      </button>
                     </div>
                   )}
-                  {storage === "online" &&
-                    saveStatus.includes("not saved") &&
-                    session && (
-                      <button
-                        disabled={saving}
-                        onClick={() =>
-                          void save({
-                            ...session,
-                            student,
-                            finishedAt: new Date().toISOString(),
-                            problems: allProblems,
-                            finished: false,
-                          })
-                        }
-                      >
-                        Retry syncing progress
-                      </button>
-                    )}
                   <p className="slope-small">
-                    {storage === "online"
-                      ? saveStatus ||
-                        "Progress saves after each submitted answer."
-                      : "Not saved online. Finish to download your result."}{" "}
-                    Keep this page open while practicing.
+                    Your work stays on this device. Keep this page open until
+                    you complete the goal and save your results image.
                   </p>
                 </section>
               </div>

@@ -12,7 +12,7 @@
 - Preserve mathematical accuracy and the methods in the teacher's materials. If an original contains an error, leave the original untouched and identify a correction in a prepared public guide and the source catalog.
 - Keep all four material links available. Do not invent a missing source or label an unfinished sheet as completed.
 - Run content checks, typecheck, lint, and production build before publishing. Check responsive layouts and PDF rendering for affected pages.
-- Never imply student progress is saved unless the configured backend confirms it. Slope practice supports optional private storage and downloadable reports; other app scores remain local to the visit. See docs/slope-results-setup.md.
+- Slope practice is local-only: do not send student names, answers, or scores to a server or persist them in browser storage. Completion exports a locally generated image bearing the name entered at the start, for manual Google Classroom submission. New score POSTs must remain disabled. Preserve existing protected records without deleting them. See docs/slope-results-setup.md.
 - Keep the current domain and email settings unchanged unless the user asks to modify them.
 
 <!-- BEGIN:nextjs-agent-rules -->

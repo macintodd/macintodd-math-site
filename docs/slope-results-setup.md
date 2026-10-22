@@ -1,36 +1,21 @@
-# Slope practice and private results
+# Slope practice: local results images
 
-The app is `/apps/slope`; the teacher view is `/apps/slope/results`.
+## Current mode
 
-## Current behavior without credentials
+At the teacher's request, names, class hour, answers, scores, and completion times stay in browser memory. The student practice app has no score/status requests, background uploads, cookies, or browser storage for student work. Refreshing or leaving resets the practice. Normal website hosting requests still occur; this is not a blanket claim of SOPPA compliance or absence of hosting metadata.
 
-The complete practice app works without a database. It explicitly says that online saving is not connected. Names and answers remain in React memory until leaving/reloading. Finishing creates a downloadable JSON report that a student can attach in Google Classroom. The teacher view imports those files locally, recalculates scores, filters by hour, and exports CSV. Imported reports are not uploaded or retained after leaving/reloading. Treat downloaded reports as student work that students can edit, rather than verified assessments.
+After at least 10 correct and a best streak of 5, the app draws a PNG results image using the browser's canvas. It includes the exact first and last name entered at the start (with surrounding whitespace trimmed), class hour, correct count, first-try and retry counts, best streak, graphs/attempts, and completion date/time from the device. The student's name is wrapped, never truncated. The image is created locally, displayed via a local blob URL, and can be downloaded or shared using a user-selected OS share destination. No screenshot service, Google sign-in, or Classroom API is used.
 
-## Enable online collection
+Students attach the image in the district's Google Classroom assignment and tap Turn in. Classroom identifies the submitting account. The image's typed name, device timestamp, and session ID are not an identity verification or tamper-proof assessment. The export becomes available only after the practice goal is complete. On iPads, touch-and-hold the preview or use the hardware screenshot buttons if download/share isn't available.
 
-Use a school-approved private database. This implementation supports Supabase's REST API without adding a browser database SDK. Confirm school approval and retention requirements before enabling student collection.
+## Former online collection
 
-1. Create/select a Supabase project in the teacher/school account and run `docs/slope-results.sql`.
-2. In the production Vercel project serving macintodd.net, configure **server-only** environment variables:
-   - `SUPABASE_URL`: project URL, e.g. `https://PROJECT.supabase.co`
-   - `SUPABASE_SERVICE_ROLE_KEY`: server service-role key. Never use a `NEXT_PUBLIC_` prefix or commit credentials.
-   - `RESULTS_TEACHER_PASSWORD`: a unique randomly generated access key of at least 24 characters. Keep it in a password manager; don't send it to students. The dashboard uses a bearer key sent over HTTPS, compares its hash in constant time, and clears the input after connecting. The key remains only in page memory for polling; Disconnect clears it and the displayed results. It is not stored in browser storage or URLs.
-3. Redeploy. There are currently two Vercel projects connected to this repository; configure the actual production project deliberately. Do not copy student data to a public GitHub repository.
-4. Test with a fictional student. Open the teacher dashboard with its key. Submit an answer in a separate student tab; verify the row appears/updates within 5 seconds. Finish, confirm the saved message, and verify one session row appears even if saving was retried. Re-run the SQL to add the latest-session view if upgrading the previous schema. Verify unauthenticated GET is rejected and anonymous Supabase access cannot read/write the table.
-5. Choose a retention period and delete expired records in Supabase. The teacher dashboard shows the latest 500 sessions, sorted by first name and filterable by hour/name. It refreshes every 5 seconds while connected. Export as needed; no scheduled deletion is configured.
+`POST /api/slope/results` returns 410 without reading or logging the body; it cannot save new scores even when Supabase credentials remain configured. `/api/slope/status` reports collection disabled. Have students reload any tabs left open from the previous version: old client code could otherwise still attempt requests, although they will not be stored by the current endpoint.
 
-Collection sends name, class hour, start/update times, graph parameters, submitted fractions, and derived totals after each submitted answer and on explicit Finish. Each update is an immutable snapshot; the private `slope_latest_results` view selects the furthest progress per session, prioritizing a finished snapshot at equal attempt count. Repeated saves do not create duplicate snapshots and late older updates cannot replace newer progress. It does not save every keystroke. The teacher sees a student after their first submitted answer. Save failures are explicit and retryable; the download remains available. Reloading loses the active browser session, but previously confirmed online snapshots remain available to the teacher. Scores are recomputed on the server, but answers and identities are self-reported. Anonymous submission is intended for low-stakes classroom practice, not high-stakes grading; deploy platform rate limits before enabling broadly advertised collection. The endpoint enforces same-origin browser submissions, bounded payloads, valid graph/answer data, and duplicate-session protection. Same-origin checks are not authentication and do not prevent custom clients submitting fictional work.
+Existing Supabase records and server credentials have not been deleted. The previous-records section of `/apps/slope/results` is collapsed by default, never polls, and loads records only after a teacher explicitly supplies the existing access key. `GET /api/slope/results` remains protected and uncached. Consult the district before handling any existing real student records; no deletion or retention changes were performed.
 
-## Google identity
+`docs/slope-results.sql` describes the former private schema for reference. It is not required for local-image practice. Do not re-enable uploads without an explicit teacher request and appropriate district review.
 
-The teacher supplied school domain is `dps61.net`; no domain filtering is claimed in this version. The teacher supplied their address for a future Google allowlist; OAuth is not configured.
+## Validation
 
-Being signed into a managed iPad or Google Classroom does not authenticate this website. No Google password is requested. If verified email identity is required, the next step is school-approved Google OAuth: a configured Google Cloud client, exact website redirect URLs, domain restrictions, and a teacher allowlist. Do not claim verified Google identity until that flow is connected and tested. This version uses student-entered names and a separate teacher key, so it does not require students to approve third-party Google access.
-
-## Scoring
-
-A star means a graph was answered correctly on attempt one or two. A first miss immediately breaks the streak. Retry success earns one star and leaves the streak at zero. Second miss reveals the answer, no star. Completion requires at least 10 stars and a **best** first-try streak of at least 5 in that session. Equivalent fractions count, with simplest-form feedback. Denominator zero is an input error, not a scored attempt. Horizontal lines are included; vertical lines are excluded because the requested interface is a fraction. Every generated line has at least two visible integer grid intersections; students can tap any visible integer point on the line to toggle its coordinate label. Labels stay selected until that same point is tapped again or the graph changes. Retry hints can additionally mark two points. A slope may repeat twice but never three times consecutively; slopes are sampled uniformly from distinct reduced fractions.
-
-Run `npm run test:slope` plus the standard project checks before publishing. After building, `node scripts/test-slope-api.mjs` tests access controls, validation, score recomputation, and idempotent saving against a local mock database. It does not substitute for testing the actual configured Supabase project.
-
-Reference: https://supabase.com/docs/guides/api/securing-your-api
+Run `npm run test:slope`, content checks, typecheck, lint, and a production build. After building, `node scripts/test-slope-api.mjs` verifies that uploads stay disabled even with credentials present, no database writes occur, and historical records require teacher authorization. Browser-test a full 10-answer run, verify the initial name on the PNG, confirm no student API requests are made, and inspect the downloaded image on an iPad-sized layout.

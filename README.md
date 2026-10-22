@@ -36,7 +36,7 @@ The prepared Precalculus practice key fills gaps in the classroom scan and corre
 
 ## Publishing and access
 
-Notes, completed notes, practice, and completed practice are public immediately. The slope app collects a first name, last name, and class hour for its result report. It supports tappable integer points, prevents three identical slopes in a row, and supports optional private progress snapshots with a teacher dashboard that refreshes every five seconds, but saving remains explicitly unavailable until server credentials are configured. Downloadable reports and local teacher import/CSV export work without a backend. Google identity is not authenticated. Other practice app scores exist only during the visit. See [slope results setup](docs/slope-results-setup.md).
+Notes, completed notes, practice, and completed practice are public immediately. The slope app keeps names and work in browser memory and creates a local completion image bearing the name entered at the start, for manual Google Classroom submission. New score uploads are disabled. Existing private database records are preserved for teacher review. See [results workflow](docs/slope-results-setup.md).
 
 Known old URLs redirect where an equivalent new destination exists. The former Unit 3 page remains accessible as legacy content. Domain DNS and Bluehost account settings are managed separately from this repository. Do not change domain or email records without a specific task to do so.
 
