@@ -33,7 +33,7 @@ for (const l of lessons) {
   for (const c of l.concepts) if (c.formula) { katex.renderToString(c.formula, { throwOnError: true }); formulas++ }
   if (l.check) { katex.renderToString(l.check.answer, { throwOnError: true }); formulas++ }
   assert(l.materials.some(m => m.file), 'Lesson must have reviewed materials')
-  for (const m of l.materials) {
+  for (const m of l.materials.flatMap(m => [m, ...(m.additional ?? [])])) {
     if (!m.file) {
       assert(m.unavailableReason && m.pages === 0, `Missing document needs an explicit reason: ${id}`)
       assert(m.kind === 'completed-notes' || m.kind === 'completed-practice', 'Only missing keys may be unpublished')

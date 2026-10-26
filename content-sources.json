@@ -581,6 +581,18 @@
       "sourceSha256": "648d57ddc0f0c67cdd55d62b5e0aaeca1dabb390ea3a3a7cc096d1f54a8071bc",
       "publishedSha256": "d5e83585ac234994dc2b97ed816d2809ff3dca67775b111afc562e6ddcb8b0c1",
       "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1B/Unit 1B Completed/U1B L2 More Practice Function Notation 2.pdf",
+      "output": "algebra-2/function-notation/completed-practice-2.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Teacher identified this as a second Function Notation practice; reviewed both completed pages, numbered 1-23. Published as an indented additional completed practice link without replacing the first worksheet.",
+      "sourceSha256": "81402577b45d433df39c41bd61dcb67dc810d2b9b615005ad441e10d1271a72d",
+      "publishedSha256": "0f765acb61f4ecd6a930f62e79a318122420059bf5353a476757a09ce80a02ff",
+      "publishedPages": 2
     }
   ]
 }

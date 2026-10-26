@@ -176,3 +176,7 @@ body:has(.book-reader) .site-footer{display:none}
 .course-index .toc-unit{padding:16px 0 24px}
 .course-index .toc-unit+.toc-unit{border-top:1px solid var(--line);padding-top:28px}
 @media(max-width:740px){.course-index.shell{width:calc(100% - 24px)}.course-index-content{padding:22px 16px}.course-index .toc-unit h2 a{width:100%}}
+
+.lesson-pdf-links .lesson-material-group{display:flex;flex-direction:column;align-items:flex-start;align-self:flex-start}
+.lesson-pdf-links .lesson-extra-material{margin-left:24px}
+.lesson-pdf-links:has(.lesson-extra-material){align-items:flex-start}

@@ -53,3 +53,7 @@ Guest videos are embedded from their original publishers; no video files are upl
 - [Introduction to slope | Algebra I | Khan Academy](https://www.youtube.com/watch?v=MeU-KzdCBps) — Khan Academy
 - [Average rate of change from a graph](https://www.youtube.com/watch?v=TEXSW-o8674) — Khan Academy
 - [Average rate of change from a table](https://www.youtube.com/watch?v=U1lQbh21y1k) — Khan Academy
+
+## October 26: second Function Notation practice
+
+Reviewed both pages of `Unit 1B Completed/U1B L2 More Practice Function Notation 2.pdf`. The teacher confirmed this is additional Function Notation practice, despite L2 in the filename. Published both pages as Completed Practice 2, indented under the original Completed Practice link. Original materials and slope lesson selections are unchanged.
