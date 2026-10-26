@@ -2,7 +2,7 @@ export type CourseId = 'algebra-2' | 'precalculus'
 export type Step = { math: string; explanation: string }
 export type Example = { id: string; title: string; category: string; prompt: string; steps: Step[]; points?: { x: number; y: number; label: string }[]; triangle?: boolean }
 export type Lesson = {
-  course: CourseId; unitSlug: string; slug: string; title: string; unit: string; number: string; description: string;
+  followUpOf?: string; sortOrder?: number; course: CourseId; unitSlug: string; slug: string; title: string; unit: string; number: string; description: string;
   goals: string[]; prerequisites: string; concepts: { title: string; text: string; formula?: string; note?: string }[];
   videos: { id: string; title: string; author: string }[]; examples: Example[];
   materials: { additional?: { file: string; contentsLabel?: string; label: string; description: string; pages: number }[]; file?: string; label?: string; unavailableReason?: string; title: string; description: string; pages: number; kind: string }[];
@@ -772,7 +772,6 @@ const additionalAlgebraLessons: Lesson[] = [
       },
       {
         "file": "algebra-2/function-notation/completed-practice.pdf",
-        "additional": [{ "file": "algebra-2/function-notation/completed-practice-2.pdf", "label": "Completed Practice 2", "contentsLabel": "Function notation — Practice 2 (completed)", "description": "Second Function Notation practice with classroom solutions, problems 1-23.", "pages": 2 }],
         "title": "completed-practice",
         "description": "Selected classroom handout.",
         "kind": "completed-practice",
@@ -845,8 +844,20 @@ const additionalAlgebraLessons: Lesson[] = [
     "practiceApp": "/apps/slope"
   }
 ]
-export const lessons: Lesson[] = [...originalLessons, ...additionalAlgebraLessons].sort((a, b) =>
+const functionNotation = additionalAlgebraLessons.find(lesson => lesson.slug === 'function-notation')!
+const functionNotationPractice: Lesson = {
+  ...functionNotation,
+  slug: 'function-notation-practice-2', title: 'Function notation — More practice 2', number: 'Practice 2',
+  followUpOf: 'function-notation', sortOrder: 1.5,
+  description: 'More practice with function notation following Lesson 1. Review the lesson videos and compare your work with the completed handout.',
+  materials: [
+    { ...functionNotation.materials[0], label: 'Lesson 1 Blank Notes' },
+    { ...functionNotation.materials[1], label: 'Lesson 1 Completed Notes' },
+    { file: 'algebra-2/function-notation/completed-practice-2.pdf', label: 'Completed Practice 2', title: 'Completed Practice 2', description: 'Second Function Notation practice with classroom solutions, problems 1-23.', kind: 'completed-practice', pages: 2 },
+  ],
+}
+export const lessons: Lesson[] = [...originalLessons, ...additionalAlgebraLessons, functionNotationPractice].sort((a, b) =>
   a.course.localeCompare(b.course) || a.unitSlug.localeCompare(b.unitSlug) ||
-  Number(a.number.match(/\d+/)?.[0] ?? 0) - Number(b.number.match(/\d+/)?.[0] ?? 0)
+  (a.sortOrder ?? Number(a.number.match(/\d+/)?.[0] ?? 0)) - (b.sortOrder ?? Number(b.number.match(/\d+/)?.[0] ?? 0))
 )
 export function getLesson(course: string, slug: string) { return lessons.find(l => l.course === course && l.slug === slug) }

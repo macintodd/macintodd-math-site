@@ -57,3 +57,5 @@ Guest videos are embedded from their original publishers; no video files are upl
 ## October 26: second Function Notation practice
 
 Reviewed both pages of `Unit 1B Completed/U1B L2 More Practice Function Notation 2.pdf`. The teacher confirmed this is additional Function Notation practice, despite L2 in the filename. Published both pages as Completed Practice 2, indented under the original Completed Practice link. Original materials and slope lesson selections are unchanged.
+
+Practice 2 now has its own follow-up page directly after Lesson 1, indented in the course contents. It reuses Lesson 1 videos and links to Lesson 1 notes, with only the completed second practice handout available. No blank second practice has been substituted.

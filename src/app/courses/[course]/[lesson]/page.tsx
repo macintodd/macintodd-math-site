@@ -23,7 +23,7 @@ export default async function LessonPage({ params }: { params: Promise<{ course:
   const previous = courseLessons[index - 1]
   const next = courseLessons[index + 1]
   const unitLessons = lessons.filter(item => item.course === lesson.course && item.unitSlug === lesson.unitSlug)
-  const lessonItems = unitLessons.map(item => <li key={item.slug}>
+  const lessonItems = unitLessons.map(item => <li className={item.followUpOf ? "unit-follow-up" : undefined} key={item.slug}>
     <Link href={`/courses/${item.course}/${item.slug}`} aria-current={item.slug === lesson.slug ? 'page' : undefined}>
       <span>{item.number}</span>{item.title}
     </Link>

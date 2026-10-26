@@ -180,3 +180,7 @@ body:has(.book-reader) .site-footer{display:none}
 .lesson-pdf-links .lesson-material-group{display:flex;flex-direction:column;align-items:flex-start;align-self:flex-start}
 .lesson-pdf-links .lesson-extra-material{margin-left:24px}
 .lesson-pdf-links:has(.lesson-extra-material){align-items:flex-start}
+
+.toc-lessons .toc-follow-up{margin-left:24px}
+
+.lesson-sidebar .unit-follow-up{margin-left:16px}
