@@ -168,3 +168,11 @@ body:has(.book-reader) .site-footer{display:none}
  .unit-lessons-mobile summary{cursor:pointer;min-height:44px;padding-block:12px;font-size:13px;color:var(--ink)}
  .unit-lessons-mobile ol{max-height:280px;overflow-y:auto}
 }
+
+/* Algebra 2 contents is a complete document, not a set of reader slides. */
+.course-index{margin-bottom:40px}
+.course-index-content{background:#fff;border:1px solid var(--line);border-radius:8px;padding:28px 34px}
+.course-index h1{font-size:clamp(26px,3vw,36px);line-height:1.2;margin:0 0 24px}
+.course-index .toc-unit{padding:16px 0 24px}
+.course-index .toc-unit+.toc-unit{border-top:1px solid var(--line);padding-top:28px}
+@media(max-width:740px){.course-index.shell{width:calc(100% - 24px)}.course-index-content{padding:22px 16px}.course-index .toc-unit h2 a{width:100%}}

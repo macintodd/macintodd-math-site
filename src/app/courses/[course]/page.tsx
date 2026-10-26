@@ -15,6 +15,19 @@ export default async function CoursePage({ params }: { params: Promise<{ course:
   const course = courses.find(c => c.id === courseId)
   if (!course) notFound()
   const courseUnits = units.filter(unit => unit.course === courseId)
+  if (courseId === 'algebra-2') return <section className="course-index shell" aria-label={`${course.title} table of contents`}>
+    <nav className="book-breadcrumb" aria-label="Breadcrumb"><Link href="/">Classes</Link><span aria-hidden="true">/</span><span>{course.title}</span></nav>
+    <div className="course-index-content">
+      <header><h1>{course.title} table of contents</h1></header>
+      {courseUnits.map(unit => <section className="toc-unit" key={unit.slug}>
+        <h2><Link href={`/courses/${courseId}/units/${unit.slug}`}><span className="toc-unit-number">{unit.number}</span><span>{unit.title}</span></Link></h2>
+        <p className="toc-unit-hint">Select the unit title for its skills and everyday connections.</p>
+        <ol className="toc-lessons">{lessons.filter(lesson => lesson.course === courseId && lesson.unitSlug === unit.slug).map(lesson => <li key={lesson.slug}>
+          <Link href={`/courses/${courseId}/${lesson.slug}`}><span className="toc-lesson-number">{unit.number}.{lesson.number.match(/\d+/)?.[0]}</span><span className="toc-lesson-title">{lesson.title}</span><span className="toc-leader" aria-hidden="true" /><span className="toc-read">Read <span aria-hidden="true">→</span></span></Link>
+        </li>)}</ol>
+      </section>)}
+    </div>
+  </section>
   const pages: BookPage[] = []
   // Reserve space for the unit heading and page controls on landscape iPads.
   for (const unit of courseUnits) {
