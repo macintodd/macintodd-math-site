@@ -22,7 +22,9 @@ export default async function CoursePage({ params }: { params: Promise<{ course:
       {courseUnits.map(unit => <section className="toc-unit" key={unit.slug}>
         <h2><Link href={`/courses/${courseId}/units/${unit.slug}`}><span className="toc-unit-number">{unit.number}</span><span>{unit.title}</span></Link></h2>
         <p className="toc-unit-hint">Select the unit title for its skills and everyday connections.</p>
-        <ol className="toc-lessons">{lessons.filter(lesson => lesson.course === courseId && lesson.unitSlug === unit.slug).map(lesson => <li key={lesson.slug}>
+        <ol className="toc-lessons">{lessons.filter(lesson => lesson.course === courseId && lesson.unitSlug === unit.slug).flatMap(lesson => lesson.materials.flatMap(material => (material.additional ?? []).map(extra => <li key={extra.file}>
+          <a href={`/materials/${extra.file}`} target="_blank" rel="noopener noreferrer"><span className="toc-lesson-number">PDF</span><span className="toc-lesson-title">{extra.contentsLabel ?? `${lesson.title} — ${extra.label}`}</span><span className="toc-leader" aria-hidden="true" /><span className="toc-read">Open <span aria-hidden="true">↗</span></span></a>
+        </li>)))}{lessons.filter(lesson => lesson.course === courseId && lesson.unitSlug === unit.slug).map(lesson => <li key={lesson.slug}>
           <Link href={`/courses/${courseId}/${lesson.slug}`}><span className="toc-lesson-number">{unit.number}.{lesson.number.match(/\d+/)?.[0]}</span><span className="toc-lesson-title">{lesson.title}</span><span className="toc-leader" aria-hidden="true" /><span className="toc-read">Read <span aria-hidden="true">→</span></span></Link>
         </li>)}</ol>
       </section>)}

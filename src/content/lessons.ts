@@ -5,7 +5,7 @@ export type Lesson = {
   course: CourseId; unitSlug: string; slug: string; title: string; unit: string; number: string; description: string;
   goals: string[]; prerequisites: string; concepts: { title: string; text: string; formula?: string; note?: string }[];
   videos: { id: string; title: string; author: string }[]; examples: Example[];
-  materials: { additional?: { file: string; label: string; description: string; pages: number }[]; file?: string; label?: string; unavailableReason?: string; title: string; description: string; pages: number; kind: string }[];
+  materials: { additional?: { file: string; contentsLabel?: string; label: string; description: string; pages: number }[]; file?: string; label?: string; unavailableReason?: string; title: string; description: string; pages: number; kind: string }[];
   check?: { question: string; answer: string; explanation: string }; practiceApp?: string;
 }
 const t = String.raw
@@ -772,7 +772,7 @@ const additionalAlgebraLessons: Lesson[] = [
       },
       {
         "file": "algebra-2/function-notation/completed-practice.pdf",
-        "additional": [{ "file": "algebra-2/function-notation/completed-practice-2.pdf", "label": "Completed Practice 2", "description": "Second Function Notation practice with classroom solutions, problems 1-23.", "pages": 2 }],
+        "additional": [{ "file": "algebra-2/function-notation/completed-practice-2.pdf", "label": "Completed Practice 2", "contentsLabel": "Function notation — Practice 2 (completed)", "description": "Second Function Notation practice with classroom solutions, problems 1-23.", "pages": 2 }],
         "title": "completed-practice",
         "description": "Selected classroom handout.",
         "kind": "completed-practice",
