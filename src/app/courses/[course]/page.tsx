@@ -25,7 +25,7 @@ export default async function CoursePage({ params }: { params: Promise<{ course:
         label: `${unit.title}${start ? ' continued' : ''}`,
         content: <section className="toc-unit">
           <h2><Link href={`/courses/${courseId}/units/${unit.slug}`}><span className="toc-unit-number">{unit.number}</span><span>{unit.title}{start ? ' (continued)' : ''}</span></Link></h2>
-          <p className="toc-unit-hint">Select the unit title for its skills and everyday connections.</p>
+          <p className="toc-unit-hint"><span>Select the unit title for its skills and everyday connections.</span></p>
           <ol className="toc-lessons" start={start + 1}>{unitLessons.slice(start, start + 4).map((lesson, i) => <li key={lesson.slug}>
             <Link href={`/courses/${courseId}/${lesson.slug}`}><span className="toc-lesson-number">{unit.number}.{start + i + 1}</span><span className="toc-lesson-title">{lesson.title}</span><span className="toc-leader" aria-hidden="true" /><span className="toc-read">Read <span aria-hidden="true">→</span></span></Link>
           </li>)}</ol>
@@ -33,9 +33,9 @@ export default async function CoursePage({ params }: { params: Promise<{ course:
       })
     }
   }
-  return <BookReader label={`${course.title} table of contents`}
+  return <BookReader className="course-contents" label={`${course.title} table of contents`}
     breadcrumb={<><Link href="/">Classes</Link><span aria-hidden="true">/</span><span>{course.title}</span></>}
-    heading={<h1>{course.title} table of contents</h1>}
+    heading={<h1><span>{course.title} table of contents</span></h1>}
     pages={pages}
     previousHref="/" previousLabel="Classes"
     nextHref={courseUnits[0] ? `/courses/${courseId}/units/${courseUnits[0].slug}` : undefined} nextLabel="Unit overview"

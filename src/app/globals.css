@@ -110,3 +110,36 @@ body:has(.book-reader) .site-footer{display:none}
 .slope-point-target{cursor:pointer;touch-action:manipulation}.slope-point-target:focus-visible{outline:none;stroke:#b77900;stroke-width:3}.slope-graph-panel>p{max-width:440px;margin-inline:auto;line-height:1.35}
 .slope-selected{font-size:12px;line-height:1.4;min-height:0;margin:0;color:#16334c;overflow-wrap:anywhere}
 .slope-result-image{margin:18px auto;max-width:760px}.slope-result-image img{display:block;width:100%;height:auto;border:1px solid #cad5d8;border-radius:8px;margin:14px auto}.slope-result-image .slope-primary{display:inline-flex;align-items:center;justify-content:center;padding:10px 16px;min-height:44px;border-radius:7px;font-weight:600;text-decoration:none}.slope-complete>p{margin:8px 0}.slope-results .slope-local-notice{background:#eaf3eb;border:1px solid #bfd3c6;border-radius:8px;padding:18px}.slope-results details>summary{cursor:pointer;font-weight:600;padding:12px 0}
+
+/* Contents use one 40px writing rhythm. A zero-width baseline strut places
+   every font on the same rule, even when a title wraps onto another line. */
+.course-contents .book-paper{padding-top:0}
+.course-contents .book-heading{padding:0 0 40px}
+.course-contents .book-heading h1{display:flex;align-items:baseline;min-height:40px;line-height:40px}
+.course-contents .book-heading h1::before,
+.course-contents .toc-unit h2 a::before,
+.course-contents .toc-unit-hint::before,
+.course-contents .toc-lessons li a::before{content:"";display:block;flex:0 0 0;width:0;height:40px}
+.course-contents .book-stage{margin-top:0;background-attachment:local;background-image:repeating-linear-gradient(180deg,var(--paper) 0,var(--paper) 39px,#a7c6ce80 39px,#a7c6ce80 40px)}
+.course-contents .book-paper{background:linear-gradient(90deg,transparent 41px,#d9847f70 41px,#d9847f70 42px,transparent 42px),repeating-linear-gradient(180deg,var(--paper) 0,var(--paper) 39px,#a7c6ce80 39px,#a7c6ce80 40px)}
+.course-contents .toc-unit{padding:0}
+.course-contents .toc-unit h2{margin:0;line-height:40px}
+.course-contents .toc-unit h2 a{gap:0;min-height:40px;line-height:40px}
+.course-contents .toc-unit h2 a>span+span{margin-left:18px}
+.course-contents .toc-unit-number{line-height:40px}
+.course-contents .toc-unit-hint{display:flex;align-items:baseline;line-height:40px;margin:0 0 40px}
+.course-contents .toc-lessons li a{gap:0;align-items:baseline;min-height:80px;padding:0 0 40px;line-height:40px}
+.course-contents .toc-lessons li a>span+span{margin-left:18px}
+.course-contents .toc-lesson-title{line-height:40px}
+.course-contents .toc-leader{align-self:baseline;position:relative;bottom:5px}
+@supports(text-box-trim:trim-both){
+ .course-contents .book-heading h1>span,
+ .course-contents .toc-unit h2 a>span,
+ .course-contents .toc-unit-hint>span,
+ .course-contents .toc-lessons li a>span:not(.toc-leader){text-box-trim:trim-both;text-box-edge:cap alphabetic;transform:translateY(-1px)}
+}
+@media(max-width:740px){
+ .course-contents .book-paper{background:linear-gradient(90deg,transparent 13px,#d9847f70 13px,#d9847f70 14px,transparent 14px),repeating-linear-gradient(180deg,var(--paper) 0,var(--paper) 39px,#a7c6ce80 39px,#a7c6ce80 40px)}
+ .course-contents .toc-unit h2 a>span+span{margin-left:10px}
+ .course-contents .toc-lessons li a>span+span{margin-left:9px}
+}

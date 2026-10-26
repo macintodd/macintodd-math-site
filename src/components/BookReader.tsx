@@ -8,6 +8,7 @@ export type BookPage = { id: string; label: string; content: ReactNode }
 
 type Props = {
   label: string
+  className?: string
   heading: ReactNode
   breadcrumb: ReactNode
   pages: BookPage[]
@@ -17,7 +18,7 @@ type Props = {
   nextLabel?: string
 }
 
-export function BookReader({ label, heading, breadcrumb, pages, previousHref, previousLabel = 'Previous section', nextHref, nextLabel = 'Next section' }: Props) {
+export function BookReader({ label, className = '', heading, breadcrumb, pages, previousHref, previousLabel = 'Previous section', nextHref, nextLabel = 'Next section' }: Props) {
   const [active, setActive] = useState(0)
   const stage = useRef<HTMLDivElement>(null)
   const router = useRouter()
@@ -66,7 +67,7 @@ export function BookReader({ label, heading, breadcrumb, pages, previousHref, pr
   }, [active, last, nextHref, previousHref, router, turnPage])
 
   const page = pages[active] ?? pages[0]
-  return <section className="book-reader" aria-label={label}>
+  return <section className={`book-reader ${className}`} aria-label={label}>
     <nav className="book-breadcrumb" aria-label="Breadcrumb">{breadcrumb}</nav>
     <article className="book-paper">
       <header className="book-heading">{heading}</header>
