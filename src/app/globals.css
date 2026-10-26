@@ -15,7 +15,7 @@
 #materials .material-grid{grid-template-columns:repeat(4,minmax(0,1fr))}#materials .material-card p{display:none}#materials .material-card h3{font-size:16px}#materials .material-actions{gap:8px 18px}#materials{margin-bottom:36px}#materials>p:not(.section-kicker){font-size:13px;margin-bottom:16px}@media(max-width:900px){#materials .material-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:420px){#materials .material-card{padding:13px}#materials .material-type{font-size:8px;letter-spacing:.8px}#materials .material-actions{gap:0 12px;font-size:11px}}
 
 /* Notebook reader: one landscape-iPad page at a time. */
-:root{--ink:#16334c;--muted:#4e687b;--teal:#278a99;--paper:#fbf6ec;--line:#dcdcd3}
+:root{--ink:#16334c;--muted:#4e687b;--teal:#278a99;--paper:#f6f8fa;--line:#dcdcd3}
 body:has(.book-reader) .site-footer{display:none}
 .site-header{background:var(--paper)}
 .header-inner{min-height:76px}
@@ -23,7 +23,7 @@ body:has(.book-reader) .site-footer{display:none}
 .book-reader{max-width:1360px;margin:0 auto;padding:0 24px 16px;height:calc(100dvh - 77px);min-height:420px;display:flex;flex-direction:column}
 .book-breadcrumb{min-height:40px;display:flex;align-items:center;flex-wrap:wrap;gap:10px;flex-shrink:0;font-size:12px;color:var(--muted)}
 .book-breadcrumb a:hover{text-decoration:underline;text-underline-offset:4px}
-.book-paper{min-height:0;flex:1;display:flex;flex-direction:column;padding:22px 34px 10px 74px;border:1px solid #ddd5c7;border-radius:3px;box-shadow:0 4px 16px #162e4310;background:linear-gradient(90deg,transparent 41px,#d9847f70 41px,#d9847f70 42px,transparent 42px),repeating-linear-gradient(180deg,var(--paper) 0,var(--paper) 39px,#a7c6ce80 39px,#a7c6ce80 40px)}
+.book-paper{min-height:0;flex:1;display:flex;flex-direction:column;padding:24px 34px 10px;border:1px solid var(--line);border-radius:8px;background:#fff}
 .book-heading{flex-shrink:0;padding-bottom:6px}
 .book-heading h1{font:400 clamp(25px,2.7vw,34px)/1.2 Georgia,'Times New Roman',serif;letter-spacing:-.025em;color:var(--ink);margin:0}
 .book-eyebrow{font-size:10px;line-height:1.5;letter-spacing:1.8px;text-transform:uppercase;color:var(--teal);font-weight:600;margin:0 0 7px}
@@ -33,7 +33,7 @@ body:has(.book-reader) .site-footer{display:none}
 .book-stage{flex:1;min-height:0;overflow:auto;margin:14px 0 0;overscroll-behavior:contain;scrollbar-width:thin;outline-offset:-3px}
 .book-stage:focus:not(:focus-visible){outline:none}
 .book-controls{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:14px;align-items:center;min-height:64px;flex-shrink:0;margin-top:8px;border-top:1px solid #bacbd16b}
-.book-controls button,.book-controls a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 12px;background:#fbf6ecf0;color:var(--ink);font-size:13px;border:1px solid #cfdbdc;border-radius:4px;font-weight:500;text-align:center;line-height:1.3}
+.book-controls button,.book-controls a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 12px;background:#fff;color:var(--ink);font-size:13px;border:1px solid #cfdbdc;border-radius:4px;font-weight:500;text-align:center;line-height:1.3}
 .book-controls button:hover:not(:disabled),.book-controls a:hover{border-color:var(--teal);color:#126f80;background:#f2f6ef}
 .book-controls button:disabled{opacity:.35}
 .book-next{text-align:right}.book-previous{text-align:left}
@@ -76,7 +76,7 @@ body:has(.book-reader) .site-footer{display:none}
  body:has(.book-reader) .header-inner nav a{padding:8px 0}
  .book-reader{height:calc(100dvh - 96px);min-height:460px;padding:0 10px 10px}
  .book-breadcrumb{font-size:10px;gap:7px;min-height:36px}
- .book-paper{padding:16px 16px 8px 28px;background:linear-gradient(90deg,transparent 13px,#d9847f70 13px,#d9847f70 14px,transparent 14px),repeating-linear-gradient(180deg,var(--paper) 0,var(--paper) 39px,#a7c6ce80 39px,#a7c6ce80 40px)}
+ .book-paper{padding:16px 16px 8px;background:#fff}
  .book-heading h1{font-size:25px}
  .book-eyebrow{font-size:9px;letter-spacing:1px}
  .lesson-pdf-links{gap:0 15px;margin-top:6px}
@@ -111,35 +111,48 @@ body:has(.book-reader) .site-footer{display:none}
 .slope-selected{font-size:12px;line-height:1.4;min-height:0;margin:0;color:#16334c;overflow-wrap:anywhere}
 .slope-result-image{margin:18px auto;max-width:760px}.slope-result-image img{display:block;width:100%;height:auto;border:1px solid #cad5d8;border-radius:8px;margin:14px auto}.slope-result-image .slope-primary{display:inline-flex;align-items:center;justify-content:center;padding:10px 16px;min-height:44px;border-radius:7px;font-weight:600;text-decoration:none}.slope-complete>p{margin:8px 0}.slope-results .slope-local-notice{background:#eaf3eb;border:1px solid #bfd3c6;border-radius:8px;padding:18px}.slope-results details>summary{cursor:pointer;font-weight:600;padding:12px 0}
 
-/* Contents use one 40px writing rhythm. A zero-width baseline strut places
-   every font on the same rule, even when a title wraps onto another line. */
-.course-contents .book-paper{padding-top:0}
-.course-contents .book-heading{padding:0 0 40px}
-.course-contents .book-heading h1{display:flex;align-items:baseline;min-height:40px;line-height:40px}
-.course-contents .book-heading h1::before,
-.course-contents .toc-unit h2 a::before,
-.course-contents .toc-unit-hint::before,
-.course-contents .toc-lessons li a::before{content:"";display:block;flex:0 0 0;width:0;height:40px}
-.course-contents .book-stage{margin-top:0;background-attachment:local;background-image:repeating-linear-gradient(180deg,var(--paper) 0,var(--paper) 39px,#a7c6ce80 39px,#a7c6ce80 40px)}
-.course-contents .book-paper{background:linear-gradient(90deg,transparent 41px,#d9847f70 41px,#d9847f70 42px,transparent 42px),repeating-linear-gradient(180deg,var(--paper) 0,var(--paper) 39px,#a7c6ce80 39px,#a7c6ce80 40px)}
-.course-contents .toc-unit{padding:0}
-.course-contents .toc-unit h2{margin:0;line-height:40px}
-.course-contents .toc-unit h2 a{gap:0;min-height:40px;line-height:40px}
-.course-contents .toc-unit h2 a>span+span{margin-left:18px}
-.course-contents .toc-unit-number{line-height:40px}
-.course-contents .toc-unit-hint{display:flex;align-items:baseline;line-height:40px;margin:0 0 40px}
-.course-contents .toc-lessons li a{gap:0;align-items:baseline;min-height:80px;padding:0 0 40px;line-height:40px}
-.course-contents .toc-lessons li a>span+span{margin-left:18px}
-.course-contents .toc-lesson-title{line-height:40px}
-.course-contents .toc-leader{align-self:baseline;position:relative;bottom:5px}
-@supports(text-box-trim:trim-both){
- .course-contents .book-heading h1>span,
- .course-contents .toc-unit h2 a>span,
- .course-contents .toc-unit-hint>span,
- .course-contents .toc-lessons li a>span:not(.toc-leader){text-box-trim:trim-both;text-box-edge:cap alphabetic;transform:translateY(-1px)}
-}
+
+/* Lesson videos keep their natural 16:9 size; the document scrolls instead of
+   squeezing the player into the remaining viewport height. */
+.lesson-layout{display:grid;grid-template-columns:210px minmax(0,1fr);gap:28px;width:min(1360px,calc(100% - 48px));margin:0 auto 40px;align-items:start}
+.lesson-sidebar{position:sticky;top:24px;padding-top:40px;min-width:0;max-height:calc(100dvh - 48px);overflow-y:auto}
+.lesson-unit-link{display:block;padding:16px 12px;border-bottom:1px solid var(--line)}
+.lesson-unit-link>span{display:block;color:var(--teal);font-size:12px;font-weight:700;margin-bottom:7px}
+.lesson-unit-link strong{font-size:16px;line-height:1.5;display:block}
+.lesson-sidebar ol{list-style:none;padding:12px 0;margin:0}
+.lesson-sidebar li a{display:block;padding:12px;border-radius:6px;font-size:14px;line-height:1.5;min-height:48px}
+.lesson-sidebar li a>span{display:block;font-size:11px;color:var(--muted);margin-bottom:3px}
+.lesson-sidebar li a:hover{background:#edf3f3}
+.lesson-sidebar li a[aria-current=page]{background:#e5eff0;box-shadow:inset 3px 0 var(--teal);font-weight:700}
+.lesson-contents-link{display:block;padding:12px;font-size:12px;line-height:1.5;color:var(--muted);text-decoration:underline;text-underline-offset:3px}
+.lesson-reader{width:100%;max-width:none;height:auto;min-height:0;margin:0;padding:0}
+.lesson-reader .book-paper{display:block;padding:28px;border-radius:8px}
+.lesson-reader .book-heading{padding:0}
+.lesson-reader .book-heading h1{font-size:clamp(26px,3vw,34px);line-height:1.2}
+.lesson-reader .lesson-pdf-links{gap:0 22px;margin-top:10px}
+.lesson-reader .book-stage{overflow:visible;margin-top:24px}
+.lesson-reader .book-video-section{display:block;height:auto;min-height:0;padding:0}
+.lesson-reader .video-card{display:block;width:100%;max-width:none;height:auto;margin:0;background:#fff}
+.lesson-reader .video-placeholder,.lesson-reader .video-frame{width:100%;height:auto;min-height:0;aspect-ratio:16/9;position:relative;flex:none}
+.lesson-reader .video-placeholder{padding:24px;background:#edf3f3}
+.lesson-reader .video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.lesson-reader .video-meta{padding:16px;background:#fff}
+.lesson-reader .video-meta small{display:block}
+.lesson-reader .book-controls{margin-top:24px;min-height:68px}
 @media(max-width:740px){
- .course-contents .book-paper{background:linear-gradient(90deg,transparent 13px,#d9847f70 13px,#d9847f70 14px,transparent 14px),repeating-linear-gradient(180deg,var(--paper) 0,var(--paper) 39px,#a7c6ce80 39px,#a7c6ce80 40px)}
- .course-contents .toc-unit h2 a>span+span{margin-left:10px}
- .course-contents .toc-lessons li a>span+span{margin-left:9px}
+ .lesson-layout{grid-template-columns:minmax(0,1fr);width:calc(100% - 24px);gap:8px}
+ .lesson-sidebar{position:static;padding-top:12px;max-height:none;overflow:visible}
+ .lesson-unit-link{padding:8px 12px;border-bottom:0}
+ .lesson-unit-link strong{font-size:14px}.lesson-unit-link>span{margin-bottom:2px}
+ .lesson-sidebar ol{display:flex;flex-wrap:wrap;gap:6px;padding:4px 0}
+ .lesson-sidebar li{flex:1 1 160px}
+ .lesson-sidebar li a{padding:8px 12px}
+ .lesson-contents-link{padding-block:8px}
+ .lesson-reader .book-paper{padding:18px 14px}
+ .lesson-reader .lesson-pdf-links{gap:0 16px}
+ .lesson-reader .book-stage{margin-top:18px}
+ .lesson-reader .video-placeholder{padding:16px}
+ .lesson-reader .video-placeholder strong{font-size:18px}
+ .lesson-reader .video-placeholder button{width:44px;height:44px;margin-bottom:8px}
+ .lesson-reader .video-meta{align-items:start;flex-direction:column}
 }
