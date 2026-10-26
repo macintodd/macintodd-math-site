@@ -5,6 +5,7 @@ Requires pypdf. Re-run after reviewing source changes; do not use on a timer.
 import argparse, hashlib, io, json, time
 from pathlib import Path
 from pypdf import PdfReader, PdfWriter
+from pdf_publish import compress_for_browser
 
 ROOT = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser()
@@ -30,6 +31,7 @@ for item in manifest['materials']:
         writer.add_page(reader.pages[number - 1])
     output = ROOT / 'public' / 'materials' / item['output']
     output.parent.mkdir(parents=True, exist_ok=True)
+    compress_for_browser(writer)
     writer.write(output)
     # Rewriting resolves malformed source xref tables for browser PDF readers.
     item['sourceSha256'] = hashlib.sha256(data).hexdigest()

@@ -65,6 +65,522 @@
       "selectionReason": "Complete checked key based on the selected practice. The classroom scan omits plotting answers and its handwritten answer to problem 7 conflicts with the printed positive quadratic term. Preserve originals; publish a clearly identified prepared answer guide.",
       "publishedSha256": "d9361e26d5a6df995baeb57c467d82e3a926ed60cc3c14b4fe7e57a9a9d8a2aa",
       "publishedPages": 3
+    },
+    {
+      "source": "Algebra 2/Unit 1A/U1AL0 Notes Formula Substitution.pdf",
+      "output": "algebra-2/formula-substitution/notes.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "c211832ab4171cf277e9ed46fd1198055273cca9c1249ea4ec412b1a0c96f585",
+      "publishedSha256": "37cd22a804c6d38de010cb3d9046c3464c4dc4cec999def9f183c3816c0b32a4",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/Unit 1A completed/U1L0 Formulas and order of operations copy 1.pdf",
+      "output": "algebra-2/formula-substitution/completed-notes.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Extract only the notes or practice pages from the combined classroom PDF. This classroom scan leaves some exercises unfinished; label it as partial, not a complete answer sheet. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "9800cf1a404680044d8d6b9f7afdc3216870e30a4b470116b85a8cfca2cf825b",
+      "publishedSha256": "03ebfe30a1c5d27831bd8faf2684405cf524dbbb3440448aae90a1830b4ff306",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/U1AL0 Practice Formula Substitution.pdf",
+      "output": "algebra-2/formula-substitution/practice.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "32aaa137fecc63a67d729f2e1a43561514e984238c0109597952a6cea268c23a",
+      "publishedSha256": "2b378850d7bc3ca1f07538062688ed4a2eabf180a94d78609b4ff0d2a859d4cc",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/Unit 1A completed/U1L0 Formulas and order of operations copy 1.pdf",
+      "output": "algebra-2/formula-substitution/completed-practice.pdf",
+      "pages": [
+        3,
+        4
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Extract only the notes or practice pages from the combined classroom PDF. This classroom scan leaves some exercises unfinished; label it as partial, not a complete answer sheet. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "9800cf1a404680044d8d6b9f7afdc3216870e30a4b470116b85a8cfca2cf825b",
+      "publishedSha256": "bf0e4413f971226a6382e63f48d055f1d658339bc30a6dafc9a7febbd80f806b",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/U1AL2  Solving Two-Step Equations \u2014 NOTES.pdf",
+      "output": "algebra-2/two-step-equations/notes.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Omit the trailing page containing only a footer. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "f819e6ac13604ccaaeb2e26c2cb649cb8533fce2bac3271d21b22dd89239abdb",
+      "publishedSha256": "b76e2815325b04e3cfc57266e20e54df04b5ba8c48a0f01fc6c16ab3cbc96839",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/Unit 1A completed/U1L2 2Step Equations.pdf",
+      "output": "algebra-2/two-step-equations/completed-notes.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Extract only the notes or practice pages from the combined classroom PDF. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "31f14262b2ef03a61b76ad6320e23a21b87a8176bb514785c52204709874c96a",
+      "publishedSha256": "816e4862da36765227ed9f0d9662b1e53197f50559bbd6e382c5b19516af38b7",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/U1AL2 P Practice Solving Two-Step Equations.pdf",
+      "output": "algebra-2/two-step-equations/practice.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "f52e3839d6df2613267eee0ba3bfbb96f158ebb74253435c53f1c3549486e8bf",
+      "publishedSha256": "539ff7c83e5a398f2cf60b867ab0a072fb3a55e6150676c7d90e72b506a9f7de",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/Unit 1A completed/U1L2 2Step Equations.pdf",
+      "output": "algebra-2/two-step-equations/completed-practice.pdf",
+      "pages": [
+        3,
+        4
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Extract only the notes or practice pages from the combined classroom PDF. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "31f14262b2ef03a61b76ad6320e23a21b87a8176bb514785c52204709874c96a",
+      "publishedSha256": "0a8cd45b8272139d0f230de0286c621d9eb79b0ed10f1d4865455c4873933f05",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/U1AL3 Notes Solving Equations with Variables in Two Positions.pdf",
+      "output": "algebra-2/variables-on-both-sides/notes.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Omit the trailing page containing only a footer. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "e83e8cd26ec064adf1ab9fa3b42eb01b82cdaa64516e16491728e9797feba157",
+      "publishedSha256": "d85f59a2bca2aa71f7a5b2c13996f211cd7539da727fbf27ca85afb3e48a2f40",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/U1A L3 Practice Variables in 2 Positions.pdf",
+      "output": "algebra-2/variables-on-both-sides/practice.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "0719962721be7f8b94c1e5a5fd382a6c85487e3367b68b1504487ba1c14f2b99",
+      "publishedSha256": "ca46072051d634b8d49f2132374edb77b765a690800e0fb26ce2f0d01b2fbe97",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/Unit 1A completed/U1L3 Variables in 2 Positions .pdf",
+      "output": "algebra-2/variables-on-both-sides/completed-practice.pdf",
+      "pages": [
+        2,
+        1
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Source scans are reversed; publish source page 2 before page 1 to match the blank practice. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "3431af6a5808c04d003fe9cb979fccaad8fd1d3f7454ae7f8ee6a569560a3495",
+      "publishedSha256": "c9ae518f21fa99a089ad1513f52643f7d8158fc4d29b7a4109eb48dcd7489bf5",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/U1AL4  Lesson__The_Distributive_Property.pdf",
+      "output": "algebra-2/distributive-property/notes.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "795102d79ad3dba91b37b28745adef15c4b25dd3587e37713cfe49118603bfa7",
+      "publishedSha256": "00deca8f158ea4d3a78e26bf50511a6d7419495388c8c7ee923c1b840cb5e255",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/Unit 1A completed/U1L4 notes Distributive Property.pdf",
+      "output": "algebra-2/distributive-property/completed-notes.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "f088594933bf912eca76c262a50741e92ec02d77277b1818faa17d8346d2c99b",
+      "publishedSha256": "b413d9175b0392c84af549117910e469e42f5d8c4b41bde654a558b5b8f0d01e",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/U1AL4  Lesson Practice_The_Distributive_Property.pdf",
+      "output": "algebra-2/distributive-property/practice.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "2089b45715f09df0aeff5801435be7fa820bf29dbae9eb071fdde6b10050839e",
+      "publishedSha256": "3c259b964a68289e5082ae8a20525f1b9672618c4cd16bae37a35d86d9b9a8f1",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/Unit 1A completed/U1L4 Practice Distributive Property Solutions.pdf",
+      "output": "algebra-2/distributive-property/completed-practice.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "1cbeaad8cd4d302bd02157add6ff77e7a520b2874924354bfbdd1fdede0ecdc6",
+      "publishedSha256": "0ab5b8f4bd3b019479572f64ac4a768405c4311785a60ec1419a7d924e2c91e2",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/U1AL4 Lesson Notes_Evaluate___solve___graph_Inequalities.pdf",
+      "output": "algebra-2/linear-inequalities/notes.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Filename says L4, but printed lesson heading and content identify Lesson 5 inequalities. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "f3a0e9e5297cf2313b495d2af4827b58107b05d9156007e5c480ae2c4423528b",
+      "publishedSha256": "4720637372ed83fc3b1558c1c3030589df2b229a03e32302afa763dca39002df",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/Unit 1A completed/U1L5 notes Inequalities.pdf",
+      "output": "algebra-2/linear-inequalities/completed-notes.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. This classroom scan leaves some exercises unfinished; label it as partial, not a complete answer sheet. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "08e078253189ee65153dccdedc3bff969527ef15fe86b030d54c1d3ca98fa8a0",
+      "publishedSha256": "7283f9aadcd05229fa37529437e2534a21359ddc887bcb095e119daa50eef64a",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/U1AL4  Lesson PRACTICE_Evaluate__solve_and_graph_Inequalities.pdf",
+      "output": "algebra-2/linear-inequalities/practice.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "0bf220601d79b5f7ce36c0227dccdfe44d7f52677e7284f284b394b53c272f95",
+      "publishedSha256": "8dd01a4845cd64d409771b3fc1797aa6fc8d2f2140298b4b5301201eb545bd9a",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/Algebra 2 Lesson 6 Writing and Solving.pdf",
+      "output": "algebra-2/writing-solving-equations-inequalities/notes.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "8df02e4b5e1188b8d35f2b4d95caf0720f7eee07d22303aa0c10d0a290d0f5eb",
+      "publishedSha256": "b8c0d126a7ba9aaa5b8410addb95d9a000262034ea9ed6ce592d4ff347bd7763",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/Unit 1A completed/U1L6 linear Word Problems.pdf",
+      "output": "algebra-2/writing-solving-equations-inequalities/completed-notes.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "95f43f3eab7948eb46ae1f410519bbf42d6bf1c6d5f14a1b4bd63a6684603a1a",
+      "publishedSha256": "a70daeb1362c43c90460c33b0c0c5e3bd43761202f467ed3a20fda891c34522a",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/U1AL6 Practice Lesson 6 updated.pdf",
+      "output": "algebra-2/writing-solving-equations-inequalities/practice.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. The updated carnival values (4 + 5g = 54; 6 + 2g <= 54) match the completed classroom practice, unlike the older alternate. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "37bee118b864586cd8f224c95c3e0d5c10383291b4912384d5d0d7a912983d80",
+      "publishedSha256": "fc8915cac861b5082055f2e3448bc0d2b4137429348b67526e645282b5ad082d",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/Unit 1A completed/U1L6 Practice linear word problems.pdf",
+      "output": "algebra-2/writing-solving-equations-inequalities/completed-practice.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "32c811dd793f2d640c38f337b64bb6985855d5e45a435892790223f85255ae30",
+      "publishedSha256": "341d6178ffb24d974f491747a52fbce02d6cc12cf71c3c09dd9a192aab2f749a",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/U1AL7 Lesson_7_Compound_Inequalities.pdf",
+      "output": "algebra-2/compound-inequalities/notes.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "2f5f690eacfb86a7ee23ebef8ec3305be3b2a5c58ad6c37b81446d876db9f0d6",
+      "publishedSha256": "35c4b607a757b3541ff9b8d3749b0e79eced3188cb3d445b8d763402b5bfd9ec",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/Unit 1A completed/U1L7 Notes Compound Inequalities.pdf",
+      "output": "algebra-2/compound-inequalities/completed-notes.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "d1c769ea3928abb3deceea1b87575e8ea172707415b6a77eaade5f09c77785e1",
+      "publishedSha256": "3fdcab60fcb3e7a095295ecb418271f1220159cbcaa64aa266e59e486f1d1438",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/U1AL7 Practice Lesson_7_Compound_Inequalities.pdf",
+      "output": "algebra-2/compound-inequalities/practice.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "d3218c0b4945c91bad3b545727b7edd7f423ad3a0955de66040445f065ffabab",
+      "publishedSha256": "128df01a5d6e57f71967be1380ab3c4060392d9eff8cd22bdbab8e6e34df0b0e",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/Unit 1A completed/U1L7 Practice Compound Inequalities.pdf",
+      "output": "algebra-2/compound-inequalities/completed-practice.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "298d042d860244f7d8d7d9fc8aec13878b38d86d3adb3faa39cf021bf48349c2",
+      "publishedSha256": "718e311c9818a1165c7a1a6a33e451271bbcf8fc054b4234b0c6fa0fdf15e4ee",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/U1AL8 Notes Comp Inequalities.pdf",
+      "output": "algebra-2/compound-inequality-applications/notes.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "158d0e967150af15023af822860b6d7e29b46702f46f642c6b59f348b98d7c62",
+      "publishedSha256": "03fed168873a5fbc3fc3a75072575a866870c5238396b9516440078c25248e8d",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/Unit 1A completed/U1L8 Notes Writing Compound Inequalities.pdf",
+      "output": "algebra-2/compound-inequality-applications/completed-notes.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "7eb8a5ff40b720e0a8ba3053442e58fb5b75620339995417f9f0db5510b40bc9",
+      "publishedSha256": "020d5f9e61cff0402262020fe023530650e7b24556c8474aecaa0a362b1beadb",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/Practice L1U8 Compound Inequaity Writing 2026.pdf",
+      "output": "algebra-2/compound-inequality-applications/practice.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "72ed376e2c991ca16fb1c7a2ca41e3a798b18ad2a0b3bd87687fc47a31413b18",
+      "publishedSha256": "7f527b15c81c692113bc891b6ba216412c9c2aac4d51841eff84f78024ec805f",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/Unit 1A completed/U1L8 Practice Writing Compound Inequalities.pdf",
+      "output": "algebra-2/compound-inequality-applications/completed-practice.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. This classroom scan leaves some exercises unfinished; label it as partial, not a complete answer sheet. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "a8676acf2355a3ee871573398e2827afa35e87672dae07fae8439c8bfd1e891c",
+      "publishedSha256": "0139e88c24de85c9827fc8711ab76bd52df627e4c2fcce5f8e9c18ad6cec8cbf",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/U1 L9 2026 Absolute Value Equations Notes.pdf",
+      "output": "algebra-2/absolute-value-equations/notes.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "6f1c92c47d69d3764f81341cabf31c1969f66ed4e5514708dc1a18fdf50d550d",
+      "publishedSha256": "8914db2f9af5547db4b0d3e1cf5d63ca3b1087affdc87bbf9ad736ec24378e63",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/Unit_1A_Lesson_9_Absolute_Value_Equations.pdf",
+      "output": "algebra-2/absolute-value-equations/practice.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "bb8b1b9f28251927b637082644c420697d1d7066e82962e1ea47046aad54e4e9",
+      "publishedSha256": "0bc231d3dd6f762527c7842fda29a604954bec5d2bb80442d95393d7d8ea233c",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/Unit 1A completed/U1L9 Practice Absolute Value Equations.pdf",
+      "output": "algebra-2/absolute-value-equations/completed-practice.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "14db2637eee7c40caddd09695005a2030d8e63310d096a0c3feabff085c8b2a2",
+      "publishedSha256": "ce904f7fca3d5b0c0388c8311f37180c4dd5d2799725e2e14d10f76e146cca56",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/U1 L10 2026Absolute Value Inequalities Notes.pdf",
+      "output": "algebra-2/absolute-value-inequalities/notes.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "87662afc8591f0a91fd716bc11657109e1b78b39c4b1a645cfbc172e73b2ec0f",
+      "publishedSha256": "d2de5666bb7028f4b9e48bdd1dbe9f3561b9e958a612540e18cd6d6a2d46e088",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/Unit 1A completed/U1L10 Absolute Value Inequalities.pdf",
+      "output": "algebra-2/absolute-value-inequalities/completed-notes.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "3099e0e938a35c6beecf951f111c406f6451358e859d4f1d48c1345f6f37f849",
+      "publishedSha256": "12d007a5f1e4bdd2b950e3f51c62e282b3044b8811af8fbcb437c39852270c8c",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/U1A L10 Practice Absolute Value Inequalities.pdf",
+      "output": "algebra-2/absolute-value-inequalities/practice.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "a8af528667ecb080b46061167dc703677f90f74890d1ee88741e8a74d1eade69",
+      "publishedSha256": "ed15ff034346f268e1cd76cbee6932ca6a5f830d3b239e7459a226ae851059a3",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1A/Unit 1A completed/U1L10 Practice Absolute Value Inequalities.pdf",
+      "output": "algebra-2/absolute-value-inequalities/completed-practice.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "bd0da6667c129d943fc87117c802dcdeec211bb70299272af3b4f5986b26b8b6",
+      "publishedSha256": "b648746dbd7429fda7ee69a72a83f2f1f97b8410c4d56e3e0545e6454c8a3482",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1B/U1BL1 Notes Function Notation Evaluation Domain Range  2026 copy.pdf",
+      "output": "algebra-2/function-notation/notes.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. The copy with the function definition and coordinate graph matches the completed notes; the alternate starts with a different phone-plan review. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "cfbf07149c668fdb68c0bc957ba97f70743d275a3a207e8b6fd116afca6dc0de",
+      "publishedSha256": "8d8e5034da6a61430b2fdb5516b591b54908348fe79b66eb59d48487e4c2b3c3",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1B/Unit 1B Completed/U1B L1 Function Notation.pdf",
+      "output": "algebra-2/function-notation/completed-notes.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Extract only the notes or practice pages from the combined classroom PDF. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "07888ae736314ee7045f2933f2a8d29fd6ccc4c46d2f83da33697b45a83518a1",
+      "publishedSha256": "196f90be0988f29b73d8164017d1c0f97fb56eb9d977c607e3d1831403256236",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1B/U1BL1 Practice Function Notation Evaluation Domain Range  2026 copy.pdf",
+      "output": "algebra-2/function-notation/practice.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "43d95345c81de7c7a7cfc039d3e6f6cac67f9041c9686a307a3aa813f05a6027",
+      "publishedSha256": "f1cc8d1525b7090ad50e048aef0dd509070ac1cc2bfeb8c2381238c5ea183dfa",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1B/Unit 1B Completed/U1B L1 Function Notation.pdf",
+      "output": "algebra-2/function-notation/completed-practice.pdf",
+      "pages": [
+        3,
+        4
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Extract only the notes or practice pages from the combined classroom PDF. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "07888ae736314ee7045f2933f2a8d29fd6ccc4c46d2f83da33697b45a83518a1",
+      "publishedSha256": "2d9f9ea87d1012f7970b9fcaf5f2c75d6d997e2a3d9bfb193db4ccfb08b9aa8e",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1B/U1BL2 NOTES Slope and Rate of Change.pdf",
+      "output": "algebra-2/slope-rate-of-change/notes.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "2df673d0943e8aa8b140fadbabc3448fc77da6da7fb223a0a8335c9c53040bf8",
+      "publishedSha256": "8b3c06a81108141c2dea77df7e572b423f303a2826cbd8c9583d08e40816a8fc",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1B/U1B L2 PRACTICE Slope and Rage of Change.pdf",
+      "output": "algebra-2/slope-rate-of-change/practice.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed lesson title, problem set, and page images; selected instructional handout or teacher classroom work. Losslessly compress raw streams for browser downloads; page images, text, and annotations are unchanged.",
+      "sourceSha256": "648d57ddc0f0c67cdd55d62b5e0aaeca1dabb390ea3a3a7cc096d1f54a8071bc",
+      "publishedSha256": "d5e83585ac234994dc2b97ed816d2809ff3dca67775b111afc562e6ddcb8b0c1",
+      "publishedPages": 2
     }
   ]
 }

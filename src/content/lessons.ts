@@ -5,15 +5,15 @@ export type Lesson = {
   course: CourseId; unitSlug: string; slug: string; title: string; unit: string; number: string; description: string;
   goals: string[]; prerequisites: string; concepts: { title: string; text: string; formula?: string; note?: string }[];
   videos: { id: string; title: string; author: string }[]; examples: Example[];
-  materials: { file: string; title: string; description: string; pages: number; kind: string }[];
-  check: { question: string; answer: string; explanation: string }; practiceApp?: string;
+  materials: { file?: string; label?: string; unavailableReason?: string; title: string; description: string; pages: number; kind: string }[];
+  check?: { question: string; answer: string; explanation: string }; practiceApp?: string;
 }
 const t = String.raw
 export const courses = [
   { id: 'algebra-2' as const, title: 'Algebra 2', kicker: 'BUILD YOUR FOUNDATION', description: 'Find the patterns. Understand the operations. Build confidence with equations and functions.' },
   { id: 'precalculus' as const, title: 'Precalculus', kicker: 'EXPAND YOUR PERSPECTIVE', description: 'Connect algebra and geometry. Explore functions, coordinates, and the ideas that come next.' },
 ]
-export const lessons: Lesson[] = [
+const originalLessons: Lesson[] = [
   {
     course: 'algebra-2', unitSlug: 'unit-1a', slug: 'one-step-equations', title: 'One-step equations', unit: 'Unit 1A', number: 'Lesson 1',
     description: 'Keep the equation balanced. Use inverse operations to get the variable alone—and explain why each step works.',
@@ -165,4 +165,687 @@ export const lessons: Lesson[] = [
     check: { question: 'Your turn: find the midpoint of (3, −1) and (−9, 5).', answer: t`\boxed{(-3,2)}`, explanation: 'Average x: (3 − 9)/2 = −3. Average y: (−1 + 5)/2 = 2. The midpoint is (−3, 2).' },
   },
 ]
+// Added from individually reviewed classroom materials. Missing documents stay explicit.
+const additionalAlgebraLessons: Lesson[] = [
+  {
+    "course": "algebra-2",
+    "unitSlug": "unit-1a",
+    "slug": "formula-substitution",
+    "title": "Formula substitution and order of operations",
+    "unit": "Unit 1A",
+    "number": "Lesson 0",
+    "description": "Replace variables with given values, follow the order of operations, and report answers with units.",
+    "goals": [
+      "Substitute values using parentheses.",
+      "Choose geometry formulas and interpret units."
+    ],
+    "prerequisites": "Earlier lessons in this unit and signed-number arithmetic.",
+    "concepts": [],
+    "examples": [],
+    "videos": [
+      {
+        "id": "AJNDeVt9UOo",
+        "title": "Evaluating expressions with substitution",
+        "author": "Khan Academy"
+      },
+      {
+        "id": "tC1SfxRvtmM",
+        "title": "Using substitution in a formula",
+        "author": "Khan Academy"
+      }
+    ],
+    "materials": [
+      {
+        "file": "algebra-2/formula-substitution/notes.pdf",
+        "title": "notes",
+        "description": "Selected classroom handout.",
+        "kind": "notes",
+        "pages": 2
+      },
+      {
+        "file": "algebra-2/formula-substitution/completed-notes.pdf",
+        "title": "completed-notes",
+        "description": "Classroom annotations; some exercises are unfinished.",
+        "kind": "completed-notes",
+        "pages": 2,
+        "label": "Classroom Notes (partial)"
+      },
+      {
+        "file": "algebra-2/formula-substitution/practice.pdf",
+        "title": "practice",
+        "description": "Selected classroom handout.",
+        "kind": "practice",
+        "pages": 2
+      },
+      {
+        "file": "algebra-2/formula-substitution/completed-practice.pdf",
+        "title": "completed-practice",
+        "description": "Classroom annotations; some exercises are unfinished.",
+        "kind": "completed-practice",
+        "pages": 2,
+        "label": "Classroom Practice (partial)"
+      }
+    ]
+  },
+  {
+    "course": "algebra-2",
+    "unitSlug": "unit-1a",
+    "slug": "two-step-equations",
+    "title": "Two-step equations",
+    "unit": "Unit 1A",
+    "number": "Lesson 2",
+    "description": "Undo two operations while keeping both sides of an equation balanced.",
+    "goals": [
+      "Solve two-step equations, including fraction coefficients.",
+      "Justify operations with properties of equality."
+    ],
+    "prerequisites": "Earlier lessons in this unit and signed-number arithmetic.",
+    "concepts": [],
+    "examples": [],
+    "videos": [
+      {
+        "id": "_y_Q3_B2Vh8",
+        "title": "Solving two-step equations",
+        "author": "Khan Academy"
+      }
+    ],
+    "materials": [
+      {
+        "file": "algebra-2/two-step-equations/notes.pdf",
+        "title": "notes",
+        "description": "Selected classroom handout.",
+        "kind": "notes",
+        "pages": 2
+      },
+      {
+        "file": "algebra-2/two-step-equations/completed-notes.pdf",
+        "title": "completed-notes",
+        "description": "Selected classroom handout.",
+        "kind": "completed-notes",
+        "pages": 2
+      },
+      {
+        "file": "algebra-2/two-step-equations/practice.pdf",
+        "title": "practice",
+        "description": "Selected classroom handout.",
+        "kind": "practice",
+        "pages": 2
+      },
+      {
+        "file": "algebra-2/two-step-equations/completed-practice.pdf",
+        "title": "completed-practice",
+        "description": "Selected classroom handout.",
+        "kind": "completed-practice",
+        "pages": 2
+      }
+    ]
+  },
+  {
+    "course": "algebra-2",
+    "unitSlug": "unit-1a",
+    "slug": "variables-on-both-sides",
+    "title": "Variables on both sides",
+    "unit": "Unit 1A",
+    "number": "Lesson 3",
+    "description": "Combine like terms and collect variable terms before solving an equation.",
+    "goals": [
+      "Simplify each side before moving terms.",
+      "Solve equations with a variable in more than one position."
+    ],
+    "prerequisites": "Earlier lessons in this unit and signed-number arithmetic.",
+    "concepts": [],
+    "examples": [],
+    "videos": [
+      {
+        "id": "XoEn1LfVoTo",
+        "title": "Solving a more complicated equation",
+        "author": "Khan Academy"
+      }
+    ],
+    "materials": [
+      {
+        "file": "algebra-2/variables-on-both-sides/notes.pdf",
+        "title": "notes",
+        "description": "Selected classroom handout.",
+        "kind": "notes",
+        "pages": 2
+      },
+      {
+        "title": "completed-notes",
+        "description": "A matching completed sheet has not been located in the shared folder.",
+        "kind": "completed-notes",
+        "pages": 0,
+        "unavailableReason": "A matching completed sheet has not been located in the shared folder."
+      },
+      {
+        "file": "algebra-2/variables-on-both-sides/practice.pdf",
+        "title": "practice",
+        "description": "Selected classroom handout.",
+        "kind": "practice",
+        "pages": 2
+      },
+      {
+        "file": "algebra-2/variables-on-both-sides/completed-practice.pdf",
+        "title": "completed-practice",
+        "description": "Selected classroom handout.",
+        "kind": "completed-practice",
+        "pages": 2
+      }
+    ]
+  },
+  {
+    "course": "algebra-2",
+    "unitSlug": "unit-1a",
+    "slug": "distributive-property",
+    "title": "The distributive property",
+    "unit": "Unit 1A",
+    "number": "Lesson 4",
+    "description": "Distribute to every term, simplify, and solve the resulting equation.",
+    "goals": [
+      "Distribute positive, negative, and fractional factors.",
+      "Combine like terms and solve multi-step equations."
+    ],
+    "prerequisites": "Earlier lessons in this unit and signed-number arithmetic.",
+    "concepts": [],
+    "examples": [],
+    "videos": [
+      {
+        "id": "YZBStgZGyDY",
+        "title": "Solving equations with the distributive property",
+        "author": "Khan Academy"
+      }
+    ],
+    "materials": [
+      {
+        "file": "algebra-2/distributive-property/notes.pdf",
+        "title": "notes",
+        "description": "Selected classroom handout.",
+        "kind": "notes",
+        "pages": 2
+      },
+      {
+        "file": "algebra-2/distributive-property/completed-notes.pdf",
+        "title": "completed-notes",
+        "description": "Selected classroom handout.",
+        "kind": "completed-notes",
+        "pages": 2
+      },
+      {
+        "file": "algebra-2/distributive-property/practice.pdf",
+        "title": "practice",
+        "description": "Selected classroom handout.",
+        "kind": "practice",
+        "pages": 2
+      },
+      {
+        "file": "algebra-2/distributive-property/completed-practice.pdf",
+        "title": "completed-practice",
+        "description": "Selected classroom handout.",
+        "kind": "completed-practice",
+        "pages": 2
+      }
+    ]
+  },
+  {
+    "course": "algebra-2",
+    "unitSlug": "unit-1a",
+    "slug": "linear-inequalities",
+    "title": "Evaluate, solve, and graph inequalities",
+    "unit": "Unit 1A",
+    "number": "Lesson 5",
+    "description": "Evaluate inequalities, solve them, and represent the solution set on a number line.",
+    "goals": [
+      "Reverse the inequality when multiplying or dividing by a negative.",
+      "Use open or closed endpoints and the correct shading."
+    ],
+    "prerequisites": "Earlier lessons in this unit and signed-number arithmetic.",
+    "concepts": [],
+    "examples": [],
+    "videos": [
+      {
+        "id": "y7QLay8wrW8",
+        "title": "Solving a two-step inequality",
+        "author": "Khan Academy"
+      },
+      {
+        "id": "PNXozoJWsWc",
+        "title": "Multiplying and dividing with inequalities",
+        "author": "Khan Academy"
+      }
+    ],
+    "materials": [
+      {
+        "file": "algebra-2/linear-inequalities/notes.pdf",
+        "title": "notes",
+        "description": "Selected classroom handout.",
+        "kind": "notes",
+        "pages": 2
+      },
+      {
+        "file": "algebra-2/linear-inequalities/completed-notes.pdf",
+        "title": "completed-notes",
+        "description": "Classroom annotations; some exercises are unfinished.",
+        "kind": "completed-notes",
+        "pages": 2,
+        "label": "Classroom Notes (partial)"
+      },
+      {
+        "file": "algebra-2/linear-inequalities/practice.pdf",
+        "title": "practice",
+        "description": "Selected classroom handout.",
+        "kind": "practice",
+        "pages": 2
+      },
+      {
+        "title": "completed-practice",
+        "description": "A matching completed sheet has not been located in the shared folder.",
+        "kind": "completed-practice",
+        "pages": 0,
+        "unavailableReason": "A matching completed sheet has not been located in the shared folder."
+      }
+    ]
+  },
+  {
+    "course": "algebra-2",
+    "unitSlug": "unit-1a",
+    "slug": "writing-solving-equations-inequalities",
+    "title": "Writing and solving equations and inequalities",
+    "unit": "Unit 1A",
+    "number": "Lesson 6",
+    "description": "Define a variable, build an expression, and choose an equation or inequality to model a situation.",
+    "goals": [
+      "Distinguish exactly, at most, and at least.",
+      "Solve a model and interpret the result in context."
+    ],
+    "prerequisites": "Earlier lessons in this unit and signed-number arithmetic.",
+    "concepts": [],
+    "examples": [],
+    "videos": [
+      {
+        "id": "xKH1Evwu150",
+        "title": "Linear equation word problem",
+        "author": "Khan Academy"
+      },
+      {
+        "id": "y7QLay8wrW8",
+        "title": "Solving a two-step inequality",
+        "author": "Khan Academy"
+      }
+    ],
+    "materials": [
+      {
+        "file": "algebra-2/writing-solving-equations-inequalities/notes.pdf",
+        "title": "notes",
+        "description": "Selected classroom handout.",
+        "kind": "notes",
+        "pages": 2
+      },
+      {
+        "file": "algebra-2/writing-solving-equations-inequalities/completed-notes.pdf",
+        "title": "completed-notes",
+        "description": "Selected classroom handout.",
+        "kind": "completed-notes",
+        "pages": 2
+      },
+      {
+        "file": "algebra-2/writing-solving-equations-inequalities/practice.pdf",
+        "title": "practice",
+        "description": "Selected classroom handout.",
+        "kind": "practice",
+        "pages": 2
+      },
+      {
+        "file": "algebra-2/writing-solving-equations-inequalities/completed-practice.pdf",
+        "title": "completed-practice",
+        "description": "Selected classroom handout.",
+        "kind": "completed-practice",
+        "pages": 2
+      }
+    ]
+  },
+  {
+    "course": "algebra-2",
+    "unitSlug": "unit-1a",
+    "slug": "compound-inequalities",
+    "title": "Compound inequalities",
+    "unit": "Unit 1A",
+    "number": "Lesson 7",
+    "description": "Solve AND and OR inequalities and show their intersections or unions.",
+    "goals": [
+      "Solve both parts of a compound inequality.",
+      "Graph the combined solution set."
+    ],
+    "prerequisites": "Earlier lessons in this unit and signed-number arithmetic.",
+    "concepts": [],
+    "examples": [],
+    "videos": [
+      {
+        "id": "A3xPhzs-KBI",
+        "title": "Compound inequalities",
+        "author": "Khan Academy"
+      }
+    ],
+    "materials": [
+      {
+        "file": "algebra-2/compound-inequalities/notes.pdf",
+        "title": "notes",
+        "description": "Selected classroom handout.",
+        "kind": "notes",
+        "pages": 2
+      },
+      {
+        "file": "algebra-2/compound-inequalities/completed-notes.pdf",
+        "title": "completed-notes",
+        "description": "Selected classroom handout.",
+        "kind": "completed-notes",
+        "pages": 2
+      },
+      {
+        "file": "algebra-2/compound-inequalities/practice.pdf",
+        "title": "practice",
+        "description": "Selected classroom handout.",
+        "kind": "practice",
+        "pages": 2
+      },
+      {
+        "file": "algebra-2/compound-inequalities/completed-practice.pdf",
+        "title": "completed-practice",
+        "description": "Selected classroom handout.",
+        "kind": "completed-practice",
+        "pages": 2
+      }
+    ]
+  },
+  {
+    "course": "algebra-2",
+    "unitSlug": "unit-1a",
+    "slug": "compound-inequality-applications",
+    "title": "Writing compound inequalities",
+    "unit": "Unit 1A",
+    "number": "Lesson 8",
+    "description": "Translate real-world limits into compound inequalities and simplify special cases.",
+    "goals": [
+      "Write inside intervals with AND and outside intervals with OR.",
+      "Recognize overlapping sets, no solution, and all real numbers."
+    ],
+    "prerequisites": "Earlier lessons in this unit and signed-number arithmetic.",
+    "concepts": [],
+    "examples": [],
+    "videos": [
+      {
+        "id": "A3xPhzs-KBI",
+        "title": "Compound inequalities",
+        "author": "Khan Academy"
+      }
+    ],
+    "materials": [
+      {
+        "file": "algebra-2/compound-inequality-applications/notes.pdf",
+        "title": "notes",
+        "description": "Selected classroom handout.",
+        "kind": "notes",
+        "pages": 2
+      },
+      {
+        "file": "algebra-2/compound-inequality-applications/completed-notes.pdf",
+        "title": "completed-notes",
+        "description": "Selected classroom handout.",
+        "kind": "completed-notes",
+        "pages": 2
+      },
+      {
+        "file": "algebra-2/compound-inequality-applications/practice.pdf",
+        "title": "practice",
+        "description": "Selected classroom handout.",
+        "kind": "practice",
+        "pages": 2
+      },
+      {
+        "file": "algebra-2/compound-inequality-applications/completed-practice.pdf",
+        "title": "completed-practice",
+        "description": "Classroom annotations; some exercises are unfinished.",
+        "kind": "completed-practice",
+        "pages": 2,
+        "label": "Classroom Practice (partial)"
+      }
+    ]
+  },
+  {
+    "course": "algebra-2",
+    "unitSlug": "unit-1a",
+    "slug": "absolute-value-equations",
+    "title": "Absolute value equations",
+    "unit": "Unit 1A",
+    "number": "Lesson 9",
+    "description": "Interpret absolute value as distance, isolate the absolute value, and solve both cases.",
+    "goals": [
+      "Solve absolute value equations and check both candidates.",
+      "Recognize two, one, or no solutions."
+    ],
+    "prerequisites": "Earlier lessons in this unit and signed-number arithmetic.",
+    "concepts": [],
+    "examples": [],
+    "videos": [
+      {
+        "id": "frBJEYvyd-8",
+        "title": "Absolute value and number lines",
+        "author": "Khan Academy"
+      },
+      {
+        "id": "u6zDpUL5RkU",
+        "title": "Absolute value equations",
+        "author": "Khan Academy"
+      }
+    ],
+    "materials": [
+      {
+        "file": "algebra-2/absolute-value-equations/notes.pdf",
+        "title": "notes",
+        "description": "Selected classroom handout.",
+        "kind": "notes",
+        "pages": 2
+      },
+      {
+        "title": "completed-notes",
+        "description": "The available classroom notes use an earlier worksheet; a matching key for these revised notes has not been located.",
+        "kind": "completed-notes",
+        "pages": 0,
+        "unavailableReason": "The available classroom notes use an earlier worksheet; a matching key for these revised notes has not been located."
+      },
+      {
+        "file": "algebra-2/absolute-value-equations/practice.pdf",
+        "title": "practice",
+        "description": "Selected classroom handout.",
+        "kind": "practice",
+        "pages": 2
+      },
+      {
+        "file": "algebra-2/absolute-value-equations/completed-practice.pdf",
+        "title": "completed-practice",
+        "description": "Selected classroom handout.",
+        "kind": "completed-practice",
+        "pages": 2
+      }
+    ]
+  },
+  {
+    "course": "algebra-2",
+    "unitSlug": "unit-1a",
+    "slug": "absolute-value-inequalities",
+    "title": "Absolute value inequalities",
+    "unit": "Unit 1A",
+    "number": "Lesson 10",
+    "description": "Use distance to decide whether an absolute value inequality describes an inside or outside interval.",
+    "goals": [
+      "Isolate absolute value before splitting into cases.",
+      "Solve and graph absolute value inequalities, including special cases."
+    ],
+    "prerequisites": "Earlier lessons in this unit and signed-number arithmetic.",
+    "concepts": [],
+    "examples": [],
+    "videos": [
+      {
+        "id": "ZJvOGkykJ44",
+        "title": "Absolute Value Inequalities - How To Solve It",
+        "author": "The Organic Chemistry Tutor"
+      }
+    ],
+    "materials": [
+      {
+        "file": "algebra-2/absolute-value-inequalities/notes.pdf",
+        "title": "notes",
+        "description": "Selected classroom handout.",
+        "kind": "notes",
+        "pages": 2
+      },
+      {
+        "file": "algebra-2/absolute-value-inequalities/completed-notes.pdf",
+        "title": "completed-notes",
+        "description": "Selected classroom handout.",
+        "kind": "completed-notes",
+        "pages": 2
+      },
+      {
+        "file": "algebra-2/absolute-value-inequalities/practice.pdf",
+        "title": "practice",
+        "description": "Selected classroom handout.",
+        "kind": "practice",
+        "pages": 2
+      },
+      {
+        "file": "algebra-2/absolute-value-inequalities/completed-practice.pdf",
+        "title": "completed-practice",
+        "description": "Selected classroom handout.",
+        "kind": "completed-practice",
+        "pages": 2
+      }
+    ]
+  },
+  {
+    "course": "algebra-2",
+    "unitSlug": "unit-1b",
+    "slug": "function-notation",
+    "title": "Function notation",
+    "unit": "Unit 1B",
+    "number": "Lesson 1",
+    "description": "Read function notation and evaluate functions at numbers or variable expressions.",
+    "goals": [
+      "Identify inputs and outputs.",
+      "Substitute numbers and expressions using proper function notation."
+    ],
+    "prerequisites": "Earlier lessons in this unit and signed-number arithmetic.",
+    "concepts": [],
+    "examples": [],
+    "videos": [
+      {
+        "id": "kvGsIo1TmsM",
+        "title": "What is a function?",
+        "author": "Khan Academy"
+      },
+      {
+        "id": "E9YEUQR9NAU",
+        "title": "Evaluating Functions",
+        "author": "Khan Academy"
+      }
+    ],
+    "materials": [
+      {
+        "file": "algebra-2/function-notation/notes.pdf",
+        "title": "notes",
+        "description": "Selected classroom handout.",
+        "kind": "notes",
+        "pages": 2
+      },
+      {
+        "file": "algebra-2/function-notation/completed-notes.pdf",
+        "title": "completed-notes",
+        "description": "Selected classroom handout.",
+        "kind": "completed-notes",
+        "pages": 2
+      },
+      {
+        "file": "algebra-2/function-notation/practice.pdf",
+        "title": "practice",
+        "description": "Selected classroom handout.",
+        "kind": "practice",
+        "pages": 2
+      },
+      {
+        "file": "algebra-2/function-notation/completed-practice.pdf",
+        "title": "completed-practice",
+        "description": "Selected classroom handout.",
+        "kind": "completed-practice",
+        "pages": 2
+      }
+    ]
+  },
+  {
+    "course": "algebra-2",
+    "unitSlug": "unit-1b",
+    "slug": "slope-rate-of-change",
+    "title": "Slope and rate of change",
+    "unit": "Unit 1B",
+    "number": "Lesson 2",
+    "description": "Find slope and average rate of change using points, graphs, tables, and formulas.",
+    "goals": [
+      "Distinguish positive, negative, zero, and undefined slope.",
+      "Calculate average rate of change over an interval and interpret its units."
+    ],
+    "prerequisites": "Earlier lessons in this unit and signed-number arithmetic.",
+    "concepts": [],
+    "examples": [],
+    "videos": [
+      {
+        "id": "MeU-KzdCBps",
+        "title": "Introduction to slope",
+        "author": "Khan Academy"
+      },
+      {
+        "id": "TEXSW-o8674",
+        "title": "Average rate of change from a graph",
+        "author": "Khan Academy"
+      },
+      {
+        "id": "U1lQbh21y1k",
+        "title": "Average rate of change from a table",
+        "author": "Khan Academy"
+      }
+    ],
+    "materials": [
+      {
+        "file": "algebra-2/slope-rate-of-change/notes.pdf",
+        "title": "notes",
+        "description": "Selected classroom handout.",
+        "kind": "notes",
+        "pages": 2
+      },
+      {
+        "title": "completed-notes",
+        "description": "A matching completed sheet has not been located in the shared folder.",
+        "kind": "completed-notes",
+        "pages": 0,
+        "unavailableReason": "A matching completed sheet has not been located in the shared folder."
+      },
+      {
+        "file": "algebra-2/slope-rate-of-change/practice.pdf",
+        "title": "practice",
+        "description": "Selected classroom handout.",
+        "kind": "practice",
+        "pages": 2
+      },
+      {
+        "title": "completed-practice",
+        "description": "A matching completed sheet has not been located in the shared folder.",
+        "kind": "completed-practice",
+        "pages": 0,
+        "unavailableReason": "A matching completed sheet has not been located in the shared folder."
+      }
+    ],
+    "practiceApp": "/apps/slope"
+  }
+]
+export const lessons: Lesson[] = [...originalLessons, ...additionalAlgebraLessons].sort((a, b) =>
+  a.course.localeCompare(b.course) || a.unitSlug.localeCompare(b.unitSlug) ||
+  Number(a.number.match(/\d+/)?.[0] ?? 0) - Number(b.number.match(/\d+/)?.[0] ?? 0)
+)
 export function getLesson(course: string, slug: string) { return lessons.find(l => l.course === course && l.slug === slug) }

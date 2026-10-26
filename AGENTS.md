@@ -10,7 +10,7 @@
 - Do not display worked examples or practice problems in lesson readers until the teacher asks for them again. Preserve existing example data for later use.
 - Keep lesson content and video URLs in src/content/lessons.ts. Use the shared paginated book reader. Respect reduced-motion settings and provide complete static solutions.
 - Preserve mathematical accuracy and the methods in the teacher's materials. If an original contains an error, leave the original untouched and identify a correction in a prepared public guide and the source catalog.
-- Keep all four material links available. Do not invent a missing source or label an unfinished sheet as completed.
+- Keep all four material positions visible. Link only reviewed documents; mark absent matching keys as not posted yet with a reason in content data. Label unfinished classroom scans as partial instead of completed. Do not invent a missing source or substitute a key from a different worksheet. See docs/algebra-2-publishing-review.md for reviewed selections.
 - Run content checks, typecheck, lint, and production build before publishing. Check responsive layouts and PDF rendering for affected pages.
 - Slope practice is local-only: do not send student names, answers, or scores to a server or persist them in browser storage. Completion exports a locally generated image bearing the name entered at the start, for manual Google Classroom submission. New score POSTs must remain disabled. Preserve existing protected records without deleting them. See docs/slope-results-setup.md.
 - Keep the current domain and email settings unchanged unless the user asks to modify them.

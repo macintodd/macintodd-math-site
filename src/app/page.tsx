@@ -6,8 +6,8 @@ export default function Home() {
     <div className="section-heading"><h1>Choose your class.</h1></div>
     <div className="course-grid">{courses.map(course => <Link className={`course-tile ${course.id}`} key={course.id} href={`/courses/${course.id}`}>
       <div className="tile-top"><h2>{course.title}</h2><span className="circle-arrow" aria-hidden="true">→</span></div>
-      <p>Lesson notes, practice, videos, and worked examples.</p>
-      <div className="tile-bottom"><span>{lessons.filter(l => l.course === course.id).length} lesson available</span><span>View lesson index →</span></div>
+      <p>Lesson notes, practice, and videos.</p>
+      <div className="tile-bottom"><span>{lessons.filter(l => l.course === course.id).length} {lessons.filter(l => l.course === course.id).length === 1 ? 'lesson' : 'lessons'} available</span><span>View lesson index →</span></div>
     </Link>)}</div>
   </div></section>
 }

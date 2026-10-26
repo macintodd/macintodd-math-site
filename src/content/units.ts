@@ -17,12 +17,14 @@ export const units: Unit[] = [
     slug: 'unit-1a',
     number: '1A',
     title: 'Foundations of Algebra 2',
-    introduction: 'Use the rules of arithmetic to explain, represent, and solve problems. These foundations support the equations, inequalities, and functions that follow in Algebra 2.',
+    introduction: 'Build from formula substitution and one-step equations to multi-step equations, compound inequalities, and absolute value. Explain your steps, graph solution sets, and use algebra to describe real situations.',
     skills: [
       'Evaluate expressions accurately with signed numbers and fractions.',
       'Use inverse operations to isolate a variable and justify each step.',
       'Check a solution by substituting it into the original equation.',
       'Connect a mathematical statement to the quantities in a real situation.',
+      'Solve and graph linear, compound, and absolute value inequalities.',
+      'Model real-world limits and interpret solution sets.',
     ],
     relevance: [
       { title: 'Make a budget', text: 'An equation can represent a starting balance, a purchase, and the money left over. Working backward helps you find an unknown cost or how much you need to save.' },
@@ -30,6 +32,33 @@ export const units: Unit[] = [
       { title: 'Understand a formula', text: 'Formulas connect measurements in science, construction, cooking, and everyday planning. Knowing what each variable means helps you choose the right operation and check whether an answer is reasonable.' },
     ],
   },
+{
+  "course": "algebra-2",
+  "slug": "unit-1b",
+  "number": "1B",
+  "title": "Functions, Slope & Rate of Change",
+  "introduction": "Connect the equations and inequalities from Unit 1A to functions. Use function notation to track inputs and outputs, then describe how quantities change using slope and average rate of change.",
+  "skills": [
+    "Read function notation and evaluate functions at numerical or algebraic inputs.",
+    "Recognize how inputs, outputs, domain, and range describe a situation.",
+    "Find slope from points and graphs, including horizontal and vertical lines.",
+    "Calculate average rate of change from a formula, graph, or table and interpret the units."
+  ],
+  "relevance": [
+    {
+      "title": "Compare service plans",
+      "text": "A function can connect data use or miles traveled to total cost. Its rate of change tells you the charge for one additional unit."
+    },
+    {
+      "title": "Describe a trend",
+      "text": "A table or graph can record savings, population, or water levels. Average rate of change tells you how quickly the quantity rises or falls over an interval."
+    },
+    {
+      "title": "Make a prediction",
+      "text": "Function notation keeps inputs and outputs clear when using a model. Check the domain and units before interpreting a prediction."
+    }
+  ]
+},
   {
     course: 'precalculus',
     slug: 'unit-1',

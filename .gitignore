@@ -51,3 +51,7 @@ token.json
 
 # Local source review and document previews
 /tmp/
+
+# Python review/sync caches
+__pycache__/
+*.pyc

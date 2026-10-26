@@ -31,8 +31,14 @@ for (const l of lessons) {
     for (const step of ex.steps) { katex.renderToString(step.math, { throwOnError: true, trust: false }); formulas++ }
   }
   for (const c of l.concepts) if (c.formula) { katex.renderToString(c.formula, { throwOnError: true }); formulas++ }
-  katex.renderToString(l.check.answer, { throwOnError: true }); formulas++
+  if (l.check) { katex.renderToString(l.check.answer, { throwOnError: true }); formulas++ }
+  assert(l.materials.some(m => m.file), 'Lesson must have reviewed materials')
   for (const m of l.materials) {
+    if (!m.file) {
+      assert(m.unavailableReason && m.pages === 0, `Missing document needs an explicit reason: ${id}`)
+      assert(m.kind === 'completed-notes' || m.kind === 'completed-practice', 'Only missing keys may be unpublished')
+      continue
+    }
     const item = manifest.materials.find(i => i.output === m.file)
     assert(item, `Material not in explicit publishing allowlist: ${m.file}`)
     const data = fs.readFileSync(path.join(root, 'public/materials', m.file))
