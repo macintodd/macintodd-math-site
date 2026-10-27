@@ -242,3 +242,24 @@ body:has(.book-reader) .site-footer{display:none}
 .glossary-entry p{line-height:1.7;margin:8px 0 12px}
 .glossary-entry nav{display:flex;flex-wrap:wrap;gap:10px 20px;font-size:13px}
 @media(max-width:740px){.lesson-title-row{grid-template-columns:1fr;gap:18px}.lesson-vocabulary{border-left:0;border-top:1px solid #dce8e8;padding:14px 0 0}.vocabulary-dialog-content{padding:18px}}
+
+.equation-student{display:flex;gap:12px;flex-wrap:wrap;align-items:center;background:#edf4f4;border:1px solid #c8dddd;border-radius:7px;padding:10px 14px;margin:12px 0;overflow-wrap:anywhere}
+.equation-student strong{font-size:19px}
+.equation-student span{margin-left:auto}
+.equation-app .slope-score span:last-child{margin-left:0}
+.equation-intercept{display:flex;align-items:center;gap:8px;font-size:25px;margin:5px 0 8px}
+.equation-intercept input{width:75px;text-align:center}
+.equation-final>span{display:flex;align-items:center;gap:10px;margin-top:4px}
+.equation-final input{min-width:0;flex:1;font-size:22px;width:100%}
+.equation-final strong{font:24px Georgia,serif;white-space:nowrap}
+.equation-app input.active{outline:2px solid #278a99}
+.equation-app .equation-keypad{grid-template-columns:repeat(6,minmax(0,1fr));max-width:100%;gap:6px}
+.equation-app .equation-keypad button{grid-column:auto;min-height:44px;font-size:20px;padding:6px}
+.equation-app .equation-keypad button:last-child{font-size:12px}
+.equation-app .slope-graph{max-height:none;min-height:0}
+.equation-finish{background:#edf4f4;border-radius:7px;padding:12px}
+.equation-finish p{font-size:14px;margin:0}
+.equation-results-name{font-size:22px;font-weight:600;overflow-wrap:anywhere}
+@media(max-width:700px){.equation-app .equation-keypad{grid-template-columns:repeat(6,minmax(0,1fr))}.equation-student span{margin-left:0}.equation-app .slope-score{font-size:13px}}
+.equation-progress{position:sticky;top:0;z-index:5;background:#f5f7f9;padding-bottom:4px}
+.equation-progress .equation-student{margin-top:0}

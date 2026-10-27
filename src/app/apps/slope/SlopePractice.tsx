@@ -239,7 +239,7 @@ export default function SlopePractice() {
               Best streak <b>{progress.bestStreak}</b> / 5
             </span>
             <span>
-              Hour {student.hour} · {student.firstName}
+              Hour {student.hour} · {student.firstName} {student.lastName}
             </span>
           </div>
           <div
