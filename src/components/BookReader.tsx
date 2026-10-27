@@ -9,6 +9,7 @@ export type BookPage = { id: string; label: string; content: ReactNode }
 type Props = {
   label: string
   className?: string
+  pagePickerLabel?: string
   heading: ReactNode
   breadcrumb: ReactNode
   pages: BookPage[]
@@ -18,7 +19,7 @@ type Props = {
   nextLabel?: string
 }
 
-export function BookReader({ label, className = '', heading, breadcrumb, pages, previousHref, previousLabel = 'Previous section', nextHref, nextLabel = 'Next section' }: Props) {
+export function BookReader({ label, className = '', pagePickerLabel, heading, breadcrumb, pages, previousHref, previousLabel = 'Previous section', nextHref, nextLabel = 'Next section' }: Props) {
   const [active, setActive] = useState(0)
   const stage = useRef<HTMLDivElement>(null)
   const router = useRouter()
@@ -71,6 +72,7 @@ export function BookReader({ label, className = '', heading, breadcrumb, pages, 
     <nav className="book-breadcrumb" aria-label="Breadcrumb">{breadcrumb}</nav>
     <article className="book-paper">
       <header className="book-heading">{heading}</header>
+      {pagePickerLabel && <label className="book-page-picker"><span>{pagePickerLabel} ({pages.length})</span><select value={active} onChange={event => turnPage(Number(event.target.value))}>{pages.map((item, index) => <option key={item.id} value={index}>{index + 1}. {item.label}</option>)}</select></label>}
       <div className="book-stage" ref={stage} tabIndex={-1} aria-label={page.label}>
         <div className="book-page-content" key={page.id}>{page.content}</div>
       </div>

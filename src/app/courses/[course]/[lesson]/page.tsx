@@ -42,7 +42,7 @@ export default async function LessonPage({ params }: { params: Promise<{ course:
         <Link className="lesson-contents-link" href={`/courses/${lesson.course}`}>All {course.title} lessons →</Link>
       </nav>
     </aside>
-    <BookReader className="lesson-reader" label={`${lesson.title} lesson reader`}
+    <BookReader pagePickerLabel={lesson.reviewGuide ? undefined : "Choose a video"} className="lesson-reader" label={`${lesson.title} lesson reader`}
     breadcrumb={<><Link href="/">Classes</Link><span aria-hidden="true">/</span><Link href={`/courses/${lesson.course}`}>{course.title} contents</Link><span aria-hidden="true">/</span><Link href={`/courses/${lesson.course}/units/${unit.slug}`}>Unit {unit.number}</Link></>}
     heading={<><p className="book-eyebrow">{lesson.unit} · {lesson.number}</p><h1>{lesson.title}</h1><nav id="materials" className="lesson-pdf-links" aria-label="Lesson PDFs">{lesson.materials.map((material, i) => material.file
       ? <div className="lesson-material-group" key={material.kind}><a href={`/materials/${material.file}`} target="_blank" rel="noopener noreferrer" title={material.description} aria-label={`Open ${material.label ?? materialLabels[i]} PDF in a new tab`}>{material.label ?? materialLabels[i]}</a>{material.additional?.map(extra => <a className="lesson-extra-material" key={extra.file} href={`/materials/${extra.file}`} target="_blank" rel="noopener noreferrer" title={extra.description} aria-label={`Open ${extra.label} PDF in a new tab`}>{extra.label}</a>)}</div>

@@ -52,13 +52,28 @@ export const precalculusLessons: Lesson[] = [
     "examples": [],
     "videos": [
       {
-        "id": "uk7gS3cZVp4",
-        "title": "Graph from a slope-intercept equation",
+        "id": "OmZ9O1xM0KQ",
+        "title": "Graphing Equations By Plotting Points - Part 1",
+        "author": "Mathispower4u"
+      },
+      {
+        "id": "vmaMT188ChA",
+        "title": "Ex:  Determine the x and y Intercepts of a Linear Equation in Slope Intercept Form",
+        "author": "Mathispower4u"
+      },
+      {
+        "id": "PH4LNOAezcI",
+        "title": "Symmetry Introduction: x-axis, y-axis, the origin",
+        "author": "Mathispower4u"
+      },
+      {
+        "id": "GQXUpB2NHvQ",
+        "title": "Equation for a circle using the Pythagorean Theorem",
         "author": "Khan Academy"
       },
       {
         "id": "fHroNLez6R8",
-        "title": "Graphing and setting a window on the TI-84 Plus CE",
+        "title": "Plot Graphs and Set Windows on the TI-84 Plus CE",
         "author": "Texas Instruments Education"
       }
     ],
@@ -116,12 +131,32 @@ export const precalculusLessons: Lesson[] = [
     "videos": [
       {
         "id": "uk7gS3cZVp4",
-        "title": "Graph from a slope-intercept equation",
+        "title": "Graph from slope-intercept equation example",
+        "author": "Khan Academy"
+      },
+      {
+        "id": "Iqws-qzyZwc",
+        "title": "Slope and rate of change",
+        "author": "Khan Academy"
+      },
+      {
+        "id": "K_OI9LA54AA",
+        "title": "Introduction to point-slope form",
+        "author": "Khan Academy"
+      },
+      {
+        "id": "9hryH94KFJA",
+        "title": "Equations of parallel and perpendicular lines",
+        "author": "Khan Academy"
+      },
+      {
+        "id": "qnvgI8co7BI",
+        "title": "Constructing a linear function word problem",
         "author": "Khan Academy"
       },
       {
         "id": "fHroNLez6R8",
-        "title": "Graphing and setting a window on the TI-84 Plus CE",
+        "title": "Plot Graphs and Set Windows on the TI-84 Plus CE",
         "author": "Texas Instruments Education"
       }
     ],
@@ -184,13 +219,23 @@ export const precalculusLessons: Lesson[] = [
       },
       {
         "id": "E9YEUQR9NAU",
-        "title": "Evaluating functions",
+        "title": "Evaluating Functions",
         "author": "Khan Academy"
       },
       {
         "id": "-DTMakGDZAw",
         "title": "What is the domain of a function?",
         "author": "Khan Academy"
+      },
+      {
+        "id": "djT6-YamHaA",
+        "title": "How To Find The Domain of a Function - Radicals, Fractions & Square Roots - Interval Notation",
+        "author": "The Organic Chemistry Tutor"
+      },
+      {
+        "id": "qQgVomi8lCc",
+        "title": "Difference Quotient",
+        "author": "The Organic Chemistry Tutor"
       }
     ],
     "materials": [
@@ -247,17 +292,32 @@ export const precalculusLessons: Lesson[] = [
     "videos": [
       {
         "id": "KxOp3s9ottg",
-        "title": "Increasing and decreasing intervals",
+        "title": "Introduction to increasing, decreasing, positive or negative intervals",
         "author": "Khan Academy"
       },
       {
         "id": "sXP7VhU1gYE",
-        "title": "Domain and range from a graph",
+        "title": "How to find the domain and the range of a function given its graph (example)",
         "author": "Khan Academy"
       },
       {
+        "id": "eVJxTEx7VXw",
+        "title": "Finding Zeros of a Function",
+        "author": "ThinkwellVids"
+      },
+      {
+        "id": "D3a8NnpQ2vU",
+        "title": "Factoring quadratics as (x+a)(x+b)",
+        "author": "Khan Academy"
+      },
+      {
+        "id": "GaltHJF6WyI",
+        "title": "Identifying The Relative Maximum and Minimum Values of a Function",
+        "author": "The Organic Chemistry Tutor"
+      },
+      {
         "id": "fHroNLez6R8",
-        "title": "Graphing and setting a window on the TI-84 Plus CE",
+        "title": "Plot Graphs and Set Windows on the TI-84 Plus CE",
         "author": "Texas Instruments Education"
       }
     ],
@@ -314,7 +374,22 @@ export const precalculusLessons: Lesson[] = [
     "videos": [
       {
         "id": "TEXSW-o8674",
-        "title": "Average rate of change from a graph",
+        "title": "How to find the average rate of change from a graph (example)",
+        "author": "Khan Academy"
+      },
+      {
+        "id": "f_Q0qlwlclQ",
+        "title": "Average Rate of Change of a Function Over an Interval",
+        "author": "The Organic Chemistry Tutor"
+      },
+      {
+        "id": "Iqws-qzyZwc",
+        "title": "Slope and rate of change",
+        "author": "Khan Academy"
+      },
+      {
+        "id": "qnvgI8co7BI",
+        "title": "Constructing a linear function word problem",
         "author": "Khan Academy"
       },
       {
@@ -374,6 +449,11 @@ export const precalculusLessons: Lesson[] = [
     "concepts": [],
     "examples": [],
     "videos": [
+      {
+        "id": "PH4LNOAezcI",
+        "title": "Symmetry Introduction: x-axis, y-axis, the origin",
+        "author": "Mathispower4u"
+      },
       {
         "id": "8VgmBe3ulb8",
         "title": "Recognizing odd and even functions",
@@ -439,8 +519,33 @@ export const precalculusLessons: Lesson[] = [
         "author": "Khan Academy"
       },
       {
-        "id": "uk7gS3cZVp4",
-        "title": "Graph from a slope-intercept equation",
+        "id": "Ez_-RwV9WVo",
+        "title": "Midpoint formula",
+        "author": "Khan Academy"
+      },
+      {
+        "id": "vmaMT188ChA",
+        "title": "Ex:  Determine the x and y Intercepts of a Linear Equation in Slope Intercept Form",
+        "author": "Mathispower4u"
+      },
+      {
+        "id": "PH4LNOAezcI",
+        "title": "Symmetry Introduction: x-axis, y-axis, the origin",
+        "author": "Mathispower4u"
+      },
+      {
+        "id": "GQXUpB2NHvQ",
+        "title": "Equation for a circle using the Pythagorean Theorem",
+        "author": "Khan Academy"
+      },
+      {
+        "id": "K_OI9LA54AA",
+        "title": "Introduction to point-slope form",
+        "author": "Khan Academy"
+      },
+      {
+        "id": "9hryH94KFJA",
+        "title": "Equations of parallel and perpendicular lines",
         "author": "Khan Academy"
       }
     ],
@@ -496,8 +601,13 @@ export const precalculusLessons: Lesson[] = [
     "videos": [
       {
         "id": "D3a8NnpQ2vU",
-        "title": "Factoring quadratics as (x + a)(x + b)",
+        "title": "Factoring quadratics as (x+a)(x+b)",
         "author": "Khan Academy"
+      },
+      {
+        "id": "mXvt9OumKH8",
+        "title": "Factoring Polynomials - By GCF, AC Method, Grouping, Substitution, Sum & Difference of Cubes",
+        "author": "The Organic Chemistry Tutor"
       }
     ],
     "materials": [
@@ -547,13 +657,18 @@ export const precalculusLessons: Lesson[] = [
     "videos": [
       {
         "id": "E9YEUQR9NAU",
-        "title": "Evaluating functions",
+        "title": "Evaluating Functions",
         "author": "Khan Academy"
       },
       {
-        "id": "D3a8NnpQ2vU",
-        "title": "Factoring quadratics as (x + a)(x + b)",
-        "author": "Khan Academy"
+        "id": "HyNie_PYgsY",
+        "title": "Evaluating Functions - Basic Introduction",
+        "author": "The Organic Chemistry Tutor"
+      },
+      {
+        "id": "qQgVomi8lCc",
+        "title": "Difference Quotient",
+        "author": "The Organic Chemistry Tutor"
       }
     ],
     "materials": [
@@ -652,18 +767,38 @@ export const precalculusLessons: Lesson[] = [
     "videos": [
       {
         "id": "KxOp3s9ottg",
-        "title": "Increasing and decreasing intervals",
+        "title": "Introduction to increasing, decreasing, positive or negative intervals",
         "author": "Khan Academy"
       },
       {
+        "id": "eVJxTEx7VXw",
+        "title": "Finding Zeros of a Function",
+        "author": "ThinkwellVids"
+      },
+      {
+        "id": "GaltHJF6WyI",
+        "title": "Identifying The Relative Maximum and Minimum Values of a Function",
+        "author": "The Organic Chemistry Tutor"
+      },
+      {
         "id": "TEXSW-o8674",
-        "title": "Average rate of change from a graph",
+        "title": "How to find the average rate of change from a graph (example)",
         "author": "Khan Academy"
+      },
+      {
+        "id": "f_Q0qlwlclQ",
+        "title": "Average Rate of Change of a Function Over an Interval",
+        "author": "The Organic Chemistry Tutor"
       },
       {
         "id": "8VgmBe3ulb8",
         "title": "Recognizing odd and even functions",
         "author": "Khan Academy"
+      },
+      {
+        "id": "qQgVomi8lCc",
+        "title": "Difference Quotient",
+        "author": "The Organic Chemistry Tutor"
       }
     ],
     "materials": [
@@ -701,62 +836,62 @@ export const precalculusLessons: Lesson[] = [
       }
     ]
   },
-{
-  "course": "precalculus",
-  "unitSlug": "unit-1",
-  "slug": "unit-1-test-review",
-  "title": "Unit 1 test review: sections 1.1–1.5",
-  "unit": "Unit 1",
-  "number": "Test review",
-  "indexLabel": "Review",
-  "sortOrder": 6,
-  "materialSet": "resources",
-  "description": "Prepare for the Unit 1 test using the blank review, completed classroom solutions, and videos from each lesson.",
-  "goals": [
-    "Review coordinates, graphs, lines, functions, and average rate of change."
-  ],
-  "prerequisites": "Sections 1.1–1.5B.",
-  "concepts": [],
-  "examples": [],
-  "videos": [],
-  "materials": [
-    {
-      "file": "precalculus/unit-1-test-review/blank-review.pdf",
-      "title": "Blank Review",
-      "label": "Blank Review",
-      "description": "Matching three-page Unit 1 review, covering sections 1.1–1.5.",
-      "kind": "practice",
-      "pages": 3
-    },
-    {
-      "file": "precalculus/unit-1-test-review/completed-review.pdf",
-      "title": "Completed Review",
-      "label": "Completed Review",
-      "description": "Matching three-page Unit 1 review, covering sections 1.1–1.5.",
-      "kind": "completed-practice",
-      "pages": 3
+  {
+    "course": "precalculus",
+    "unitSlug": "unit-1",
+    "slug": "unit-1-test-review",
+    "title": "Unit 1 test review: sections 1.1–1.5",
+    "unit": "Unit 1",
+    "number": "Test review",
+    "indexLabel": "Review",
+    "sortOrder": 6,
+    "materialSet": "resources",
+    "description": "Prepare for the Unit 1 test using the blank review, completed classroom solutions, and videos from each lesson.",
+    "goals": [
+      "Review coordinates, graphs, lines, functions, and average rate of change."
+    ],
+    "prerequisites": "Sections 1.1–1.5B.",
+    "concepts": [],
+    "examples": [],
+    "videos": [],
+    "materials": [
+      {
+        "file": "precalculus/unit-1-test-review/blank-review.pdf",
+        "title": "Blank Review",
+        "label": "Blank Review",
+        "description": "Matching three-page Unit 1 review, covering sections 1.1–1.5.",
+        "kind": "practice",
+        "pages": 3
+      },
+      {
+        "file": "precalculus/unit-1-test-review/completed-review.pdf",
+        "title": "Completed Review",
+        "label": "Completed Review",
+        "description": "Matching three-page Unit 1 review, covering sections 1.1–1.5.",
+        "kind": "completed-practice",
+        "pages": 3
+      }
+    ],
+    "reviewGuide": {
+      "instructions": [
+        "Try the blank review first, showing your work before checking the completed review.",
+        "For any problem you miss, return to that lesson and rewatch its videos. Then try the problem again without looking at the solution.",
+        "Bring any questions you still have to class."
+      ],
+      "lessonSlugs": [
+        "rectangular-coordinates",
+        "graphs-of-equations",
+        "linear-equations-two-variables",
+        "function-notation-domain",
+        "increasing-decreasing",
+        "average-rate-even-odd"
+      ],
+      "practiceUrl": "https://www.mathsisfun.com/algebra/index-college.html",
+      "practiceTitle": "Maths Is Fun: College Algebra practice",
+      "privacyUrl": "https://www.mathsisfun.com/about-privacy.html",
+      "privacyNote": "Maths Is Fun states that it does not collect identifying details such as names or email addresses. It uses cookies/local storage and displays ads. Use the practice without signing in or entering personal information."
     }
-  ],
-  "reviewGuide": {
-    "instructions": [
-      "Try the blank review first, showing your work before checking the completed review.",
-      "For any problem you miss, return to that lesson and rewatch its videos. Then try the problem again without looking at the solution.",
-      "Bring any questions you still have to class."
-    ],
-    "lessonSlugs": [
-      "rectangular-coordinates",
-      "graphs-of-equations",
-      "linear-equations-two-variables",
-      "function-notation-domain",
-      "increasing-decreasing",
-      "average-rate-even-odd"
-    ],
-    "practiceUrl": "https://www.mathsisfun.com/algebra/index-college.html",
-    "practiceTitle": "Maths Is Fun: College Algebra practice",
-    "privacyUrl": "https://www.mathsisfun.com/about-privacy.html",
-    "privacyNote": "Maths Is Fun states that it does not collect identifying details such as names or email addresses. It uses cookies/local storage and displays ads. Use the practice without signing in or entering personal information."
   }
-}
 ]
 
 export const precalculusAssessments = [

@@ -207,3 +207,8 @@ body:has(.book-reader) .site-footer{display:none}
 .lesson-review-guide li{margin-bottom:10px}
 .lesson-review-guide a{color:#315f77;text-decoration:underline;text-underline-offset:3px}
 .lesson-review-guide .review-privacy{font-size:13px;color:var(--muted)}
+
+.book-page-picker{display:flex;align-items:center;gap:14px;padding:0 28px 18px;font-size:13px;color:var(--muted)}
+.book-page-picker>span{white-space:nowrap;font-weight:600}
+.book-page-picker select{min-width:0;width:100%;max-width:760px;min-height:44px;border:1px solid var(--line);border-radius:5px;background:#fff;color:var(--ink);padding:8px;font-size:14px}
+@media(max-width:740px){.book-page-picker{display:block;padding:0 16px 16px}.book-page-picker>span{display:block;margin-bottom:6px}.book-page-picker select{font-size:13px}}

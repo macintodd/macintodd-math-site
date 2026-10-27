@@ -248,6 +248,11 @@ const additionalAlgebraLessons: Lesson[] = [
         "id": "_y_Q3_B2Vh8",
         "title": "Solving two-step equations",
         "author": "Khan Academy"
+      },
+      {
+        "id": "Z-ZkmpQBIFo",
+        "title": "Algebra - How To Solve Equations Quickly!",
+        "author": "The Organic Chemistry Tutor"
       }
     ],
     "materials": [
@@ -301,6 +306,11 @@ const additionalAlgebraLessons: Lesson[] = [
         "id": "XoEn1LfVoTo",
         "title": "Solving a more complicated equation",
         "author": "Khan Academy"
+      },
+      {
+        "id": "Z-ZkmpQBIFo",
+        "title": "Algebra - How To Solve Equations Quickly!",
+        "author": "The Organic Chemistry Tutor"
       }
     ],
     "materials": [
@@ -354,6 +364,11 @@ const additionalAlgebraLessons: Lesson[] = [
         "id": "YZBStgZGyDY",
         "title": "Solving equations with the distributive property",
         "author": "Khan Academy"
+      },
+      {
+        "id": "Z-ZkmpQBIFo",
+        "title": "Algebra - How To Solve Equations Quickly!",
+        "author": "The Organic Chemistry Tutor"
       }
     ],
     "materials": [
@@ -471,6 +486,11 @@ const additionalAlgebraLessons: Lesson[] = [
         "id": "y7QLay8wrW8",
         "title": "Solving a two-step inequality",
         "author": "Khan Academy"
+      },
+      {
+        "id": "Mpv7XZA8jgA",
+        "title": "Inequality in One Variable Application: Profit",
+        "author": "Mathispower4u"
       }
     ],
     "materials": [
@@ -524,6 +544,11 @@ const additionalAlgebraLessons: Lesson[] = [
         "id": "A3xPhzs-KBI",
         "title": "Compound inequalities",
         "author": "Khan Academy"
+      },
+      {
+        "id": "msiceXvwriE",
+        "title": "How To Solve Compound Inequalities",
+        "author": "The Organic Chemistry Tutor"
       }
     ],
     "materials": [
@@ -577,6 +602,11 @@ const additionalAlgebraLessons: Lesson[] = [
         "id": "A3xPhzs-KBI",
         "title": "Compound inequalities",
         "author": "Khan Academy"
+      },
+      {
+        "id": "msiceXvwriE",
+        "title": "How To Solve Compound Inequalities",
+        "author": "The Organic Chemistry Tutor"
       }
     ],
     "materials": [
@@ -747,6 +777,11 @@ const additionalAlgebraLessons: Lesson[] = [
         "id": "E9YEUQR9NAU",
         "title": "Evaluating Functions",
         "author": "Khan Academy"
+      },
+      {
+        "id": "HyNie_PYgsY",
+        "title": "Evaluating Functions - Basic Introduction",
+        "author": "The Organic Chemistry Tutor"
       }
     ],
     "materials": [
@@ -810,6 +845,16 @@ const additionalAlgebraLessons: Lesson[] = [
         "id": "U1lQbh21y1k",
         "title": "Average rate of change from a table",
         "author": "Khan Academy"
+      },
+      {
+        "id": "Iqws-qzyZwc",
+        "title": "Slope and rate of change",
+        "author": "Khan Academy"
+      },
+      {
+        "id": "f_Q0qlwlclQ",
+        "title": "Average Rate of Change of a Function Over an Interval",
+        "author": "The Organic Chemistry Tutor"
       }
     ],
     "materials": [
