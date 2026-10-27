@@ -3,7 +3,7 @@ export type CourseId = 'algebra-2' | 'precalculus'
 export type Step = { math: string; explanation: string }
 export type Example = { id: string; title: string; category: string; prompt: string; steps: Step[]; points?: { x: number; y: number; label: string }[]; triangle?: boolean }
 export type Lesson = {
-  indexLabel?: string; materialSet?: 'resources'; materialsNote?: string; followUpOf?: string; sortOrder?: number; course: CourseId; unitSlug: string; slug: string; title: string; unit: string; number: string; description: string;
+  reviewGuide?: { instructions: string[]; lessonSlugs: string[]; practiceUrl: string; practiceTitle: string; privacyUrl: string; privacyNote: string }; indexLabel?: string; materialSet?: 'resources'; materialsNote?: string; followUpOf?: string; sortOrder?: number; course: CourseId; unitSlug: string; slug: string; title: string; unit: string; number: string; description: string;
   goals: string[]; prerequisites: string; concepts: { title: string; text: string; formula?: string; note?: string }[];
   videos: { id: string; title: string; author: string }[]; examples: Example[];
   materials: { additional?: { file: string; contentsLabel?: string; label: string; description: string; pages: number }[]; file?: string; label?: string; unavailableReason?: string; title: string; description: string; pages: number; kind: string }[];

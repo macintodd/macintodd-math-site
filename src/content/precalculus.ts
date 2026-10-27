@@ -700,7 +700,63 @@ export const precalculusLessons: Lesson[] = [
         "kind": "completed-practice"
       }
     ]
+  },
+{
+  "course": "precalculus",
+  "unitSlug": "unit-1",
+  "slug": "unit-1-test-review",
+  "title": "Unit 1 test review: sections 1.1–1.5",
+  "unit": "Unit 1",
+  "number": "Test review",
+  "indexLabel": "Review",
+  "sortOrder": 6,
+  "materialSet": "resources",
+  "description": "Prepare for the Unit 1 test using the blank review, completed classroom solutions, and videos from each lesson.",
+  "goals": [
+    "Review coordinates, graphs, lines, functions, and average rate of change."
+  ],
+  "prerequisites": "Sections 1.1–1.5B.",
+  "concepts": [],
+  "examples": [],
+  "videos": [],
+  "materials": [
+    {
+      "file": "precalculus/unit-1-test-review/blank-review.pdf",
+      "title": "Blank Review",
+      "label": "Blank Review",
+      "description": "Matching three-page Unit 1 review, covering sections 1.1–1.5.",
+      "kind": "practice",
+      "pages": 3
+    },
+    {
+      "file": "precalculus/unit-1-test-review/completed-review.pdf",
+      "title": "Completed Review",
+      "label": "Completed Review",
+      "description": "Matching three-page Unit 1 review, covering sections 1.1–1.5.",
+      "kind": "completed-practice",
+      "pages": 3
+    }
+  ],
+  "reviewGuide": {
+    "instructions": [
+      "Try the blank review first, showing your work before checking the completed review.",
+      "For any problem you miss, return to that lesson and rewatch its videos. Then try the problem again without looking at the solution.",
+      "Bring any questions you still have to class."
+    ],
+    "lessonSlugs": [
+      "rectangular-coordinates",
+      "graphs-of-equations",
+      "linear-equations-two-variables",
+      "function-notation-domain",
+      "increasing-decreasing",
+      "average-rate-even-odd"
+    ],
+    "practiceUrl": "https://www.mathsisfun.com/algebra/index-college.html",
+    "practiceTitle": "Maths Is Fun: College Algebra practice",
+    "privacyUrl": "https://www.mathsisfun.com/about-privacy.html",
+    "privacyNote": "Maths Is Fun states that it does not collect identifying details such as names or email addresses. It uses cookies/local storage and displays ads. Use the practice without signing in or entering personal information."
   }
+}
 ]
 
 export const precalculusAssessments = [

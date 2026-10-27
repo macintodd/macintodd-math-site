@@ -47,7 +47,16 @@ export default async function LessonPage({ params }: { params: Promise<{ course:
     heading={<><p className="book-eyebrow">{lesson.unit} · {lesson.number}</p><h1>{lesson.title}</h1><nav id="materials" className="lesson-pdf-links" aria-label="Lesson PDFs">{lesson.materials.map((material, i) => material.file
       ? <div className="lesson-material-group" key={material.kind}><a href={`/materials/${material.file}`} target="_blank" rel="noopener noreferrer" title={material.description} aria-label={`Open ${material.label ?? materialLabels[i]} PDF in a new tab`}>{material.label ?? materialLabels[i]}</a>{material.additional?.map(extra => <a className="lesson-extra-material" key={extra.file} href={`/materials/${extra.file}`} target="_blank" rel="noopener noreferrer" title={extra.description} aria-label={`Open ${extra.label} PDF in a new tab`}>{extra.label}</a>)}</div>
       : <span className="material-unavailable" key={material.kind} title={material.unavailableReason}>{material.label ?? materialLabels[i]} <small>Not posted yet</small></span>)}</nav>{lesson.materialsNote && <p className="lesson-materials-note">{lesson.materialsNote}</p>}</>}
-    pages={lesson.videos.map(video => ({ id: video.id, label: video.title, content: <section className="book-video-section" aria-label={video.title}><LessonVideo video={video} /></section> }))}
+    pages={lesson.reviewGuide ? [{ id: 'review-plan', label: 'Review plan', content: <section className="lesson-review-guide">
+      <h2>Prepare for the test</h2>
+      <ol>{lesson.reviewGuide.instructions.map(instruction => <li key={instruction}>{instruction}</li>)}</ol>
+      <h2>Return to a lesson</h2>
+      <ul>{lesson.reviewGuide.lessonSlugs.map(slug => { const item = getLesson(lesson.course, slug); return item ? <li key={slug}><Link href={`/courses/${lesson.course}/${slug}`}>{item.number} — {item.title}</Link></li> : null })}</ul>
+      <h2>Extra practice</h2>
+      <p><a href={lesson.reviewGuide.practiceUrl} target="_blank" rel="noopener noreferrer">{lesson.reviewGuide.practiceTitle} ↗</a></p>
+      <p>Choose a topic, then try the “Your Turn” questions near the bottom of its page. Work on paper before checking each answer. No account is needed.</p>
+      <p className="review-privacy">{lesson.reviewGuide.privacyNote} <a href={lesson.reviewGuide.privacyUrl} target="_blank" rel="noopener noreferrer">Read its privacy statement ↗</a></p>
+    </section> }] : lesson.videos.map(video => ({ id: video.id, label: video.title, content: <section className="book-video-section" aria-label={video.title}><LessonVideo video={video} /></section> }))}
     previousHref={previous ? `/courses/${previous.course}/${previous.slug}` : `/courses/${lesson.course}/units/${unit.slug}#page=2`} previousLabel={previous ? 'Previous lesson' : 'Unit overview'}
     nextHref={next ? `/courses/${next.course}/${next.slug}` : `/courses/${lesson.course}`} nextLabel={next ? 'Next lesson' : 'Contents'}
   /></div>

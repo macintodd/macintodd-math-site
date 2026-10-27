@@ -986,6 +986,25 @@
       "sourceSha256": "890694f290e572f4464035a65163b1828244c45d653369e76059e831f21794f6",
       "publishedSha256": "467cbf634734d307a1b279de50d8d01d43d034ac55663c2cf3147c489d07b490",
       "publishedPages": 1
+    },
+    {
+      "source": "Precalculus/Unit1_Test_Review_1.1-1.5.pages",
+      "output": "precalculus/unit-1-test-review/blank-review.pdf",
+      "publishedSha256": "99a5f7298a7745ad28169ca503c8692cea891c5e1369817a3e9009718459ce88",
+      "publishedPages": 3,
+      "selectionReason": "Teacher explicitly requested the Unit 1 test REVIEW. All 17 questions match the current Pages version and completed classroom copy, including the average-speed question 15. This is not the test.",
+      "generated": true,
+      "generator": "Native Pages PDF export of the current review; preserve all three pages including supplied short answers.",
+      "sourceSha256": "3f1b2297a0a6f0b7c0668e8f0698954c051cd201c98a8ad53ff77b60d5157ecb",
+      "sourceHashScope": "Pages package Index.zip"
+    },
+    {
+      "source": "Precalculus/Precalc 2026 Completed/PC Unit 1/PC Unit 1 Test Review Sections 1.1-1.5 - Completed.pdf",
+      "output": "precalculus/unit-1-test-review/completed-review.pdf",
+      "publishedSha256": "7eaa5998561c8991f06265e24a00ad962f3d445209ed471e6d8af4d90ec4f834",
+      "publishedPages": 3,
+      "selectionReason": "Teacher explicitly requested the Unit 1 test REVIEW. All 17 questions match the current Pages version and completed classroom copy, including the average-speed question 15. This is not the test.",
+      "sourceSha256": "7eaa5998561c8991f06265e24a00ad962f3d445209ed471e6d8af4d90ec4f834"
     }
   ]
 }

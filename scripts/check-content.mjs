@@ -29,7 +29,8 @@ for (const l of lessons) {
   assert(!ids.has(id), `Duplicate lesson: ${id}`); ids.add(id)
   if (l.materialSet !== 'resources') assert.equal(l.materials.length, 4, `Required materials: ${id}`)
   if (l.followUpOf) assert(lessons.some(parent => parent.slug === l.followUpOf && parent.course === l.course && !parent.followUpOf), `Follow-up needs a parent lesson: ${id}`)
-  assert(l.videos.length > 0)
+  assert(l.videos.length > 0 || l.reviewGuide)
+  if (l.reviewGuide) for (const slug of l.reviewGuide.lessonSlugs) assert(lessons.some(item => item.course === l.course && item.slug === slug), `Review links to a missing lesson: ${slug}`)
   for (const v of l.videos) assert(/^[\w-]{11}$/.test(v.id), 'Invalid YouTube ID')
   const examples = new Set()
   for (const ex of l.examples) {

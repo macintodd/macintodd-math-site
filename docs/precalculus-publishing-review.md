@@ -62,3 +62,7 @@ Only the following reviewed pages were added to the explicit publishing allowlis
 ## Videos
 
 Khan Academy and Texas Instruments Education channel identities and availability were verified via official YouTube metadata. Video links are embedded in content data; none are downloaded. Sources include [graphing on the TI-84 Plus CE](https://www.youtube.com/watch?v=fHroNLez6R8), [domain/range from a graph](https://www.youtube.com/watch?v=sXP7VhU1gYE), [increasing/decreasing intervals](https://www.youtube.com/watch?v=KxOp3s9ottg), and [odd/even functions](https://www.youtube.com/watch?v=8VgmBe3ulb8).
+
+## Unit 1 test review added at teacher request
+
+The teacher explicitly approved the test review at the bottom of the Precalculus Unit 1 index. Published the current Pages export and matching three-page completed review. The Word version was rejected: it contains raw LaTeX and a different question 15. Exported the Pages original through its native PDF exporter and reviewed all three pages; no test was published. The source Pages Index.zip hash is recorded for version identification. The page offers two PDF links, a short review plan, links to the six main lesson video pages, and optional Maths Is Fun practice. Its privacy description is attributed to the site's published policy; no claim of an independent privacy audit is made.

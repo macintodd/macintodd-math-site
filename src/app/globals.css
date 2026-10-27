@@ -200,3 +200,10 @@ body:has(.book-reader) .site-footer{display:none}
 .toc-assessment small{margin-left:auto;white-space:nowrap;font-size:12px}
 .lesson-materials-note{font-size:13px;color:var(--muted);margin:8px 0 0;line-height:1.5}
 @media(max-width:740px){.toc-assessment{gap:9px}.toc-assessment .toc-lesson-title{font-size:14px}}
+
+.lesson-review-guide{max-width:780px;font-size:16px;line-height:1.65}
+.lesson-review-guide h2{font-size:24px;margin:24px 0 12px}
+.lesson-review-guide h2:first-child{margin-top:0}
+.lesson-review-guide li{margin-bottom:10px}
+.lesson-review-guide a{color:#315f77;text-decoration:underline;text-underline-offset:3px}
+.lesson-review-guide .review-privacy{font-size:13px;color:var(--muted)}
