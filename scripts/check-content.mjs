@@ -4,6 +4,7 @@ import path from 'node:path'
 import crypto from 'node:crypto'
 import katex from 'katex'
 import { lessons, courses } from '../src/content/lessons.ts'
+import { precalculusAssessments } from '../src/content/precalculus.ts'
 import { units, getUnit } from '../src/content/units.ts'
 import { canonicalFactors } from '../src/lib/factoring.ts'
 const root = path.resolve(import.meta.dirname, '..')
@@ -14,6 +15,11 @@ for (const unit of units) {
   assert(unit.skills.length > 0 && unit.relevance.length > 0, 'Unit must explain skills and relevance')
   assert(lessons.some(l => l.course === unit.course && l.unitSlug === unit.slug), 'Do not publish empty units')
 }
+for (const item of manifest.materials.filter(m => m.output.startsWith('precalculus/'))) {
+  const name = path.basename(item.source ?? '').toLowerCase()
+  assert(!/act\s*\d/.test(name) && (name.includes('review') || !/quiz|unit1_test_1/.test(name)), `Do not publish an assessment: ${name}`)
+}
+assert(precalculusAssessments.every(item => !('file' in item) && !('href' in item)), 'Assessments must be unlinked')
 const ids = new Set()
 let formulas = 0
 for (const l of lessons) {
@@ -21,7 +27,7 @@ for (const l of lessons) {
   assert(getUnit(l.course, l.unitSlug), `Lesson has no linked unit overview: ${l.slug}`)
   const id = `${l.course}/${l.slug}`
   assert(!ids.has(id), `Duplicate lesson: ${id}`); ids.add(id)
-  assert.equal(l.materials.length, 4, `Required materials: ${id}`)
+  if (l.materialSet !== 'resources') assert.equal(l.materials.length, 4, `Required materials: ${id}`)
   if (l.followUpOf) assert(lessons.some(parent => parent.slug === l.followUpOf && parent.course === l.course && !parent.followUpOf), `Follow-up needs a parent lesson: ${id}`)
   assert(l.videos.length > 0)
   for (const v of l.videos) assert(/^[\w-]{11}$/.test(v.id), 'Invalid YouTube ID')
@@ -33,7 +39,7 @@ for (const l of lessons) {
   }
   for (const c of l.concepts) if (c.formula) { katex.renderToString(c.formula, { throwOnError: true }); formulas++ }
   if (l.check) { katex.renderToString(l.check.answer, { throwOnError: true }); formulas++ }
-  assert(l.materials.some(m => m.file), 'Lesson must have reviewed materials')
+  assert(l.materials.some(m => m.file) || (l.materialSet === 'resources' && l.materialsNote), 'Lesson needs reviewed materials or an explicit note')
   for (const m of l.materials.flatMap(m => [m, ...(m.additional ?? [])])) {
     if (!m.file) {
       assert(m.unavailableReason && m.pages === 0, `Missing document needs an explicit reason: ${id}`)

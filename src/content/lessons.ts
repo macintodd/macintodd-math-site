@@ -1,8 +1,9 @@
+import { precalculusLessons } from './precalculus.ts'
 export type CourseId = 'algebra-2' | 'precalculus'
 export type Step = { math: string; explanation: string }
 export type Example = { id: string; title: string; category: string; prompt: string; steps: Step[]; points?: { x: number; y: number; label: string }[]; triangle?: boolean }
 export type Lesson = {
-  followUpOf?: string; sortOrder?: number; course: CourseId; unitSlug: string; slug: string; title: string; unit: string; number: string; description: string;
+  indexLabel?: string; materialSet?: 'resources'; materialsNote?: string; followUpOf?: string; sortOrder?: number; course: CourseId; unitSlug: string; slug: string; title: string; unit: string; number: string; description: string;
   goals: string[]; prerequisites: string; concepts: { title: string; text: string; formula?: string; note?: string }[];
   videos: { id: string; title: string; author: string }[]; examples: Example[];
   materials: { additional?: { file: string; contentsLabel?: string; label: string; description: string; pages: number }[]; file?: string; label?: string; unavailableReason?: string; title: string; description: string; pages: number; kind: string }[];
@@ -857,7 +858,7 @@ const functionNotationPractice: Lesson = {
     { file: 'algebra-2/function-notation/completed-practice-2.pdf', label: 'Completed Practice 2', title: 'Completed Practice 2', description: 'Second Function Notation practice with classroom solutions, problems 1-23.', kind: 'completed-practice', pages: 2 },
   ],
 }
-export const lessons: Lesson[] = [...originalLessons, ...additionalAlgebraLessons, functionNotationPractice].sort((a, b) =>
+export const lessons: Lesson[] = [...originalLessons, ...additionalAlgebraLessons, functionNotationPractice, ...precalculusLessons].sort((a, b) =>
   a.course.localeCompare(b.course) || a.unitSlug.localeCompare(b.unitSlug) ||
   (a.sortOrder ?? Number(a.number.match(/\d+/)?.[0] ?? 0)) - (b.sortOrder ?? Number(b.number.match(/\d+/)?.[0] ?? 0))
 )

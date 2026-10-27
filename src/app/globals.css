@@ -194,3 +194,9 @@ body:has(.book-reader) .site-footer{display:none}
 .toc-folding-unit .current-unit{color:#b42318;font:600 16px/1.4 Arial,sans-serif}
 .toc-folding-unit .toc-unit-hint{margin-top:12px}
 .toc-folding-unit .toc-unit-hint a{text-decoration:underline;text-underline-offset:3px}
+
+.toc-assessment{display:flex;gap:18px;align-items:baseline;padding:12px 0;min-height:52px;color:var(--muted)}
+.toc-assessment .toc-lesson-title{font-size:16px}
+.toc-assessment small{margin-left:auto;white-space:nowrap;font-size:12px}
+.lesson-materials-note{font-size:13px;color:var(--muted);margin:8px 0 0;line-height:1.5}
+@media(max-width:740px){.toc-assessment{gap:9px}.toc-assessment .toc-lesson-title{font-size:14px}}

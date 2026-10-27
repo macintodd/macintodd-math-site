@@ -1,6 +1,7 @@
 import type { CourseId } from './lessons'
 
 export type Unit = {
+  current?: boolean
   course: CourseId
   slug: string
   number: string
@@ -35,6 +36,7 @@ export const units: Unit[] = [
 {
   "course": "algebra-2",
   "slug": "unit-1b",
+  "current": true,
   "number": "1B",
   "title": "Functions, Slope & Rate of Change",
   "introduction": "Connect the equations and inequalities from Unit 1A to functions. Use function notation to track inputs and outputs, then describe how quantities change using slope and average rate of change.",
@@ -62,6 +64,7 @@ export const units: Unit[] = [
   {
     course: 'precalculus',
     slug: 'unit-1',
+    current: true,
     number: '1',
     title: 'Coordinates, Graphs & Functions',
     introduction: 'Connect algebraic information to a visual picture. Begin with position, distance, and midpoint, then use graphs and functions to describe how quantities relate.',
@@ -70,6 +73,10 @@ export const units: Unit[] = [
       'Use distance and midpoint to describe a segment in the coordinate plane.',
       'Relate horizontal and vertical changes to the Pythagorean Theorem.',
       'Interpret a graph’s coordinates and units in the context of a situation.',
+      'Sketch equations, use intercepts and symmetry, and model with lines and circles.',
+      'Evaluate functions at numbers and expressions and find their domains and ranges.',
+      'Describe zeros, increasing and decreasing intervals, and relative extrema.',
+      'Interpret average rate of change and identify even and odd functions.',
     ],
     relevance: [
       { title: 'Read a map', text: 'Coordinates describe where something is. Distance and scale help estimate how far apart two places are; a midpoint identifies a location halfway between them.' },

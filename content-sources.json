@@ -601,6 +601,391 @@
       "sourceSha256": "ef746d196fb2d77154ed50220bcf11fa216a070474840326324ffc351fbc78ca",
       "publishedSha256": "ef746d196fb2d77154ed50220bcf11fa216a070474840326324ffc351fbc78ca",
       "publishedPages": 2
+    },
+    {
+      "source": "Precalculus/U1L2 Notes Graphs of Equations.pdf",
+      "output": "precalculus/graphs-of-equations/notes.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed page content and worksheet version match this lesson.",
+      "sourceSha256": "be075d475da649e34db8073369e983adc3a8cc4c7fb341ef5377fe6e799105ec",
+      "publishedSha256": "f173b6e93d619e33ac7a7952b72d59598edf343f8e8b83e46f41fbcfe53fbb87",
+      "publishedPages": 2
+    },
+    {
+      "source": "Precalculus/Precalc 2026 Completed/PC Unit 1/PC 1.2 Graphs of Equations.pdf",
+      "output": "precalculus/graphs-of-equations/completed-notes.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Matching classroom notes; partial: circle extension and application remain blank.",
+      "sourceSha256": "fb4fba199fe8910c240a17dd1f1058b6bacf35c4176f370cd629119166104e8e",
+      "publishedSha256": "1bf61a17073c91f3fe0fc5b5fc24d927d66d6405f26d33de188c382cb84654c3",
+      "publishedPages": 2
+    },
+    {
+      "source": "Precalculus/U1L2 Notes Graphing Equations Practice.pdf",
+      "output": "precalculus/graphs-of-equations/practice.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed page content and worksheet version match this lesson.",
+      "sourceSha256": "cd547b7ccccd95eb92274a6b843790ea0cb78321d3f6d62cbe7a83bd7d583352",
+      "publishedSha256": "644edf9dbbc0608676b48677405b8dc8528e8e6f68cb3757ed7b6360fba1ace0",
+      "publishedPages": 2
+    },
+    {
+      "source": "Precalculus/Precalc 2026 Completed/PC Unit 1/PC 1.2 Practice Graphs of Equations.pdf",
+      "output": "precalculus/graphs-of-equations/completed-practice.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed page content and worksheet version match this lesson.",
+      "sourceSha256": "e77b665542f443d60ecec4d9a254cdcc1e5179718d65f409ab1af01d12d04274",
+      "publishedSha256": "eaf107f00efcabefc775d801c664a5a06d675c013cd620930c8abe0d0d87114c",
+      "publishedPages": 2
+    },
+    {
+      "source": "Precalculus/ PC U1L3 Notes Linear Equations in Two Variables.pdf",
+      "output": "precalculus/linear-equations-two-variables/notes.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed page content and worksheet version match this lesson.",
+      "sourceSha256": "025e4c5b7cb0675a92b9538e0cf791c537cfcccf07e834c706e4bc53867bb953",
+      "publishedSha256": "702089e733872dc97f35c2eb8cc59cc0a7a20defdbc09f864e50c093cb3191ca",
+      "publishedPages": 2
+    },
+    {
+      "source": "Precalculus/Precalc 2026 Completed/PC Unit 1/PC 1.3 Equations of Line.pdf",
+      "output": "precalculus/linear-equations-two-variables/completed-notes.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Matching classroom notes; partial: sales-model application remains blank.",
+      "sourceSha256": "7469d84decdc134555ab0681ac920631468068a4abc73052b6b006411924544f",
+      "publishedSha256": "b16f4a1f793462c8edce6bcbb9e5312352682c1488eb8b49e97e84967a406747",
+      "publishedPages": 2
+    },
+    {
+      "source": "Precalculus/PC U1L3 Practice Linear Equations in 2 variables 2.pdf",
+      "output": "precalculus/linear-equations-two-variables/practice.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed page content and worksheet version match this lesson.",
+      "sourceSha256": "fc55d13a687a622ecee170fb195af0e9ed2e0d6910cf27c95500d2d3a4581fc4",
+      "publishedSha256": "144da04c2356f2c372d876dce02394dcf73e3bd59646632770f79fd9b7a17962",
+      "publishedPages": 2
+    },
+    {
+      "source": "Precalculus/Precalc 2026 Completed/PC Unit 1/PC 1.3 Practice Equations of Line.pdf",
+      "output": "precalculus/linear-equations-two-variables/completed-practice.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed page content and worksheet version match this lesson.",
+      "sourceSha256": "9df17657d0ae932bb301cbd2b4bbd9f32a4836e59110aef13ad5757edc1071a3",
+      "publishedSha256": "d0ba2a87eb2a56b72ba507e20145be44b26a0a5c9e5846274373e880d89de971",
+      "publishedPages": 2
+    },
+    {
+      "source": "Precalculus/Edia _ Symmetry Understanding.pdf",
+      "output": "precalculus/explore-symmetry/practice.pdf",
+      "pages": [
+        1,
+        2,
+        3
+      ],
+      "selectionReason": "Reviewed page content and worksheet version match this lesson.",
+      "sourceSha256": "ce63e5b7ea1c77602d9020c7020b835a6a8f1524528c8c5a7b3324b236d6ea00",
+      "publishedSha256": "a3f69b65d8be37dea62112d5bd3620efd3d2a26eb41b413ccb6bc32afca6c15c",
+      "publishedPages": 3
+    },
+    {
+      "source": "Precalculus/Edia _ Symmetry Understanding.pdf",
+      "output": "precalculus/explore-symmetry/completed-practice.pdf",
+      "pages": [
+        4,
+        5,
+        6
+      ],
+      "selectionReason": "Answer-key pages match the ten symmetry worksheet questions.",
+      "sourceSha256": "ce63e5b7ea1c77602d9020c7020b835a6a8f1524528c8c5a7b3324b236d6ea00",
+      "publishedSha256": "d4297ae10e6a83fb532b4b6e6c4bfd9ea5997f902640d2e9b769879bece3cc9e",
+      "publishedPages": 3
+    },
+    {
+      "source": "Precalculus/PC Section 1.1-1.3 Review.pdf",
+      "output": "precalculus/review-sections-1-1-to-1-3/notes.pdf",
+      "pages": [
+        1
+      ],
+      "selectionReason": "Reviewed page content and worksheet version match this lesson.",
+      "sourceSha256": "29ee456cda837adb84300bf362da67bc896bc01a052c293275815d13535b5c36",
+      "publishedSha256": "6286c6091529694c1015f7c5fec6e743f6171d8615e5b783a5d110f5af715513",
+      "publishedPages": 1
+    },
+    {
+      "source": "Precalculus/PC Section 1.1-1.3 Review.pdf",
+      "output": "precalculus/review-sections-1-1-to-1-3/practice.pdf",
+      "pages": [
+        2
+      ],
+      "selectionReason": "Review assignment, not the quiz itself. Page 2 contains review reminders and exercises.",
+      "sourceSha256": "29ee456cda837adb84300bf362da67bc896bc01a052c293275815d13535b5c36",
+      "publishedSha256": "b829500df9acf3a39c0414351a5ed799e41b2920ba5ccb63a64c8c0801e7fd2b",
+      "publishedPages": 1
+    },
+    {
+      "source": "Precalculus/1.4 PreReq Factoring_Practice 2026.pdf",
+      "output": "precalculus/factoring-packet/practice.pdf",
+      "pages": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "selectionReason": "Practice packet with worked examples; excluded attached key from blank copy. Not the Classroom factoring quiz.",
+      "sourceSha256": "3838eda76e92ca07475d5efd0586a341a1d771681d4718a6471b90aad88fbbf8",
+      "publishedSha256": "956eb50886d011c5d58198a8aae918232c495cb3006453e686473d58af43b86a",
+      "publishedPages": 4
+    },
+    {
+      "source": "Precalculus/1.4 PreReq Factoring_Practice 2026.pdf",
+      "output": "precalculus/factoring-packet/completed-practice.pdf",
+      "pages": [
+        5,
+        6
+      ],
+      "selectionReason": "Answer key supplied inside the same factoring packet.",
+      "sourceSha256": "3838eda76e92ca07475d5efd0586a341a1d771681d4718a6471b90aad88fbbf8",
+      "publishedSha256": "67f915694899e68d31d3edd20313dbd46c8e6409a5a9ffb9c7227b5d9ac719cc",
+      "publishedPages": 2
+    },
+    {
+      "source": "Precalculus/Factoring Practice - Even Problems (Sections III - XI).pdf",
+      "output": "precalculus/factoring-packet/even-problems.pdf",
+      "pages": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "selectionReason": "Additional even-problem workspace from the practice packet; no quiz or test.",
+      "sourceSha256": "1002ca113fc9cdd74542cf497d73a46e7d9ae4160b49c2d3d2271c35ab8b215c",
+      "publishedSha256": "cdfed6421955ff21cb392d29aa2a522c5eef23aa4a0b5bccc942b1da47a57b4e",
+      "publishedPages": 4
+    },
+    {
+      "source": "Precalculus/1.4 Pre-Req: Evaluating Functions pages.pdf",
+      "output": "precalculus/expression-substitution/practice.pdf",
+      "pages": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "selectionReason": "Reviewed page content and worksheet version match this lesson.",
+      "sourceSha256": "c86c37e27e3208c4fbcaa4f84311d7273b9562a432cece32c06666e53d81313f",
+      "publishedSha256": "d7ddd80635495d15033bc64e3be681bef2a219050232c33c75a8770973060f37",
+      "publishedPages": 4
+    },
+    {
+      "source": "Precalculus/1.4 Function Notation and Evaluaton.pdf",
+      "output": "precalculus/function-notation-domain/notes.pdf",
+      "pages": [
+        1,
+        2,
+        3
+      ],
+      "selectionReason": "Three instructional pages only; fourth source page is blank.",
+      "sourceSha256": "5e31746891756607361a6b8283bf7e0c5fc3fa8da0b68cf6701989473aa43810",
+      "publishedSha256": "a9e98c548c54d1b96dc7956a617553621c1f3fffbdc3dc5dae8bae4bf9ea6fe3",
+      "publishedPages": 3
+    },
+    {
+      "source": "Precalculus/Precalc 2026 Completed/PC Unit 1/PC 1.4 Functions Review Practice.pdf",
+      "output": "precalculus/function-notation-domain/completed-notes.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Partial classroom notes for first two pages of current blank notes; page 3 not in scan. Filename says review practice but content is guided notes.",
+      "sourceSha256": "5da1a2da0581b6abaae576b380818b7179ef8be5c3d5b9f3def8e9c2160a3fdd",
+      "publishedSha256": "54f6d3ef6a1c9221525e584508463e6ec70bfd9a8aaaf6b3478f30458907527b",
+      "publishedPages": 2
+    },
+    {
+      "source": "Precalculus/1.4 Practice Function Notation and Evaluation.pdf",
+      "output": "precalculus/function-notation-domain/practice.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed page content and worksheet version match this lesson.",
+      "sourceSha256": "4e8fadb4e1cedbe4283b429af2cf2411854400c7fa6e04da48e7c9deffb74168",
+      "publishedSha256": "e2240b5863ca3ab45d54201fca8edacba8f291e0862ba5c3ad0cb6ed98d9c2de",
+      "publishedPages": 2
+    },
+    {
+      "source": "Precalculus/Precalc 2026 Completed/PC Unit 1/PC 1.4 Practice Functions.pdf",
+      "output": "precalculus/function-notation-domain/completed-practice.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed page content and worksheet version match this lesson.",
+      "sourceSha256": "95a011e7623f5ea955f9a53d01a24e5c68b17c8d5d32ca7681ab480c848cde13",
+      "publishedSha256": "c8a0525398541ab6c0b8acc4ad941cc2b8bc8605777e32cb1dcaf516419ff801",
+      "publishedPages": 2
+    },
+    {
+      "source": "Precalculus/domain and range/chapter_1_section_1.2_domain_and_range_given_a_graph.pdf",
+      "output": "precalculus/domain-range-graphs/practice.pdf",
+      "pages": [
+        1
+      ],
+      "selectionReason": "Reviewed page content and worksheet version match this lesson.",
+      "sourceSha256": "80544ed5f71d443afe39ff43aeaaec2ce1829e898abd173e5ec18f2de4dff4bc",
+      "publishedSha256": "9ef42c0d1766f9691b5ee163ced49b373b4a32eef3cde9304349a62a33f70d6b",
+      "publishedPages": 1
+    },
+    {
+      "source": "Precalculus/domain and range/chapter_1_section_1.2_domain_and_range_given_a_graph.pdf",
+      "output": "precalculus/domain-range-graphs/completed-practice.pdf",
+      "pages": [
+        2
+      ],
+      "selectionReason": "Matching answer key supplied on source page 2. Supplemental graph worksheet, not an Edia export.",
+      "sourceSha256": "80544ed5f71d443afe39ff43aeaaec2ce1829e898abd173e5ec18f2de4dff4bc",
+      "publishedSha256": "a03da9e412742e5f916bed615f08b896432d410cbc54dab4d92656673dd37ac7",
+      "publishedPages": 1
+    },
+    {
+      "source": "Precalculus/1.5 Analyzing Graphs of Functions.pdf",
+      "output": "precalculus/increasing-decreasing/notes.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Section 1.5A pages only; later pages belong to 1.5B and differ from current 1.5B.",
+      "sourceSha256": "7016c849a1029debb78e926dc80557bbc2a62580075927fdf8993b96cf280f9b",
+      "publishedSha256": "97c6021c32c93507f7c02b5a5031326e170e05ffaf45249fa2e928b53af19a0d",
+      "publishedPages": 2
+    },
+    {
+      "source": "Precalculus/Precalc 2026 Completed/PC Unit 1/PC 1.5A Analyzing Graphs of Functions - Completed 2.pdf",
+      "output": "precalculus/increasing-decreasing/completed-notes.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Matching 1.5A classroom notes. Other completed file is duplicate, not a practice key.",
+      "sourceSha256": "376aa8225e26c22791bb48f915e29b10232bd916a6bfb4ff56c3a4289242058e",
+      "publishedSha256": "d7731e03c208c5df2d6d354c74716fce5294a8d0afe111f2f2543e4d11910271",
+      "publishedPages": 2
+    },
+    {
+      "source": "Precalculus/1.5A Practice Analyzing Graph of Functions Practice.pdf",
+      "output": "precalculus/increasing-decreasing/practice.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed page content and worksheet version match this lesson.",
+      "sourceSha256": "2f4fb7d9f6d13d555bb12b036548bd93c86701844b871118e3c97288b62a6497",
+      "publishedSha256": "87e5e04fb0372798d19c47247ecdf03dc3a4d54073fd52f34d759aec9d33be00",
+      "publishedPages": 2
+    },
+    {
+      "source": "Precalculus/1.5B Average Rate of Change Odd Even.pdf",
+      "output": "precalculus/average-rate-even-odd/notes.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed page content and worksheet version match this lesson.",
+      "sourceSha256": "ca4d03af2bf0669248d3374d5b28bf08616be85a2ce28135999cf7a8e3921776",
+      "publishedSha256": "99786b5dc3166bab1bcee4d072e3628c19f80678803b4a91f3120b977048eec5",
+      "publishedPages": 2
+    },
+    {
+      "source": "Precalculus/Precalc 2026 Completed/PC Unit 1/PC 1.5B Average Rate of Change and Even Odd Functions - Completed.pdf",
+      "output": "precalculus/average-rate-even-odd/completed-notes.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Matching notes, partial: extra average-rate example and final speed calculations remain blank.",
+      "sourceSha256": "0b65e416abcb64615e631aaaafe6f9321c15f8882353c03ba6f0fd116cca7d70",
+      "publishedSha256": "8646c82c4202bfdf3b5154b65309993915d1e7987f63a2726ff68e4130cbe475",
+      "publishedPages": 2
+    },
+    {
+      "source": "Precalculus/1.5B_Practice_ARoC_Even_Odd.pdf",
+      "output": "precalculus/average-rate-even-odd/practice.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed page content and worksheet version match this lesson.",
+      "sourceSha256": "782afc751d566c218b591dfd2270067cdf333384063815c449bd885f03ab956a",
+      "publishedSha256": "c58dd8ba67d8da22f6588f21f92cd0a2c99984aefa7fc3b7f148d8c3f54ce4c0",
+      "publishedPages": 2
+    },
+    {
+      "source": "Precalculus/1.5_Quiz_Review_Guide 2026.pdf",
+      "output": "precalculus/review-analyzing-graphs/notes.pdf",
+      "pages": [
+        1
+      ],
+      "selectionReason": "Current 2026 review version, not quiz.",
+      "sourceSha256": "d32d13073f575c45836b47a0441bb6768761e8e6d665775311e8934956770644",
+      "publishedSha256": "f1d58c568254c9e29c21d24fa8d77fb31317a9fb221744bfae495571c1e94eae",
+      "publishedPages": 1
+    },
+    {
+      "source": "Precalculus/Precalc 2026 Completed/PC Unit 1/PC 1.5 Quiz Review Analyzing Graphs of Functions - Completed.pdf",
+      "output": "precalculus/review-analyzing-graphs/completed-notes.pdf",
+      "pages": [
+        1
+      ],
+      "selectionReason": "Matches 2026 review examples.",
+      "sourceSha256": "890694f290e572f4464035a65163b1828244c45d653369e76059e831f21794f6",
+      "publishedSha256": "de487e09d437fc877d251862ea6c0f302295ce9b41777935f331f94c006517a9",
+      "publishedPages": 1
+    },
+    {
+      "source": "Precalculus/1.5_Quiz_Review_Guide 2026.pdf",
+      "output": "precalculus/review-analyzing-graphs/practice.pdf",
+      "pages": [
+        2
+      ],
+      "selectionReason": "Self-test within review guide, not actual assessment.",
+      "sourceSha256": "d32d13073f575c45836b47a0441bb6768761e8e6d665775311e8934956770644",
+      "publishedSha256": "38d06198d432761637a689899e9d794ab9aefd7b421d55bf013fdf44c8897184",
+      "publishedPages": 1
+    },
+    {
+      "source": "Precalculus/Precalc 2026 Completed/PC Unit 1/PC 1.5 Quiz Review Analyzing Graphs of Functions - Completed.pdf",
+      "output": "precalculus/review-analyzing-graphs/completed-practice.pdf",
+      "pages": [
+        2
+      ],
+      "selectionReason": "Completed matching review self-test.",
+      "sourceSha256": "890694f290e572f4464035a65163b1828244c45d653369e76059e831f21794f6",
+      "publishedSha256": "467cbf634734d307a1b279de50d8d01d43d034ac55663c2cf3147c489d07b490",
+      "publishedPages": 1
     }
   ]
 }
