@@ -21,7 +21,7 @@ for (const l of lessons) {
   assert(getUnit(l.course, l.unitSlug), `Lesson has no linked unit overview: ${l.slug}`)
   const id = `${l.course}/${l.slug}`
   assert(!ids.has(id), `Duplicate lesson: ${id}`); ids.add(id)
-  assert.equal(l.materials.length, l.followUpOf ? 3 : 4, `Required materials: ${id}`)
+  assert.equal(l.materials.length, 4, `Required materials: ${id}`)
   if (l.followUpOf) assert(lessons.some(parent => parent.slug === l.followUpOf && parent.course === l.course && !parent.followUpOf), `Follow-up needs a parent lesson: ${id}`)
   assert(l.videos.length > 0)
   for (const v of l.videos) assert(/^[\w-]{11}$/.test(v.id), 'Invalid YouTube ID')

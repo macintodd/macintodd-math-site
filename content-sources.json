@@ -593,6 +593,14 @@
       "sourceSha256": "81402577b45d433df39c41bd61dcb67dc810d2b9b615005ad441e10d1271a72d",
       "publishedSha256": "0f765acb61f4ecd6a930f62e79a318122420059bf5353a476757a09ce80a02ff",
       "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1B/U1B L2 2nd Function notation practice.pdf",
+      "output": "algebra-2/function-notation/practice-2.pdf",
+      "selectionReason": "Teacher supplied blank second Function Notation practice. Both pages reviewed and match the existing completed Practice 2, problems 1-23.",
+      "sourceSha256": "ef746d196fb2d77154ed50220bcf11fa216a070474840326324ffc351fbc78ca",
+      "publishedSha256": "ef746d196fb2d77154ed50220bcf11fa216a070474840326324ffc351fbc78ca",
+      "publishedPages": 2
     }
   ]
 }

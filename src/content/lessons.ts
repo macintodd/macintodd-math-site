@@ -853,6 +853,7 @@ const functionNotationPractice: Lesson = {
   materials: [
     { ...functionNotation.materials[0], label: 'Lesson 1 Blank Notes' },
     { ...functionNotation.materials[1], label: 'Lesson 1 Completed Notes' },
+    { file: 'algebra-2/function-notation/practice-2.pdf', label: 'Blank Practice 2', title: 'Blank Practice 2', description: 'Blank second Function Notation practice, problems 1-23.', kind: 'practice', pages: 2 },
     { file: 'algebra-2/function-notation/completed-practice-2.pdf', label: 'Completed Practice 2', title: 'Completed Practice 2', description: 'Second Function Notation practice with classroom solutions, problems 1-23.', kind: 'completed-practice', pages: 2 },
   ],
 }
