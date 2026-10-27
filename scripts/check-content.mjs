@@ -6,7 +6,19 @@ import katex from 'katex'
 import { lessons, courses } from '../src/content/lessons.ts'
 import { precalculusAssessments } from '../src/content/precalculus.ts'
 import { units, getUnit } from '../src/content/units.ts'
+import { getLessonVocabulary, getCourseVocabulary } from '../src/content/vocabulary.ts'
 import { canonicalFactors } from '../src/lib/factoring.ts'
+for (const lesson of lessons) {
+  const terms = getLessonVocabulary(lesson.slug)
+  assert(terms.length > 0, `Missing vocabulary: ${lesson.slug}`)
+  assert.equal(new Set(terms.map(term => term?.id)).size, terms.length, `Repeated vocabulary: ${lesson.slug}`)
+  for (const term of terms) assert(term?.id && term.term && term.definition, `Invalid vocabulary: ${lesson.slug}`)
+}
+for (const course of courses) {
+  const terms = getCourseVocabulary(lessons.filter(lesson => lesson.course === course.id))
+  assert(terms.length > 0)
+  assert.equal(new Set(terms.map(term => term.id)).size, terms.length)
+}
 const root = path.resolve(import.meta.dirname, '..')
 const manifest = JSON.parse(fs.readFileSync(path.join(root, 'content-sources.json')))
 const published = fs.readdirSync(path.join(root, 'public/materials'), { recursive: true, withFileTypes: true }).filter(e => e.isFile()).map(e => path.relative(path.join(root, 'public/materials'), path.join(e.parentPath, e.name)))

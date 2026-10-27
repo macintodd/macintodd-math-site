@@ -19,7 +19,7 @@ export default async function CoursePage({ params }: { params: Promise<{ course:
   return <section className="course-index shell" aria-label={`${course.title} table of contents`}>
     <nav className="book-breadcrumb" aria-label="Breadcrumb"><Link href="/">Classes</Link><span aria-hidden="true">/</span><span>{course.title}</span></nav>
     <div className="course-index-content">
-      <header><h1>{course.title} table of contents</h1></header>
+      <header><h1>{course.title} table of contents</h1><p className="course-glossary-link"><Link href={`/courses/${courseId}/vocabulary`}>Vocabulary &amp; definitions →</Link></p></header>
       {courseUnits.map(unit => {
         const entries: ContentsEntry[] = [
           ...lessons.filter(lesson => lesson.course === courseId && lesson.unitSlug === unit.slug).map(lesson => ({ lesson, sortOrder: lesson.sortOrder ?? Number(lesson.number.match(/\d+/)?.[0] ?? 0) })),

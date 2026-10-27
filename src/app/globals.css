@@ -212,3 +212,33 @@ body:has(.book-reader) .site-footer{display:none}
 .book-page-picker>span{white-space:nowrap;font-weight:600}
 .book-page-picker select{min-width:0;width:100%;max-width:760px;min-height:44px;border:1px solid var(--line);border-radius:5px;background:#fff;color:var(--ink);padding:8px;font-size:14px}
 @media(max-width:740px){.book-page-picker{display:block;padding:0 16px 16px}.book-page-picker>span{display:block;margin-bottom:6px}.book-page-picker select{font-size:13px}}
+
+/* Vocabulary stays beside the title without narrowing the lesson video. */
+.lesson-title-row{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(240px,1fr);gap:24px;align-items:start}
+.lesson-vocabulary{border-left:2px solid #dce8e8;padding-left:20px;min-width:0}
+.lesson-vocabulary h2{font:600 14px/1.4 Arial,sans-serif;margin:0;color:var(--ink)}
+.vocabulary-hint{font-size:12px;color:var(--muted);margin:3px 0 7px}
+.lesson-vocabulary ul{display:flex;flex-wrap:wrap;gap:4px 8px;list-style:none;padding:0;margin:0 0 8px}
+.lesson-vocabulary li{margin:0}
+.lesson-vocabulary li button{font:inherit;font-size:13px;line-height:1.3;min-height:44px;border:1px solid #c8dddd;border-radius:6px;background:#f3f8f8;color:var(--ink);padding:8px 10px;cursor:pointer;text-align:left}
+.lesson-vocabulary li button:hover{background:#e1eeee}
+.lesson-vocabulary>a{font-size:12px;text-underline-offset:3px}
+.vocabulary-dialog{width:min(480px,calc(100% - 32px));max-height:85dvh;overflow:auto;border:1px solid #bfd4d4;border-radius:12px;padding:0;color:var(--ink);background:#fff;box-shadow:0 16px 70px #112e3940;margin:auto}
+.vocabulary-dialog::backdrop{background:#102e3a66}
+.vocabulary-dialog-content{padding:24px}
+.vocabulary-dialog h2{font:500 25px/1.25 Georgia,serif;margin:12px 0}
+.vocabulary-dialog p{font-size:17px;line-height:1.65;margin:12px 0 20px}
+.vocabulary-close{display:block;margin-left:auto;min-height:44px;background:#edf4f4;border:1px solid #c8dddd;border-radius:6px;padding:8px 14px;cursor:pointer;color:var(--ink);font:inherit}
+.course-glossary-link{margin:14px 0 24px}
+.glossary-page .course-index-content{max-width:1100px}
+.glossary-page h1{font-size:clamp(26px,3vw,38px)}
+.glossary-letters{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0}
+.glossary-letters a{display:grid;place-items:center;min-width:44px;min-height:44px;background:#edf4f4;border-radius:6px}
+.glossary-letter h2{font-size:26px;border-bottom:1px solid #c8dddd;padding-bottom:8px;scroll-margin-top:24px}
+.glossary-entry{padding:18px 0;border-bottom:1px solid #e4ebeb;scroll-margin-top:24px}
+.glossary-entry:target{background:#f1f8f8;outline:2px solid #8ababa;outline-offset:8px}
+.glossary-entry dt{font-size:20px;font-weight:600}
+.glossary-entry dd{margin:0}
+.glossary-entry p{line-height:1.7;margin:8px 0 12px}
+.glossary-entry nav{display:flex;flex-wrap:wrap;gap:10px 20px;font-size:13px}
+@media(max-width:740px){.lesson-title-row{grid-template-columns:1fr;gap:18px}.lesson-vocabulary{border-left:0;border-top:1px solid #dce8e8;padding:14px 0 0}.vocabulary-dialog-content{padding:18px}}
