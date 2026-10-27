@@ -184,3 +184,13 @@ body:has(.book-reader) .site-footer{display:none}
 .toc-lessons .toc-follow-up{margin-left:24px}
 
 .lesson-sidebar .unit-follow-up{margin-left:16px}
+
+.toc-folding-unit>summary{cursor:pointer;display:flex;align-items:baseline;gap:12px;list-style:none;min-height:48px}
+.toc-folding-unit>summary::-webkit-details-marker{display:none}
+.toc-folding-unit>summary::before{content:'▸';color:var(--teal);font-size:22px}
+.toc-folding-unit[open]>summary::before{content:'▾'}
+.toc-folding-unit>summary h2{display:flex;align-items:baseline;flex-wrap:wrap;gap:10px 18px;margin:0}
+.toc-folding-unit>summary:focus-visible{outline:2px solid var(--teal);outline-offset:5px;border-radius:3px}
+.toc-folding-unit .current-unit{color:#b42318;font:600 16px/1.4 Arial,sans-serif}
+.toc-folding-unit .toc-unit-hint{margin-top:12px}
+.toc-folding-unit .toc-unit-hint a{text-decoration:underline;text-underline-offset:3px}
