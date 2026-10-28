@@ -882,12 +882,11 @@ const additionalAlgebraLessons: Lesson[] = [
       {
         "file": "algebra-2/slope-rate-of-change/completed-practice.pdf",
         "title": "completed-practice",
-        "description": "Matching two-page classroom answer sheet. See the answer-key clarifications below the links.",
+        "description": "Corrected two-page classroom answer sheet.",
         "kind": "completed-practice",
         "pages": 2
       }
     ],
-    "materialsNote": "Answer-key clarifications: In problem 6, use 8 − (−2.9) in the numerator; the final slope −109/186 is correct. In problem 11, V(2) = 4,952 and V(10) = 4,800, so the average rate is −19 cubic meters per day. In problem 12, P(2) = 121,180 and P(6) = 123,420; the final rate of 560 people per year is correct. The original classroom PDF is preserved.",
     "practiceApp": "/apps/slope"
   }
 ]

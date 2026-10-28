@@ -1007,15 +1007,15 @@
       "sourceSha256": "7eaa5998561c8991f06265e24a00ad962f3d445209ed471e6d8af4d90ec4f834"
     },
     {
-      "source": "Algebra 2/Unit 1B/Unit 1B Completed/U1B2 Practice Slope Rate of Change.pdf",
+      "source": "Algebra 2/Unit 1B/Unit 1B Completed/U1B2 Practice Slope & Rate of Change.pdf",
       "output": "algebra-2/slope-rate-of-change/completed-practice.pdf",
       "pages": [
         1,
         2
       ],
-      "selectionReason": "Reviewed both rendered pages against the published blank slope/rate-of-change practice. Matching exercises and graphs, teacher handwriting, no student identity. Publish original unchanged; answer-key arithmetic/units clarifications appear on the lesson page.",
-      "sourceSha256": "e8a982532e16f814f7c87eccfc147b12a42160e010736c1c3ac78241e69d2bf9",
-      "publishedSha256": "e8a982532e16f814f7c87eccfc147b12a42160e010736c1c3ac78241e69d2bf9",
+      "selectionReason": "Reviewed both corrected pages against the matching slope/rate-of-change practice. Teacher corrected the previously flagged handwritten arithmetic and units. Publish the replacement original unchanged; remove superseded lesson-page clarifications.",
+      "sourceSha256": "ba9ff44d71ef68c3451c735e6016402894255a469f7299f84cb3293050238b79",
+      "publishedSha256": "ba9ff44d71ef68c3451c735e6016402894255a469f7299f84cb3293050238b79",
       "publishedPages": 2
     }
   ]
