@@ -61,3 +61,8 @@ Reviewed both pages of `Unit 1B Completed/U1B L2 More Practice Function Notation
 Practice 2 now has its own follow-up page directly after Lesson 1, indented in the course contents. It reuses Lesson 1 videos and links to Lesson 1 notes, with only the completed second practice handout available. No blank second practice has been substituted.
 
 Added the teacher-supplied blank `U1B L2 2nd Function notation practice.pdf` to More Practice 2. Both pages match the existing completed handout, problems 1-23. Published the original PDF unchanged; the follow-up page now has all four material links.
+
+
+## Unit 1B Lesson 2 completed practice — October 28, 2026
+
+Reviewed both pages of `U1B2 Practice Slope Rate of Change.pdf` against the published blank practice: matching point-pair, formula/table, application, and graph questions. Published the original two-page PDF unchanged as Completed Practice on Slope and Rate of Change. No student name is filled in. Added public answer-key clarifications beneath the material links: #6 numerator must be 8 − (−2.9), final −109/186 correct; #11 V(2)=4952 and V(10)=4800, so the correct average rate is −19 cubic meters/day (the handwritten 4700 and −31.5 gallons/minute are incorrect); #12 P(2)=121180 and P(6)=123420, final 560 people/year correct.

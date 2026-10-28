@@ -1005,6 +1005,18 @@
       "publishedPages": 3,
       "selectionReason": "Teacher explicitly requested the Unit 1 test REVIEW. All 17 questions match the current Pages version and completed classroom copy, including the average-speed question 15. This is not the test.",
       "sourceSha256": "7eaa5998561c8991f06265e24a00ad962f3d445209ed471e6d8af4d90ec4f834"
+    },
+    {
+      "source": "Algebra 2/Unit 1B/Unit 1B Completed/U1B2 Practice Slope Rate of Change.pdf",
+      "output": "algebra-2/slope-rate-of-change/completed-practice.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed both rendered pages against the published blank slope/rate-of-change practice. Matching exercises and graphs, teacher handwriting, no student identity. Publish original unchanged; answer-key arithmetic/units clarifications appear on the lesson page.",
+      "sourceSha256": "e8a982532e16f814f7c87eccfc147b12a42160e010736c1c3ac78241e69d2bf9",
+      "publishedSha256": "e8a982532e16f814f7c87eccfc147b12a42160e010736c1c3ac78241e69d2bf9",
+      "publishedPages": 2
     }
   ]
 }
