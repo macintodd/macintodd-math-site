@@ -289,3 +289,16 @@ body:has(.book-reader) .site-footer{display:none}
 @keyframes graph-reward{0%{opacity:0;transform:translate(-50%,70px) scale(.2) rotate(-180deg)}45%{opacity:1;transform:translate(-50%,-60px) scale(1.4) rotate(120deg)}75%{opacity:1}100%{opacity:0;transform:translate(-50%,-100px) scale(.5) rotate(360deg)}}
 @media(max-width:700px){.graphing-layout{grid-template-columns:1fr;gap:8px}.graphing-actions{padding:0 10px}.graph-equation{margin:12px 0 0}.graph-score{gap:6px 14px;font-size:12px}.graph-stars{font-size:18px}.graph-streak-stars{font-size:14px}}
 @media(prefers-reduced-motion:reduce){.draw-student-line{animation:none;stroke-dashoffset:0}.draw-line-arrows{animation:none;opacity:1}.graph-celebrate{animation:none;border-color:#b78316}.graph-reward-star{animation:none;display:none}}
+.standard-intercepts{padding:12px;background:#fff;border:1px solid #d3dfe0;border-radius:8px}
+.standard-pair{display:flex;align-items:center;gap:6px;font-size:23px;margin:4px 0 10px}
+.standard-pair input{width:70px;min-width:0;text-align:center}
+.standard-pair input.active{outline:2px solid #278a99}
+.standard-intercepts .standard-keypad{grid-template-columns:repeat(3,minmax(0,1fr));max-width:280px;margin-bottom:0}
+.standard-keypad button{font-size:18px;min-height:44px}
+.intercept-work{background:#fff;border:1px solid #cfdddb;border-radius:8px;padding:12px;margin:12px 0;color:#16334c}
+.intercept-work h3{font-size:17px;font-weight:600;margin:0 0 8px}
+.intercept-steps{font:21px/1.7 Georgia,serif;display:grid;gap:6px}
+.intercept-steps>div{display:grid;grid-template-columns:1fr 20px 1fr;gap:10px;align-items:center;text-align:center}
+.work-fraction{display:inline-flex;flex-direction:column;justify-self:center;min-width:38px;line-height:1.4}
+.work-fraction>span:first-child{border-bottom:1px solid currentColor;padding:0 6px}
+.work-fraction>span:last-child{padding:0 6px}

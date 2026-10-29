@@ -11,3 +11,11 @@ Full credit requires ten total correct and a best first-try streak of six in thi
 SVG uses touch-action:none, pointer capture, movement filtering, and pointer cancellation handling; only the grid captures gestures. Outside content scrolls normally. Keyboard arrows move a cursor; Enter/Space toggles a point. Native controls retain touch targets ≥44px; reduced-motion disables drawing/celebration animations.
 
 `npm run test:graph-line` checks clipping, equivalence, duplicate/wrong points, 1,500 random graph configurations, scoring and completion. This test is included in CI. Helpers can support later point/slope or standard-form exercises without adding those modes now.
+
+## Standard form / intercept mode
+
+The original app is now named **Graph the line: Slope-intercept form**. `/apps/graph-standard` uses the same session, plotting, celebration, six-streak/ten-correct scoring, and local results UI, named **Graph the line: Standard form x and y intercept**.
+
+Generate Ax + By = C with nonzero integer intercepts in −8…8. A is positive; B and C may be negative; both coefficients divide C exactly. Avoid three consecutive identical slopes. Students enter both coordinates of each intercept with the touch number pad and plot the two intercepts. Check requires both ordered pairs and both plotted intercepts to be correct. Missing/incomplete fields produce a reminder, not a graded miss. Correct answers earn one star; misses reveal the correct intercepts and line, and show only the needed x/y intercept calculations: substitute the other variable as zero, simplify, divide both sides in vertically stacked fractions, and state the ordered pair. If just the graph is wrong, show plotting guidance. Hide the disabled keypad after checking to make room for corrections. No credited retry after the answer is revealed.
+
+`npm run test:standard-form` verifies 2,000 generated equations, signed exact divisibility, integer intercepts, input checks, required intercept plotting, and repeated-slope avoidance. Added to CI. Results downloads identify which graphing mode was used.
