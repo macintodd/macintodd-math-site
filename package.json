@@ -12,7 +12,8 @@
     "test:slope": "node --experimental-strip-types scripts/test-slope.mjs",
     "test:line-equations": "node --experimental-strip-types scripts/test-line-equation.mjs",
     "test:graph-line": "node --experimental-strip-types scripts/test-graph-line.mjs",
-    "test:standard-form": "node --experimental-strip-types scripts/test-standard-form.mjs"
+    "test:standard-form": "node --experimental-strip-types scripts/test-standard-form.mjs",
+    "test:mathboard": "node --experimental-strip-types scripts/test-mathboard.mjs"
   },
   "keywords": [
     "education",

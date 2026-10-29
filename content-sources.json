@@ -1017,6 +1017,30 @@
       "sourceSha256": "ba9ff44d71ef68c3451c735e6016402894255a469f7299f84cb3293050238b79",
       "publishedSha256": "ba9ff44d71ef68c3451c735e6016402894255a469f7299f84cb3293050238b79",
       "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1B/U1BL3 NOTES Graphing Lines.pdf",
+      "output": "algebra-2/graphing-linear-equations/notes.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed Unit 1B Lesson 3 notes/practice against requested MathBoard Session 1. Select instructional pages 1\u20132; omit trailing header/footer-only pages. Preserve printed content including later Session 2 sections. Completed keys have not been located.",
+      "sourceSha256": "d0567a0ea677deb468617abe3a2799fdbab6a6cba26c59760ae28fd249514d8c",
+      "publishedSha256": "f5a6ba887c4599140805b733f8bf82a5851f24884d086a6462fd179cc24ee9ea",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1B/U1L3 Practice Graphing Lines.pdf",
+      "output": "algebra-2/graphing-linear-equations/practice.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Reviewed Unit 1B Lesson 3 notes/practice against requested MathBoard Session 1. Select instructional pages 1\u20132; omit trailing header/footer-only pages. Preserve printed content including later Session 2 sections. Completed keys have not been located.",
+      "sourceSha256": "f654d6aaa3a098330af88886975fe3b9a2c7aa8c5caedc3c06c8ccd9f46d789e",
+      "publishedSha256": "153ad0779cc129591a664052e609c845ba20f24d67b7c7ddfd526f23046b1e83",
+      "publishedPages": 2
     }
   ]
 }

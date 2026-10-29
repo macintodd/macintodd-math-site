@@ -1,0 +1,29 @@
+'use client'
+import { useId, useRef, useState } from 'react'
+import type { GraphConfig,Point } from '@/content/mathboard/session-one'
+import { clipLine,pointEqual } from '@/lib/mathboard/model'
+export default function LessonGraph({config,points=[],line,segment,vertical,triangle=false,highlight,onToggle,limit=2}:{config:GraphConfig;points?:Point[];line?:{m:number;b:number};segment?:Point[];vertical?:number;triangle?:boolean;highlight?:Point;onToggle?:(point:Point)=>void;limit?:number}){
+ const id=useId().replace(/:/g,''),down=useRef<{x:number;y:number;id:number}|null>(null)
+ const [cursor,setCursor]=useState<Point>({x:Math.max(0,config.xmin),y:Math.max(0,config.ymin)})
+ const [keyboard,setKeyboard]=useState(false)
+ const px=(x:number)=>58+(x-config.xmin)/(config.xmax-config.xmin)*490,py=(y:number)=>438-(y-config.ymin)/(config.ymax-config.ymin)*390
+ const coords=(p:Point)=>`${px(p.x)},${py(p.y)}`
+ const xs=Array.from({length:Math.round((config.xmax-config.xmin)/config.xstep)+1},(_,i)=>config.xmin+i*config.xstep)
+ const ys=Array.from({length:Math.round((config.ymax-config.ymin)/config.ystep)+1},(_,i)=>config.ymin+i*config.ystep)
+ const ends=line?clipLine(line.m,line.b,config):vertical!==undefined?[{x:vertical,y:config.ymin},{x:vertical,y:config.ymax}]:segment
+ function toggle(p:Point){if(onToggle&&(points.length<limit||points.some(q=>pointEqual(p,q))))onToggle(p)}
+ return <svg className={`mb-graph ${onToggle?'mb-graph-interactive':''}`} viewBox="0 0 610 510" role="group" aria-label={`${config.xlabel} from ${config.xmin} to ${config.xmax}; ${config.ylabel} from ${config.ymin} to ${config.ymax}.${onToggle?' Tap to plot or remove a point. Keyboard arrows move, Enter toggles.':''}`} tabIndex={onToggle?0:undefined}
+ onPointerDown={event=>{if(!onToggle)return;event.preventDefault();down.current={x:event.clientX,y:event.clientY,id:event.pointerId};setKeyboard(false);event.currentTarget.setPointerCapture(event.pointerId)}} onPointerCancel={()=>{down.current=null}}
+ onPointerUp={event=>{const start=down.current;down.current=null;if(!onToggle||!start||start.id!==event.pointerId)return;event.preventDefault();if(Math.hypot(start.x-event.clientX,start.y-event.clientY)>15)return;const matrix=event.currentTarget.getScreenCTM();if(!matrix)return;const p=new DOMPoint(event.clientX,event.clientY).matrixTransform(matrix.inverse());if(p.x<46||p.x>560||p.y<36||p.y>450)return;const x=config.xmin+(p.x-58)/490*(config.xmax-config.xmin),y=config.ymin+(438-p.y)/390*(config.ymax-config.ymin);const snap=(value:number,step:number)=>Math.abs(value-Math.round(value))<.32?Math.round(value):Math.round(value/step)*step;toggle({x:Math.max(config.xmin,Math.min(config.xmax,snap(x,config.snapX))),y:Math.max(config.ymin,Math.min(config.ymax,snap(y,config.snapY)))})}}
+ onKeyDown={event=>{if(!onToggle)return;const d:Record<string,Point>={ArrowLeft:{x:-config.snapX,y:0},ArrowRight:{x:config.snapX,y:0},ArrowUp:{x:0,y:config.snapY},ArrowDown:{x:0,y:-config.snapY}};if(d[event.key]){event.preventDefault();setKeyboard(true);const v=d[event.key];setCursor(p=>({x:Math.max(config.xmin,Math.min(config.xmax,p.x+v.x)),y:Math.max(config.ymin,Math.min(config.ymax,p.y+v.y))}))}else if(event.key==='Enter'||event.key===' '){event.preventDefault();toggle(cursor)}}}>
+ <defs><marker id={`arrow-${id}`} viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#176977" strokeWidth="2"/></marker><clipPath id={`bounds-${id}`}><rect x="57" y="47" width="492" height="392"/></clipPath></defs>
+ <rect x="58" y="48" width="490" height="390" fill="white"/>
+ {xs.map(x=><g key={`x${x}`}><path d={`M ${px(x)} 48 V 438`} stroke={x===0?'#1e4154':'#dce5e7'} strokeWidth={x===0?2:1}/>{(config.xmin>=0||x%2===0)&&<text x={px(x)} y={config.ymin>=0?457:py(0)+17} fontSize="12" textAnchor="middle" fill="#3e5a68">{x}</text>}</g>)}
+ {ys.map(y=><g key={`y${y}`}><path d={`M 58 ${py(y)} H 548`} stroke={y===0?'#1e4154':'#dce5e7'} strokeWidth={y===0?2:1}/>{Math.abs(y%(config.ylabelStep??config.ystep))<1e-8&&y!==0&&<text x={config.xmin>=0?49:px(0)-9} y={py(y)+4} fontSize="12" textAnchor="end" fill="#3e5a68">{y}</text>}</g>)}
+ <text x="303" y="492" fontSize="15" textAnchor="middle" fill="#16334c">{config.xlabel}</text><text x="58" y="25" fontSize="15" fill="#16334c">{config.ylabel}</text>
+ {ends&&ends.length>=2&&<path className="mb-drawn-line" d={`M ${coords(ends[0])} L ${coords(ends[ends.length-1])}`} fill="none" stroke="#176977" strokeWidth="3" markerStart={line||vertical!==undefined?`url(#arrow-${id})`:undefined} markerEnd={line||vertical!==undefined?`url(#arrow-${id})`:undefined}/>}
+ {triangle&&points.length>=2&&<><path d={`M ${coords(points[0])} H ${px(points[1].x)} V ${py(points[1].y)}`} fill="none" stroke="#bd751b" strokeWidth="3" strokeDasharray="6 3"/><text x={px((points[0].x+points[1].x)/2)} y={py(points[0].y)+25} textAnchor="middle" fontSize="13" fill="#8d5414">run {points[1].x-points[0].x}</text><text x={px(points[1].x)+10} y={py((points[0].y+points[1].y)/2)} fontSize="13" fill="#8d5414">rise {points[1].y-points[0].y}</text></>}
+ {points.map((p,i)=>{const tx=Math.min(507,Math.max(91,px(p.x))),ty=py(p.y)<80?py(p.y)+25:py(p.y)-18;return <g key={`${p.x}:${p.y}:${i}`} className={highlight&&pointEqual(p,highlight)?'mb-point-highlight':''}><circle cx={px(p.x)} cy={py(p.y)} r={highlight&&pointEqual(p,highlight)?7:5} fill="#176977" stroke="white" strokeWidth="2"/><rect x={tx-34} y={ty-13} width="68" height="21" rx="4" fill="#193d50"/><text x={tx} y={ty+2} fontSize="12" textAnchor="middle" fill="white">({p.x}, {p.y})</text></g>})}
+ {keyboard&&onToggle&&<><circle cx={px(cursor.x)} cy={py(cursor.y)} r="9" stroke="#ae6b15" strokeWidth="2" fill="none"/><text x="58" y="475" fontSize="12" fill="#8d5414">Cursor ({cursor.x}, {cursor.y})</text></>}
+ </svg>
+}

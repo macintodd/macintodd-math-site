@@ -326,6 +326,7 @@ export const vocabulary: Record<string, VocabularyTerm> = {
 }
 
 const lessonTerms: Record<string, string[]> = {
+  "graphing-linear-equations": ["linear-equation","slope","rate-of-change","y-intercept","slope-intercept-form","function-notation"],
   "one-step-equations": [
     "equation",
     "variable",
