@@ -302,3 +302,8 @@ body:has(.book-reader) .site-footer{display:none}
 .work-fraction{display:inline-flex;flex-direction:column;justify-self:center;min-width:38px;line-height:1.4}
 .work-fraction>span:first-child{border-bottom:1px solid currentColor;padding:0 6px}
 .work-fraction>span:last-child{padding:0 6px}
+.board-toggle,.scratch-tools{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 10px}
+.board-toggle button[aria-pressed=true],.scratch-tools button[aria-pressed=true]{background:#176977;color:#fff;border-color:#176977}
+.scratch-surface{display:block;width:100%;aspect-ratio:1;border:1px solid #bccfd1;border-radius:8px;background:white;touch-action:none;overscroll-behavior:contain;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;cursor:crosshair}
+.scratch-tools button{font-size:12px;min-height:44px;padding:8px 10px}
+.graph-control-buttons[hidden]{display:none}
