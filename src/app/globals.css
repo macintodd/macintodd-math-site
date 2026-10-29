@@ -263,3 +263,29 @@ body:has(.book-reader) .site-footer{display:none}
 @media(max-width:700px){.equation-app .equation-keypad{grid-template-columns:repeat(6,minmax(0,1fr))}.equation-student span{margin-left:0}.equation-app .slope-score{font-size:13px}}
 .equation-progress{position:sticky;top:0;z-index:5;background:#f5f7f9;padding-bottom:4px}
 .equation-progress .equation-student{margin-top:0}
+
+.graph-practice{position:relative;border:3px solid transparent;border-radius:12px}
+.graph-score{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:14px}
+.graph-stars{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;color:#a86900;min-height:30px;font-size:22px;overflow-wrap:anywhere}
+.graph-streak-stars{font-size:17px}
+.graph-equation{text-align:center;font:500 clamp(26px,4vw,38px)/1.3 Georgia,serif;margin:14px 0}
+.graphing-layout{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(240px,.8fr);gap:24px;align-items:start}
+.graphing-board{min-width:0;max-width:600px;width:100%;justify-self:center}
+.tap-line-grid{width:100%;display:block;aspect-ratio:1;touch-action:none;overscroll-behavior:contain;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;cursor:crosshair}
+.tap-line-grid:focus-visible{outline:3px solid #278a99;border-radius:6px}
+.graphing-actions h2{font-size:21px;margin:8px 0}
+.graphing-actions p{font-size:14px;line-height:1.6;margin:10px 0}
+.graph-control-buttons{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
+.student-line{stroke:#187c8b}.student-line-wrong{stroke:#ae493b;stroke-dasharray:7 5;opacity:.7}.correct-graph{stroke:#17633c}
+.draw-student-line{stroke-dasharray:1;stroke-dashoffset:1;animation:graph-draw .7s ease-out forwards}
+.student-line-wrong .draw-student-line{stroke-dasharray:7 5;stroke-dashoffset:0;animation:none}
+.draw-line-arrows{opacity:0;animation:graph-arrows .15s .65s forwards}
+.student-line-wrong .draw-line-arrows{opacity:1;animation:none}
+.graph-celebrate{animation:graph-border .8s ease-out}
+.graph-reward-star{position:fixed;pointer-events:none;z-index:20;left:50%;top:35%;font-size:90px;color:#d49312;text-shadow:0 2px 8px #83600055;animation:graph-reward 1s ease-out forwards}
+@keyframes graph-draw{to{stroke-dashoffset:0}}
+@keyframes graph-arrows{to{opacity:1}}
+@keyframes graph-border{0%,50%{border-color:#d49312;box-shadow:0 0 0 5px #d4931255}25%,100%{border-color:transparent;box-shadow:none}}
+@keyframes graph-reward{0%{opacity:0;transform:translate(-50%,70px) scale(.2) rotate(-180deg)}45%{opacity:1;transform:translate(-50%,-60px) scale(1.4) rotate(120deg)}75%{opacity:1}100%{opacity:0;transform:translate(-50%,-100px) scale(.5) rotate(360deg)}}
+@media(max-width:700px){.graphing-layout{grid-template-columns:1fr;gap:8px}.graphing-actions{padding:0 10px}.graph-equation{margin:12px 0 0}.graph-score{gap:6px 14px;font-size:12px}.graph-stars{font-size:18px}.graph-streak-stars{font-size:14px}}
+@media(prefers-reduced-motion:reduce){.draw-student-line{animation:none;stroke-dashoffset:0}.draw-line-arrows{animation:none;opacity:1}.graph-celebrate{animation:none;border-color:#b78316}.graph-reward-star{animation:none;display:none}}

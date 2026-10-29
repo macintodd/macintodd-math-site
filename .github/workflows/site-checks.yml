@@ -17,6 +17,7 @@ jobs:
       - run: npm ci
       - run: npm run test:slope
       - run: npm run test:line-equations
+      - run: npm run test:graph-line
       - run: npm run check:content
       - run: npm run typecheck
       - run: npm run lint

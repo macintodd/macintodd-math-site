@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "check:content": "node --experimental-strip-types scripts/check-content.mjs",
     "test:slope": "node --experimental-strip-types scripts/test-slope.mjs",
-    "test:line-equations": "node --experimental-strip-types scripts/test-line-equation.mjs"
+    "test:line-equations": "node --experimental-strip-types scripts/test-line-equation.mjs",
+    "test:graph-line": "node --experimental-strip-types scripts/test-graph-line.mjs"
   },
   "keywords": [
     "education",

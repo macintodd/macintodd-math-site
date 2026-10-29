@@ -2,7 +2,7 @@
 import json, sys, subprocess, urllib.request, urllib.error
 from pathlib import Path
 base=sys.argv[1].rstrip('/') if len(sys.argv)>1 else 'http://127.0.0.1:3000'
-routes=['/apps/line-equations','/courses/algebra-2/vocabulary','/courses/precalculus/vocabulary','/','/courses/algebra-2','/courses/precalculus','/courses/algebra-2/units/unit-1a','/courses/precalculus/units/unit-1','/courses/algebra-2/one-step-equations','/courses/precalculus/rectangular-coordinates','/apps','/apps/one-step-solver','/apps/factoring','/apps/slope','/apps/slope/results','/resources']
+routes=['/apps/graph-linear','/apps/line-equations','/courses/algebra-2/vocabulary','/courses/precalculus/vocabulary','/','/courses/algebra-2','/courses/precalculus','/courses/algebra-2/units/unit-1a','/courses/precalculus/units/unit-1','/courses/algebra-2/one-step-equations','/courses/precalculus/rectangular-coordinates','/apps','/apps/one-step-solver','/apps/factoring','/apps/slope','/apps/slope/results','/resources']
 root=Path(__file__).resolve().parents[1]
 # Read the same lesson/unit catalog used by the website so new pages are checked.
 result=subprocess.run(['node','--experimental-strip-types','--input-type=module','-e',
