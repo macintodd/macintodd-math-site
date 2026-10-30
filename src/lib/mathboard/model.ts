@@ -11,7 +11,7 @@ export function evaluate(screen:Screen,state:LessonState){
  const checks:{skill:string;correct:boolean;feedback:string}[]=[]
  if(screen.kind==='rate'){
   const earned=numeric(state.values.change??''),hours=numeric(state.values.hours??'')
-  checks.push({skill:'context',correct:earned!==null&&hours!==null&&earned<0&&hours>0&&near(earned/hours,-720)&&state.units[0]==='gallons'&&state.units[1]==='hour',feedback:state.units[0]!=='gallons'?'The numerator should describe volume: choose Gallons.':state.units[1]!=='hour'?'The denominator should describe time: choose hours.':'Compare the change in gallons with elapsed hours. Draining means a negative change of 720 gallons in one hour.'})
+  checks.push({skill:'context',correct:earned!==null&&hours!==null&&earned<0&&hours>0&&near(earned/hours,-720),feedback:'Compare the change in gallons with elapsed hours. Draining means a negative change of 720 gallons in one hour.'})
  }else for(const field of screen.fields??[])checks.push({skill:field.id==='m'?'slope':field.id==='b'?'intercept':screen.skills?.[0]??'context',correct:near(numeric(state.values[field.id]??''),field.answer),feedback:field.hint})
  if(screen.kind==='choice'||screen.kind==='slider')checks.push({skill:screen.skills?.[0]??'context',correct:state.choice===screen.correctChoice,feedback:screen.hint??'Look back at the question and compare the quantities.'})
  if(screen.kind==='start-point')checks.push({skill:'context',correct:state.units[0]==='gallons',feedback:'Choose Gallons for the initial volume units.'})

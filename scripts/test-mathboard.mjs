@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import katex from 'katex'
 import { screens,poolGraph,poolEmptyHours,poolVolume,plane } from '../src/content/mathboard/session-one.ts'
 import { initialState,numeric,evaluate,lineCorrect,clipLine,safeIndex,restoreState } from '../src/lib/mathboard/model.ts'
+import { editAnswer } from '../src/lib/mathboard/keypad.ts'
 import { move2048,start2048 } from '../src/lib/mathboard/game.ts'
 import { readConfig,released,unlock } from '../src/lib/mathboard/config.ts'
 process.env.RESULTS_TEACHER_PASSWORD='local-automated-test-password-not-production'
@@ -17,7 +18,7 @@ for(const screen of screens){
  assert(evaluate(screen,state).correct,screen.id)
  const empty=evaluate(screen,{...s,units:['','']});if(screen.kind!=='connect')assert(!empty.correct,screen.id+' rejects empty')
 }
-const rate=screens.find(s=>s.id==='rate');assert(!evaluate(rate,{...s,values:{change:'-720',hours:'1'},units:['hour','gallons']}).correct)
+const rate=screens.find(s=>s.id==='rate');assert(evaluate(rate,{...s,values:{change:'-720',hours:'1'},units:['','']}).correct)
 assert(lineCorrect([{x:1,y:2.5},{x:3,y:3.5}],.5,2));assert(!lineCorrect([{x:1,y:2.5},{x:1,y:2.5}],.5,2));assert(!lineCorrect([{x:1,y:2.5},{x:3,y:3.6}],.5,2))
 const cp1=screens.findIndex(s=>s.checkpoint===1),cp2=screens.findIndex(s=>s.checkpoint===2)
 assert.equal(safeIndex(screens.length-1,[]),cp1);assert.equal(safeIndex(screens.length-1,[1]),cp2);assert.equal(safeIndex(screens.length-1,[1,2]),screens.length-1)
@@ -32,3 +33,14 @@ b[0]=4;b[1]=4;b[2]=8;b[3]=0;move=move2048(b,'left');assert.deepEqual(move.board.
 assert.equal(poolGraph.ylabel,'Volume (gallons)');assert.equal(poolVolume(0),15000);assert.equal(poolVolume(10),7800);assert.equal(poolVolume(poolEmptyHours),0);assert.equal(poolVolume(30),0);assert.deepEqual(clipLine(.5,2,plane),[{x:-10,y:-3},{x:10,y:7}]);assert(clipLine(-720,15000,poolGraph).every(p=>p.x>=0))
 for(const screen of screens)if(screen.graph==='pool')assert(!screen.note,'No opening paper-writing prompts')
 console.log(`Passed: ${screens.length} lesson screens; fractions, targeted checks, equivalent graphs, fixed Linear checkpoint gates, tampering/reload clamps, local resume, and 2048 merges.`)
+
+// Keypad edits honor the caret and selected range, including repeated middle edits.
+assert.deepEqual(editAnswer('15000','back',3,3),{value:'1500',caret:2})
+assert.deepEqual(editAnswer('1234','back',2,2),{value:'134',caret:1})
+assert.deepEqual(editAnswer('1234','back',1,3),{value:'14',caret:1})
+assert.deepEqual(editAnswer('1234','9',2,2),{value:'12934',caret:3})
+assert.deepEqual(editAnswer('1234','9',1,3),{value:'194',caret:2})
+assert.deepEqual(editAnswer('1234','back',0,0),{value:'1234',caret:0})
+assert.deepEqual(editAnswer('1234','sign',2,2),{value:'-1234',caret:3})
+assert.deepEqual(editAnswer('-1234','sign',3,3),{value:'1234',caret:2})
+assert.deepEqual(editAnswer('1234','clear',2,2),{value:'',caret:0})

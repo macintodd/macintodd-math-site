@@ -86,3 +86,13 @@ body:has(.mb-app) .site-header,body:has(.mb-app) .site-footer{display:none}body:
 @media(prefers-reduced-motion:reduce){.mb-flash-correct{animation:none;border-color:#1e9b50}.mb-flash-wrong{animation:none;border-color:#e6b52b}.mb-y-intercept-word{animation:none}}
 
 .mb-app:has(.mb-story-context) .mb-question{gap:6px}.mb-question .mb-bold-question{font-size:22px;font-weight:700;line-height:1.3}
+
+/* Keep the number block together and all digit keys equally sized. */
+.mb-keypad{grid-template-columns:repeat(4,minmax(0,1fr))}
+.mb-keypad button{font-size:20px}
+.mb-keypad button:nth-child(4n),.mb-keypad button:nth-last-child(2){font-size:20px}
+.mb-keypad button[aria-label='Backspace'],.mb-keypad button[aria-label='Clear entry'],.mb-keypad button[aria-label='Next field'],.mb-keypad button[aria-label='Fraction bar'],.mb-keypad button[aria-label='Gallons'],.mb-keypad button[aria-label='Hour']{font-size:13px}
+.mb-rate-layout{display:flex;justify-content:center;margin:14px 0}
+.mb-labeled-rate{width:190px;padding:0 5px}
+.mb-labeled-rate .mb-answer-value{justify-content:flex-start;gap:12px}
+.mb-labeled-rate .mb-unit-label{font-size:18px}
