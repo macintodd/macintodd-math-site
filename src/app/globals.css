@@ -308,3 +308,13 @@ body:has(.book-reader) .site-footer{display:none}
 .scratch-tools button{font-size:12px;min-height:44px;padding:8px 10px}
 .graph-control-buttons[hidden]{display:none}
 .mathboard-launch{padding:14px 6px;max-width:850px}.mathboard-launch h2{font:500 28px/1.3 Georgia,serif;margin:10px 0 18px}.mathboard-launch p{margin:16px 0;line-height:1.6}.mathboard-launch a:not(.mb-primary){text-decoration:underline;text-underline-offset:4px}.mathboard-launch .mb-actions{display:flex;gap:20px;align-items:center;flex-wrap:wrap}.mathboard-launch .mb-primary{display:inline-block;background:#176977;color:white;padding:12px 18px;border-radius:7px;text-decoration:none}
+
+.conversion-equation{display:flex;align-items:center;gap:8px;font:24px Georgia,serif;white-space:nowrap;margin:12px 0}
+.conversion-equation input{width:100px;min-width:0;min-height:46px;background:#fffdf5;border:1px solid #8aa5ad;border-radius:6px;padding:8px;text-align:center;font:20px Arial,sans-serif}
+.conversion-equation input.active{outline:2px solid #248a9a;outline-offset:1px}
+.conversion-entry .conversion-keypad{grid-template-columns:repeat(4,minmax(0,1fr));max-width:320px}
+.conversion-entry .conversion-keypad button{grid-column:auto;font-size:20px;min-height:44px}.conversion-entry .conversion-keypad button:nth-child(4n){font-size:12px}
+.conversion-subtract{display:grid;grid-template-columns:1fr 1fr 20px 1fr;gap:8px;text-align:center;font:22px/1.5 Georgia,serif}
+.subtract-operation{border-bottom:1px solid #16334c;color:#236fb0}
+.conversion-work .katex-display{font-size:.95em;overflow-x:auto}
+@media(max-width:420px){.conversion-equation{gap:5px;font-size:22px}.conversion-equation input{width:85px}}

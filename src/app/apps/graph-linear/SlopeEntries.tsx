@@ -1,0 +1,12 @@
+'use client'
+import {useLayoutEffect,useRef,useState} from 'react'
+import {editAnswer} from '@/lib/mathboard/keypad'
+import type {SlopeEntries as Entries} from '@/lib/standard-slope'
+export default function SlopeEntries({value,onChange,disabled}:{value:Entries;onChange:(value:Entries)=>void;disabled:boolean}){
+ const [active,setActive]=useState<keyof Entries>('m')
+ const inputs=useRef<Partial<Record<keyof Entries,HTMLInputElement|null>>>({}),pending=useRef<{field:keyof Entries;caret:number}|null>(null)
+ useLayoutEffect(()=>{const cursor=pending.current;if(cursor){const input=inputs.current[cursor.field];input?.focus({preventScroll:true});input?.setSelectionRange(cursor.caret,cursor.caret);pending.current=null}},[value])
+ function field(id:keyof Entries,label:string){return <input ref={el=>{inputs.current[id]=el}} aria-label={label} inputMode="none" autoComplete="off" value={value[id]} disabled={disabled} className={active===id?'active':''} onFocus={()=>setActive(id)} onChange={event=>{if(/^[\d.\-/]{0,18}$/.test(event.target.value))onChange({...value,[id]:event.target.value})}}/>}
+ function key(key:string){if(key==='next'){const next=active==='m'?'b':'m';setActive(next);inputs.current[next]?.focus({preventScroll:true});return}const input=inputs.current[active],current=value[active],edited=editAnswer(current,key,input?.selectionStart??current.length,input?.selectionEnd??current.length);if(edited.value.length<=18){pending.current={field:active,caret:edited.caret};onChange({...value,[active]:edited.value})}}
+ return <section className="standard-intercepts conversion-entry" aria-label="Slope-intercept equation"><h3>Slope-intercept form</h3><div className="conversion-equation"><span>y =</span>{field('m','Slope m')}<span>x +</span>{field('b','Y-intercept b')}</div><p className="slope-small">First box: slope m. Second box: y-intercept b. Use a minus sign for a negative value. Fractions such as −3/4 are accepted.</p>{!disabled&&<div className="slope-keypad conversion-keypad" aria-label="Slope and intercept number pad">{['7','8','9','back','4','5','6','clear','1','2','3','next','sign','0','.','/'].map(k=><button type="button" key={k} aria-label={k==='back'?'Backspace':k==='clear'?'Clear entry':k==='next'?'Next field':k==='sign'?'Change sign':k==='/'?'Fraction bar':k} onPointerDown={e=>e.preventDefault()} onClick={()=>key(k)}>{k==='back'?'⌫':k==='clear'?'Clear':k==='next'?'Next':k==='sign'?'±':k==='/'?'a/b':k}</button>)}</div>}</section>
+}
