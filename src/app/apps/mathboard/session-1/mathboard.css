@@ -28,3 +28,61 @@ body:has(.mb-app) .site-header,body:has(.mb-app) .site-footer{display:none}body:
 
 .mb-game-grid{position:relative}.mb-moving-tile{position:absolute;width:calc((100% - 44px)/4);aspect-ratio:1;animation:mb-slide-tile .16s ease-out;z-index:2;pointer-events:none}@keyframes mb-slide-tile{from{transform:translate(0,0)}}
 @media(prefers-reduced-motion:reduce){.mb-moving-tile{animation:none}}
+
+/* Pool lesson revision: a clear student identity and compact mathematical inputs. */
+.mb-topbar{position:relative;justify-content:center;min-height:88px;padding:5px 130px}
+.mb-topbar>a{position:absolute;left:16px;top:14px;font-size:12px}
+.mb-identity{text-align:center;display:flex;align-items:center;flex-direction:column;gap:0;min-width:0}
+.mb-topbar .mb-identity strong{font-size:14px;line-height:18px}
+.mb-student-name,.mb-topbar .mb-student-name{font:italic 600 34px/1.15 Georgia,'Times New Roman',serif;letter-spacing:.3px;color:#183f57;text-align:center;margin:0;overflow-wrap:anywhere}
+.mb-topbar .mb-identity span{font-size:12px;max-width:none;line-height:16px}
+.mb-story-context{font-size:17px;line-height:1.35;text-align:center;padding:5px 22px;margin:0;background:#eaf2f5;border-bottom:1px solid #d3e0e5;flex-shrink:0}
+.mb-question{border-width:3px;padding:10px;gap:7px}
+.mb-question h1{font:700 24px/1.2 Arial,sans-serif}
+.mb-question h1>span{font-weight:700}
+.mb-question .mb-prompt{font-size:17px;line-height:1.4}
+.mb-question .mb-answered-question{font-size:16px;color:#245f43}
+.mb-pool-intro{display:flex;flex:1;flex-direction:column;justify-content:center;align-items:flex-start;gap:26px;padding:12px 8px}
+.mb-pool-intro h1{font-size:22px;line-height:1.4}
+.mb-pool-intro>p{font:500 25px/1.5 Georgia,serif;color:#17394a}
+.mb-pool-intro button{align-self:center;min-width:140px;font-size:20px}
+.mb-app input:not([type=range]),.mb-teacher input:not([type=checkbox]),.mb-teacher textarea{background:#fffdf5}
+.mb-answer-value{justify-content:flex-start;flex-shrink:0}
+.mb-answer-value input{width:128px;max-width:100%;flex:none;font-size:22px}
+.mb-fields{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.mb-fields label{font-size:14px}
+.mb-fields .mb-answer-value input{width:112px}
+.mb-unit-label{font-size:16px;white-space:nowrap}
+.mb-keypad{grid-template-columns:repeat(6,minmax(0,1fr));gap:5px}
+.mb-keypad button{min-height:44px;font-size:18px;padding:5px}
+.mb-keypad button[aria-label='Gallons'],.mb-keypad button[aria-label='Hour'],.mb-keypad button[aria-label='Clear entry'],.mb-keypad button[aria-label='Next field']{font-size:12px}
+.mb-rate-layout{display:grid;grid-template-columns:100px minmax(85px,1fr) 114px;gap:10px;align-items:center;justify-items:center;margin:4px 0}
+.mb-rate-layout>strong{font-size:17px;line-height:1.4;text-align:center}
+.mb-narrow-fraction{display:flex;flex-direction:column;gap:7px;width:100px;text-align:center;position:relative;padding:0 6px;background:linear-gradient(#17394a,#17394a) center/100% 2px no-repeat}
+.mb-narrow-fraction .mb-answer-value{margin:0;justify-content:center}
+.mb-narrow-fraction input,.mb-narrow-fraction .mb-answer-value input{width:88px;font-size:22px;text-align:center;max-width:none;min-height:44px}
+.mb-unit-fraction{width:114px}.mb-unit-fraction input{width:102px;font-size:18px;padding:6px}
+.mb-inline-check{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.mb-inline-check label{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:13px}
+.mb-app .mb-inline-check>label>input{width:104px;font-size:18px;text-align:center}
+.mb-inline-check .mb-answer-value input{width:122px}
+.mb-inline-check>button{align-self:center;min-height:44px}
+.mb-staged-point,.mb-staged-rule{display:flex;flex-direction:column;gap:9px}
+.mb-staged-point h2,.mb-staged-rule h2,.mb-slider-question{font-size:20px;line-height:1.35;font-weight:700;margin:0}
+.mb-rule-confirmed{font-size:15px;color:#245f43;font-weight:600}
+.mb-feedback{font-size:17px;line-height:1.4;padding:10px 12px}
+.mb-feedback.success{font-size:20px;font-weight:700;border-width:2px;background:#e5f5e9;color:#176134}
+.mb-notes,.mb-writing,.mb-question .mb-prompt.mb-writing{font-size:18px!important;line-height:1.4;color:#2055bb;font-weight:600;background:#edf3ff;border-color:#2055bb}
+.mb-notes strong{font-size:19px}
+.mb-flash-correct{animation:mb-correct-border 1.8s linear}
+.mb-flash-wrong{animation:mb-wrong-border 1.8s linear}
+@keyframes mb-correct-border{0%,33.333%,66.666%{border-color:#1e9b50;box-shadow:inset 0 0 0 2px #1e9b5033}16.666%,50%,83.333%,100%{border-color:#d5e1e4;box-shadow:none}}
+@keyframes mb-wrong-border{0%,33.333%,66.666%{border-color:#e6b52b;box-shadow:inset 0 0 0 2px #e6b52b44}16.666%,50%,83.333%,100%{border-color:#d5e1e4;box-shadow:none}}
+.mb-y-intercept-word{animation:mb-intercept-flash 1.4s ease-in-out infinite}
+@keyframes mb-intercept-flash{0%,100%{opacity:1}50%{opacity:.22}}
+.mb-summary>.mb-student-name{font-size:42px;margin:14px 0}
+@media(max-height:740px) and (min-width:741px){.mb-topbar{min-height:80px}.mb-topbar .mb-student-name{font-size:30px}.mb-story-context{font-size:15px}.mb-question h1{font-size:22px}.mb-question{gap:6px;padding:9px}.mb-feedback.success{font-size:18px}}
+@media(max-width:740px){.mb-topbar{padding:8px 12px 8px;min-height:105px}.mb-topbar>a{position:static;align-self:flex-start}.mb-topbar .mb-identity strong{order:0;width:auto;font-size:12px}.mb-topbar .mb-student-name{font-size:30px}.mb-topbar .mb-identity span{max-width:none}.mb-story-context{font-size:15px;padding:9px 14px}.mb-question h1{font-size:23px}.mb-pool-intro>p{font-size:23px}.mb-rate-layout{grid-template-columns:94px minmax(65px,1fr) 108px;gap:6px}.mb-keypad button{padding:4px;font-size:17px}.mb-unit-label{font-size:14px}.mb-identity{width:100%}}
+@media(prefers-reduced-motion:reduce){.mb-flash-correct{animation:none;border-color:#1e9b50}.mb-flash-wrong{animation:none;border-color:#e6b52b}.mb-y-intercept-word{animation:none}}
+
+.mb-app:has(.mb-story-context) .mb-question{gap:6px}.mb-question .mb-bold-question{font-size:22px;font-weight:700;line-height:1.3}
