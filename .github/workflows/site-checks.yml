@@ -19,6 +19,7 @@ jobs:
       - run: npm run test:line-equations
       - run: npm run test:graph-line
       - run: npm run test:standard-form
+      - run: node scripts/test-function-families.mjs
       - run: npm run test:mathboard
       - run: npm run check:content
       - run: npm run typecheck

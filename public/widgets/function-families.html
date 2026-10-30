@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parent Function Challenge</title>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<style>
+  :root{--ink:#1d2a3a;--muted:#5a6878;--blue:#1d4fb8;--blue-dk:#0f2f73;--green:#1a8a4a;--red:#c0392b;--panel:#f4f7fb;--line:#d5dde8}
+  *{box-sizing:border-box}
+  html,body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:#fff;overscroll-behavior:none;-webkit-user-select:none;user-select:none}
+  .wrap{max-width:900px;margin:0 auto;padding:6px 12px}
+  button{touch-action:manipulation;-webkit-tap-highlight-color:transparent;font:inherit;font-weight:700;border:0;border-radius:10px;padding:10px 16px;background:var(--blue);color:#fff;cursor:pointer}
+  button.secondary{background:#e6ebf2;color:var(--ink)}
+  button:disabled{cursor:default}
+  .hidden{display:none !important}
+
+  /* top bar */
+  .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+  .title h1{font-size:1.15rem;margin:0;white-space:nowrap}
+  .chip{display:inline-block;margin-top:2px;background:#e8f0fb;color:var(--blue);border-radius:999px;padding:2px 10px;font-weight:700;font-size:.85rem}
+  .player{text-align:right;position:relative}
+  .player .name{font-weight:800;font-size:0.95rem}
+  .player .total{font-size:.8rem;color:var(--muted)}
+  .star{position:absolute;right:90px;top:20px;font-size:1.8rem;pointer-events:none;opacity:0;z-index:5}
+  .star.pop{animation:pop .9s ease-out}
+  @keyframes pop{0%{opacity:0;transform:scale(.2) rotate(0)}25%{opacity:1;transform:scale(3.2) rotate(25deg)}60%{opacity:1;transform:scale(2.2) rotate(-10deg)}100%{opacity:0;transform:scale(1) rotate(0)}}
+
+  /* game area - stacked vertically */
+  .game{display:flex;flex-direction:column;align-items:center;gap:10px}
+  .qcard{width:100%;max-width:480px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:8px}
+  .prompt{font-weight:700;margin:0 4px 6px;font-size:0.98rem;text-align:center}
+  .stagebox{position:relative;width:100%;aspect-ratio:1/1;background:#fff;border-radius:10px;border:1px solid var(--line);overflow:hidden}
+  #graph{width:100%;height:100%;display:block}
+  #eq{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.8rem,4vw,3.2rem);white-space:nowrap;padding:10px}
+  #eq i{font-style:italic}
+  #eq sup{font-size:.6em}
+  .rad{display:inline-flex;align-items:flex-start}
+  .rad .rc{border-top:.07em solid currentColor;padding:0 .08em;margin-top:.12em}
+  .fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;margin:0 .1em}
+  .fr .n{border-bottom:.06em solid currentColor;padding:0 .2em}
+  .fr .d{padding:0 .2em}
+  .gi{letter-spacing:-.12em;margin:0 .06em}
+  .ready{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:1.2rem}
+
+  .answers{width:100%;max-width:560px;display:flex;flex-direction:column;gap:8px}
+  .grid{display:grid;grid-template-columns:repeat(4, 1fr);gap:8px}
+  .choice{height:clamp(48px,9vh,80px);font-size:clamp(0.95rem,1.5vw,1.25rem);background:#fff;color:var(--ink);border:3px solid #b9c4d3;transition:background .25s,border-color .25s,color .25s}
+  .choice.sel{background:var(--blue);border-color:var(--blue);color:#fff}
+  .choice.ok{background:var(--green);border-color:var(--green);color:#fff}
+  .choice:disabled:not(.sel):not(.ok){opacity:.55}
+  .next{height:50px;font-size:1.2rem;background:#c9d2de;color:#fff}
+  .next.go{background:var(--green)}
+  
+  /* bottom answer bar (timer, count, points) */
+  .ans-footer{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 12px}
+  .timer{font-variant-numeric:tabular-nums;font-size:1.3rem;font-weight:800;background:var(--blue-dk);color:#fff;border-radius:8px;padding:2px 12px;text-align:center}
+  .timer.low{background:var(--red)}
+  .timer.paused{opacity:.55}
+  .qcount{color:var(--muted);font-size:0.85rem;text-align:center}
+  .points-box{font-weight:800;font-size:1.05rem;color:var(--blue);text-align:right}
+  .points-box span{display:inline-block;transform-origin:right center}
+  .points-box span.bump{animation:bump .5s ease}
+  @keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.45);color:var(--green)}100%{transform:scale(1)}}
+
+  /* overlays */
+  .overlay{position:fixed;inset:0;background:rgba(15,30,70,.55);display:flex;align-items:center;justify-content:center;padding:16px;z-index:20}
+  .card{background:#fff;border-top:8px solid var(--blue);border-radius:16px;padding:22px 26px;width:min(480px,94vw);max-height:94vh;overflow:auto;text-align:center;box-shadow:0 12px 40px rgba(0,0,0,.3)}
+  .card .big{font-size:2.6rem;line-height:1}
+  .card h2{margin:8px 0 6px}
+  .card p{font-size:1.1rem;line-height:1.45;margin:8px 0 16px}
+  .card .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .card .btns button{font-size:1.15rem;padding:12px 22px}
+  .card.wrong{border-top-color:var(--red)}
+  .bigbtn{width:100%;font-size:1.6rem !important;padding:16px !important;background:var(--green)}
+  #nameBox .card{text-align:left}
+  #nameBox h2,#nameBox .big{text-align:center}
+  .nameIn{font:inherit;font-size:1.1rem;font-weight:600;width:100%;padding:10px;border:2px solid #b9c4d3;border-radius:8px;margin:4px 0 10px;-webkit-user-select:text;user-select:text}
+  .nameIn:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(29,79,184,.25)}
+  label{font-weight:700}
+  .err{color:var(--red);font-weight:600;min-height:1.4em}
+  table{border-collapse:collapse;width:100%;margin:6px 0 14px}
+  th,td{border:1px solid var(--line);padding:8px;font-size:1rem}
+  th{background:#e8eef6}
+  tr.tot td{font-weight:800;background:#eef7f1}
+  #shotBox .card{width:min(720px,94vw);padding:16px}
+  #shotImg{width:100%;border:1px solid var(--line);border-radius:8px;-webkit-touch-callout:default;-webkit-user-select:auto;user-select:auto}
+  .small{font-size:.9rem;color:var(--muted)}
+
+  /* A square graph grows into the space left by the compact controls. */
+  .wrap{height:100dvh;max-width:1200px;display:flex;flex-direction:column;gap:6px;padding:8px 12px}
+  .top{flex-shrink:0;min-height:48px;margin:0;gap:12px}
+  .apps-link{display:inline-block;color:var(--blue);font-size:12px;margin-bottom:2px;text-decoration:none}
+  .title h1{font-size:18px}
+  .chip{font-size:12px;padding:1px 8px}
+  .player .name{font-size:18px;overflow-wrap:anywhere}
+  .game{flex:1;min-height:0;gap:6px}
+  .qcard{flex:1;min-height:0;max-width:none;display:flex;flex-direction:column;align-items:center;padding:6px}
+  .prompt{flex-shrink:0;font-size:14px;line-height:20px;margin:0 0 4px}
+  .stagebox{width:auto;height:calc(100% - 24px);max-width:100%;aspect-ratio:1;flex:none}
+  .answers{max-width:none;flex-shrink:0;display:grid;grid-template-columns:150px 1fr;gap:6px}
+  .grid{grid-column:1/-1;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+  .choice{height:46px;min-height:44px;font-size:14px;padding:4px;border-width:2px;border-radius:9px;line-height:1.15}
+  .next{height:46px;font-size:17px;padding:6px}
+  .ans-footer{min-height:46px;padding:4px 12px}
+  .timer{font-size:23px;min-width:84px}
+  .player-context{font-size:16px;font-weight:750;color:var(--blue);margin:0 0 10px;overflow-wrap:anywhere}
+  .hour-select{background:white;color:var(--ink);min-height:44px}
+  .local-note{font-size:12px!important;color:var(--muted);margin:6px 0!important}
+  button:focus-visible,a:focus-visible{outline:3px solid #d99f13;outline-offset:2px}
+  @media(max-width:700px){
+    .wrap{height:auto;min-height:100dvh;padding:8px}
+    .title h1{font-size:15px;white-space:normal}.player .name{font-size:15px}
+    .qcard{flex:none}.stagebox{width:min(100%,420px);height:auto}
+    .answers{grid-template-columns:110px 1fr}.grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .choice{font-size:12px}.ans-footer{padding:4px 6px;gap:4px}.timer{font-size:19px;min-width:60px;padding:2px 6px}
+    .points-box{font-size:14px}.qcount{font-size:12px}
+  }
+  @media(prefers-reduced-motion:reduce){.star.pop,.points-box span.bump{animation:none}.choice{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="title">
+      <a class="apps-link" href="/apps" target="_top">← Practice apps</a><h1>📈 Parent Function Challenge</h1>
+      <span class="chip" id="levelChip">Level 1 · Graphs</span>
+    </div>
+    <div class="player">
+      <div class="name" id="who">—</div>
+      <div class="total" id="total">Total: 0</div>
+      <div class="star" id="star">⭐</div>
+    </div>
+  </div>
+
+  <div class="game">
+    <section class="qcard">
+      <div class="prompt" id="prompt">Which parent function family does this graph belong to?</div>
+      <div class="stagebox">
+        <canvas id="graph" aria-label="Graph of a function"></canvas>
+        <div id="eq" class="hidden"></div>
+        <div class="ready" id="ready">Press GO to start</div>
+      </div>
+    </section>
+    <section class="answers">
+      <div class="grid" id="choices"></div>
+      <button class="next" id="nextBtn" disabled>Next ▶</button>
+      <div class="ans-footer">
+        <div class="timer" id="timer">1:00</div>
+        <div class="qcount" id="qcount"></div>
+        <div class="points-box">Pts: <span id="score">0</span></div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- Name prompt (shown first) -->
+<div class="overlay" id="nameBox" role="dialog" aria-modal="true" aria-labelledby="nameTitle">
+  <form class="card" id="nameForm" autocomplete="off">
+    <div class="big">📈</div>
+    <h2 id="nameTitle">Parent Function Challenge</h2>
+    <p class="small" style="text-align:center">Enter your name and class hour to begin. It will appear on your results and can't be changed later.</p>
+    <label for="firstName">First name</label>
+    <input class="nameIn" type="text" id="firstName" maxlength="25" autocapitalize="words" spellcheck="false">
+    <label for="lastName">Last name</label>
+    <input class="nameIn" type="text" id="lastName" maxlength="25" autocapitalize="words" spellcheck="false">
+    <label for="classHour">Class hour</label>
+    <select class="nameIn hour-select" id="classHour" required><option value="">Choose hour</option><option>3</option><option>6</option><option>7</option><option>8</option></select>
+    <p class="local-note">Your name and results stay on this device during this game. Download your results to submit them in Google Classroom.</p>
+    <div class="err" id="nameErr"></div>
+    <button type="submit" style="width:100%;font-size:1.15rem;padding:12px">Continue ▶</button>
+  </form>
+</div>
+
+<!-- Level intro -->
+<div class="overlay hidden" id="introBox" role="dialog" aria-modal="true">
+  <div class="card">
+    <div class="big" id="introIcon">📊</div>
+    <h2 id="introTitle">Level 1 · Graphs</h2>
+    <p id="introText"></p>
+    <button class="bigbtn" id="goBtn">GO! ▶</button>
+  </div>
+</div>
+
+<!-- Wrong answer pop-up -->
+<div class="overlay hidden" id="wrongBox" role="dialog" aria-modal="true">
+  <div class="card wrong">
+    <div class="big">🤔</div>
+    <p id="wrongText"></p>
+    <p class="small">⏸ The clock is paused.</p>
+    <div class="btns"><button id="dismissBtn">Dismiss</button></div>
+  </div>
+</div>
+
+<!-- Level end -->
+<div class="overlay hidden" id="endBox" role="dialog" aria-modal="true">
+  <div class="card">
+    <div class="big">⏰</div>
+    <h2 id="endTitle">Time's up!</h2>
+    <p id="endText"></p>
+    <div class="btns">
+      <button class="secondary" id="replayBtn">↺ Replay</button>
+      <button id="nextLevelBtn">Next Level ▶</button>
+    </div>
+  </div>
+</div>
+
+<!-- Final score -->
+<div class="overlay hidden" id="finalBox" role="dialog" aria-modal="true">
+  <div class="card">
+    <div class="big">🏆</div>
+    <h2 id="finalTitle">Final Score</h2>
+    <div id="finalWho" style="font-weight:700"></div>
+    <table id="finalTable"></table>
+    <div class="btns">
+      <button class="secondary" id="playAgainBtn">↺ Play Again</button>
+      <button id="shotBtn">📸 Take Screenshot</button>
+    </div>
+  </div>
+</div>
+
+<!-- Results picture -->
+<div class="overlay hidden" id="shotBox" role="dialog" aria-modal="true">
+  <div class="card">
+    <p style="margin:4px 0 8px;font-weight:700">📸 Your results picture</p>
+    <img id="shotImg" alt="Picture of your results">
+    <p class="small" style="margin:10px 0">On an iPad: <b>press and hold the picture</b>, then choose <b>Save to Photos</b> (or <b>Copy</b>) to turn it in.</p>
+    <div class="btns">
+      <button class="secondary" id="shotClose">Close</button>
+      <a id="shotDl" download="parent-functions-results.png"><button type="button">⬇️ Download</button></a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  const show = id => $(id).classList.remove('hidden'), hide = id => $(id).classList.add('hidden');
+
+  // ---------- Families ----------
+  const FAMS = ['linear', 'quadratic', 'cubic', 'sqrt', 'rational', 'gint', 'constant'];
+  const NAME = { linear: 'Linear', quadratic: 'Quadratic', cubic: 'Cubic', sqrt: 'Square Root', rational: 'Rational', gint: 'Greatest Integer', constant: 'Constant' };
+  const GRAPH_TIP = { linear: 'a straight line', quadratic: 'a U-shaped parabola', cubic: 'an S-shaped curve', sqrt: 'a half-curve that starts at a point',
+                      rational: 'two separate branches that approach asymptotes', gint: 'a staircase of flat steps', constant: 'a horizontal line' };
+  const EQ_TIP = { linear: 'x to the first power (no exponent)', quadratic: 'x squared (x²)', cubic: 'x cubed (x³)', sqrt: 'x inside a square root √',
+                   rational: 'x in the denominator of a fraction', gint: 'x inside greatest integer brackets [[ ]]', constant: 'y equals a single number (no x)' };
+  const A_VALUES = { linear: [1, -1, 2, -2, 0.5, -0.5, 3, -3], quadratic: [1, -1, 2, -2, 0.5, -0.5], cubic: [1, -1, 0.5, -0.5],
+                     sqrt: [1, -1, 2, -2, 3, 0.5], rational: [1, -1, 2, -2, 3, -3], gint: [1, -1, 2, -2], constant: [1, -1, 2, -2, 3, -3] };
+  const PARENT = { linear: x => x, quadratic: x => x * x, cubic: x => x * x * x, sqrt: x => Math.sqrt(x), rational: x => 1 / x, gint: x => Math.floor(x), constant: x => 0 };
+
+  const LEVELS = [
+    { name: 'Graphs', icon: '📊', text: 'Look at each <b>graph</b> and tap its parent function family.' },
+    { name: 'Equations', icon: '✏️', text: 'Look at each <b>equation</b> and tap its parent function family.' },
+    { name: 'Mix', icon: '🔀', text: 'A <b>mix of graphs and equations</b>. Tap the parent function family.' }
+  ];
+  const LEVEL_MS = 60000, POINTS = 10;
+
+  // ---------- State ----------
+  let playerName = '', playerHour = '', level = 0, results = [null, null, null];
+  let score = 0, correct = 0, attempted = 0, qNum = 0, Q = null, lastFam = null;
+  let state = 'idle';            // idle | ask | answered | popup | over
+  let remaining = LEVEL_MS, running = false, lastTs = performance.now(), finishedAt = null;
+
+  // ---------- Answer buttons ----------
+  FAMS.forEach(f => {
+    const b = document.createElement('button');
+    b.className = 'choice'; b.textContent = NAME[f]; b.dataset.fam = f; b.disabled = true;
+    b.onclick = () => choose(f, b);
+    $('choices').appendChild(b);
+  });
+  const choiceBtns = () => [...document.querySelectorAll('.choice')];
+
+  // ---------- Name prompt ----------
+  $('nameForm').onsubmit = e => {
+    e.preventDefault();
+    const clean = v => v.trim().replace(/\s+/g, ' ');
+    const f = clean($('firstName').value), l = clean($('lastName').value);
+    if (!/\p{L}/u.test(f) || !/\p{L}/u.test(l)) { $('nameErr').textContent = 'Please type both your first and last name.'; return; }
+    playerName = f + ' ' + l; playerHour = $('classHour').value;
+    if (!playerHour) { $('nameErr').textContent = 'Please choose your class hour.'; return; }
+    $('who').textContent = '👤 ' + playerName + ' · Hour ' + playerHour;
+    document.querySelectorAll('.overlay:not(#nameBox) .card').forEach(card => { const identity = document.createElement('div'); identity.className = 'player-context'; identity.textContent = playerName + ' · Hour ' + playerHour; card.prepend(identity); });
+    hide('nameBox'); document.activeElement.blur();
+    showIntro(0);
+  };
+
+  // ---------- Level flow ----------
+  function showIntro(lv){
+    level = lv; state = 'idle'; running = false; remaining = LEVEL_MS;
+    score = 0; correct = 0; attempted = 0; qNum = 0; lastFam = null;
+    $('levelChip').textContent = 'Level ' + (lv + 1) + ' · ' + LEVELS[lv].name;
+    $('introIcon').textContent = LEVELS[lv].icon;
+    $('introTitle').textContent = 'Level ' + (lv + 1) + ' · ' + LEVELS[lv].name;
+    $('introText').innerHTML = LEVELS[lv].text + '<br>You have <b>1 minute</b>. Each correct answer is worth <b>10 points</b>.';
+    clearQuestion(); updateScore(false); renderTimer(); show('introBox');
+  }
+  $('goBtn').onclick = () => {
+    unlockAudio(); hide('introBox');
+    newQuestion(); running = true; lastTs = performance.now();
+  };
+  function endLevel(){
+    running = false; state = 'over';
+    choiceBtns().forEach(b => b.disabled = true); setNext(false);
+    results[level] = { score, correct, attempted };
+    $('endTitle').textContent = "Time's up! Level " + (level + 1) + ' done';
+    $('endText').innerHTML = 'Level ' + (level + 1) + ' score: <b>' + score + '</b><br>' + correct + ' correct out of ' + attempted + ' answered';
+    $('replayBtn').textContent = '↺ Replay Level ' + (level + 1);
+    $('nextLevelBtn').textContent = level < 2 ? 'Next Level ▶' : 'Final Score 🏆';
+    updateScore(false); show('endBox');
+  }
+  $('replayBtn').onclick = () => { hide('endBox'); results[level] = null; showIntro(level); };
+  $('nextLevelBtn').onclick = () => { hide('endBox'); if (level < 2) showIntro(level + 1); else showFinal(); };
+  $('playAgainBtn').onclick = () => { hide('finalBox'); results = [null, null, null]; finishedAt = null; showIntro(0); };
+
+  function showFinal(){
+    finishedAt = new Date();
+    const tot = results.reduce((s, r) => s + (r ? r.score : 0), 0);
+    $('finalTitle').textContent = 'Final Score: ' + tot;
+    $('finalWho').textContent = '👤 ' + playerName + ' · Hour ' + playerHour + ' · ' + stamp(finishedAt);
+    $('finalTable').innerHTML = '<tr><th>Level</th><th>Correct</th><th>Score</th></tr>' +
+      results.map((r, i) => '<tr><td>' + (i + 1) + ' · ' + LEVELS[i].name + '</td><td>' + (r ? r.correct + ' / ' + r.attempted : '—') + '</td><td>' + (r ? r.score : '—') + '</td></tr>').join('') +
+      '<tr class="tot"><td>Total</td><td>' + results.reduce((s, r) => s + (r ? r.correct : 0), 0) + ' / ' + results.reduce((s, r) => s + (r ? r.attempted : 0), 0) + '</td><td>' + tot + '</td></tr>';
+    show('finalBox');
+  }
+
+  // ---------- Questions ----------
+  const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+  const randInt = (lo, hi) => lo + Math.floor(Math.random() * (hi - lo + 1));
+  function makeQuestion(){
+    let fam; do fam = pick(FAMS); while (fam === lastFam);
+    lastFam = fam;
+    const mode = level === 0 ? 'graph' : level === 1 ? 'eq' : (Math.random() < 0.5 ? 'graph' : 'eq');
+    let a = 1, h = 0, k = 0, form = 'vertex';
+    if (fam === 'linear') { a = pick(A_VALUES.linear); k = randInt(-5, 5); if (Math.random() < 0.25) { a = 1; k = 0; } }
+    else if (fam === 'constant') { k = randInt(-5, 5); if (k === 0 && Math.random() < 0.5) k = 3; }
+    else if (Math.random() >= 0.3) {            // 70% transformed, 30% plain parent
+      a = pick(A_VALUES[fam]); h = randInt(-4, 4); k = randInt(-4, 4);
+      if (fam === 'quadratic' && Number.isInteger(a) && mode === 'eq' && Math.random() < 0.35) form = 'standard';
+    }
+    return { fam, mode, a, h, k, form };
+  }
+  function newQuestion(){
+    Q = makeQuestion(); qNum++; state = 'ask';
+    hide('ready');
+    $('prompt').textContent = 'Which parent function family does this ' + (Q.mode === 'graph' ? 'graph' : 'equation') + ' belong to?';
+    if (Q.mode === 'graph') { hide('eq'); $('graph').classList.remove('hidden'); drawGraph(Q); }
+    else { $('graph').classList.add('hidden'); $('eq').innerHTML = equationHTML(Q); show('eq'); }
+    choiceBtns().forEach(b => { b.className = 'choice'; b.disabled = false; });
+    setNext(false); $('qcount').textContent = 'Question ' + qNum;
+  }
+  function clearQuestion(){
+    hide('eq'); $('graph').classList.remove('hidden'); drawGraph(null); show('ready');
+    choiceBtns().forEach(b => { b.className = 'choice'; b.disabled = true; });
+    setNext(false); $('qcount').textContent = '';
+  }
+  function setNext(on){ $('nextBtn').disabled = !on; $('nextBtn').classList.toggle('go', on); }
+  $('nextBtn').onclick = () => { if (state === 'answered' && running) newQuestion(); };
+
+  function choose(fam, btn){
+    if (state !== 'ask') return;
+    state = 'answered'; attempted++;
+    choiceBtns().forEach(b => b.disabled = true);
+    btn.classList.add('sel');
+    const right = choiceBtns().find(b => b.dataset.fam === Q.fam);
+    if (fam === Q.fam) {
+      score += POINTS; correct++;
+      requestAnimationFrame(() => requestAnimationFrame(() => btn.classList.add('ok')));   // blue → green
+      ding(); popStar(); updateScore(true); setNext(true);
+    } else {
+      right.classList.add('ok');
+      running = false; state = 'popup'; $('timer').classList.add('paused');
+      const tip = Q.mode === 'graph' ? GRAPH_TIP[Q.fam] : EQ_TIP[Q.fam];
+      $('wrongText').innerHTML = 'This ' + (Q.mode === 'graph' ? 'graph shape' : 'equation') + ' is always a <b>' + NAME[Q.fam] + '</b> function — look for ' + tip +
+        '.<br>You chose <b>' + NAME[fam] + '</b>.';
+      show('wrongBox');
+    }
+  }
+  $('dismissBtn').onclick = () => {
+    hide('wrongBox'); $('timer').classList.remove('paused');
+    state = 'answered'; running = true; lastTs = performance.now(); setNext(true);
+  };
+
+  // ---------- Score display ----------
+  function updateScore(animate){
+    $('score').textContent = score;
+    const tot = results.reduce((s, r, i) => s + (r && i !== level ? r.score : 0), 0) + score;
+    $('total').textContent = 'Total: ' + tot;
+    if (animate) { const s = $('score'); s.classList.remove('bump'); void s.offsetWidth; s.classList.add('bump'); }
+  }
+  function popStar(){ const s = $('star'); s.classList.remove('pop'); void s.offsetWidth; s.classList.add('pop'); }
+
+  // ---------- Sound ----------
+  let actx = null;
+  function unlockAudio(){
+    try { if (!actx) actx = new (window.AudioContext || window.webkitAudioContext)(); if (actx.state === 'suspended') actx.resume(); } catch (_) {}
+  }
+  function ding(){
+    if (!actx) return;
+    const t = actx.currentTime;
+    [[1046.5, 0], [1568, 0.09]].forEach(([f, d]) => {
+      const o = actx.createOscillator(), g = actx.createGain();
+      o.type = 'sine'; o.frequency.value = f;
+      g.gain.setValueAtTime(0.0001, t + d); g.gain.exponentialRampToValueAtTime(0.35, t + d + 0.01); g.gain.exponentialRampToValueAtTime(0.0001, t + d + 0.6);
+      o.connect(g).connect(actx.destination); o.start(t + d); o.stop(t + d + 0.65);
+    });
+  }
+
+  // ---------- Timer ----------
+  function renderTimer(){
+    const s = Math.ceil(remaining / 1000);
+    $('timer').textContent = Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+    $('timer').classList.toggle('low', s <= 10 && remaining > 0 && state !== 'idle');
+  }
+  function tick(ts){
+    if (running) {
+      remaining -= Math.max(0, ts - lastTs);
+      if (remaining <= 0) { remaining = 0; renderTimer(); endLevel(); }
+    }
+    lastTs = ts; renderTimer(); requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  // ---------- Equations ----------
+  const X = '<i>x</i>';
+  const num = v => (v < 0 ? '−' : '') + (Math.abs(v) === 0.5 ? '½' : Math.abs(v));
+  const coef = a => a === 1 ? '' : a === -1 ? '−' : num(a);
+  const inner = h => h === 0 ? X : h > 0 ? X + ' − ' + h : X + ' + ' + (-h);
+  const kTerm = k => k === 0 ? '' : k > 0 ? ' + ' + k : ' − ' + (-k);
+  function poly(terms){        // [[coef, power], ...]
+    let out = '';
+    terms.filter(([c]) => c !== 0).forEach(([c, p], i) => {
+      const abs = Math.abs(c), body = (p > 0 && abs === 1 ? '' : (abs === 0.5 ? '½' : abs)) + (p > 0 ? X : '') + (p > 1 ? '<sup>' + p + '</sup>' : '');
+      out += i === 0 ? (c < 0 ? '−' : '') + body : (c < 0 ? ' − ' : ' + ') + body;
+    });
+    return out || '0';
+  }
+  function equationHTML({ fam, a, h, k, form }){
+    let rhs;
+    const grp = (p) => (h === 0 ? X : '(' + inner(h) + ')') + '<sup>' + p + '</sup>';
+    if (fam === 'linear') rhs = poly([[a, 1], [k, 0]]);
+    else if (fam === 'quadratic') rhs = form === 'standard' ? poly([[a, 2], [-2 * a * h, 1], [a * h * h + k, 0]]) : coef(a) + grp(2) + kTerm(k);
+    else if (fam === 'cubic') rhs = coef(a) + grp(3) + kTerm(k);
+    else if (fam === 'sqrt') rhs = coef(a) + '<span class="rad"><span>√</span><span class="rc">' + inner(h) + '</span></span>' + kTerm(k);
+    else if (fam === 'rational') rhs = (a < 0 ? '−' : '') + '<span class="fr"><span class="n">' + Math.abs(a) + '</span><span class="d">' + inner(h) + '</span></span>' + kTerm(k);
+    else if (fam === 'constant') rhs = String(k);
+    else rhs = coef(a) + '<span class="gi">[[</span>' + inner(h) + '<span class="gi">]]</span>' + kTerm(k);
+    return '<span><i>y</i> = ' + rhs + '</span>';
+  }
+
+  // ---------- Graph drawing ----------
+  const cv = $('graph'), ctx = cv.getContext('2d'), G = 600, R = 10, S = G / (2 * R);
+  const dpr = window.devicePixelRatio || 1;
+  cv.width = G * dpr; cv.height = G * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  const gx = x => G / 2 + x * S, gy = y => G / 2 - y * S;
+  function drawGraph(q){
+    ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, G, G);
+    ctx.lineWidth = 1; ctx.strokeStyle = '#e1e7f0';
+    for (let i = -R; i <= R; i++) { ctx.beginPath(); ctx.moveTo(gx(i), 0); ctx.lineTo(gx(i), G); ctx.moveTo(0, gy(i)); ctx.lineTo(G, gy(i)); ctx.stroke(); }
+    ctx.strokeStyle = '#3a4656'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(0, gy(0)); ctx.lineTo(G, gy(0)); ctx.moveTo(gx(0), 0); ctx.lineTo(gx(0), G); ctx.stroke();
+    ctx.fillStyle = '#5a6878'; ctx.font = '13px system-ui, sans-serif';
+    for (let i = -R + 2; i < R; i += 2) if (i) {
+      ctx.textAlign = 'center'; ctx.textBaseline = 'top'; ctx.fillText(i, gx(i), gy(0) + 4);
+      ctx.textAlign = 'right'; ctx.textBaseline = 'middle'; ctx.fillText(i, gx(0) - 5, gy(i));
+    }
+    ctx.font = 'italic 16px Georgia, serif'; ctx.textAlign = 'right'; ctx.textBaseline = 'bottom'; ctx.fillText('x', G - 6, gy(0) - 4);
+    ctx.textAlign = 'left'; ctx.textBaseline = 'top'; ctx.fillText('y', gx(0) + 6, 4);
+    if (!q) return;
+
+    const f = x => q.a * PARENT[q.fam](x - q.h) + q.k, color = '#1d4fb8';
+    ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = 4; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    const dot = (x, y, open) => { ctx.beginPath(); ctx.arc(gx(x), gy(y), 6, 0, 7); ctx.fillStyle = open ? '#fff' : color; ctx.fill(); ctx.lineWidth = 3; ctx.stroke(); ctx.lineWidth = 4; };
+
+    if (q.fam === 'constant') {
+      ctx.beginPath(); ctx.moveTo(gx(-R - 1), gy(q.k)); ctx.lineTo(gx(R + 1), gy(q.k)); ctx.stroke();
+      return;
+    }
+    if (q.fam === 'gint') {
+      for (let n = -30; n <= 30; n++) {
+        const x0 = q.h + n, y = q.a * n + q.k;
+        if (x0 > R + 1 || x0 + 1 < -R - 1 || Math.abs(y) > R + 1) continue;
+        ctx.beginPath(); ctx.moveTo(gx(x0), gy(y)); ctx.lineTo(gx(x0 + 1), gy(y)); ctx.stroke();
+        dot(x0, y, false); dot(x0 + 1, y, true);
+      }
+      return;
+    }
+    const start = q.fam === 'sqrt' ? q.h : -R - 1, steps = 3000, dx = (R + 1 - start) / steps;
+    ctx.beginPath(); let pen = false, prevSide = 0;
+    for (let i = 0; i <= steps; i++) {
+      const x = start + i * dx;
+      if (q.fam === 'rational') {
+        const side = Math.sign(x - q.h);
+        if (Math.abs(x - q.h) < 0.004 || side !== prevSide) { pen = false; prevSide = side; continue; }
+      }
+      const y = f(x);
+      if (!isFinite(y) || Math.abs(y) > 3 * R) { pen = false; continue; }
+      pen ? ctx.lineTo(gx(x), gy(y)) : ctx.moveTo(gx(x), gy(y)); pen = true;
+    }
+    ctx.stroke();
+    if (q.fam === 'sqrt') dot(q.h, q.k, false);
+  }
+  drawGraph(null);
+
+  // ---------- Results picture ----------
+  const stamp = d => d.toLocaleString([], { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' });
+  $('shotBtn').onclick = () => {
+    const url = drawResults();
+    $('shotImg').src = url; $('shotDl').href = url;
+    $('shotDl').download = 'parent-functions-' + playerName.replace(/[^\w-]+/g, '_') + '.png';
+    show('shotBox');
+  };
+  $('shotClose').onclick = () => hide('shotBox');
+  function drawResults(){
+    const W = 1000, pad = 40, rh = 48, H = 160 + rh * 5 + 70;
+    const c = document.createElement('canvas'); c.width = W; c.height = H;
+    const x = c.getContext('2d');
+    x.fillStyle = '#fff'; x.fillRect(0, 0, W, H);
+    x.fillStyle = '#1d4fb8'; x.fillRect(0, 0, W, 70);
+    x.fillStyle = '#fff'; x.font = 'bold 30px system-ui, sans-serif'; x.textBaseline = 'middle'; x.fillText('📈 Parent Function Challenge — Results', pad, 36);
+    x.textBaseline = 'alphabetic'; x.fillStyle = '#1d2a3a'; x.font = 'bold 28px system-ui, sans-serif'; x.fillText('Student: ' + playerName + ' · Hour ' + playerHour, pad, 108, W - 2 * pad);
+    x.font = '20px system-ui, sans-serif'; x.fillStyle = '#5a6878'; x.textAlign = 'right'; x.fillText(stamp(finishedAt || new Date()), W - pad, 140);
+    const cols = [W * 0.42, W * 0.25, W * 0.25].map(w => w - 0), cx = [pad, pad + cols[0], pad + cols[0] + cols[1]];
+    const tot = results.reduce((s, r) => s + (r ? r.score : 0), 0);
+    const rows = [['Level', 'Correct / Answered', 'Score'],
+      ...results.map((r, i) => [(i + 1) + ' · ' + LEVELS[i].name, r ? r.correct + ' / ' + r.attempted : '—', r ? String(r.score) : '—']),
+      ['Total', results.reduce((s, r) => s + (r ? r.correct : 0), 0) + ' / ' + results.reduce((s, r) => s + (r ? r.attempted : 0), 0), String(tot)]];
+    let y = 150;
+    rows.forEach((row, ri) => {
+      x.fillStyle = ri === 0 ? '#e8eef6' : ri === rows.length - 1 ? '#eef7f1' : '#fff';
+      x.fillRect(pad, y, W - 2 * pad, rh);
+      row.forEach((t, ci) => {
+        const w = ci === 2 ? W - pad - cx[2] : cols[ci];
+        x.strokeStyle = '#c3cedc'; x.lineWidth = 1; x.strokeRect(cx[ci], y, w, rh);
+        x.fillStyle = '#1d2a3a'; x.font = (ri === 0 || ri === rows.length - 1 ? 'bold ' : '') + '22px system-ui, sans-serif';
+        x.textAlign = 'center'; x.fillText(t, cx[ci] + w / 2, y + 32);
+      });
+      y += rh;
+    });
+    x.textAlign = 'left'; x.fillStyle = '#1a8a4a'; x.font = 'bold 30px system-ui, sans-serif'; x.fillText('🏆 Final Score: ' + tot, pad, y + 50);
+    return c.toDataURL('image/png');
+  }
+})();
+</script>
+</body>
+</html>
