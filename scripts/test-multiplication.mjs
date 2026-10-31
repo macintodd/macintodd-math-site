@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict'
+import {multiplicationFacts,shuffleFacts,multiplicationResults} from '../src/lib/multiplication.ts'
+const all=multiplicationFacts(Array.from({length:12},(_,i)=>i))
+assert.equal(all.length,143)
+assert.equal(Math.max(...all.map(f=>f.a*f.b)),110)
+assert(all.some(f=>f.a===0&&f.b===11));assert(all.some(f=>f.a===11&&f.b===10));assert(!all.some(f=>f.a===11&&f.b===11))
+assert.equal(multiplicationFacts([11]).length,11)
+assert.equal(multiplicationFacts([2]).length,12)
+assert(multiplicationFacts([2,7]).every(f=>[2,7].includes(f.a)))
+assert.equal(multiplicationFacts([2,2,-1,12,NaN]).length,12)
+assert.deepEqual(multiplicationFacts([]),[])
+const shuffled=shuffleFacts(all)
+assert.equal(new Set(shuffled.map(f=>`${f.a},${f.b}`)).size,143)
+assert.deepEqual(all[0],{a:0,b:0})
+assert.deepEqual(multiplicationResults([]),{correct:0,attempted:0,streak:0,best:0,accuracy:0})
+assert.deepEqual(multiplicationResults([true,true,false,true,true,true].map(correct=>({a:2,b:2,answer:correct?4:3,correct}))),{correct:5,attempted:6,streak:3,best:3,accuracy:83})
+console.log('Passed: all 143 allowed facts, factor filtering, 110 maximum, full shuffled coverage, points, streaks, and accuracy.')
