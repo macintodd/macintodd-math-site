@@ -9,3 +9,14 @@ The landscape layout gives a large problem panel and a separate three-column key
 Names, answers and results remain in component memory, without storage, analytics, or server collection. Results show points, answered count, accuracy, best streak, chosen factors, and missed-fact review. A local canvas creates a named/hour PNG for manual Classroom submission. Reload resets practice.
 
 Validation: `node --experimental-strip-types scripts/test-multiplication.mjs`, lint/build/typecheck/content checks, website/PDF smoke checks, and browser review of selections, table hiding, keypad, feedback, timer end and named results export at iPad landscape sizes.
+
+
+## Signed factors and combined reports
+
+Include Negatives expands each selected magnitude to both signs in either factor (without negative zero duplicates). All products remain within −110 to 110; ±11 × ±11 are excluded. The keypad has ± and accepts three digits plus a sign. Negative operands are shown in parentheses. A bare minus sign cannot be submitted.
+
+Each completed minute appends an immutable in-memory snapshot: unique round ID, completion timestamp, selected factors, whether negatives were enabled, and answers. Reports list actually answered factor magnitudes separately from selected factors, points, weighted accuracy, and date/time per minute, with combined totals and a combined named PNG. Factor/sign changes retain the same student's earlier rows. Name or class-hour changes clear all prior rows and exported-image state immediately; New student also resets identity/settings. Reload clears history; nothing is persisted or uploaded.
+
+Google's Classroom Share button shares a URL and can attach links to student assignments, but does not itself turn in the assignment. A locally generated data-URL report image is not a remotely accessible report URL. No Google API, tokens, report hosting, or third-party sharing script was added. The image download remains, followed by a plainly labeled Open Google Classroom link for manual attachment/turn-in. References: https://developers.google.com/workspace/classroom/tutorials/assignment-workflows and https://developers.google.com/workspace/classroom/guides/sharebutton. SOPPA agreement/operator status cannot be determined just by choosing a share button.
+
+Additional checks: all 525 signed ordered facts, sign entry, immutable snapshots, weighted accuracy, and actual component-event tests for multiple timed sessions, combined image rows, factor changes, identity changes and explicit New student reset (`scripts/test-multiplication-flow.mjs`). Native browser preview is unavailable for this revision; these are automated logic checks, not an interactive iPad verification.

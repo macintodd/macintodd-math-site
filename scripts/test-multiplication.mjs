@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import {multiplicationFacts,shuffleFacts,multiplicationResults} from '../src/lib/multiplication.ts'
+import {multiplicationFacts,shuffleFacts,multiplicationResults,signedEntry,studentKey,completedMinute,appendMinute,practicedFactors,combinedResults} from '../src/lib/multiplication.ts'
 const all=multiplicationFacts(Array.from({length:12},(_,i)=>i))
 assert.equal(all.length,143)
 assert.equal(Math.max(...all.map(f=>f.a*f.b)),110)
@@ -15,3 +15,21 @@ assert.deepEqual(all[0],{a:0,b:0})
 assert.deepEqual(multiplicationResults([]),{correct:0,attempted:0,streak:0,best:0,accuracy:0})
 assert.deepEqual(multiplicationResults([true,true,false,true,true,true].map(correct=>({a:2,b:2,answer:correct?4:3,correct}))),{correct:5,attempted:6,streak:3,best:3,accuracy:83})
 console.log('Passed: all 143 allowed facts, factor filtering, 110 maximum, full shuffled coverage, points, streaks, and accuracy.')
+
+const signed=multiplicationFacts(Array.from({length:12},(_,i)=>i),true)
+assert.equal(signed.length,525)
+assert.equal(new Set(signed.map(f=>`${f.a},${f.b}`)).size,525)
+assert(signed.every(f=>Math.abs(f.a*f.b)<=110))
+for(const [a,b] of [[-2,3],[2,-3],[-2,-3],[2,3],[-11,10],[11,-10]])assert(signed.some(f=>f.a===a&&f.b===b))
+assert(!signed.some(f=>Math.abs(f.a)===11&&Math.abs(f.b)===11))
+assert(multiplicationFacts([3],true).every(f=>Math.abs(f.a)===3))
+assert.equal(signedEntry('110','sign'),'-110');assert.equal(signedEntry('-110','sign'),'110');assert.equal(signedEntry('','sign'),'-');assert.equal(signedEntry('-11','0'),'-110');assert.equal(signedEntry('-110','9'),'-110');assert.equal(signedEntry('-110','back'),'-11')
+const factors=[2],records=[{a:-2,b:3,answer:-6,correct:true}]
+const minute=completedMinute('one','2026-10-31T15:00:00.000Z',factors,true,records)
+factors.push(4);records[0].answer=999;assert.deepEqual(minute.selectedFactors,[2]);assert.equal(minute.answers[0].answer,-6)
+assert.deepEqual(practicedFactors(minute),[2])
+let history=appendMinute([],minute);history=appendMinute(history,minute);assert.equal(history.length,1)
+history=appendMinute(history,completedMinute('two','2026-10-31T15:02:00.000Z',[3,4],false,Array.from({length:9},(_,i)=>({a:3,b:i,answer:0,correct:i===0}))))
+assert.equal(combinedResults(history).accuracy,20);assert.equal(combinedResults(history).correct,2);assert.equal(history[0].includeNegatives,true);assert.equal(history[1].includeNegatives,false)
+assert.equal(studentKey(' Alex ',' TODD','3'),studentKey('alex','todd','3'));assert.notEqual(studentKey('Alex','Todd','3'),studentKey('Sam','Todd','3'))
+console.log('Passed: all signed combinations, sign-key entry, immutable per-minute snapshots, duplicate finish protection, weighted report accuracy, and student identity keys.')

@@ -21,3 +21,10 @@ body:has(.multiply-app) .site-header,body:has(.multiply-app) .site-footer{displa
 @media(prefers-reduced-motion:reduce){.multiply-problem,.multiply-pop-star,.multiply-flash{animation:none}.multiply-pop-star{display:none}.multiply-flash{border-color:var(--flash);opacity:.65}}
 
 @media(max-width:380px){.multiply-fact{font-size:42px;gap:8px}.multiply-fact input{width:90px;min-height:60px}}
+
+.multiply-negative-option{min-height:44px;cursor:pointer;display:flex;align-items:center;gap:10px;font-weight:bold;margin:12px 0}.multiply-negative-option input{width:23px;height:23px;accent-color:var(--accent)}
+.multiply-keypad{grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(4,minmax(44px,1fr))}.multiply-keypad button[aria-label='Change sign']{font-size:26px}.multiply-keypad .multiply-enter{grid-column:2/-1}
+.multiply-history{overflow:auto;margin:20px 0;border:1px solid var(--edge);border-radius:12px}.multiply-history table{width:100%;min-width:650px;border-collapse:collapse;font-size:14px}.multiply-history caption{padding:10px;text-align:left;font-weight:bold}.multiply-history th,.multiply-history td{text-align:left;border-top:1px solid var(--edge);padding:10px;vertical-align:top}.multiply-history th{background:var(--soft)}.multiply-history small{display:block;font-size:11px;margin-top:5px}
+.multiply-fact{font-size:clamp(32px,5.8vw,75px);gap:clamp(5px,1vw,14px)}.multiply-fact input{width:clamp(110px,15vw,175px)}
+@media(max-width:740px){.multiply-fact{font-size:35px;gap:5px}.multiply-fact input{width:100px}.multiply-keypad{grid-template-rows:repeat(4,minmax(50px,1fr))}}
+@media(max-width:380px){.multiply-fact{font-size:27px}.multiply-fact input{width:80px}}
