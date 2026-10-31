@@ -1,0 +1,13 @@
+{
+  "repository": "https://github.com/gabrielecirulli/2048",
+  "commit": "478b6ec346e3787f589e4af751378d06ded4cbbc",
+  "license": "MIT",
+  "unmodifiedFiles": {
+    "LICENSE.txt": "57e12c39a6ad9d98b2e451065bfdfbd15fc9e0c2ed3bf4dc1d09acab41ff02fc",
+    "js/grid.js": "169428f5ff7f726c38112fcf1c918028cbca3a1d9f9239838fbc7eb4396b9f9a",
+    "js/tile.js": "13699e51d62179a6d36874108831a29901a98d6e11329918e64cfb5ee82d58e3",
+    "js/game_manager.js": "b02baa6b75f8c8cad8606e680b6f73b7c843c61e3a643ee48410022499a649f0",
+    "js/html_actuator.js": "67b796d4f640b927e517b2281f8230c4f65c08b07558001e2c0dc9ea2e2145cf"
+  },
+  "changes": "Custom HTML/CSS, pointer/keyboard input adapter, memory-only storage, and bootstrap. Core files listed above are unchanged."
+}

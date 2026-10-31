@@ -1,0 +1,1 @@
+body:has(.standalone-2048) .site-header,body:has(.standalone-2048) .site-footer{display:none}body:has(.standalone-2048) main{min-height:0;height:100dvh}.standalone-2048{display:block;border:0;width:100%;height:100dvh;background:#f7f6f1}

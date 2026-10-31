@@ -21,6 +21,7 @@ jobs:
       - run: npm run test:standard-form
       - run: node --experimental-strip-types scripts/test-standard-slope.mjs
       - run: node --experimental-strip-types scripts/test-multiplication.mjs
+      - run: node scripts/test-2048.mjs
       - run: node scripts/test-function-families.mjs
       - run: npm run test:mathboard
       - run: npm run check:content

@@ -2,5 +2,5 @@ import { defineConfig, globalIgnores } from 'eslint/config'
 import nextVitals from 'eslint-config-next/core-web-vitals'
 export default defineConfig([
   ...nextVitals,
-  globalIgnores(['.next/**', 'node_modules/**', 'tmp/**', 'next-env.d.ts']),
+  globalIgnores(['.next/**', 'node_modules/**', 'tmp/**', 'next-env.d.ts', 'public/games/2048/js/**']),
 ])
