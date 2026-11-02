@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import katex from 'katex'
 import {families,makeProblem,makeRound,inputKinds,parseAnswer,isAnswer,tex,evaluationResults,q} from '../src/lib/function-evaluation.ts'
 // Independent arithmetic oracle for the trusted generated TeX, never user-entered input.
-function oracle(problem){let expression=problem.substituted.replace(/\\left|\\right/g,'');for(let i=0;i<8&&expression.includes('\\frac');i++)expression=expression.replace(/\\frac\{([^{}]+)\}\{([^{}]+)\}/g,'(($1)/($2))');expression=expression.replace(/\\sqrt\{([^{}]+)\}/g,'Math.sqrt($1)').replace(/\\lfloor (.*?)\\rfloor/g,'Math.floor($1)').replace(/\|([^|]+)\|/g,'Math.abs($1)').replace(/\^\{([23])\}/g,'**$1').replace(/(\d|\))\(/g,'$1*(');return Function('return ('+expression+')')()}
+function oracle(problem){let expression=problem.substituted.replace(/\\left|\\right/g,'');for(let i=0;i<8&&expression.includes('\\frac');i++)expression=expression.replace(/\\frac\{([^{}]+)\}\{([^{}]+)\}/g,'(($1)/($2))');expression=expression.replace(/\\sqrt\{([^{}]+)\}/g,'Math.sqrt($1)').replace(/\[\[(.*?)\]\]/g,'Math.floor($1)').replace(/\|([^|]+)\|/g,'Math.abs($1)').replace(/\^\{([23])\}/g,'**$1').replace(/(\d|\))\(/g,'$1*(');return Function('return ('+expression+')')()}
 for(const decimals of [false,true])for(const fractions of [false,true]){
  const settings={families:[...families],decimals,fractions},kinds=inputKinds(settings),round=makeRound(settings)
  assert.equal(round.length,12);assert.equal(new Set(round.map(p=>p.family)).size,8)

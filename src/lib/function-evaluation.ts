@@ -36,7 +36,7 @@ export function makeProblem(family:Family,kind:InputKind,random=Math.random):Pro
   else if(family==='squareRoot'){rule=`\\sqrt{${arg}}${tail}`;substituted=`\\sqrt{${replaced}}${tail}`;answer=q(Math.sqrt(target)+offset)}
   else{const power=family==='quadratic'?2:3;rule=`\\left(${arg}\\right)^{${power}}${tail}`;substituted=`\\left(${replaced}\\right)^{${power}}${tail}`;answer=q(target**power+offset)}
  }
- if(family==='greatest'){const k=Math.floor(input.n/input.d)+pick([-2,-1,0,1,2],random);rule=`\\left\\lfloor ${argument(variable,1,k)}\\right\\rfloor${tail}`;substituted=`\\left\\lfloor ${argument(sub,1,k)}\\right\\rfloor${tail}`;answer=q(Math.floor((input.n-k*input.d)/input.d)+offset)}
+ if(family==='greatest'){const k=Math.floor(input.n/input.d)+pick([-2,-1,0,1,2],random);rule=`\\left[\\left[${argument(variable,1,k)}\\right]\\right]${tail}`;substituted=`\\left[\\left[${argument(sub,1,k)}\\right]\\right]${tail}`;answer=q(Math.floor((input.n-k*input.d)/input.d)+offset)}
  if(family==='constant'){const c=pick([-9,-6,-4,-2,-1,0,1,2,4,6,9],random);rule=String(c);substituted=String(c);answer=q(c)}
  return {family,kind,name,variable,input,inputTex,rule,substituted,answer}
 }
