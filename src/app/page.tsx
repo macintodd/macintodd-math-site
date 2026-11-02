@@ -1,13 +1,4 @@
 import Link from 'next/link'
-import { courses, lessons } from '@/content/lessons'
-
-export default function Home() {
-  return <section id="courses" className="course-section student-home"><div className="shell">
-    <div className="section-heading"><h1>Choose your class.</h1></div>
-    <div className="course-grid">{courses.map(course => <Link className={`course-tile ${course.id}`} key={course.id} href={`/courses/${course.id}`}>
-      <div className="tile-top"><h2>{course.title}</h2><span className="circle-arrow" aria-hidden="true">→</span></div>
-      <p>Lesson notes, practice, and videos.</p>
-      <div className="tile-bottom"><span>{lessons.filter(l => l.course === course.id).length} {lessons.filter(l => l.course === course.id).length === 1 ? 'lesson' : 'lessons'} available</span><span>View lesson index →</span></div>
-    </Link>)}</div>
-  </div></section>
-}
+import {courses,lessons} from '@/content/lessons'
+import {units} from '@/content/units'
+export default function Home(){return <div className="modern-home shell"><section className="home-start"><div className="home-heading"><div><p className="eyebrow">YOUR NEXT STEP STARTS HERE</p><h1>Choose your class.</h1></div><p>Your lessons, videos, and practice.<br/>All in one place.</p></div><div className="home-class-grid">{courses.map((course,i)=><Link className={`home-class ${course.id}`} href={`/courses/${course.id}`} key={course.id}><p className="home-class-label">{i===0?'Explore · understand · practice':'Connect · discover · apply'}<span>0{i+1}</span></p><h2>{course.title}</h2><p>{i===0?'Build on what you know.':'See how the ideas connect.'}</p><span className="home-class-arrow" aria-hidden="true">→</span><svg className="home-class-art" viewBox="0 0 180 95" aria-hidden="true"><path d="M15 65H165M90 90V5" stroke="currentColor" opacity=".3" fill="none"/><path d={i===0?'M25 78Q90 -45 155 78':'M10 49C35 -10 65 -10 90 49S145 108 170 49'} stroke="currentColor" strokeWidth="3" fill="none"/><circle cx="90" cy={i===0?16:49} r="5" fill="#d7945d"/></svg></Link>)}</div></section><section className="home-recent"><div className="home-section-title"><h2>Pick up where your class left off</h2><span>Recent lessons &amp; practice</span></div><div className="home-recent-grid">{courses.map(course=>{const unit=units.find(u=>u.course===course.id&&u.current);const recent=lessons.filter(l=>l.course===course.id&&(!unit||l.unitSlug===unit.slug)).slice(-4).reverse();return <article className="home-recent-card" key={course.id}><div className="home-card-title"><h3>{course.title}</h3>{unit&&<span className="modern-badge">Current · Unit {unit.number}</span>}</div>{recent.map(lesson=><Link className={`home-recent-row ${lesson.followUpOf?'follow-up':''}`} href={`/courses/${course.id}/${lesson.slug}`} key={lesson.slug}><span className="home-lesson-icon" aria-hidden="true">{lesson.followUpOf?'↳':'↗'}</span><span>{lesson.title}</span><span aria-hidden="true">→</span></Link>)}<Link className="modern-text-link" href={`/courses/${course.id}`}>All {course.title} lessons →</Link></article>})}</div></section><section className="home-practice-band"><div><h2>A little practice goes a long way.</h2><p>Choose a skill. Try a challenge. See your progress.</p></div><Link href="/apps">Find a practice app →</Link></section></div>}

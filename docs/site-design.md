@@ -1,0 +1,9 @@
+# MacInTodd design system
+
+The teacher approved the local playful-modern preview on November 1, 2026. The live shared theme is src/app/theme.css, imported after the existing layout styles. Core colors are navy #172b4a, copper #a75d2c, warm neutral #faf8f3, sky #e8f4fa and peach #fff0e5. Avenir Next, Trebuchet MS and system fallbacks avoid external font requests. Brand.tsx provides the accessible, scalable MacInTodd wordmark with the curve and circular marker inspired by the supplied MathBoard reference.
+
+Home starts with class choices and current-unit recent lesson links; the practice band follows. Course contents retain all lessons on one page, folding units, indented follow-ups, unlinked assessment labels, unit overview links, vocabulary and a practice sidebar. Unit 1A stays closed, current units stay open, and the red current-unit label is retained. Lesson readers keep their sidebar, four PDF positions, large 16:9 video, vocabulary pop-outs and previous/next navigation. Backgrounds stay clean rather than ruled or gridded. Unit, resource and glossary pages share the theme.
+
+Practice pages retain scoring, touch behavior, identity display and local-only reports. Their surrounding chrome and the two embedded games use the shared navy/warm palette. Multiplication theme choices and mathematical display fonts remain functional. Individual gameplay layouts must not be compressed to fit decorative elements.
+
+Validation includes lint, production build, typecheck, content checks, app-directory filtering, strict rendering of twelve example previews, and existing game/function/line-equation event suites. Verify all published routes and allowlisted PDFs after deployment. Browser visual inspection is unavailable in this environment; landscape iPad and phone visual review remains outstanding.

@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { courses, lessons, type Lesson } from '@/content/lessons'
 import { units } from '@/content/units'
+import {practiceApps} from '@/content/practice-apps'
 import { precalculusAssessments } from '@/content/precalculus'
 
 export function generateStaticParams() { return courses.map(course => ({ course: course.id })) }
@@ -19,8 +20,8 @@ export default async function CoursePage({ params }: { params: Promise<{ course:
   return <section className="course-index shell" aria-label={`${course.title} table of contents`}>
     <nav className="book-breadcrumb" aria-label="Breadcrumb"><Link href="/">Classes</Link><span aria-hidden="true">/</span><span>{course.title}</span></nav>
     <div className="course-index-content">
-      <header><h1>{course.title} table of contents</h1><p className="course-glossary-link"><Link href={`/courses/${courseId}/vocabulary`}>Vocabulary &amp; definitions →</Link></p></header>
-      {courseUnits.map(unit => {
+      <header><p className="eyebrow">LEARN IT. TRY IT. MAKE IT CLICK.</p><h1>{course.title}</h1><p className="course-intro">Lesson notes, videos, and practice, organized by unit.</p><p className="course-glossary-link"><Link href={`/courses/${courseId}/vocabulary`}>Vocabulary &amp; definitions →</Link></p></header>
+      <div className="modern-course-layout"><div>{courseUnits.map(unit => {
         const entries: ContentsEntry[] = [
           ...lessons.filter(lesson => lesson.course === courseId && lesson.unitSlug === unit.slug).map(lesson => ({ lesson, sortOrder: lesson.sortOrder ?? Number(lesson.number.match(/\d+/)?.[0] ?? 0) })),
           ...precalculusAssessments.filter(item => item.course === courseId && item.unitSlug === unit.slug),
@@ -36,7 +37,7 @@ export default async function CoursePage({ params }: { params: Promise<{ course:
             </li>
           })}</ol>
         </details>
-      })}
+      })}</div><aside className="modern-course-aside"><h2>Try it for yourself</h2><p>Practice the skills from your class.</p>{practiceApps.filter(app=>app.courses.includes(course.id)&&app.category==='Linear graphs and equations').slice(0,4).map(app=><Link key={app.slug} href={`/apps/${app.slug}`}>{app.title}<span aria-hidden="true">→</span></Link>)}<Link className="modern-text-link" href="/apps">Browse all practice apps →</Link><div className="modern-aside-note"><h3>Need a fresh start?</h3><p>Revisit a video or compare your work with the completed notes. Take it one step at a time.</p></div></aside></div>
     </div>
   </section>
 }

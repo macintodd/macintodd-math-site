@@ -21,3 +21,6 @@
 .tile-position-4-3{transform:translate(calc(3 * (100% + 10px)),calc(2 * (100% + 10px)))}
 .tile-position-4-4{transform:translate(calc(3 * (100% + 10px)),calc(3 * (100% + 10px)))}
 @media(max-width:380px){.scores{position:static}.scores>div{flex:1}.scores{width:100%}}
+
+/* MacInTodd frame; preserve the original tile contrast and gameplay layout. */
+body{background:#faf8f3;color:#172b4a;font-family:'Avenir Next','Trebuchet MS',Arial,sans-serif}.heading h1{color:#172b4a}.above-game button{border-radius:10px;background:#172b4a}.game-container{border-radius:15px}.score-container,.best-container{border-radius:9px}

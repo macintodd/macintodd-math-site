@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import './globals.css'
+import './theme.css'
+import {Brand} from '@/components/Brand'
 import 'katex/dist/katex.min.css'
 
 export const metadata: Metadata = {
@@ -12,7 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return <html lang="en"><body>
     <a className="skip-link" href="#main">Skip to content</a>
     <header className="site-header"><div className="shell header-inner">
-      <Link className="brand" href="/" aria-label="MacIntodd Math home"><span className="brand-symbol" aria-hidden="true">m<span>↗</span></span><span>MacIntodd<span className="brand-sub">ALGEBRA 2 · PRECALCULUS</span></span></Link>
+      <Link className="brand" href="/" aria-label="MacIntodd Math home"><Brand/></Link>
       <nav aria-label="Main navigation"><Link href="/courses/algebra-2">Algebra 2</Link><Link href="/courses/precalculus">Precalculus</Link><Link href="/apps">Practice apps</Link><Link href="/resources">Resources</Link></nav>
     </div></header>
     <main id="main" tabIndex={-1}>{children}</main>
