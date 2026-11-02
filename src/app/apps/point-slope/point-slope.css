@@ -2,3 +2,5 @@
 @media(max-width:700px){.point-slope-progress{gap:7px}.point-slope-progress>strong{font-size:18px}.point-slope-app .slope-graph-panel{position:static}.point-slope-graph{max-height:none;min-height:0}.point-template{font-size:18px}.point-slope-app .point-template input{width:58px}.point-keyboard{max-width:none}.point-slope-progress .slope-stars{font-size:18px}.point-slope-progress .slope-score{font-size:12px}}
 
 .point-symbol-keys{display:flex;flex-direction:column;gap:8px}.point-symbol-keys>button:not(.point-variable){background:#edf1fb;border-color:#a8badf;color:#204c86;font-size:24px}.point-final{align-items:flex-start;flex-direction:column;font-size:13px;font-weight:650;gap:6px}
+
+.point-work-view[hidden]{display:none}.point-slope-app .board-toggle{justify-content:center;margin-bottom:12px}.point-slope-app .scratch-surface{max-height:calc(100dvh - 290px);min-height:280px}.point-slope-app .scratch-tools{justify-content:center}.point-slope-app .scratch-pad>p{text-align:left}@media(max-width:700px){.point-slope-app .scratch-surface{max-height:none;min-height:0}}
