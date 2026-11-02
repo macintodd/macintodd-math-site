@@ -1,4 +1,4 @@
-# Function Evaluation Machine
+# Function Evaluation Practice
 
 Route `/apps/function-evaluation`, linked from Practice apps. Eight selectable families: linear, absolute value, quadratic, cubic, rational, greatest integer, square root and constant. Function names and input-variable letters vary. Inputs stay between 1 and 12. Mental-math templates constrain shifted powers to small arguments, square-root radicands to 0/1/4/9, and rational denominators to nonzero small integers. Exact rational arithmetic checks equivalent fractions and finite decimals without evaluating user-entered code.
 
@@ -7,3 +7,5 @@ Twelve untimed questions, one attempt and one point per question, with substitut
 Gold stars indicate whole-number inputs, blue decimal inputs, purple fraction inputs, with text labels as well as color. Name/hour remain in a sticky header throughout practice and results. The named local PNG includes score, answered count, accuracy, best streak, selected families, both toggle settings, colored star totals and completion date/time. Students manually submit the image in Classroom. Early finish is available after an answer; partial scores show answered count and points out of twelve. Returning to editable student/settings clears answers and exported image. No names, answers or scores are uploaded or persisted.
 
 Validation: 2,400 generated formulas independently evaluated from their displayed substituted TeX, KaTeX parsing, input bounds/mixes, safe domains, equivalent-answer parsing, colored-star counts, and actual component-event tests across twelve questions, results export and a new student. Normal lint/build/typecheck/content and HTTP page/PDF checks apply. Native browser preview was attempted but unavailable/stalled, so interactive iPad rendering is unverified for this revision.
+
+The answer prompt appears directly below the function as “Find P(4) = [answer]” using the generated function name and input. A local touch/Apple Pencil scratch pad below has pen, eraser, undo and clear controls. It resets on each question and round. The existing graphing scratch pad retains its square dimensions.

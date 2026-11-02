@@ -7,3 +7,17 @@ body:has(.evaluation-app) .site-header,body:has(.evaluation-app) .site-footer{di
 /* Auto margins center spare space without hiding the top of tall content. */
 .evaluation-machine{justify-content:flex-start}.evaluation-rule{margin-top:auto}.evaluation-earned{margin-bottom:auto}.evaluation-keypad button{min-height:52px}
 @media(max-height:700px) and (min-width:741px){.evaluation-controls h2{margin:4px 0 8px;font-size:20px}.evaluation-controls p{font-size:13px;margin:6px 0;line-height:1.4}.evaluation-keypad button{min-height:48px}.evaluation-legend{margin:10px 0;gap:4px}}
+
+/* Compact function and answer leave the main panel available for scratch work. */
+.evaluation-rule{margin-top:0;flex-shrink:0}
+.evaluation-find{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;font-size:25px;flex-shrink:0}
+.evaluation-find label{display:flex;align-items:center;gap:10px}
+.evaluation-find input{width:140px;min-width:0;min-height:50px;font:26px Arial;text-align:center;border:2px solid #729fb1;border-radius:10px;background:#fffdf5;color:var(--ink)}
+.evaluation-scratch{width:100%;min-height:210px;flex:1}
+.evaluation-scratch .scratch-pad{height:100%;display:flex;flex-direction:column}
+.evaluation-scratch .scratch-tools{margin:0 0 6px;gap:6px}
+.evaluation-scratch .scratch-tools button{font-size:12px;padding:6px 10px;min-height:44px}
+.evaluation-scratch .scratch-surface{aspect-ratio:504/210;flex:1;min-height:145px;max-height:360px}
+.evaluation-scratch .slope-small{font-size:11px;margin:4px 0}
+.evaluation-earned{margin-bottom:0;min-height:30px}
+@media(max-width:740px){.evaluation-find{font-size:22px}.evaluation-scratch{min-height:240px}.evaluation-machine{min-height:0}}

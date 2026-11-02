@@ -25,6 +25,7 @@ jobs:
       - run: node --experimental-strip-types scripts/test-multiplication.mjs
       - run: node --experimental-strip-types scripts/test-multiplication-flow.mjs
       - run: node scripts/test-2048.mjs
+      - run: node scripts/test-scratch-pad.mjs
       - run: node --experimental-strip-types scripts/test-function-evaluation.mjs
       - run: node --experimental-strip-types scripts/test-function-evaluation-flow.mjs
       - run: node scripts/test-function-families.mjs
