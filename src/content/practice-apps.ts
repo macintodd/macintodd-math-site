@@ -6,6 +6,7 @@ export type PracticeApp={slug:string;title:string;description:string;category:Ap
 const a=(slug:string):LessonReference=>({course:'algebra-2',slug})
 const p=(slug:string):LessonReference=>({course:'precalculus',slug})
 export const practiceApps:PracticeApp[]=[
+ {slug:'transformations',title:'Transformation Explorer',description:'Discover shifts, stretches, and reflections with six parent functions, live sliders, and linked input/output tables.',category:'Functions',courses:['algebra-2','precalculus'],lessons:[],note:'Transformation exploration and preview · record observations and export a named report'},
  {slug:'multiplication',title:'Multiplication Minute',description:'Choose factors, optional negatives, and a color theme. Answer as many as you can in one minute.',category:'Arithmetic foundations',courses:['algebra-2','precalculus'],lessons:[a('formula-substitution'),p('algebra-review-ti84')],note:'Prerequisite skill review'},
  {slug:'one-step-solver',title:'One-step equations',description:'Choose inverse operations and solve one-step equations at two difficulty levels.',category:'Equations and factoring',courses:['algebra-2','precalculus'],lessons:[a('one-step-equations'),p('algebra-review-ti84')],note:'Precalculus: algebra review'},
  {slug:'factoring',title:'Factoring',description:'Practice trinomials, differences of squares, and common factors.',category:'Equations and factoring',courses:['algebra-2','precalculus'],lessons:[p('factoring-packet')],note:'Algebra 2: general factoring practice; no matching published lesson yet'},
