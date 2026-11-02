@@ -16,6 +16,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run test:slope
+      - run: node --experimental-strip-types scripts/test-line-equation-levels.mjs
+      - run: node --experimental-strip-types scripts/test-line-equation-flow.mjs
       - run: npm run test:line-equations
       - run: npm run test:graph-line
       - run: npm run test:standard-form

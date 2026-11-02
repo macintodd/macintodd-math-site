@@ -1,9 +1,13 @@
 "use client";
 import { useState } from "react";
 import { points, type Line } from "@/lib/slope";
-export default function Graph({ line, hint }: { line: Line; hint: boolean }) {
+type Point={x:number;y:number}
+export default function Graph({ line, hint, selectedPoints, onPointTap, disabled=false, instructions }: { line: Line; hint: boolean; selectedPoints?:Point[];onPointTap?:(point:Point)=>void;disabled?:boolean;instructions?:string }) {
   const [selected, setSelected] = useState<string[]>([]);
+  const shown=selectedPoints?selectedPoints.map(p=>`${p.x},${p.y}`):selected;
   function toggle(key: string) {
+    if(disabled)return;
+    if(onPointTap){const [x,y]=key.split(',').map(Number);onPointTap({x,y});return;}
     setSelected((current) =>
       current.includes(key)
         ? current.filter((p) => p !== key)
@@ -22,7 +26,7 @@ export default function Graph({ line, hint }: { line: Line; hint: boolean }) {
         className="slope-graph"
         viewBox="0 0 448 448"
         role="group"
-        aria-label="Coordinate grid from negative ten to ten, with a line. Tap integer grid points on the line to show their coordinates. Tap a selected point again to hide them."
+        aria-label={instructions??"Coordinate grid from negative ten to ten, with a line. Tap integer grid points on the line to show their coordinates. Tap a selected point again to hide them."}
       >
         <defs>
           <clipPath id="slope-grid-clip">
@@ -99,7 +103,7 @@ export default function Graph({ line, hint }: { line: Line; hint: boolean }) {
         )}
         {pairs.map((p) => {
           const key = `${p.x},${p.y}`,
-            active = selected.includes(key);
+            active = shown.includes(key);
           const labelX = Math.max(61, Math.min(387, scale(p.x))),
             labelY =
               vertical(p.y) < 65 ? vertical(p.y) + 28 : vertical(p.y) - 18;
@@ -141,7 +145,8 @@ export default function Graph({ line, hint }: { line: Line; hint: boolean }) {
                 r="9"
                 fill="transparent"
                 role="button"
-                tabIndex={0}
+                tabIndex={disabled?-1:0}
+                aria-disabled={disabled}
                 aria-label={`Point (${p.x}, ${p.y})`}
                 aria-pressed={active}
                 onClick={() => toggle(key)}
@@ -157,8 +162,8 @@ export default function Graph({ line, hint }: { line: Line; hint: boolean }) {
         })}
       </svg>
       <p className="slope-selected" role="status">
-        {selected.length
-          ? `Selected: ${selected.map((p) => `(${p.replace(",", ", ")})`).join(" · ")}`
+        {shown.length
+          ? `Selected: ${shown.map((p) => `(${p.replace(",", ", ")})`).join(" · ")}`
           : ""}
       </p>
     </>

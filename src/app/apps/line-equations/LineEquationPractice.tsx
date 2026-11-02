@@ -1,110 +1,58 @@
 'use client'
-
 import Link from 'next/link'
-import { useRef, useState } from 'react'
+import {useLayoutEffect,useRef,useState} from 'react'
 import Graph from '../slope/Graph'
-import { fraction, type Line, type Student } from '@/lib/slope'
-import { checkEquationAnswer, equationProgress, equationText, generateEquationLine, type EquationAnswer, type EquationRecord } from '@/lib/line-equation'
-
-const emptyAnswer = (): EquationAnswer => ({ interceptX: '', interceptY: '', rise: '', run: '', equation: '' })
-type Field = keyof EquationAnswer
-export default function LineEquationPractice() {
-  const [student, setStudent] = useState<Student>({ firstName: '', lastName: '', hour: '' })
-  const [line, setLine] = useState<Line | null>(null)
-  const [history, setHistory] = useState<EquationRecord[]>([])
-  const [answer, setAnswer] = useState(emptyAnswer)
-  const [attempts, setAttempts] = useState(0)
-  const [phase, setPhase] = useState<'answer' | 'retry' | 'correct' | 'revealed'>('answer')
-  const [active, setActive] = useState<Field>('interceptX')
-  const [message, setMessage] = useState('')
-  const [finished, setFinished] = useState<string | null>(null)
-  const [notation, setNotation] = useState<'y' | 'f(x)'>('y')
-  const [image, setImage] = useState<string | null>(null)
-  const inputs = useRef<Partial<Record<Field, HTMLInputElement | null>>>({})
-  const allRecords = line && attempts ? [...history, { line, attempts, correct: phase === 'correct' }] : history
-  const progress = equationProgress(allRecords)
-  const locked = phase === 'correct' || phase === 'revealed' || !!finished
-  const name = `${student.firstName} ${student.lastName}`
-  function focus(field: Field) { setActive(field); inputs.current[field]?.focus({ preventScroll: true }) }
-  function edit(field: Field, value: string) {
-    if (locked) return
-    if (field === 'equation' ? /^[\dxyf().+\-−*/= ×·]{0,100}$/i.test(value) : /^-?\d{0,3}$/.test(value)) setAnswer(current => ({ ...current, [field]: value }))
-  }
-  function key(value: string) {
-    const current = answer[active]
-    edit(active, value === 'clear' ? '' : value === 'back' ? current.slice(0, -1) : current + value)
-    focus(active)
-  }
-  function finish() { setFinished(new Date().toLocaleString()); setImage(null) }
-  function submit(event: React.FormEvent) {
-    event.preventDefault()
-    if (!line || locked) return
-    if (Object.values(answer).some(value => !value.trim() || value === '-')) { setMessage('Complete the ordered pair, slope, and equation before submitting.'); return }
-    const result = checkEquationAnswer(line, answer), nextAttempts = attempts + 1
-    setAttempts(nextAttempts)
-    if (result.correct) {
-      setPhase('correct')
-      const simple = fraction(line.rise, line.run)
-      setMessage(`That’s correct! The y-intercept is (0, ${line.y}), the slope is ${simple}, and ${notation} = ${equationText(line)}.${answer.rise + '/' + answer.run !== simple && Number(answer.run) !== 1 ? ` Write the slope in simplest form: ${simple}.` : ''}${nextAttempts > 1 ? ' You earned a gold star on your retry; your streak remains reset.' : ' Gold star!'}`)
-      if (equationProgress([...history, { line, attempts: nextAttempts, correct: true }]).completed) finish()
-    } else {
-      const hints = [
-        !result.interceptCorrect ? 'Y-intercept: find where the line crosses the y-axis. Its x-coordinate is 0.' : 'Your y-intercept is correct.',
-        !result.slopeCorrect ? 'Slope: use two integer grid points. Count rise (up positive, down negative) over run to the right.' : 'Your slope is correct.',
-        !result.equationCorrect ? `Equation: use ${notation} = mx + b. Replace m with the slope and b with the y-coordinate of the intercept. Use x for the variable.` : 'Your equation is correct.',
-      ]
-      if (nextAttempts === 1) { setPhase('retry'); setMessage(`Not quite. Your streak has reset. ${hints.join(' ')} Try again for a gold star.`) }
-      else { setPhase('revealed'); setMessage(`The y-intercept is (0, ${line.y}), m = ${fraction(line.rise, line.run)}, and ${notation} = ${equationText(line)}. Compare this with your entries, then try a new graph.`) }
-    }
-  }
-  function nextGraph() {
-    if (!line) return
-    setHistory(allRecords)
-    setLine(generateEquationLine(Math.random, [...history.map(item => item.line), line]))
-    setAnswer(emptyAnswer()); setAttempts(0); setPhase('answer'); setMessage('')
-    setNotation((history.length + 1) % 2 ? 'f(x)' : 'y'); focus('interceptX')
-  }
-  function saveImage() {
-    const canvas = document.createElement('canvas'); canvas.width = 1200; canvas.height = 850
-    const ctx = canvas.getContext('2d'); if (!ctx) { setMessage('Please take a screenshot of this results screen.'); return }
-    ctx.fillStyle = '#fffdf8'; ctx.fillRect(0, 0, 1200, 850); ctx.fillStyle = '#16334c'
-    const rows = ['MacIntodd Math · Write the line', name, `Class hour ${student.hour}`, `Score: ${progress.score}/10`, `${progress.correct} graphs correct · ${progress.firstTry} correct on first try`, `Best streak: ${progress.bestStreak} / 5 · Final streak: ${progress.streak}`, `${allRecords.length} graphs attempted · ${progress.attempts} answers submitted`, `${Math.max(0, 5 - progress.bestStreak)} point(s) deducted for missing streak`, finished ?? '', 'Submit this image to Google Classroom.']
-    rows.forEach((text, index) => { const size = index === 3 ? 60 : index === 1 ? 42 : 30; ctx.font = `${index === 1 || index === 3 ? 'bold ' : ''}${size}px Arial`; ctx.fillText(text, 60, 80 + index * 75, 1080) })
-    setImage(canvas.toDataURL('image/png'))
-  }
-  function field(id: Field, label: string, placeholder?: string) {
-    return <input ref={element => { inputs.current[id] = element }} aria-label={label} value={answer[id]} onChange={event => edit(id, event.target.value)} onFocus={() => setActive(id)} inputMode="none" autoComplete="off" autoCapitalize="none" spellCheck={false} disabled={locked} placeholder={placeholder} className={active === id ? 'active' : ''} />
-  }
-  return <div className="slope-app equation-app shell">
-    <nav className="breadcrumb" aria-label="Breadcrumb"><Link href="/apps">Practice apps</Link><span>/</span><span>Write the line</span></nav>
-    <header className="slope-title"><div><p className="eyebrow">FROM GRAPH TO EQUATION</p><h1>Write the line</h1></div></header>
-    {!line ? <form className="slope-start" onSubmit={event => { event.preventDefault(); setStudent({ ...student, firstName: student.firstName.trim(), lastName: student.lastName.trim() }); setLine(generateEquationLine()); setNotation('y') }}>
-      <h2>Find the intercept, slope, and equation</h2>
-      <p>Earn 10 correct graphs and a best streak of 5 first-try answers for 10/10. A correct retry earns a gold star but breaks the streak. The best streak you reach in this session counts.</p>
-      <p>You can submit once you reach a streak of 5 or finish 10 graphs correctly. Your score is your correct total (up to 10), minus one point for each streak point missing from 5. For example, 10 correct with a best streak of 3 earns 8/10. You may keep practicing to improve your score.</p>
-      <div className="slope-student-fields">{(['firstName','lastName'] as const).map(id => <label key={id}>{id === 'firstName' ? 'First name' : 'Last name'}<input required maxLength={60} pattern=".*\S.*" autoComplete="off" value={student[id]} onChange={event => setStudent({ ...student, [id]: event.target.value })} /></label>)}<label>Class hour<select required value={student.hour} onChange={event => setStudent({ ...student, hour: event.target.value })}><option value="">Choose hour</option>{['3','6','7','8'].map(hour => <option key={hour}>{hour}</option>)}</select></label></div>
-      <p className="slope-storage">Your name, answers, and scores stay in this page on your device. Nothing is sent to a server or saved in browser storage. Take a screenshot at any time, or save your final results image for Google Classroom. Leaving or reloading resets practice.</p>
-      <button className="slope-primary">Start practice</button>
-    </form> : <>
-      <div className="equation-progress"><div className="equation-student"><strong>{name}</strong><span>Class hour {student.hour}</span></div>
-      <div className="slope-score" aria-label="Progress"><span>Score <b>{progress.score}</b> / 10</span><span>Correct <b>{progress.correct}</b> / 10</span><span>Streak <b>{progress.streak}</b></span><span>Best streak <b>{progress.bestStreak}</b> / 5</span></div>
-      <div className="slope-stars" aria-label={`${progress.correct} gold stars`}>{'★'.repeat(Math.min(progress.correct, 30))}{progress.correct > 30 ? ` +${progress.correct - 30}` : ''}</div></div>
-      {finished ? <section className="slope-complete"><h2>{progress.completed ? 'Goal reached!' : 'Practice results'}</h2><p className="equation-results-name">{name} · Class hour {student.hour}</p><h2>Score: {progress.score}/10</h2><p>{progress.correct} correct graphs · {progress.firstTry} correct on first try · best streak {progress.bestStreak}/5</p><p>{allRecords.length} graphs attempted · {progress.attempts} answers submitted</p><p>Correct total (up to 10): {Math.min(10, progress.correct)}. Missing streak deduction: {Math.max(0,5-progress.bestStreak)}.</p><p>{finished}</p><p>Take a screenshot showing your name and score. Upload it to Google Classroom yourself.</p><button onClick={saveImage}>Create results image</button>{image && <div className="slope-result-image"><p><a className="slope-primary" href={image} download="line-equation-results.png">Save results image</a></p>{/* Local image only; no network request. */}
+import {fraction,type Line,type Student} from '@/lib/slope'
+import {checkEquationAnswer,equationText,generateEquationLine,type EquationAnswer} from '@/lib/line-equation'
+import {checkTappedIntercept,checkGuidedSlope,levelProgress,type LevelRecord,type LineLevel,type GuidedStep} from '@/lib/line-equation-levels'
+import type {GridPoint} from '@/lib/graph-line'
+import {editAnswer} from '@/lib/mathboard/keypad'
+const emptyAnswer=():EquationAnswer=>({interceptX:'',interceptY:'',rise:'',run:'',equation:''})
+type Field=keyof EquationAnswer
+export default function LineEquationPractice(){
+ const [student,setStudent]=useState<Student>({firstName:'',lastName:'',hour:''}),[line,setLine]=useState<Line|null>(null),[history,setHistory]=useState<LevelRecord[]>([])
+ const [level,setLevel]=useState<LineLevel>(1),[step,setStep]=useState<GuidedStep>('intercept'),[answer,setAnswer]=useState(emptyAnswer),[points,setPoints]=useState<GridPoint[]>([])
+ const [misses,setMisses]=useState(0),[checks,setChecks]=useState(0),[equationAttempts,setEquationAttempts]=useState(0),[phase,setPhase]=useState<'answer'|'retry'|'correct'|'revealed'>('answer')
+ const [active,setActive]=useState<Field>('rise'),[message,setMessage]=useState(''),[finished,setFinished]=useState<string|null>(null),[notation,setNotation]=useState<'y'|'f(x)'>('y'),[image,setImage]=useState<string|null>(null)
+ const inputs=useRef<Partial<Record<Field,HTMLInputElement|null>>>({}),caret=useRef<{field:Field;position:number}|null>(null)
+ useLayoutEffect(()=>{const cursor=caret.current;if(cursor){inputs.current[cursor.field]?.focus({preventScroll:true});inputs.current[cursor.field]?.setSelectionRange(cursor.position,cursor.position);caret.current=null}},[answer])
+ const locked=phase==='correct'||phase==='revealed'||!!finished,name=`${student.firstName} ${student.lastName}`
+ const current:LevelRecord|null=line&&(misses>0||locked)?{line,level,checks,attempts:misses?2:1,correct:phase==='correct'}:null
+ const allRecords=current?[...history,current]:history,stats=levelProgress(allRecords),progress=stats.independent
+ function allowed(field:Field){return !locked&&(level===2||(step==='slope'&&points.length===2&&(field==='rise'||field==='run'))||(step==='equation'&&field==='equation'))}
+ function edit(field:Field,value:string){if(!allowed(field))return;if(field==='equation'?/^[\dxyf().+\-−*/= ×·]{0,100}$/i.test(value):/^-?\d{0,3}$/.test(value))setAnswer(a=>({...a,[field]:value}))}
+ function key(value:string){if(!allowed(active))return;const text=answer[active],input=inputs.current[active],edited=editAnswer(text,value,input?.selectionStart??text.length,input?.selectionEnd??text.length);caret.current={field:active,position:edited.caret};edit(active,edited.value)}
+ function tap(point:GridPoint){if(locked)return;if(level===1){if(step==='intercept'){const exists=points.some(p=>p.x===point.x&&p.y===point.y);setPoints(exists?[]:[point]);setAnswer(a=>({...a,interceptX:exists?'':String(point.x),interceptY:exists?'':String(point.y)}));setMessage('');return}if(step==='slope'){if(point.x===0&&point.y===line?.y)return;const exists=points[1]?.x===point.x&&points[1]?.y===point.y;setPoints(exists?[points[0]]:[points[0],point]);setAnswer(a=>({...a,rise:'',run:''}));setActive('rise');setMessage('');return}return}
+  const exists=points.some(p=>p.x===point.x&&p.y===point.y);setPoints(exists?points.filter(p=>p.x!==point.x||p.y!==point.y):[...points,point]);if(!exists&&point.x===0)setAnswer(a=>({...a,interceptX:'0',interceptY:String(point.y)}))
+ }
+ function stageCheck(){if(!line||level!==1||locked||step==='equation')return;const correct=step==='intercept'?checkTappedIntercept(line,points[0]??null):checkGuidedSlope(line,answer,points[1]??null);setChecks(n=>n+1);if(!correct){setMisses(n=>n+1);setMessage(step==='intercept'?'Not quite. Tap where the line crosses the vertical y-axis: the x-coordinate must be 0. Your Level 1 streak has reset.':'Not quite. Count the signed change in y (rise) over the signed change in x (run) between your two points. Your Level 1 streak has reset.');return}if(step==='intercept'){setStep('slope');setActive('rise');setMessage(`Correct y-intercept: (0, ${line.y}). Now tap a second point on the line, then determine the slope.`)}else{setStep('equation');setActive('equation');setMessage(`Correct slope: ${fraction(line.rise,line.run)}. Now write the equation of the line.`)}}
+ function finish(){setFinished(new Date().toLocaleString());setImage(null)}
+ function submit(event:React.FormEvent){event.preventDefault();if(!line||locked||level===1&&step!=='equation')return;if(Object.values(answer).some(v=>!v.trim()||v==='-')){setMessage('Complete the y-intercept, slope, and equation first.');return}const result=checkEquationAnswer(line,answer);setChecks(n=>n+1);setEquationAttempts(n=>n+1)
+  if(result.correct){setPhase('correct');const record:LevelRecord={line,level,attempts:misses?2:1,correct:true,checks:checks+1},updated=levelProgress([...history,record]);setMessage(`That’s correct! The y-intercept is (0, ${line.y}), the slope is ${fraction(line.rise,line.run)}, and ${notation} = ${equationText(line)}. Gold star!${misses?' A retry earns a star, but does not extend the streak.':''}${level===1&&updated.unlocked?' Level 2 is unlocked!':''}`);if(level===2&&updated.independent.completed)finish()}
+  else{setMisses(n=>n+1);if(equationAttempts===0){setPhase('retry');setMessage(`Not quite. Your streak has reset. ${!result.interceptCorrect?'Check where the line crosses the y-axis. ':''}${!result.slopeCorrect?'Check signed rise over run. ':''}${!result.equationCorrect?`Use ${notation} = mx + b: put the slope before x and add the y-intercept. `:''}Try again for a gold star.`)}else{setPhase('revealed');setMessage(`The y-intercept is (0, ${line.y}), m = ${fraction(line.rise,line.run)}, and ${notation} = ${equationText(line)}. Compare your entries, then try a new graph.`)}}
+ }
+ function nextGraph(){if(!line)return;const nextLevel:LineLevel=stats.unlocked?2:1;setHistory(allRecords);setLine(generateEquationLine(Math.random,allRecords.map(r=>r.line)));setLevel(nextLevel);setStep('intercept');setAnswer(emptyAnswer());setPoints([]);setMisses(0);setChecks(0);setEquationAttempts(0);setPhase('answer');setMessage('');setNotation(allRecords.length%2?'f(x)':'y');setActive(nextLevel===1?'rise':'interceptX')}
+ function reset(){setNotation('y');setActive('rise');setLine(null);setStudent({firstName:'',lastName:'',hour:''});setHistory([]);setLevel(1);setStep('intercept');setAnswer(emptyAnswer());setPoints([]);setMisses(0);setChecks(0);setEquationAttempts(0);setPhase('answer');setMessage('');setFinished(null);setImage(null)}
+ function saveImage(){const canvas=document.createElement('canvas');canvas.width=1400;canvas.height=950;const ctx=canvas.getContext('2d');if(!ctx)return;ctx.fillStyle='#fffdf8';ctx.fillRect(0,0,1400,950);ctx.fillStyle='#16334c';const rows=['MacIntodd Math · Write the line',name,`Class hour ${student.hour}`,`Level 2 score: ${progress.score}/10`,`Level 1: ${stats.guided.correct} correct · best first-try streak ${stats.guided.bestStreak}/5`,`Level 1 completed: ${stats.unlocked?'YES':'NO'}`,`Level 2: ${progress.correct} correct · best first-try streak ${progress.bestStreak}/5`,`${stats.totalStars} total stars · ${stats.checks} checks performed`,finished??'','Save this image and submit it in Google Classroom.'];rows.forEach((text,i)=>{ctx.font=`${i===1||i===3?'bold ':''}${i===3?48:i===1?40:29}px Arial`;ctx.fillText(text,55,70+i*80,1290)});setImage(canvas.toDataURL('image/png'))}
+ function field(id:Field,label:string,placeholder?:string,readOnly=false){return <input ref={el=>{inputs.current[id]=el}} aria-label={label} value={answer[id]} onChange={e=>edit(id,e.target.value)} onFocus={()=>{if(!readOnly)setActive(id)}} inputMode="none" autoComplete="off" autoCapitalize="none" spellCheck={false} readOnly={readOnly} disabled={locked||(!readOnly&&!allowed(id))} placeholder={placeholder} className={active===id&&!readOnly?'active':''}/>}
+ const numberReady=allowed(active),equationReady=numberReady&&active==='equation'
+ return <div className="slope-app equation-app staged-equation-app shell"><nav className="breadcrumb" aria-label="Breadcrumb"><Link href="/apps">Practice apps</Link><span>/</span><span>Write the line</span></nav><header className="slope-title"><div><p className="eyebrow">FROM GRAPH TO EQUATION</p><h1>Write the line</h1></div></header>
+ {!line?<form className="slope-start" onSubmit={e=>{e.preventDefault();setStudent({...student,firstName:student.firstName.trim(),lastName:student.lastName.trim()});setLine(generateEquationLine())}}><h2>Level 1: guided practice → Level 2: independent practice</h2><p>In Level 1, tap and check the y-intercept, tap a second point and check the slope, then write the equation. Five consecutive problems with every check correct on the first try unlock Level 2. A missed check breaks the streak; a correct retry still earns a star.</p><p>In Level 2, enter the y-intercept, slope and equation together and submit once. Tapping points is optional. The existing scoring applies to Level 2: 10 correct and a best first-try streak of 5 for 10/10. You can submit after a best streak of 5 or 10 correct, or keep practicing.</p><div className="slope-student-fields">{(['firstName','lastName'] as const).map(id=><label key={id}>{id==='firstName'?'First name':'Last name'}<input required maxLength={60} pattern=".*\S.*" autoComplete="off" value={student[id]} onChange={e=>setStudent({...student,[id]:e.target.value})}/></label>)}<label>Class hour<select required value={student.hour} onChange={e=>setStudent({...student,hour:e.target.value})}><option value="">Choose hour</option>{['3','6','7','8'].map(h=><option key={h}>{h}</option>)}</select></label></div><p className="slope-storage">Names, answers and scores stay in this page. Nothing is sent to a server or saved in browser storage. Save your named results for Classroom. Reloading clears the session.</p><button className="slope-primary">Start practice</button></form>:<>
+ <div className="equation-progress"><div className="equation-student"><strong>{name}</strong><span>Class hour {student.hour} · Level {level}</span></div>{level===1?<div className="slope-score" aria-label="Level 1 progress"><span>Guided correct <b>{stats.guided.correct}</b></span><span>Consecutive first-try correct <b>{stats.guided.streak}</b> / 5</span><span>Best <b>{stats.guided.bestStreak}</b> / 5</span></div>:<div className="slope-score" aria-label="Level 2 progress"><span>Score <b>{progress.score}/10</b></span><span>Correct <b>{progress.correct}</b> / 10</span><span>Streak <b>{progress.streak}</b> · Best <b>{progress.bestStreak}</b> / 5</span></div>}<div className="slope-stars" aria-label={`${stats.totalStars} gold stars`}>{'★'.repeat(Math.min(30,stats.totalStars))}{stats.totalStars>30?` +${stats.totalStars-30}`:''}</div></div>
+ {finished?<section className="slope-complete"><h2>{progress.completed?'Goal reached!':'Practice results'}</h2><p className="equation-results-name">{name} · Hour {student.hour}</p><h2>Level 2 score: {progress.score}/10</h2><p>Level 1: {stats.guided.correct} correct · best first-try streak {stats.guided.bestStreak}/5 · {stats.unlocked?'Completed':'In progress'}</p><p>Level 2: {progress.correct} correct · best first-try streak {progress.bestStreak}/5</p><p>{stats.totalStars} stars · {stats.checks} checks performed · {finished}</p><button onClick={saveImage}>Create results image</button>{image&&<div className="slope-result-image"><a className="slope-primary" href={image} download="line-equation-results.png">Save results image</a>{/* Local result image only. */}
 {/* eslint-disable-next-line @next/next/no-img-element */}
-<img src={image} alt={`Results for ${name}, hour ${student.hour}: ${progress.score}/10`} width={1200} height={850} /></div>}<div className="slope-actions"><button onClick={() => { setLine(null); setHistory([]); setAttempts(0); setAnswer(emptyAnswer()); setPhase('answer'); setMessage(''); setFinished(null); setImage(null); setStudent({ firstName:'',lastName:'',hour:'' }) }}>Next student / new session</button></div></section> : <>
-      <div className="slope-workspace"><section className="slope-graph-panel"><h2>Graph {history.length + 1}</h2><Graph key={history.length} line={line} hint={attempts > 0 && phase !== 'correct'} /><p>Each square is 1 unit. Tap integer points to show coordinates; tap again to hide.</p></section>
-      <section className="slope-answer-panel"><h2>Write in slope-intercept form</h2><form onSubmit={submit}>
-        <label>Y-intercept (ordered pair)<span className="equation-intercept">(<span>{field('interceptX','Y-intercept x-coordinate')}</span>, <span>{field('interceptY','Y-intercept y-coordinate')}</span>)</span></label>
-        <div className="slope-equation"><i>m</i><span>=</span><span className="slope-fraction"><span>rise</span><span>run</span></span><span>=</span><span className="slope-fraction slope-input-fraction">{field('rise','Rise (numerator)')}{field('run','Run (denominator)')}</span></div>
-        <label className="equation-final">Equation of the line<span><strong>{notation} =</strong>{field('equation','Equation of the line','mx + b')}</span></label>
-        <p className="slope-small">Use x for the variable. For a fractional slope, type 3/5x or (3/5)x. Both y and f(x) mean the output.</p>
-        <div className="slope-keypad equation-keypad" aria-label="Number and equation pad">{['7','8','9','4','5','6','1','2','3','-','0','back','x','/','+','(',')','clear'].map(value => <button type="button" key={value} disabled={locked} onPointerDown={event => event.preventDefault()} onClick={() => key(value)} aria-label={value === 'back' ? 'Backspace' : value === '-' ? 'Minus' : value === 'clear' ? 'Clear entry' : value}>{value === 'back' ? '⌫' : value === 'clear' ? 'Clear' : value}</button>)}</div>
-        {!locked && <button className="slope-primary slope-submit">{phase === 'retry' ? 'Submit retry' : 'Submit answer'}</button>}
-      </form><div className={`slope-feedback ${phase === 'correct' ? 'success' : ''}`} role="status">{message}</div>
-      {locked && <button className="slope-primary" onClick={nextGraph}>Next graph →</button>}
-      </section></div>
-      {progress.canSubmit && <div className="slope-actions equation-finish"><button onClick={finish}>Submit {progress.score}/10 &amp; view results</button><p>You can submit this score now or keep practicing.</p></div>}
-      </>}
-    </>}
-  </div>
+<img src={image} width={1400} height={950} alt={`Write the line results for ${name}, hour ${student.hour}: Level 2 ${progress.score}/10`}/></div>}<div className="slope-actions"><button onClick={reset}>Next student / new session</button></div></section>:<>
+ <div className="slope-workspace"><section className="slope-graph-panel"><h2>Level {level} · Graph {allRecords.filter(r=>r.level===level).length+(current?0:1)}</h2><Graph key={history.length} line={line} hint={misses>0&&(level===2||step!=='intercept')} selectedPoints={points} onPointTap={tap} disabled={locked||level===1&&step==='equation'} instructions={level===1?(step==='intercept'?'Tap the y-intercept of the line.':step==='slope'?'Tap a second integer point on the line. The confirmed y-intercept stays marked.':'The confirmed intercept and second point are marked.'):'Tap points optionally to show coordinates. You may enter all answers without tapping.'}/><p>{level===1?(step==='intercept'?'Directions: tap the y-intercept of the line.':step==='slope'?'Find a second point on the line and determine the slope. Tap your second point to remove it.':'Use the confirmed slope and y-intercept to write the equation.'):'Tapping is optional. Enter the y-intercept, slope and equation, then submit.'} Each square is 1 unit.</p></section>
+ <section className="slope-answer-panel"><h2>{level===1?(step==='intercept'?'1. Tap the y-intercept':step==='slope'?'2. Find a second point and the slope':'3. Write the equation'):'Write in slope-intercept form'}</h2><form onSubmit={submit}>
+ {level===1&&step!=='intercept'?<p className="line-confirmed">✓ Y-intercept: (0, {line.y})</p>:<label>Y-intercept (ordered pair)<span className="equation-intercept">({field('interceptX','Y-intercept x-coordinate',undefined,level===1)}, {field('interceptY','Y-intercept y-coordinate',undefined,level===1)})</span></label>}
+ {level===1&&step==='intercept'&&<button type="button" className="slope-primary line-stage-check" disabled={!points.length||locked} onClick={stageCheck}>Check y-intercept</button>}
+ {(level===2||step!=='intercept')&&(level===1&&step==='equation'?<p className="line-confirmed">✓ Slope: {fraction(line.rise,line.run)}</p>:<><p className="slope-small">{level===1?(points.length<2?'Tap a second point to unlock the slope entries.':`Marked points: (0, ${line.y}) and (${points[1].x}, ${points[1].y}). Count signed rise over run.`):'Find the slope using two points on the line.'}</p><div className="slope-equation"><i>m</i><span>=</span><span className="slope-fraction"><span>rise</span><span>run</span></span><span>=</span><span className="slope-fraction slope-input-fraction">{field('rise','Rise (numerator)')}{field('run','Run (denominator)')}</span></div>{level===1&&<button type="button" className="slope-primary line-stage-check" disabled={points.length<2||!answer.rise||!answer.run||locked} onClick={stageCheck}>Check slope</button>}</>)}
+ {(level===2||step==='equation')&&<><label className="equation-final">Equation of the line<span><strong>{notation} =</strong>{field('equation','Equation of the line','mx + b')}</span></label><p className="slope-small">Use x for the variable. Fractional slopes may be entered as 3/5x or (3/5)x.</p></>}
+ <div className="line-keyboard" aria-label="Number and equation pad"><div className="line-variable-tools"><button className="line-x-key" type="button" aria-label="Insert variable x" disabled={!equationReady} onPointerDown={e=>e.preventDefault()} onClick={()=>key('x')}><strong>x</strong><span>VARIABLE</span></button><div>{['(',')','/'].map(k=><button type="button" key={k} disabled={!equationReady} aria-label={k==='/'?'Fraction bar':k} onPointerDown={e=>e.preventDefault()} onClick={()=>key(k)}>{k}</button>)}</div></div><div className="line-number-keys">{['7','8','9','+','4','5','6','-','1','2','3','back','0','.','clear'].map(k=><button type="button" key={k} disabled={!numberReady||(k==='+'||k==='.')&&!equationReady} aria-label={k==='back'?'Backspace':k==='clear'?'Clear entry':k==='+'?'Plus':k==='-'?'Minus':k} onPointerDown={e=>e.preventDefault()} onClick={()=>key(k)}>{k==='back'?'⌫':k==='clear'?'Clear':k}</button>)}</div></div>
+ {!locked&&(level===2||step==='equation')&&<button className="slope-primary slope-submit">{phase==='retry'?'Submit retry':level===1?'Check equation':'Submit answer'}</button>}
+ </form><div className={`slope-feedback ${phase==='correct'?'success':''}`} role="status">{message}</div>{locked&&<button className="slope-primary" onClick={nextGraph}>{level===1&&stats.unlocked?'Start Level 2 →':'Next graph →'}</button>}</section></div>
+ {level===2&&progress.canSubmit&&<div className="slope-actions"><button onClick={finish}>Submit {progress.score}/10 &amp; view results</button><p>Submit now or keep practicing.</p></div>}
+ </>}
+ </>}
+ </div>
 }

@@ -318,3 +318,12 @@ body:has(.book-reader) .site-footer{display:none}
 .subtract-operation{border-bottom:1px solid #16334c;color:#236fb0}
 .conversion-work .katex-display{font-size:.95em;overflow-x:auto}
 @media(max-width:420px){.conversion-equation{gap:5px;font-size:22px}.conversion-equation input{width:85px}}
+
+/* Guided and independent Write the line levels. */
+.staged-equation-app .equation-progress{position:sticky;top:0;z-index:4;background:#f4f8f8;padding:8px 0;border-bottom:1px solid #c8d8dc}
+.line-confirmed{background:#eaf5ee;border:1px solid #bad8c5;color:#1b603c;padding:8px 10px;border-radius:7px;font-weight:bold;font-size:15px!important;margin:6px 0!important}
+.line-stage-check{margin:10px 0;min-height:44px}
+.line-keyboard{display:grid;grid-template-columns:95px minmax(0,1fr);gap:10px;margin:14px 0;max-width:480px}
+.line-variable-tools{display:flex;flex-direction:column;gap:8px}.line-variable-tools .line-x-key{display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:110px;background:#e8dcfa;border:2px solid #8050aa;color:#5b287d;padding:8px}.line-x-key strong{font:italic 700 42px Georgia,serif}.line-x-key span{font-size:10px;letter-spacing:1px}.line-variable-tools>div{display:grid;grid-template-columns:1fr 1fr;gap:5px}.line-variable-tools>div button{padding:6px;min-width:0}.line-variable-tools>div button:last-child{grid-column:1/-1}
+.line-number-keys{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}.line-number-keys button{font-size:20px;min-height:48px;padding:6px}.line-number-keys button[aria-label=Backspace],.line-number-keys button[aria-label='Clear entry']{font-size:12px}.line-number-keys button:last-child{grid-column:span 2}
+@media(max-width:400px){.line-keyboard{grid-template-columns:76px minmax(0,1fr);gap:7px}.line-number-keys button{min-height:46px}.line-variable-tools .line-x-key{min-height:100px}}
