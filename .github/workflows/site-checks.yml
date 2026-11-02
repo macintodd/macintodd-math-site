@@ -19,6 +19,8 @@ jobs:
       - run: node --experimental-strip-types scripts/test-transformations-flow.mjs
       - run: node --experimental-strip-types scripts/test-point-slope.mjs
       - run: node --experimental-strip-types scripts/test-point-slope-flow.mjs
+      - run: node --experimental-strip-types scripts/test-mixed-graph.mjs
+      - run: node --experimental-strip-types scripts/test-mixed-graph-flow.mjs
       - run: npm run test:slope
       - run: node --experimental-strip-types scripts/test-line-equation-levels.mjs
       - run: node --experimental-strip-types scripts/test-line-equation-flow.mjs
