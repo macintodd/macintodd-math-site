@@ -1,3 +1,3 @@
 import LineEquationPractice from './LineEquationPractice'
-export const metadata = { title: 'Write the line: slope-intercept practice' }
+export const metadata = { title: 'Write the Line: Given m and b' }
 export default function Page() { return <LineEquationPractice /> }
