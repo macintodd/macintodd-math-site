@@ -1,0 +1,21 @@
+export const appCategories=['Arithmetic foundations','Equations and factoring','Functions','Linear graphs and equations','Puzzles'] as const
+export type AppCategory=typeof appCategories[number]
+export type AppCourse='algebra-2'|'precalculus'
+export type LessonReference={course:AppCourse;slug:string}
+export type PracticeApp={slug:string;title:string;description:string;category:AppCategory;courses:AppCourse[];lessons:LessonReference[];note?:string}
+const a=(slug:string):LessonReference=>({course:'algebra-2',slug})
+const p=(slug:string):LessonReference=>({course:'precalculus',slug})
+export const practiceApps:PracticeApp[]=[
+ {slug:'multiplication',title:'Multiplication Minute',description:'Choose factors, optional negatives, and a color theme. Answer as many as you can in one minute.',category:'Arithmetic foundations',courses:['algebra-2','precalculus'],lessons:[a('formula-substitution'),p('algebra-review-ti84')],note:'Prerequisite skill review'},
+ {slug:'one-step-solver',title:'One-step equations',description:'Choose inverse operations and solve one-step equations at two difficulty levels.',category:'Equations and factoring',courses:['algebra-2','precalculus'],lessons:[a('one-step-equations'),p('algebra-review-ti84')],note:'Precalculus: algebra review'},
+ {slug:'factoring',title:'Factoring',description:'Practice trinomials, differences of squares, and common factors.',category:'Equations and factoring',courses:['algebra-2','precalculus'],lessons:[p('factoring-packet')],note:'Algebra 2: general factoring practice; no matching published lesson yet'},
+ {slug:'function-evaluation',title:'Function Evaluation Practice',description:'Evaluate eight function families with whole-number, decimal, or fraction inputs. Includes a scratch pad.',category:'Functions',courses:['algebra-2','precalculus'],lessons:[a('function-notation'),p('function-notation-domain'),p('expression-substitution')]},
+ {slug:'function-families',title:'Parent Function Challenge',description:'Identify seven parent function families from graphs, equations, and a mixed round.',category:'Functions',courses:['algebra-2','precalculus'],lessons:[],note:'Function-family review and preview; no single matching published lesson'},
+ {slug:'slope',title:'Slope practice',description:'Find signed rise and run on randomly generated line graphs.',category:'Linear graphs and equations',courses:['algebra-2','precalculus'],lessons:[a('slope-rate-of-change'),p('linear-equations-two-variables')]},
+ {slug:'line-equations',title:'Write the line',description:'Find the intercept and slope, then write the equation. Guided checks unlock independent practice.',category:'Linear graphs and equations',courses:['algebra-2','precalculus'],lessons:[a('graphing-linear-equations'),p('linear-equations-two-variables')]},
+ {slug:'graph-linear',title:'Graph the line: Slope-intercept form',description:'Plot two points and draw a line from a slope-intercept equation.',category:'Linear graphs and equations',courses:['algebra-2','precalculus'],lessons:[a('graphing-linear-equations'),p('linear-equations-two-variables')]},
+ {slug:'graph-standard',title:'Graph the line: Standard form x and y intercept',description:'Calculate the x- and y-intercepts, enter the ordered pairs, then graph the line.',category:'Linear graphs and equations',courses:['algebra-2','precalculus'],lessons:[a('graphing-linear-equations'),p('linear-equations-two-variables')]},
+ {slug:'graph-standard-slope',title:'Graph the line: Standard form to Slope Intercept',description:'Use the scratch pad to isolate y, enter slope and intercept, then graph.',category:'Linear graphs and equations',courses:['algebra-2','precalculus'],lessons:[a('graphing-linear-equations'),p('linear-equations-two-variables')]},
+ {slug:'mathboard/session-1',title:'Graphing Linear Equations · Interactive lesson',description:'Explore a draining pool, rate of change, slope, intercepts, and graphing with guided checkpoints.',category:'Linear graphs and equations',courses:['algebra-2','precalculus'],lessons:[a('graphing-linear-equations'),p('linear-equations-two-variables')],note:'Guided classroom lesson'},
+ {slug:'2048',title:'2048',description:'Slide and combine matching tiles in a number puzzle.',category:'Puzzles',courses:['algebra-2','precalculus'],lessons:[],note:'Optional enrichment · no lesson assignment'},
+]
