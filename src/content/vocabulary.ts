@@ -16,12 +16,12 @@ export const vocabulary: Record<string, VocabularyTerm> = {
   "coefficient": {
     "id": "coefficient",
     "term": "Coefficient",
-    "definition": "A number multiplying a variable or variable expression. In −3x, the coefficient of x is −3."
+    "definition": "A number multiplying a variable or variable expression. In $-3x$, the coefficient of $x$ is $-3$."
   },
   "term": {
     "id": "term",
     "term": "Term",
-    "definition": "A part of an expression separated by addition or subtraction. In 3x − 5, the terms are 3x and −5."
+    "definition": "A part of an expression separated by addition or subtraction. In $3x-5$, the terms are $3x$ and $-5$."
   },
   "expression": {
     "id": "expression",
@@ -46,7 +46,7 @@ export const vocabulary: Record<string, VocabularyTerm> = {
   "reciprocal": {
     "id": "reciprocal",
     "term": "Reciprocal",
-    "definition": "For a nonzero number a, the number 1/a. Their product is 1."
+    "definition": "For a nonzero number $a$, the number $\\frac{1}{a}$. Their product is 1."
   },
   "property-of-equality": {
     "id": "property-of-equality",
@@ -56,7 +56,7 @@ export const vocabulary: Record<string, VocabularyTerm> = {
   "formula": {
     "id": "formula",
     "term": "Formula",
-    "definition": "An equation expressing a relationship among quantities, such as A = lw."
+    "definition": "An equation expressing a relationship among quantities, such as $A=lw$."
   },
   "substitution": {
     "id": "substitution",
@@ -71,27 +71,27 @@ export const vocabulary: Record<string, VocabularyTerm> = {
   "like-terms": {
     "id": "like-terms",
     "term": "Like terms",
-    "definition": "Terms with exactly the same variable factors and exponents. For example, 3x and −2x are like terms."
+    "definition": "Terms with exactly the same variable factors and exponents. For example, $3x$ and $-2x$ are like terms."
   },
   "distributive-property": {
     "id": "distributive-property",
     "term": "Distributive property",
-    "definition": "Multiplying a sum by a number gives the same result as multiplying each term: a(b + c) = ab + ac."
+    "definition": "Multiplying a sum by a number gives the same result as multiplying each term: $a(b+c)=ab+ac$."
   },
   "identity": {
     "id": "identity",
     "term": "Identity",
-    "definition": "An equation true for every value in its domain, such as 2(x + 1) = 2x + 2."
+    "definition": "An equation true for every value in its domain, such as $2(x+1)=2x+2$."
   },
   "contradiction": {
     "id": "contradiction",
     "term": "Contradiction",
-    "definition": "A statement that cannot be true. If solving an equation produces 0 = 5, the original equation has no solution."
+    "definition": "A statement that cannot be true. If solving an equation produces $0=5$, the original equation has no solution."
   },
   "inequality": {
     "id": "inequality",
     "term": "Inequality",
-    "definition": "A comparison using <, >, ≤, or ≥. Multiplying or dividing both sides by a negative number reverses the inequality sign."
+    "definition": "A comparison using $<$, $>$, $\\leq$, or $\\geq$. Multiplying or dividing both sides by a negative number reverses the inequality sign."
   },
   "solution-set": {
     "id": "solution-set",
@@ -121,7 +121,7 @@ export const vocabulary: Record<string, VocabularyTerm> = {
   "absolute-value": {
     "id": "absolute-value",
     "term": "Absolute value",
-    "definition": "A number’s distance from zero on the number line, written |x|. Absolute value is never negative."
+    "definition": "A number’s distance from zero on the number line, written $\\lvert x\\rvert$. Absolute value is never negative."
   },
   "extraneous-solution": {
     "id": "extraneous-solution",
@@ -136,17 +136,17 @@ export const vocabulary: Record<string, VocabularyTerm> = {
   "function-notation": {
     "id": "function-notation",
     "term": "Function notation",
-    "definition": "Notation such as f(x) for the output of function f at input x. It means a function value, not f multiplied by x."
+    "definition": "Notation such as $f(x)$ for the output of function $f$ at input $x$. It means a function value, not $f$ multiplied by $x$."
   },
   "input": {
     "id": "input",
     "term": "Input",
-    "definition": "A value supplied to a function; usually represented by the independent variable x."
+    "definition": "A value supplied to a function; usually represented by the independent variable $x$."
   },
   "output": {
     "id": "output",
     "term": "Output",
-    "definition": "The value produced by a function for a given input; often written y or f(x)."
+    "definition": "The value produced by a function for a given input; often written $y$ or $f(x)$."
   },
   "domain": {
     "id": "domain",
@@ -161,12 +161,12 @@ export const vocabulary: Record<string, VocabularyTerm> = {
   "vertical-line-test": {
     "id": "vertical-line-test",
     "term": "Vertical line test",
-    "definition": "A graph represents y as a function of x exactly when no vertical line intersects the graph more than once."
+    "definition": "A graph represents $y$ as a function of $x$ exactly when no vertical line intersects the graph more than once."
   },
   "slope": {
     "id": "slope",
     "term": "Slope",
-    "definition": "The change in y divided by the corresponding nonzero change in x: m = (y₂ − y₁)/(x₂ − x₁). Vertical lines have undefined slope; horizontal lines have slope zero."
+    "definition": "The change in y divided by the corresponding nonzero change in x: $m=\\frac{y_2-y_1}{x_2-x_1}$. Vertical lines have undefined slope; horizontal lines have slope zero."
   },
   "rate-of-change": {
     "id": "rate-of-change",
@@ -176,12 +176,12 @@ export const vocabulary: Record<string, VocabularyTerm> = {
   "average-rate-of-change": {
     "id": "average-rate-of-change",
     "term": "Average rate of change",
-    "definition": "The change in output over an interval divided by the change in input: [f(b) − f(a)]/(b − a), where a ≠ b. It is the slope of the secant line through the endpoints."
+    "definition": "The change in output over an interval divided by the change in input: $\\frac{f(b)-f(a)}{b-a}$, where $a\\ne b$. It is the slope of the secant line through the endpoints."
   },
   "ordered-pair": {
     "id": "ordered-pair",
     "term": "Ordered pair",
-    "definition": "Two numbers (x, y) identifying a point: the first gives horizontal position and the second gives vertical position."
+    "definition": "Two numbers $(x,y)$ identifying a point: the first gives horizontal position and the second gives vertical position."
   },
   "coordinate-plane": {
     "id": "coordinate-plane",
@@ -191,7 +191,7 @@ export const vocabulary: Record<string, VocabularyTerm> = {
   "origin": {
     "id": "origin",
     "term": "Origin",
-    "definition": "The point (0, 0), where the coordinate axes intersect."
+    "definition": "The point $(0,0)$, where the coordinate axes intersect."
   },
   "quadrant": {
     "id": "quadrant",
@@ -201,27 +201,27 @@ export const vocabulary: Record<string, VocabularyTerm> = {
   "x-intercept": {
     "id": "x-intercept",
     "term": "X intercept",
-    "definition": "A point where a graph meets the x-axis, so y = 0. Its x-coordinate is also a zero of the function when the graph represents a function."
+    "definition": "A point where a graph meets the x-axis, so $y=0$. Its x-coordinate is also a zero of the function when the graph represents a function."
   },
   "y-intercept": {
     "id": "y-intercept",
     "term": "Y intercept",
-    "definition": "A point where a graph meets the y-axis, so x = 0."
+    "definition": "A point where a graph meets the y-axis, so $x=0$."
   },
   "distance-formula": {
     "id": "distance-formula",
     "term": "Distance formula",
-    "definition": "The distance between (x₁, y₁) and (x₂, y₂) is √[(x₂ − x₁)² + (y₂ − y₁)²]."
+    "definition": "The distance between $(x_1,y_1)$ and $(x_2,y_2)$ is $\\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}$."
   },
   "midpoint": {
     "id": "midpoint",
     "term": "Midpoint",
-    "definition": "The point halfway between two points: ((x₁ + x₂)/2, (y₁ + y₂)/2)."
+    "definition": "The point halfway between two points: $\\left(\\frac{x_1+x_2}{2},\\frac{y_1+y_2}{2}\\right)$."
   },
   "circle": {
     "id": "circle",
     "term": "Circle",
-    "definition": "The set of points at a fixed positive distance r from a center (h, k). Its equation is (x − h)² + (y − k)² = r²."
+    "definition": "The set of points at a fixed positive distance $r$ from a center $(h,k)$. Its equation is $(x-h)^2+(y-k)^2=r^2$."
   },
   "symmetry": {
     "id": "symmetry",
@@ -231,17 +231,17 @@ export const vocabulary: Record<string, VocabularyTerm> = {
   "linear-equation": {
     "id": "linear-equation",
     "term": "Linear equation",
-    "definition": "An equation whose graph is a straight line, such as Ax + By = C, where A and B are not both zero."
+    "definition": "An equation whose graph is a straight line, such as $Ax+By=C$, where $A$ and $B$ are not both zero."
   },
   "slope-intercept-form": {
     "id": "slope-intercept-form",
     "term": "Slope intercept form",
-    "definition": "The equation y = mx + b, where m is the slope and (0, b) is the y-intercept. Vertical lines cannot be written in this form."
+    "definition": "The equation $y=mx+b$, where $m$ is the slope and $(0,b)$ is the y-intercept. Vertical lines cannot be written in this form."
   },
   "point-slope-form": {
     "id": "point-slope-form",
     "term": "Point slope form",
-    "definition": "The equation y − y₁ = m(x − x₁) for a line with slope m through (x₁, y₁)."
+    "definition": "The equation $y-y_1=m(x-x_1)$ for a line with slope $m$ through $(x_1,y_1)$."
   },
   "parallel-lines": {
     "id": "parallel-lines",
@@ -276,12 +276,12 @@ export const vocabulary: Record<string, VocabularyTerm> = {
   "zero-product-property": {
     "id": "zero-product-property",
     "term": "Zero product property",
-    "definition": "If a product equals zero, at least one factor equals zero. For example, ab = 0 implies a = 0 or b = 0."
+    "definition": "If a product equals zero, at least one factor equals zero. For example, $ab=0$ implies $a=0$ or $b=0$."
   },
   "difference-quotient": {
     "id": "difference-quotient",
     "term": "Difference quotient",
-    "definition": "The expression [f(x + h) − f(x)]/h, where h ≠ 0 and the function values exist. It gives an average rate of change between x and x + h."
+    "definition": "The expression $\\frac{f(x+h)-f(x)}{h}$, where $h\\ne0$ and the function values exist. It gives an average rate of change between $x$ and $x+h$."
   },
   "increasing": {
     "id": "increasing",
@@ -306,17 +306,17 @@ export const vocabulary: Record<string, VocabularyTerm> = {
   "zero": {
     "id": "zero",
     "term": "Zero",
-    "definition": "An input x for which f(x) = 0. On the graph, it is the x-coordinate of an x-intercept."
+    "definition": "An input $x$ for which $f(x)=0$. On the graph, it is the x-coordinate of an x-intercept."
   },
   "even-function": {
     "id": "even-function",
     "term": "Even function",
-    "definition": "A function satisfying f(−x) = f(x) for every x in its domain, with −x also in the domain. Its graph is symmetric about the y-axis."
+    "definition": "A function satisfying $f(-x)=f(x)$ for every $x$ in its domain, with $-x$ also in the domain. Its graph is symmetric about the y-axis."
   },
   "odd-function": {
     "id": "odd-function",
     "term": "Odd function",
-    "definition": "A function satisfying f(−x) = −f(x) for every x in its domain, with −x also in the domain. Its graph is symmetric about the origin."
+    "definition": "A function satisfying $f(-x)=-f(x)$ for every $x$ in its domain, with $-x$ also in the domain. Its graph is symmetric about the origin."
   },
   "graphing-window": {
     "id": "graphing-window",

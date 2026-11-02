@@ -4,7 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Parent Function Challenge</title>
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src data:; img-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<link rel="stylesheet" href="/vendor/katex/katex.min.css">
+<script src="/vendor/katex/katex.min.js"></script>
 <style>
   :root{--ink:#1d2a3a;--muted:#5a6878;--blue:#1d4fb8;--blue-dk:#0f2f73;--green:#1a8a4a;--red:#c0392b;--panel:#f4f7fb;--line:#d5dde8}
   *{box-sizing:border-box}
@@ -117,6 +119,8 @@
     .points-box{font-size:14px}.qcount{font-size:12px}
   }
   @media(prefers-reduced-motion:reduce){.star.pop,.points-box span.bump{animation:none}.choice{transition:none}}
+
+#eq .katex-display{margin:0}#eq .katex{font-size:1em}#eq{overflow-x:auto;padding:12px;max-width:100%}
 </style>
 </head>
 <body>
@@ -421,31 +425,31 @@
   requestAnimationFrame(tick);
 
   // ---------- Equations ----------
-  const X = '<i>x</i>';
-  const num = v => (v < 0 ? '−' : '') + (Math.abs(v) === 0.5 ? '½' : Math.abs(v));
-  const coef = a => a === 1 ? '' : a === -1 ? '−' : num(a);
-  const inner = h => h === 0 ? X : h > 0 ? X + ' − ' + h : X + ' + ' + (-h);
-  const kTerm = k => k === 0 ? '' : k > 0 ? ' + ' + k : ' − ' + (-k);
-  function poly(terms){        // [[coef, power], ...]
+  const num = v => Math.abs(v) === 0.5 ? '\\frac{1}{2}' : String(Math.abs(v));
+  const coef = a => a === 1 ? '' : a === -1 ? '-' : (a < 0 ? '-' : '') + num(a);
+  const inner = h => h === 0 ? 'x' : h > 0 ? 'x-' + h : 'x+' + (-h);
+  const kTerm = k => k === 0 ? '' : k > 0 ? '+' + k : '-' + (-k);
+  function poly(terms){
     let out = '';
     terms.filter(([c]) => c !== 0).forEach(([c, p], i) => {
-      const abs = Math.abs(c), body = (p > 0 && abs === 1 ? '' : (abs === 0.5 ? '½' : abs)) + (p > 0 ? X : '') + (p > 1 ? '<sup>' + p + '</sup>' : '');
-      out += i === 0 ? (c < 0 ? '−' : '') + body : (c < 0 ? ' − ' : ' + ') + body;
+      const abs = Math.abs(c), body = (p > 0 && abs === 1 ? '' : num(c)) + (p > 0 ? 'x' : '') + (p > 1 ? '^{' + p + '}' : '');
+      out += (c < 0 ? '-' : i === 0 ? '' : '+') + body;
     });
     return out || '0';
   }
-  function equationHTML({ fam, a, h, k, form }){
+  function equationTex({ fam, a, h, k, form }){
     let rhs;
-    const grp = (p) => (h === 0 ? X : '(' + inner(h) + ')') + '<sup>' + p + '</sup>';
+    const grp = p => (h === 0 ? 'x' : '\\left(' + inner(h) + '\\right)') + '^{' + p + '}';
     if (fam === 'linear') rhs = poly([[a, 1], [k, 0]]);
-    else if (fam === 'quadratic') rhs = form === 'standard' ? poly([[a, 2], [-2 * a * h, 1], [a * h * h + k, 0]]) : coef(a) + grp(2) + kTerm(k);
+    else if (fam === 'quadratic') rhs = form === 'standard' ? poly([[a, 2], [-2*a*h, 1], [a*h*h+k, 0]]) : coef(a) + grp(2) + kTerm(k);
     else if (fam === 'cubic') rhs = coef(a) + grp(3) + kTerm(k);
-    else if (fam === 'sqrt') rhs = coef(a) + '<span class="rad"><span>√</span><span class="rc">' + inner(h) + '</span></span>' + kTerm(k);
-    else if (fam === 'rational') rhs = (a < 0 ? '−' : '') + '<span class="fr"><span class="n">' + Math.abs(a) + '</span><span class="d">' + inner(h) + '</span></span>' + kTerm(k);
+    else if (fam === 'sqrt') rhs = coef(a) + '\\sqrt{' + inner(h) + '}' + kTerm(k);
+    else if (fam === 'rational') rhs = (a < 0 ? '-' : '') + '\\frac{' + num(a) + '}{' + inner(h) + '}' + kTerm(k);
     else if (fam === 'constant') rhs = String(k);
-    else rhs = coef(a) + '<span class="gi">[[</span>' + inner(h) + '<span class="gi">]]</span>' + kTerm(k);
-    return '<span><i>y</i> = ' + rhs + '</span>';
+    else rhs = coef(a) + '\\left[\\left[' + inner(h) + '\\right]\\right]' + kTerm(k);
+    return 'y=' + rhs;
   }
+  function equationHTML(question){return katex.renderToString(equationTex(question),{displayMode:true,throwOnError:true,trust:false,output:'htmlAndMathml'});}
 
   // ---------- Graph drawing ----------
   const cv = $('graph'), ctx = cv.getContext('2d'), G = 600, R = 10, S = G / (2 * R);

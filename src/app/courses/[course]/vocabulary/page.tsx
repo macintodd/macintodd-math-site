@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import {MathText} from '@/components/MathText'
 import { notFound } from 'next/navigation'
 import { courses, lessons } from '@/content/lessons'
 import { getCourseVocabulary, getLessonVocabulary } from '@/content/vocabulary'
@@ -24,7 +25,7 @@ export default async function VocabularyPage({ params }: { params: Promise<{ cou
       {letters.map(letter => <section className="glossary-letter" key={letter} aria-labelledby={`letter-${letter}`}>
         <h2 id={`letter-${letter}`}>{letter}</h2>
         <dl>{terms.filter(term => term.term[0] === letter).map(term => <div className="glossary-entry" id={term.id} key={term.id}>
-          <dt>{term.term}</dt><dd><p>{term.definition}</p><nav aria-label={`Lessons using ${term.term}`}>{courseLessons.filter(lesson => getLessonVocabulary(lesson.slug).some(item => item.id === term.id)).map(lesson => <Link key={lesson.slug} href={`/courses/${courseId}/${lesson.slug}`}>{lesson.title}</Link>)}</nav></dd>
+          <dt>{term.term}</dt><dd><p><MathText>{term.definition}</MathText></p><nav aria-label={`Lessons using ${term.term}`}>{courseLessons.filter(lesson => getLessonVocabulary(lesson.slug).some(item => item.id === term.id)).map(lesson => <Link key={lesson.slug} href={`/courses/${courseId}/${lesson.slug}`}>{lesson.title}</Link>)}</nav></dd>
         </div>)}</dl>
       </section>)}
       <p><Link href={`/courses/${courseId}`}>← Back to {course.title} contents</Link></p>

@@ -2,6 +2,7 @@
 
 import { useId, useRef, useState } from 'react'
 import Link from 'next/link'
+import {MathText} from './MathText'
 import type { VocabularyTerm } from '@/content/vocabulary'
 
 export function LessonVocabulary({ terms, course }: { terms: VocabularyTerm[]; course: string }) {
@@ -18,7 +19,7 @@ export function LessonVocabulary({ terms, course }: { terms: VocabularyTerm[]; c
       <div className="vocabulary-dialog-content">
         <button className="vocabulary-close" type="button" onClick={() => dialog.current?.close()} autoFocus>Close ×</button>
         <h2 id={titleId}>{selected.term}</h2>
-        <p id={descriptionId}>{selected.definition}</p>
+        <p id={descriptionId}><MathText>{selected.definition}</MathText></p>
         <Link href={`/courses/${course}/vocabulary#${selected.id}`}>See in class glossary →</Link>
       </div>
     </dialog>

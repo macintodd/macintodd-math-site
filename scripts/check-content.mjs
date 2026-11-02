@@ -6,8 +6,12 @@ import katex from 'katex'
 import { lessons, courses } from '../src/content/lessons.ts'
 import { precalculusAssessments } from '../src/content/precalculus.ts'
 import { units, getUnit } from '../src/content/units.ts'
-import { getLessonVocabulary, getCourseVocabulary } from '../src/content/vocabulary.ts'
+import { vocabulary, getLessonVocabulary, getCourseVocabulary } from '../src/content/vocabulary.ts'
 import { canonicalFactors } from '../src/lib/factoring.ts'
+for (const term of Object.values(vocabulary)) {
+  assert.equal((term.definition.match(/\$/g)??[]).length % 2, 0, `Unbalanced math delimiters: ${term.id}`)
+  for (const match of term.definition.matchAll(/\$([^$]+)\$/g)) katex.renderToString(match[1], {throwOnError:true,trust:false})
+}
 for (const lesson of lessons) {
   const terms = getLessonVocabulary(lesson.slug)
   assert(terms.length > 0, `Missing vocabulary: ${lesson.slug}`)
