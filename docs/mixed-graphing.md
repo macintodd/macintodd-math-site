@@ -4,7 +4,7 @@
 
 - Intercepts: enter both ordered pairs and graph using those intercepts.
 - Conversion: standard form is given; enter m and b in slope-intercept form, then graph with any two correct points.
-- Slope/intercept: slope-intercept form is given; identify m and b, then graph.
+- Slope/intercept: slope-intercept form is given; state the y-intercept as an ordered pair and the slope as signed rise/run, then graph. This task uses four separate numeric fields and an in-app keypad. Equivalent fractions are accepted; a zero run and a nonzero x-coordinate for the y-intercept are rejected.
 - Open-ended: standard or slope-intercept form is given. The prompt is only “Graph the equation.” There are no intermediate answer fields or mandated method; any two distinct points on the line are accepted.
 
 The teacher's phrase “put it standard form” was interpreted as rewriting standard form into slope-intercept form, matching the existing conversion app explicitly named in the request.
