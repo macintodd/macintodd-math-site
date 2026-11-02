@@ -195,7 +195,7 @@ export default function Results() {
             Class hour
             <select value={hour} onChange={(e) => setHour(e.target.value)}>
               <option value="">All hours</option>
-              {["3", "6", "7", "8"].map((h) => (
+              {["2", "3", "4", "6", "7", "8"].map((h) => (
                 <option key={h}>{h}</option>
               ))}
             </select>

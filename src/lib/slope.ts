@@ -110,7 +110,7 @@ export function validateReport(value: unknown): SlopeReport {
     ![student.firstName, student.lastName].every(
       (n) => typeof n === "string" && n.trim().length > 0 && n.length <= 60,
     ) ||
-    !["3", "6", "7", "8"].includes(student.hour)
+    !["2", "3", "4", "6", "7", "8"].includes(student.hour)
   )
     throw Error("Check the student name and class hour.");
   const start = Date.parse(report.startedAt),

@@ -73,8 +73,9 @@ const report = {
   problems: [right, retry],
 };
 assert.deepEqual(validateReport(report), report);
+for (const hour of ["2", "3", "4", "6", "7", "8"]) assert.equal(validateReport({...report,student:{...report.student,hour}}).student.hour,hour);
 for (const bad of [
-  { ...report, student: { ...report.student, hour: "4" } },
+  { ...report, student: { ...report.student, hour: "5" } },
   { ...report, problems: [{ line, answers: [{ rise: 1, run: 0 }] }] },
   {
     ...report,

@@ -8,7 +8,7 @@ try{
  const request={action:'create',hours:['3'],checkpoints:[]}
  assert.equal((await post('/api/mathboard/config',request)).status,410)
  const token='pool-session-1-v2'
- const publicResponse=await post('/api/mathboard/config',{token,grants:{}}),publicConfig=await publicResponse.json();assert.equal(publicResponse.status,200);assert.equal(publicResponse.headers.get('cache-control'),'no-store');assert.deepEqual(publicConfig,{hours:['1','2','3','4','5','6','7','8'],enabled:[true,true],released:[]});assert(!JSON.stringify(publicConfig).includes('Linear'))
+ const publicResponse=await post('/api/mathboard/config',{token,grants:{}}),publicConfig=await publicResponse.json();assert.equal(publicResponse.status,200);assert.equal(publicResponse.headers.get('cache-control'),'no-store');assert.deepEqual(publicConfig,{hours:['2','3','4','6','7','8'],enabled:[true,true],released:[]});assert(!JSON.stringify(publicConfig).includes('Linear'))
  assert.equal((await post('/api/mathboard/release',{token,checkpoint:2,code:'Linear',grants:{}})).status,400)
  assert.equal((await post('/api/mathboard/release',{token,checkpoint:1,code:'incorrect',grants:{}})).status,400)
  const first=await (await post('/api/mathboard/release',{token,checkpoint:1,code:'Linear',grants:{}})).json();assert(first.grant)

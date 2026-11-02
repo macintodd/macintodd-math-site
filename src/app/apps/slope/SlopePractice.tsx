@@ -212,7 +212,7 @@ export default function SlopePractice() {
                 }
               >
                 <option value="">Choose hour</option>
-                {["3", "6", "7", "8"].map((h) => (
+                {["2", "3", "4", "6", "7", "8"].map((h) => (
                   <option key={h}>{h}</option>
                 ))}
               </select>

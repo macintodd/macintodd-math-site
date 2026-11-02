@@ -23,7 +23,7 @@ assert(lineCorrect([{x:1,y:2.5},{x:3,y:3.5}],.5,2));assert(!lineCorrect([{x:1,y:
 const cp1=screens.findIndex(s=>s.checkpoint===1),cp2=screens.findIndex(s=>s.checkpoint===2)
 assert.equal(safeIndex(screens.length-1,[]),cp1);assert.equal(safeIndex(screens.length-1,[1]),cp2);assert.equal(safeIndex(screens.length-1,[1,2]),screens.length-1)
 const config=readConfig()
-assert.deepEqual(config.hours,['1','2','3','4','5','6','7','8']);assert.deepEqual(released(config,{}),[])
+assert.deepEqual(config.hours,['2','3','4','6','7','8']);assert.deepEqual(released(config,{}),[])
 assert.throws(()=>unlock(config,1,'wrong',{}));assert(unlock(config,1,'linear',{}));assert.throws(()=>unlock(config,2,'Linear',{}))
 const g1=unlock(config,1,'Linear',{});assert.deepEqual(released(config,{'1':g1}),[1]);assert.deepEqual(released(config,{'1':'forged'}),[])
 const g2=unlock(config,2,'Linear',{'1':g1});assert.deepEqual(released(config,{'1':g1,'2':g2}),[1,2]);assert.deepEqual(readConfig('old-link'),config)
