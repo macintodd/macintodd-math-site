@@ -26,6 +26,7 @@ jobs:
       - run: node --experimental-strip-types scripts/test-intro-point-slope-flow.mjs
       - run: node --experimental-strip-types scripts/test-point-slope-celebration.mjs
       - run: node --experimental-strip-types scripts/test-point-slope-celebration-flow.mjs
+      - run: node --experimental-strip-types scripts/test-point-slope-reflection.mjs
       - run: npm run test:slope
       - run: node --experimental-strip-types scripts/test-line-equation-levels.mjs
       - run: node --experimental-strip-types scripts/test-line-equation-flow.mjs

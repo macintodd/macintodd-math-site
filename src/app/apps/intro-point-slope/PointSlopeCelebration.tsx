@@ -4,7 +4,7 @@ import {Math as Formula} from '@/components/Math'
 import {slopeTex} from '@/lib/point-slope'
 import {celebrationGeometry} from '@/lib/point-slope-celebration'
 import type {IntroProblem} from '@/lib/intro-point-slope'
-export default function PointSlopeCelebration({problem,name,hour,onDismiss,onNext}:{problem:IntroProblem;name:string;hour:string;onDismiss:()=>void;onNext:()=>void}){
+export default function PointSlopeCelebration({problem,name,hour,onDismiss,onNext,canFinish=false,onFinish}:{problem:IntroProblem;name:string;hour:string;onDismiss:()=>void;onNext:()=>void;canFinish?:boolean;onFinish?:()=>void}){
  const dialog=useRef<HTMLDialogElement>(null),[replay,setReplay]=useState(0),id=useId().replace(/:/g,''),heading=useId()
  useEffect(()=>{if(dialog.current&&!dialog.current.open)dialog.current.showModal()},[])
  const g=celebrationGeometry(problem),w=g.window,scale=420/w.size,sx=(x:number)=>40+(x-w.left)*scale,sy=(y:number)=>460-(y-w.bottom)*scale,step=w.size>20?5:w.size>12?2:1
@@ -21,5 +21,5 @@ export default function PointSlopeCelebration({problem,name,hour,onDismiss,onNex
  <g transform={`translate(${sx(p.x)},${sy(p.y)})`}><text className="success-scoring-star" x="0" y="0" textAnchor="middle" dominantBaseline="central" fontSize="44" fill="#d99409" stroke="#fff" strokeWidth="1">★</text></g>
  </g><text x="480" y="480" fontSize="13">x</text><text x="20" y="23" fontSize="13">y</text></svg>
  <section className="intro-success-explanation"><div className="success-equation" aria-label="Final equation"><Formula>y=</Formula><span className="success-slope"><Formula>{slopeTex(problem.line)}</Formula></span><Formula>x</Formula><span className="success-intercept-value"><Formula>{`${sign}${Math.abs(b.y)}`}</Formula></span></div><ol><li className="success-step-given">Start at the given point <Formula>{`(${p.x},${p.y})`}</Formula>.</li><li className="success-step-intercept">Plot the y-intercept <Formula>{`(0,${b.y})`}</Formula>.</li><li className="success-step-slope">Count signed run <strong>{g.run>0?'+':''}{g.run}</strong>, then signed rise <strong>{g.rise>0?'+':''}{g.rise}</strong>.<Formula display>{`m=\\frac{${g.rise}}{${g.run}}=${slopeTex(problem.line)}`}</Formula></li><li className="success-step-star">The line passes through your point. <strong>★ One scoring star!</strong></li></ol></section></div>
- <div className="intro-celebration-actions"><button onClick={()=>setReplay(n=>n+1)}>Replay animation</button><button onClick={onDismiss}>Review my work</button><button className="intro-primary" onClick={onNext}>Next problem →</button></div></dialog>
+ <div className="intro-celebration-actions"><button onClick={()=>setReplay(n=>n+1)}>Replay animation</button><button onClick={onDismiss}>Review my work</button><button className="intro-primary" onClick={onNext}>Next problem →</button>{canFinish&&onFinish&&<button className="intro-primary" onClick={onFinish}>Finish &amp; reflect →</button>}</div></dialog>
 }
