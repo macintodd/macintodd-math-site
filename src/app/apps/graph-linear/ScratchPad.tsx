@@ -19,7 +19,7 @@ export default function ScratchPad({height=504}:{height?:number}){
       <button type="button" disabled={!strokes.length} onClick={()=>setStrokes(current=>current.slice(0,-1))}>Undo stroke</button>
       <button type="button" disabled={!strokes.length} onClick={()=>setStrokes([])}>Clear scratch work</button>
     </div>
-    <svg className="scratch-surface" viewBox={`0 0 504 ${height}`} role="img" aria-label="Scratch pad. Write calculations with your finger, stylus, or Apple Pencil. Use the pen, eraser, undo, and clear buttons above."
+    <svg className="scratch-surface" preserveAspectRatio="none" viewBox={`0 0 504 ${height}`} role="img" aria-label="Scratch pad. Write calculations with your finger, stylus, or Apple Pencil. Use the pen, eraser, undo, and clear buttons above."
       onPointerDown={event=>{event.preventDefault();if(pointer.current)return;const p=point(event);if(!p)return;const id=++serial.current;pointer.current={pointer:event.pointerId,stroke:id};event.currentTarget.setPointerCapture(event.pointerId);setStrokes(current=>[...current,{id,path:`M ${p} l 0.1 0`,erase}])}}
       onPointerMove={event=>{if(pointer.current?.pointer!==event.pointerId)return;event.preventDefault();const p=point(event),id=pointer.current.stroke;if(p)setStrokes(current=>current.map(stroke=>stroke.id===id?{...stroke,path:`${stroke.path} L ${p}`}:stroke))}}
       onPointerUp={end} onPointerCancel={end} onLostPointerCapture={end}>
