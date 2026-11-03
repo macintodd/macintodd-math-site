@@ -1041,6 +1041,14 @@
       "sourceSha256": "f654d6aaa3a098330af88886975fe3b9a2c7aa8c5caedc3c06c8ccd9f46d789e",
       "publishedSha256": "153ad0779cc129591a664052e609c845ba20f24d67b7c7ddfd526f23046b1e83",
       "publishedPages": 2
+    },
+    {
+      "source": "Precalculus/Precalc 2026 Completed/PC Unit 1B/MathBoard Slides.pdf",
+      "output": "precalculus/parent-functions/completed-notes.pdf",
+      "selectionReason": "Teacher requested U1B Section 1.6 parent-functions completed notes. Reviewed both pages: linear functions, greatest integer, piecewise graphs, and eight parent families; source is named MathBoard Slides.pdf.",
+      "sourceSha256": "31d0744c0f01b83abf17cb5aaf57fe02f01777c18427a7f56ca2fefbd67c80f7",
+      "publishedSha256": "85a58ccb6f605575d0828481ad1c580daa46b0aa262121faf1d8a230b4ab192f",
+      "publishedPages": 2
     }
   ]
 }

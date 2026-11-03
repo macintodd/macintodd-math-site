@@ -3,6 +3,9 @@ import type { Lesson } from "./lessons"
 export type VocabularyTerm = { id: string; term: string; definition: string }
 
 export const vocabulary: Record<string, VocabularyTerm> = {
+  "parent-function": {id:"parent-function",term:"Parent function",definition:"A basic function whose graph is a starting point for a family of related functions."},
+  "greatest-integer-function": {id:"greatest-integer-function",term:"Greatest integer function",definition:"The function $f(x)=[[x]]$ returns the greatest integer less than or equal to the input. For example, $[[-1.5]]=-2$."},
+  "piecewise-function": {id:"piecewise-function",term:"Piecewise-defined function",definition:"A function defined by different rules on different parts of its domain. Use the rule whose interval contains the input."},
   "variable": {
     "id": "variable",
     "term": "Variable",
@@ -326,6 +329,7 @@ export const vocabulary: Record<string, VocabularyTerm> = {
 }
 
 const lessonTerms: Record<string, string[]> = {
+  "parent-functions": ["parent-function", "greatest-integer-function", "piecewise-function", "domain", "range", "even-function", "odd-function", "interval-notation"],
   "graphing-linear-equations": ["linear-equation","slope","rate-of-change","y-intercept","slope-intercept-form","function-notation"],
   "one-step-equations": [
     "equation",

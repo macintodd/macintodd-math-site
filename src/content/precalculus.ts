@@ -2,6 +2,59 @@ import type { Lesson } from './lessons'
 
 // Ordered from the teacher's Classroom screenshots; assessments have no downloads.
 export const precalculusLessons: Lesson[] = [
+{
+  "course": "precalculus",
+  "unitSlug": "unit-1b",
+  "slug": "parent-functions",
+  "title": "A library of parent functions",
+  "unit": "Unit 1B",
+  "number": "Section 1.6",
+  "indexLabel": "1.6",
+  "sortOrder": 6,
+  "description": "Recognize eight parent graphs, describe their domains and ranges, and evaluate greatest integer and piecewise-defined functions.",
+  "goals": [
+    "Recognize constant, identity, absolute value, square root, quadratic, cubic, reciprocal, and greatest integer functions.",
+    "State domain, range, and symmetry of parent functions.",
+    "Write linear functions and graph piecewise-defined functions with correct endpoints."
+  ],
+  "prerequisites": "Function notation, slope, interval notation, and even/odd symmetry.",
+  "concepts": [],
+  "examples": [],
+  "videos": [
+    {
+      "id": "IP70kcTtWkI",
+      "title": "Graphing 9 Basic Functions",
+      "author": "Mathispower4u"
+    },
+    {
+      "id": "60-qtkfC3Nw",
+      "title": "The Domain and Range of 9 Basic Functions",
+      "author": "Mathispower4u"
+    },
+    {
+      "id": "0WMsiF6Bm-k",
+      "title": "The Floor Function (Greatest Integer Function)",
+      "author": "Mathispower4u"
+    },
+    {
+      "id": "rn_Z3yCRCt0",
+      "title": "Interpreting and Graphing Piecewise Functions",
+      "author": "Mathispower4u"
+    }
+  ],
+  "materialSet": "resources",
+  "materialsNote": "Completed classroom notes for Section 1.6. Additional handouts will be linked after review.",
+  "materials": [
+    {
+      "file": "precalculus/parent-functions/completed-notes.pdf",
+      "title": "Completed notes",
+      "label": "Completed Notes",
+      "description": "Two annotated classroom pages covering parent functions, linear functions, greatest integer, and piecewise-defined functions.",
+      "pages": 2,
+      "kind": "completed-notes"
+    }
+  ]
+},
   {
     "course": "precalculus",
     "unitSlug": "unit-1",

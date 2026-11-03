@@ -64,7 +64,7 @@ export const units: Unit[] = [
   {
     course: 'precalculus',
     slug: 'unit-1',
-    current: true,
+    current: false,
     number: '1',
     title: 'Coordinates, Graphs & Functions',
     introduction: 'Connect algebraic information to a visual picture. Begin with position, distance, and midpoint, then use graphs and functions to describe how quantities relate.',
@@ -84,6 +84,29 @@ export const units: Unit[] = [
       { title: 'Design and plan', text: 'Coordinates are used to place objects in digital drawings, games, and construction plans. Distance, midpoint, and right triangles help organize a design precisely.' },
     ],
   },
+{
+  "course": "precalculus",
+  "slug": "unit-1b",
+  "current": true,
+  "number": "1B",
+  "title": "Parent Functions & Transformations",
+  "introduction": "Recognize the basic families of functions and use their graphs as building blocks for more complex models.",
+  "skills": [
+    "Identify parent functions by their graphs and equations.",
+    "Describe domain, range, and symmetry.",
+    "Evaluate greatest integer functions and sketch piecewise graphs."
+  ],
+  "relevance": [
+    {
+      "title": "Recognize a pattern",
+      "text": "A familiar graph shape helps identify relationships in motion, growth, and measurements."
+    },
+    {
+      "title": "Model changing rules",
+      "text": "Piecewise functions describe situations such as pricing tiers, where the rule changes at a boundary."
+    }
+  ]
+}
 ]
 export function getUnit(course: string, slug: string) {
   return units.find(unit => unit.course === course && unit.slug === slug)

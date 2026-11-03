@@ -66,3 +66,7 @@ Khan Academy and Texas Instruments Education channel identities and availability
 ## Unit 1 test review added at teacher request
 
 The teacher explicitly approved the test review at the bottom of the Precalculus Unit 1 index. Published the current Pages export and matching three-page completed review. The Word version was rejected: it contains raw LaTeX and a different question 15. Exported the Pages original through its native PDF exporter and reviewed all three pages; no test was published. The source Pages Index.zip hash is recorded for version identification. The page offers two PDF links, a short review plan, links to the six main lesson video pages, and optional Maths Is Fun practice. Its privacy description is attributed to the site's published policy; no claim of an independent privacy audit is made.
+
+## Section 1.6 parent functions
+
+At teacher request, reviewed both pages of PC Unit 1B/MathBoard Slides.pdf and published them as completed notes for A library of parent functions, Section 1.6. The generic source filename was confirmed by the printed title and annotated contents. Added Unit 1B as the current unit. No assessments or other folder files were uploaded. Video selections come from the creator’s official Algebra library: https://mathispower4u.com/algebra.php.
