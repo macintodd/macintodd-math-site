@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { points, type Line } from "@/lib/slope";
 type Point={x:number;y:number}
-export default function Graph({ line, hint, selectedPoints, onPointTap, disabled=false, instructions }: { line: Line; hint: boolean; selectedPoints?:Point[];onPointTap?:(point:Point)=>void;disabled?:boolean;instructions?:string }) {
+export default function Graph({ line, hint, selectedPoints, onPointTap, disabled=false, instructions, celebrateIntercept=false }: { line: Line; hint: boolean; selectedPoints?:Point[];onPointTap?:(point:Point)=>void;disabled?:boolean;instructions?:string;celebrateIntercept?:boolean }) {
   const [selected, setSelected] = useState<string[]>([]);
   const shown=selectedPoints?selectedPoints.map(p=>`${p.x},${p.y}`):selected;
   function toggle(key: string) {
@@ -160,6 +160,7 @@ export default function Graph({ line, hint, selectedPoints, onPointTap, disabled
             </g>
           );
         })}
+        {celebrateIntercept&&<g pointerEvents="none" aria-hidden="true" className="line-intercept-celebration" transform={`translate(${scale(0)},${vertical(line.y-line.x*line.rise/line.run)})`}><text className="line-intercept-star" x="0" y="0" textAnchor="middle" dominantBaseline="central" fontSize="40" fill="#e6a217" stroke="#fffdf8" strokeWidth="1">★</text></g>}
       </svg>
       <p className="slope-selected" role="status">
         {shown.length

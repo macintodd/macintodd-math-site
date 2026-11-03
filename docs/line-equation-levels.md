@@ -10,3 +10,7 @@ Validation:
 - `node --experimental-strip-types scripts/test-line-equation-levels.mjs`
 - `node --experimental-strip-types scripts/test-line-equation-flow.mjs` (actual component event handlers; not a browser layout test)
 - Existing line-equation and slope suites, content checks, lint, production build and TypeScript checks.
+
+## Success stars
+
+A successful Level 1 y-intercept check briefly pops a star at the graph’s confirmed y-intercept. Incorrect checks do not trigger it. On a correct equation, the answer field emits exactly the current first-try streak count for the active level. A correct retry with a broken streak emits zero burst stars while retaining its normal earned scoring star. These effects do not award extra points or alter the streak. The final Level 2 equation stays visible for 1.7 seconds before the automatic report, allowing its burst to finish. Both effects ignore pointer events and are suppressed under reduced-motion preferences. New problems and new students clear the effects.
