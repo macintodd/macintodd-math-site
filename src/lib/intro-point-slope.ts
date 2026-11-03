@@ -6,7 +6,7 @@ export type Quantity='m'|'x'|'y'
 export type Slot='m'|'x1'|'y1'
 export type Placements=Record<Slot,Quantity|null>
 export const emptyPlacements=():Placements=>({m:null,x1:null,y1:null})
-export function generateIntroPointSlope(random=Math.random,recent:EquationRecord[]=[]):IntroProblem{const {line}=generatePointSlope(random,recent),xs=[-2,-1,1,2],x=xs[Math.min(3,Math.floor(random()*4))]*line.run;return {line,point:{x,y:line.rise/line.run*x+line.y}}}
+export function generateIntroPointSlope(random=Math.random,recent:EquationRecord[]=[]):IntroProblem{if(recent.length===0)return {line:{x:0,y:-2,rise:2,run:1},point:{x:3,y:4}};const {line}=generatePointSlope(random,recent),xs=[-2,-1,1,2],x=xs[Math.min(3,Math.floor(random()*4))]*line.run;return {line,point:{x,y:line.rise/line.run*x+line.y}}}
 export function quantityValue(p:IntroProblem,q:Quantity){return q==='m'?p.line.rise/p.line.run:q==='x'?p.point.x:p.point.y}
 export function quantityTex(p:IntroProblem,q:Quantity){return q==='m'?slopeTex(p.line):String(quantityValue(p,q))}
 export function placeQuantity(current:Placements,slot:Slot,quantity:Quantity):Placements{const next={...current};for(const key of ['m','x1','y1'] as Slot[])if(next[key]===quantity)next[key]=null;next[slot]=quantity;return next}

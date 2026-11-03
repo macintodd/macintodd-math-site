@@ -21,3 +21,9 @@ Completion/reflection revision: finishing practice opens a congratulations slide
 Two five-star native radio scales collect self-reflection: confidence in finding slope-intercept form from a point and slope (1=Not yet, 5=Yes confidently), and practice difficulty (1=Too easy, 3=Just right, 5=Too difficult). Ratings never affect academic scoring. Both must be answered before generating the local report PNG. The screenshot layout includes the full questions, selected labels and scale endpoints; PNG export includes the same information with wrapped text. Changing either response invalidates an existing PNG. Back navigation retains responses and date; next-student reset clears responses, report and image. All responses remain memory-only with no transmission or persistence.
 
 Tests cover radio scales/labels/callbacks, congratulations and report navigation, required responses for export, included questions/date/named scores, unchanged grades, stale-PNG invalidation, finishing from the splash, and empty ratings for a subsequent student.
+
+## Faded color guidance and narrated graph sequence
+
+The first problem is fixed for every student: slope 2 through (3,4). Later problems use the nonzero finite slope pool. Problems 1–2 color-code m blue, x₁ green, and y₁ red in the given quantities, general formula, and destination outlines. Coordinate and destination labels remain for all problems. Starting with problem 3, optional Color help defaults off and resets off at each successful step and new problem. The redundant ± keypad key is removed.
+
+The success animation labels the given point and flashes its arrow five times, then does the same for “y-intercept of your answer.” At eight seconds the slope explanation appears as change in y / change in x = signed rise / signed run; unit counting starts afterward. Line drawing and the existing scoring star follow. Reduced motion shows the complete static solution.

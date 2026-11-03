@@ -43,13 +43,21 @@ function drag(q,slot){quantity(q).props.onPointerDown(pointer(10,10));render();q
 function tapPlace(q,slot){quantity(q).props.onClick({detail:0});render();nodes().find(n=>n.props['data-slot']===slot).props.onClick();render()}
 let expectedName='Demo Student'
 function solve(miss=false,finishNow=false){
+ const number=Number(nodes().find(n=>n.props.className==='intro-given').props['aria-label'].match(/\d+/)[0]);
+ const colorOn=()=>tree.props.className.includes('intro-color-help');
+ assert.equal(colorOn(),number<=2);
+ assert(nodes().filter(n=>n.props['data-slot']).every(n=>text(n).includes(n.props['data-slot']==='m'?'m':n.props['data-slot']==='x1'?'x_1':'y_1')));
+ const toggle=nodes().find(n=>n.type==='button'&&text(n)==='Color help off');
+ assert.equal(!!toggle,number>=3);
+ if(number>=3){button('Color help off');assert(colorOn());button('Color help on');assert(!colorOn());button('Color help off');assert(colorOn())}
+
  if(miss){drag('m','m');drag('x','y1');drag('y','x1');submit();assert(text(tree).includes('Not quite.'));assert(!nodes().some(n=>n.props['aria-label']==='Distributed constant'));drag('x','x1');drag('y','y1')}
  else{tapPlace('m','m');tapPlace('x','x1');tapPlace('y','y1')}
- submit();assert(text(tree).includes('Correct placement'));field('Distributed x coefficient',`${generated.line.rise}/${generated.line.run}`);field('Distributed constant',miss?'999':String(-generated.line.rise/generated.line.run*generated.point.x));submit();if(miss){assert(!nodes().some(n=>n.props['aria-label']==='Final equation'));field('Distributed constant',String(-generated.line.rise/generated.line.run*generated.point.x));submit()}
- field('Final equation','');button('y');button('=');assert.equal(nodes().find(n=>n.props['aria-label']==='Final equation').props.value,'y=');field('Final equation',miss?'y=999':'y='+model.equationText(generated.line));submit();if(miss){field('Final equation','y='+model.equationText(generated.line));submit()}assert(text(tree).includes('Gold star!'));const splash=nodes().find(n=>n.type==='celebration');assert(splash);assert.equal(splash.props.name,expectedName);if(finishNow){assert(splash.props.canFinish);splash.props.onFinish()}else splash.props.onDismiss();render();assert(!nodes().some(n=>n.type==='celebration'))
+ submit();assert(text(tree).includes('Correct placement'));assert.equal(colorOn(),number<=2);assert(!nodes().some(n=>n.props['aria-label']==='Change sign'));if(number>=3){button('Color help off');assert(colorOn())}field('Distributed x coefficient',`${generated.line.rise}/${generated.line.run}`);field('Distributed constant',miss?'999':String(-generated.line.rise/generated.line.run*generated.point.x));submit();if(miss){assert(!nodes().some(n=>n.props['aria-label']==='Final equation'));field('Distributed constant',String(-generated.line.rise/generated.line.run*generated.point.x));submit()}
+ assert.equal(colorOn(),number<=2);field('Final equation','');button('y');button('=');assert.equal(nodes().find(n=>n.props['aria-label']==='Final equation').props.value,'y=');field('Final equation',miss?'y=999':'y='+model.equationText(generated.line));submit();if(miss){field('Final equation','y='+model.equationText(generated.line));submit()}assert(text(tree).includes('Gold star!'));const splash=nodes().find(n=>n.type==='celebration');assert(splash);assert.equal(splash.props.name,expectedName);if(finishNow){assert(splash.props.canFinish);splash.props.onFinish()}else splash.props.onDismiss();render();assert(!nodes().some(n=>n.type==='celebration'))
 }
 render();inputLabel('First name','Demo');inputLabel('Last name','Student');inputLabel('Class hour','2');submit();assert(text(tree).includes('Demo Student'));assert(!nodes().some(n=>n.type==='graph'))
-quantity('m').props.onPointerDown(pointer(10,10));render();quantity('m').props.onPointerMove(pointer(70,80));render();quantity('m').props.onPointerCancel();render();assert(!nodes().some(n=>n.props.className==='intro-drag-ghost'));assert(nodes().filter(n=>n.props['data-slot']).every(n=>text(n)==='drop here'))
+quantity('m').props.onPointerDown(pointer(10,10));render();quantity('m').props.onPointerMove(pointer(70,80));render();quantity('m').props.onPointerCancel();render();assert(!nodes().some(n=>n.props.className==='intro-drag-ghost'));assert(nodes().filter(n=>n.props['data-slot']).every(n=>text(n).endsWith('drop here')))
 solve(true);button('Next problem →');for(let i=0;i<10;i++){solve();if(i<9)button('Next problem →')}
 assert(captured>=6);button('Submit 10/10 & view results');assert(text(tree).includes('Congratulations, Demo!'));assert(text(tree).includes('next slide'));button('Next: questions & results →');assert(text(tree).includes('Demo Student'));assert(text(tree).includes('Completed:'));assert(nodes().find(n=>n.type==='button'&&text(n)==='Create results image').props.disabled)
 function rate(question,value){nodes().find(n=>n.type==='rating'&&n.props.question===question).props.onChange(value);render()}
