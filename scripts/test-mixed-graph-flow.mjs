@@ -38,12 +38,12 @@ function field(label,value){nodes().find(n=>n.type==='input'&&n.props['aria-labe
 render();inputLabel('First name','Demo');inputLabel('Last name','Student');inputLabel('Class hour','6');nodes().find(n=>n.type==='form').props.onSubmit({preventDefault(){}});render()
 const seen=new Set()
 for(let i=0;i<11;i++){
- const p=generated;seen.add(p.mode);assert(text(tree).includes('Demo Student'));assert(nodes().some(n=>n.type==='scratch-pad'));assert(!nodes().find(n=>n.props['aria-label']==='Scratch work area').props.hidden)
- if(p.mode==='free'){assert.equal(nodes().filter(n=>n.type==='input').length,0);assert(!nodes().some(n=>n.type==='slope-entries'));assert(text(tree).includes('Graph the equation.'))}
+ const p=generated;seen.add(p.mode);assert(nodes().some(n=>n.props['aria-label']==='Equation to graph'));assert(!nodes().find(n=>n.props.className==='mixed-question').props.children.some(n=>n?.type==='formula'));assert(text(tree).includes('Demo Student'));assert(nodes().some(n=>n.type==='scratch-pad'));assert(!nodes().find(n=>n.props['aria-label']==='Scratch work area').props.hidden)
+ if(p.mode==='free'){assert.equal(nodes().filter(n=>n.type==='input').length,0);assert(!nodes().some(n=>n.type==='slope-entries'));assert(text(tree).includes('Graph the equation below.'))}
  button('Graph');const points=p.mode==='intercepts'?[{x:p.standard.xIntercept,y:0},{x:0,y:p.standard.yIntercept}]:[{x:0,y:p.line.y},graphModel.slopePoint(p.line)]
  graph().props.onSelect(points[0]);render();graph().props.onSelect(points[1]);render();button('Scratch pad');assert.equal(graph().props.selected.length,2);button('Graph');button('Graph line')
  if(p.mode==='intercepts'){field('X-intercept x-coordinate',String(p.standard.xIntercept));field('X-intercept y-coordinate','0');field('Y-intercept x-coordinate','0');field('Y-intercept y-coordinate',String(p.standard.yIntercept))}
- else if(p.mode==='slope'){assert(text(tree).includes('State the y-intercept and slope, then graph.'));assert(!nodes().some(n=>n.type==='slope-entries'));nodes().find(n=>n.type==='slope-read-entries').props.onChange({x:'0',y:String(p.line.y),rise:String(p.line.rise),run:String(p.line.run)});render()}
+ else if(p.mode==='slope'){assert(text(tree).includes('State the y-intercept and slope for the equation below, then graph.'));assert(!nodes().some(n=>n.type==='slope-entries'));nodes().find(n=>n.type==='slope-read-entries').props.onChange({x:'0',y:String(p.line.y),rise:String(p.line.rise),run:String(p.line.run)});render()}
  else if(p.mode==='convert'){
   if(i===0){button('Check graph');assert(text(tree).includes('Enter the slope and y-intercept before checking.'));assert(!graph().props.disabled)}
   nodes().find(n=>n.type==='slope-entries').props.onChange({m:`${p.line.rise}/${p.line.run}`,b:i===0?'999':String(p.line.y)});render()
