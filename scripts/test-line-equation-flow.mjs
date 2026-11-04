@@ -40,16 +40,16 @@ render();inputLabel('First name','Demo');inputLabel('Last name','Student');input
 assert(!nodes().some(n=>n.props['aria-label']==='Equation of the line'))
 assert(nodes().find(n=>n.props['aria-label']==='Insert variable x').props.disabled)
 tap({x:generated.run,y:generated.y+generated.rise});assert.equal(nodes().find(n=>n.props['aria-label']==='Y-intercept x-coordinate').props.value,String(generated.run));button('Check y-intercept');assert(text(tree).includes('Not quite.'));assert.equal(nodes().find(n=>n.type==='graph').props.celebrateIntercept,false)
-tap({x:0,y:generated.y});button('Check y-intercept');assert.equal(nodes().find(n=>n.type==='graph').props.celebrateIntercept,true);assert(nodes().find(n=>n.props['aria-label']==='Rise (numerator)').props.disabled);slopeAndEquation();assert(text(tree).includes('Gold star!'));assert.equal(nodes().find(n=>n.props.className==='line-streak-burst').props['data-star-count'],0);assert(text(tree).includes('Consecutive first-try correct 0 / 5'));button('Next graph →')
-for(let i=0;i<5;i++){tap({x:0,y:generated.y});button('Check y-intercept');slopeAndEquation();assert.equal(nodes().filter(n=>n.props.className==='line-burst-star').length,i+1);if(i<4){assert(!text(tree).includes('Level 2 is unlocked'));button('Next graph →')}}
+tap({x:0,y:generated.y});button('Check y-intercept');assert.equal(nodes().find(n=>n.type==='graph').props.celebrateIntercept,true);assert(nodes().find(n=>n.props['aria-label']==='Rise (numerator)').props.disabled);slopeAndEquation();assert(text(tree).includes('Gold star!'));assert.equal(nodes().find(n=>n.props.className==='line-streak-burst').props['data-star-count'],0);assert(text(tree).includes('Consecutive first-try correct 0 / 3'));button('Next graph →')
+for(let i=0;i<3;i++){tap({x:0,y:generated.y});button('Check y-intercept');slopeAndEquation();assert.equal(nodes().filter(n=>n.props.className==='line-burst-star').length,i+1);if(i<2){assert(!text(tree).includes('Level 2 is unlocked'));button('Next graph →')}}
 assert(text(tree).includes('Level 2 is unlocked'));button('Start Level 2 →');assert(text(tree).includes('Class hour 3 · Level 2'));assert(!nodes().some(n=>n.type==='button'&&text(n)==='Check slope'))
-for(let i=0;i<10;i++){
+for(let i=0;i<3;i++){
  field('Y-intercept x-coordinate','0');field('Y-intercept y-coordinate',String(generated.y));field('Rise (numerator)',String(generated.rise));field('Run (denominator)',String(generated.run));field('Equation of the line',model.equationText(generated));
  const equation=nodes().find(n=>n.props['aria-label']==='Equation of the line');equation.props.onFocus();render();assert(!nodes().find(n=>n.props['aria-label']==='Insert variable x').props.disabled)
- submit();assert.equal(nodes().filter(n=>n.props.className==='line-burst-star').length,i+1);if(i===9){assert(nodes().some(n=>n.props['aria-label']==='Equation of the line'));assert.equal(timers.size,1);for(const fn of [...timers.values()])fn();timers.clear();render()}if(i<9)button('Next graph →')
+ submit();assert.equal(nodes().filter(n=>n.props.className==='line-burst-star').length,i+1);if(i===2){assert(nodes().some(n=>n.props['aria-label']==='Equation of the line'));assert.equal(timers.size,1);for(const fn of [...timers.values()])fn();timers.clear();render()}if(i<2)button('Next graph →')
 }
 assert(text(tree).includes('Level 2 score: 10/10'));assert(text(tree).includes('Demo Student'));button('Create results image');assert(paint.some(t=>t==='Demo Student'));assert(paint.some(t=>t.includes('Level 1 completed: YES')));button('Next student / new session');assert(!nodes().some(n=>n.type==='img'));assert(!text(tree).includes('Demo Student'))
-console.log('Passed actual component events: locked stages, tap autofill, missed check, retry star, five-problem unlock, optional taps in Level 2, scoring, named report and student reset.')
+console.log('Passed actual component events: locked stages, tap autofill, missed check, retry star, three-problem unlock, optional taps in Level 2, scoring, named report and student reset.')
 // The shared graph puts its optional decoration at the mathematical y-intercept,
 // leaves tapping unobstructed, and renders nothing for other callers by default.
 const graphModule={exports:{}}
@@ -58,4 +58,4 @@ const graphProps={line:{x:2,y:3,rise:2,run:1},hint:false}
 assert(!nodes(graphModule.exports.default(graphProps)).some(n=>n.props.className==='line-intercept-celebration'))
 const marker=nodes(graphModule.exports.default({...graphProps,celebrateIntercept:true})).find(n=>n.props.className==='line-intercept-celebration')
 assert.equal(marker.props.transform,'translate(224,244)');assert.equal(marker.props.pointerEvents,'none');assert.equal(marker.props['aria-hidden'],'true')
-console.log('Passed intercept-star placement and optional shared-graph decoration; equation bursts match current streak, including zero after a retry and ten before the final report.')
+console.log('Passed intercept-star placement and optional shared-graph decoration; equation bursts match current streak, including zero after a retry and three before the final report.')
