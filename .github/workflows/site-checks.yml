@@ -44,6 +44,8 @@ jobs:
       - run: npm run test:mathboard
       - run: node --experimental-strip-types scripts/test-app-directory.mjs
       - run: node --experimental-strip-types scripts/test-app-previews.mjs
+      - run: node --experimental-strip-types scripts/test-transformation-notation.mjs
+      - run: node --experimental-strip-types scripts/test-transformation-notation-flow.mjs
       - run: npm run check:content
       - run: npm run typecheck
       - run: npm run lint
