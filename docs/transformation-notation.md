@@ -13,3 +13,7 @@ Based on the teacher's local `1.7A New Notes Transformations Shifts and Reflecti
 - Six large answer buttons use a two-column landscape layout and stack on narrow phones. Reduced-motion preferences suppress flying stars. Duplicate/stale answer actions are ignored. No automatic timed question progression.
 
 Validation: `test-transformation-notation.mjs` independently checks 3,600 generated question/choice sets, graph-point geometry, order and exclusions, strict KaTeX, perfect-run coverage, restarts, streaks, duplicate actions and reports. `test-transformation-notation-flow.mjs` exercises the actual component handlers from entry through all level splashes to PNG and next-student reset. Both run in CI alongside directory/preview and production checks.
+
+## Continue another day
+
+At a checked-problem boundary, Stop & save progress creates a compact resume code and a named/dated downloadable card. Returning students enter their name, original hour and code on the start screen. See [resume-codes.md](resume-codes.md) for restored fields, initial/hour checks, local-only handling and tests.

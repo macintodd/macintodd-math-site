@@ -27,3 +27,7 @@ Tests cover radio scales/labels/callbacks, congratulations and report navigation
 The first problem is fixed for every student: slope 2 through (3,4). Later problems use the nonzero finite slope pool. Problems 1–2 color-code m blue, x₁ green, and y₁ red in the given quantities, general formula, and destination outlines. Coordinate and destination labels remain for all problems. Starting with problem 3, optional Color help defaults off and resets off at each successful step and new problem. The redundant ± keypad key is removed.
 
 The success animation labels the given point and flashes its arrow five times, then does the same for “y-intercept of your answer.” At eight seconds the slope explanation appears as change in y / change in x = signed rise / signed run; unit counting starts afterward. Line drawing and the existing scoring star follow. Reduced motion shows the complete static solution.
+
+## Continue another day
+
+At a checked-problem boundary, Stop & save progress creates a compact resume code and a named/dated downloadable card. Returning students enter their name, original hour and code on the start screen. See [resume-codes.md](resume-codes.md) for restored fields, initial/hour checks, local-only handling and tests.
