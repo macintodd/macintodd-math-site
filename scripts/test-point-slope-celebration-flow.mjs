@@ -21,3 +21,5 @@ const before=nodes().find(n=>n.props.className==='intro-celebration-sequence').k
 let finished=0;props.canFinish=true;props.onFinish=()=>finished++;render();button('Finish & reflect →');assert.equal(finished,1)
 console.log('Passed splash component events: modal opens once, dynamic named message, valid equations, replay resets animation without scoring/navigation, review/next/Escape callbacks.')
 const solution=geometry.celebrationGeometry(props.problem),segments=nodes().filter(n=>n.props.className==='success-main-line');assert.equal(segments.length,solution.repetitions);const star=nodes().find(n=>n.props.className==='success-scoring-star'),last=segments.at(-1);assert.equal(parseFloat(star.props.style.animationDelay),parseFloat(last.props.style.animationDelay)+.4);assert(text(tree).includes('Repeat the simplest slope'))
+
+assert(!text(tree).includes('Skip animation'));props.canSkip=true;render();const nextBefore=next;button('Skip animation →');assert.equal(next,nextBefore+1);props.canSkip=false;render();assert(!text(tree).includes('Skip animation'));console.log('Passed optional skip navigation without changing score.');
