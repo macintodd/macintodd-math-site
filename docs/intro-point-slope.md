@@ -31,3 +31,9 @@ The success animation labels the given point and flashes its arrow five times, t
 ## Continue another day
 
 At a checked-problem boundary, Stop & save progress creates a compact resume code and a named/dated downloadable card. Returning students enter their name, original hour and code on the start screen. See [resume-codes.md](resume-codes.md) for restored fields, initial/hour checks, local-only handling and tests.
+
+## Aligned givens and repeated slope counting
+
+The practice layout puts the blue given-values panel and the algebra work in the same left column. Given slope/point headings share a baseline; draggable boxes share their top edge. Name, hour, score, totals, streak and save control occupy the right column above the help/keypad. The former score row becomes the full problem direction. On narrow phones, identity/scores stack above givens and work.
+
+The success graph now reduces slope to its simplest integer rise/run pair and repeats a run-then-rise staircase from the y-intercept to the given point. Unit labels reset per repetition. Each short line segment draws after its corresponding count; the scoring star starts exactly after the final segment reaches the given point. Moving left reverses both signed counts. The five-flash point callouts and reduced-motion static result remain available. Geometry tests include unreduced fractional slopes and both traversal directions.
