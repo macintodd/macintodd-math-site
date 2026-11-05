@@ -22,3 +22,11 @@ export function skierRoute(problem:IntroProblem){
  const high=points[0],low=points.at(-1)!,landing={x:high.x+(low.x-high.x)*.22,y:high.y+(low.y-high.y)*.22},exit={x:low.x+(low.x-high.x)*.3,y:low.y+(low.y-high.y)*.3}
  return {landing,exit,angle:Math.atan(-m)*180/Math.PI,facing:m>0?-1:1}
 }
+
+export function goatRoute(problem:IntroProblem){
+ const ski=skierRoute(problem),g=celebrationGeometry(problem),m=problem.line.rise/problem.line.run
+ const stops=[g.intercept,g.point].sort((a,b)=>a.y-b.y),first=stops[0],second=stops[1]
+ // The skier exit is beyond the lower edge; extrapolate uphill beyond both stops.
+ const start=ski.exit,exit={x:ski.landing.x-(ski.exit.x-ski.landing.x)*(.22/1.52+.2),y:ski.landing.y-(ski.exit.y-ski.landing.y)*(.22/1.52+.2)}
+ return {start,first,second,exit,angle:ski.angle,facing:m>0?1:-1,label:Math.abs(m)>=1?'Steep':'Not so steep'}
+}

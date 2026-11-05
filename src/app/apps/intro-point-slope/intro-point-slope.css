@@ -44,3 +44,5 @@ body:has(.intro-point-app) .site-header,body:has(.intro-point-app) .site-footer{
 @media(prefers-reduced-motion:reduce){.intro-reward-glow::before,.intro-star-reward>span{animation:none}.intro-reward-glow::before{opacity:.8;filter:blur(5px)}}
 
 .success-skier{opacity:0;pointer-events:none;animation:skier-visit 4.8s linear forwards}@keyframes skier-visit{0%,94%{opacity:1}100%{opacity:0}}@media(prefers-reduced-motion:reduce){.success-skier{display:none}}
+
+@media(prefers-reduced-motion:reduce){.goat-surprise{display:none}}
