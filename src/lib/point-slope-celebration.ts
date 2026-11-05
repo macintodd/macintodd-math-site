@@ -30,3 +30,9 @@ export function goatRoute(problem:IntroProblem){
  const start=ski.exit,exit={x:ski.landing.x-(ski.exit.x-ski.landing.x)*(.22/1.52+.2),y:ski.landing.y-(ski.exit.y-ski.landing.y)*(.22/1.52+.2)}
  return {start,first,second,exit,angle:ski.angle,facing:m>0?1:-1,label:Math.abs(m)>=1?'Steep':'Not so steep'}
 }
+
+export function streakPraise(first:string,problem:IntroProblem){
+ const phrases=['Fantastic','Great graphing','Slope superstar','You’re on a roll','Brilliant work','High five','Legendary lines','Five-star form','Rise and shine','You’ve got the point']
+ const seed=[...first].reduce((sum,c)=>sum+c.charCodeAt(0),0)+Math.abs(problem.point.x*7+problem.point.y*11+problem.line.rise*13+problem.line.run*17)
+ return `${phrases[seed%phrases.length]}, ${first}!`
+}
