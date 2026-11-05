@@ -56,8 +56,8 @@ export default async function LessonPage({ params }: { params: Promise<{ course:
       <ul>{lesson.reviewGuide.lessonSlugs.map(slug => { const item = getLesson(lesson.course, slug); return item ? <li key={slug}><Link href={`/courses/${lesson.course}/${slug}`}>{item.number} — {item.title}</Link></li> : null })}</ul>
       <h2>Extra practice</h2>
       <p><a href={lesson.reviewGuide.practiceUrl} target="_blank" rel="noopener noreferrer">{lesson.reviewGuide.practiceTitle} ↗</a></p>
-      <p>Choose a topic, then try the “Your Turn” questions near the bottom of its page. Work on paper before checking each answer. No account is needed.</p>
-      <p className="review-privacy">{lesson.reviewGuide.privacyNote} <a href={lesson.reviewGuide.privacyUrl} target="_blank" rel="noopener noreferrer">Read its privacy statement ↗</a></p>
+      <p>{lesson.reviewGuide.practiceInstructions ?? 'Choose a topic, then try the “Your Turn” questions near the bottom of its page. Work on paper before checking each answer. No account is needed.'}</p>
+      <p className="review-privacy">{lesson.reviewGuide.privacyNote} {lesson.reviewGuide.privacyUrl && <a href={lesson.reviewGuide.privacyUrl} target="_blank" rel="noopener noreferrer">Read its privacy statement ↗</a>}</p>
     </section> }] : lesson.videos.map(video => ({ id: video.id, label: video.title, content: <section className="book-video-section" aria-label={video.title}><LessonVideo video={video} /></section> }))}
     previousHref={previous ? `/courses/${previous.course}/${previous.slug}` : `/courses/${lesson.course}/units/${unit.slug}#page=2`} previousLabel={previous ? 'Previous lesson' : 'Unit overview'}
     nextHref={next ? `/courses/${next.course}/${next.slug}` : `/courses/${lesson.course}`} nextLabel={next ? 'Next lesson' : 'Contents'}

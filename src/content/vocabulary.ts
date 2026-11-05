@@ -329,6 +329,7 @@ export const vocabulary: Record<string, VocabularyTerm> = {
 }
 
 const lessonTerms: Record<string, string[]> = {
+  "unit-1b-lessons-1-3-review": ["function-notation","slope","rate-of-change","y-intercept","slope-intercept-form"],
   "parent-functions": ["parent-function", "greatest-integer-function", "piecewise-function", "domain", "range", "even-function", "odd-function", "interval-notation"],
   "graphing-linear-equations": ["linear-equation","slope","rate-of-change","y-intercept","slope-intercept-form","function-notation"],
   "one-step-equations": [

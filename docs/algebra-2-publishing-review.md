@@ -71,3 +71,11 @@ Reviewed both pages of `U1B2 Practice Slope Rate of Change.pdf` against the publ
 ### Corrected replacement supplied by teacher
 
 Replaced the above answer sheet with `U1B2 Practice Slope & Rate of Change.pdf`. Both pages visually reviewed; corrected work addresses the flagged problems. Published replacement byte-for-byte at the existing completed-practice URL and removed the superseded public correction note. Original teaching files are untouched.
+
+## Unit 1B Lesson 3 and Lessons 1-3 review - November 5, 2026
+
+- Reviewed the blank Lesson 3 notes and practice. Publish instructional pages 1-2 only; trailing header/footer-only pages remain private.
+- Completed notes: `Algebra 2/Unit 1B/Notes lesson 3 u1b competed.pdf` is the matching two-page handwritten classroom copy (located in the Unit 1B root). Publish unchanged.
+- Prepared practice key uses the original worksheet layout, purple answers, fraction notation, two marked points and arrows for each graph, vertical/horizontal lines, both intercepts, aligned algebra, and units in applications. Problems 1-12 verified by substitution into each equation. Special lines in 13 are y=5, x=3, x=0, y=3. Applications: L(w)=0.35w+120; M(t)=15t+50 and t=6 hours; V(t)=-8t+200 and empty at t=25 minutes.
+- Review: `U1B_L1-L3_Review.pdf` pages 1-2; omit its completely blank third page. The two-page `Unit 1B Completed/U1B_L1-L3_Review_Answer_Key.pdf` matches R1-R3 and questions 1-20. Preserve teacher-supplied solutions unchanged.
+- Review appears after Lesson 3, with blank/completed PDF links and links back to Lessons 1-3. No quizzes or tests published.

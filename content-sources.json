@@ -1019,15 +1019,35 @@
       "publishedPages": 2
     },
     {
+      "source": "Precalculus/Precalc 2026 Completed/PC Unit 1B/MathBoard Slides.pdf",
+      "output": "precalculus/parent-functions/completed-notes.pdf",
+      "selectionReason": "Teacher requested U1B Section 1.6 parent-functions completed notes. Reviewed both pages: linear functions, greatest integer, piecewise graphs, and eight parent families; source is named MathBoard Slides.pdf.",
+      "sourceSha256": "31d0744c0f01b83abf17cb5aaf57fe02f01777c18427a7f56ca2fefbd67c80f7",
+      "publishedSha256": "85a58ccb6f605575d0828481ad1c580daa46b0aa262121faf1d8a230b4ab192f",
+      "publishedPages": 2
+    },
+    {
       "source": "Algebra 2/Unit 1B/U1BL3 NOTES Graphing Lines.pdf",
       "output": "algebra-2/graphing-linear-equations/notes.pdf",
       "pages": [
         1,
         2
       ],
-      "selectionReason": "Reviewed Unit 1B Lesson 3 notes/practice against requested MathBoard Session 1. Select instructional pages 1\u20132; omit trailing header/footer-only pages. Preserve printed content including later Session 2 sections. Completed keys have not been located.",
+      "selectionReason": "Reviewed matching blank notes; omit two header/footer-only trailing pages.",
       "sourceSha256": "d0567a0ea677deb468617abe3a2799fdbab6a6cba26c59760ae28fd249514d8c",
-      "publishedSha256": "f5a6ba887c4599140805b733f8bf82a5851f24884d086a6462fd179cc24ee9ea",
+      "publishedSha256": "3b8320a0fc7c355403f0bf5a5cda23c7db46ee82bc2094c8b687529c4839f965",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1B/Notes lesson 3 u1b competed.pdf",
+      "output": "algebra-2/graphing-linear-equations/completed-notes.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Teacher requested completed Lesson 3 notes. Matching two-page handwritten classroom copy is in the Unit 1B root; preserve original work.",
+      "sourceSha256": "af7867f077f5bc036e819b9c1947ea550b530f305538660d7cb84882be95369f",
+      "publishedSha256": "8ec99958a70332a0fee551a188dd7e6d83ee8836eb4fc4a9d51865c93437948e",
       "publishedPages": 2
     },
     {
@@ -1037,17 +1057,41 @@
         1,
         2
       ],
-      "selectionReason": "Reviewed Unit 1B Lesson 3 notes/practice against requested MathBoard Session 1. Select instructional pages 1\u20132; omit trailing header/footer-only pages. Preserve printed content including later Session 2 sections. Completed keys have not been located.",
+      "selectionReason": "Matching Lesson 3 practice, problems 1-16 plus horizontal/vertical graphing. Omit header-only third page.",
       "sourceSha256": "f654d6aaa3a098330af88886975fe3b9a2c7aa8c5caedc3c06c8ccd9f46d789e",
-      "publishedSha256": "153ad0779cc129591a664052e609c845ba20f24d67b7c7ddfd526f23046b1e83",
+      "publishedSha256": "f9706b50b2f498b0b87d1ffcb18ec3b3233bce2d47d2868fbb544dfb23490e3f",
       "publishedPages": 2
     },
     {
-      "source": "Precalculus/Precalc 2026 Completed/PC Unit 1B/MathBoard Slides.pdf",
-      "output": "precalculus/parent-functions/completed-notes.pdf",
-      "selectionReason": "Teacher requested U1B Section 1.6 parent-functions completed notes. Reviewed both pages: linear functions, greatest integer, piecewise graphs, and eight parent families; source is named MathBoard Slides.pdf.",
-      "sourceSha256": "31d0744c0f01b83abf17cb5aaf57fe02f01777c18427a7f56ca2fefbd67c80f7",
-      "publishedSha256": "85a58ccb6f605575d0828481ad1c580daa46b0aa262121faf1d8a230b4ab192f",
+      "source": "Algebra 2/Unit 1B/U1B_L1-L3_Review.pdf",
+      "output": "algebra-2/unit-1b-lessons-1-3-review/blank-review.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Teacher requested Lessons 1-3 review; instructional pages 1-2 only. Page 3 is completely blank. This is a review, not an assessment.",
+      "sourceSha256": "a78ffe33ab9a5ab0afdb1e4dfd1177ccaca7a400e22e1111d6bd78759e092e6b",
+      "publishedSha256": "989f43b3621c9ce740ec067197644f194f1a3de99fd5d4339f85c5a0c567256a",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1B/Unit 1B Completed/U1B_L1-L3_Review_Answer_Key.pdf",
+      "output": "algebra-2/unit-1b-lessons-1-3-review/completed-review.pdf",
+      "pages": [
+        1,
+        2
+      ],
+      "selectionReason": "Matching teacher-supplied worked review key covering R1-R3 and questions 1-20; preserve original purple solutions unchanged.",
+      "sourceSha256": "31f6ddc24b5ca45fce0fedc64ab0d50fd1eb9b8d43105223cbc1cf8a140afdf6",
+      "publishedSha256": "8401db17d6242e2f85bbe5d3fc51adc8df00ba724db0fa31f03316bed2660996",
+      "publishedPages": 2
+    },
+    {
+      "generated": true,
+      "output": "algebra-2/graphing-linear-equations/completed-practice.pdf",
+      "generator": "scripts/build-graphing-practice-key.py",
+      "selectionReason": "Teacher requested a matching worked practice key. Purple solutions over the original two-page worksheet, two points and arrows on every line, intercepts, aligned algebra and application units. All answers independently checked.",
+      "publishedSha256": "8674dfca08499fa133c6f1d087801c5a414a684a412d4ef63d924932df7c530b",
       "publishedPages": 2
     }
   ]
