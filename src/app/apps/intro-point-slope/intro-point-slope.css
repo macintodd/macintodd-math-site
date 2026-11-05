@@ -26,3 +26,6 @@ body:has(.intro-point-app) .site-header,body:has(.intro-point-app) .site-footer{
 @media(max-width:700px){.intro-workspace>.intro-student-panel{grid-column:1;grid-row:1;position:static}.intro-workspace>.intro-given{grid-column:1;grid-row:2;gap:22px}.intro-workspace>.intro-work{grid-column:1;grid-row:3}.intro-workspace>.intro-tools{grid-column:1;grid-row:4}.intro-student-panel .intro-progress{gap:6px 13px}.intro-student-panel .intro-stars{flex-basis:auto}.intro-student-panel .intro-identity strong{font-size:23px}.intro-problem-directions{font-size:14px;margin:10px 0}.intro-workspace>.intro-given:has(.intro-color-toggle){padding-bottom:53px}}
 
 .intro-active .intro-header>.intro-identity{display:none}@media(max-width:700px){.intro-active .intro-header>.intro-identity{display:flex}}
+/* Completed answers are twice the former 12px/11px math-span size. */
+.intro-point-app .intro-confirmed>.math-display{font-size:24px}
+@media(min-width:741px) and (max-height:850px){.intro-point-app .intro-confirmed>.math-display{font-size:22px}}
