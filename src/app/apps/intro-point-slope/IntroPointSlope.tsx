@@ -16,6 +16,16 @@ import {generateIntroPointSlope,emptyPlacements,placeQuantity,placementsCorrect,
 type Stage='place'|'distribute'|'final'
 type Field='coefficient'|'constant'|'equation'
 const emptyAnswers=()=>({coefficient:'',constant:'',equation:''})
+type MathBoardDemoState={
+ screen:'start'|'finished'|'practice';first:string;last:string;hour:string;problem:IntroProblem|null
+ stage:Stage;slots:ReturnType<typeof emptyPlacements>;answers:ReturnType<typeof emptyAnswers>;outcome:'correct'|'revealed'|null;message:string
+ rewarding:boolean;celebrating:boolean;colorHelp:boolean;toolView:'answers'|'scratch';finished:string;reportSlide:boolean
+ correct:number;score:number;streak:number;bestStreak:number;canSubmit:boolean;totalChecksDisplay:number
+}
+type MathBoardDemoWindow=Window & {
+ MathBoardApplet?:{publishState?:(state:MathBoardDemoState)=>void}
+ mathBoardAppletSetState?:((state:Partial<MathBoardDemoState>|null)=>void)
+}
 export default function IntroPointSlope(){
  const [resumeInput,setResumeInput]=useState(''),[resumeError,setResumeError]=useState(''),[save,setSave]=useState<{code:string;summary:string[]}|null>(null)
  function enter(resuming:boolean){setResumeError('');if(resuming){try{const restored=decodeIntroResume(resumeInput,{first,last,hour});setHistory(restored.history);setTotalChecks(restored.checks);setProblem(generateIntroPointSlope(Math.random,restored.history));setResumeInput('');setMessage('Progress restored. Continue with a new problem.')}catch(e){setResumeError(e instanceof Error?e.message:'Unable to read that code.')}}else{setResumeInput('');setProblem(generateIntroPointSlope())}}
@@ -25,7 +35,6 @@ export default function IntroPointSlope(){
  const [toolView,setToolView]=useState<'answers'|'scratch'>('answers')
  const [rewarding,setRewarding]=useState(false)
  const [celebrating,setCelebrating]=useState(false),[colorHelp,setColorHelp]=useState(false)
- useEffect(()=>{if(!rewarding)return;const timer=setTimeout(()=>{setRewarding(false);setCelebrating(true)},2800);return ()=>clearTimeout(timer)},[rewarding])
  const [first,setFirst]=useState(''),[last,setLast]=useState(''),[hour,setHour]=useState(''),[problem,setProblem]=useState<IntroProblem|null>(null),[stage,setStage]=useState<Stage>('place'),[slots,setSlots]=useState(emptyPlacements),[chosen,setChosen]=useState<Quantity|null>(null),[ghost,setGhost]=useState<{q:Quantity;x:number;y:number}|null>(null)
  const [answers,setAnswers]=useState(emptyAnswers),[active,setActive]=useState<Field>('coefficient'),[history,setHistory]=useState<EquationRecord[]>([]),[misses,setMisses]=useState(0),[checks,setChecks]=useState(0),[totalChecks,setTotalChecks]=useState(0),[finalTries,setFinalTries]=useState(0),[outcome,setOutcome]=useState<'correct'|'revealed'|null>(null),[message,setMessage]=useState(''),[finished,setFinished]=useState(''),[image,setImage]=useState<string|null>(null)
  const sessionMenu=useRef<HTMLDetailsElement>(null)
@@ -33,6 +42,37 @@ export default function IntroPointSlope(){
  useLayoutEffect(()=>{const c=caret.current;if(c){inputs.current[c.field]?.focus({preventScroll:true});inputs.current[c.field]?.setSelectionRange(c.position,c.position);caret.current=null}},[answers])
  const name=`${first.trim()} ${last.trim()}`,locked=!!outcome||!!finished,current:EquationRecord|null=problem&&(misses>0||outcome)?{line:problem.line,attempts:misses?2:1,correct:outcome==='correct'}:null,records=current?[...history,current]:history,progress=equationProgress(records)
  const guidedColors=history.length<2||colorHelp
+ useEffect(()=>{if(!rewarding)return;const timer=setTimeout(()=>{setRewarding(false);setCelebrating(true)},2800);return ()=>clearTimeout(timer)},[rewarding])
+
+ // MathBoard injects this bridge only in its native demo WebView.
+ useEffect(()=>{
+  if(typeof window==='undefined')return
+  const mb=(window as MathBoardDemoWindow).MathBoardApplet
+  if(!mb?.publishState)return
+  mb.publishState({
+   screen:!problem?'start':finished?'finished':'practice',first,last,hour,problem,
+   stage,slots,answers,outcome,message,rewarding,celebrating,colorHelp,toolView,finished,reportSlide,
+   correct:progress.correct,score:progress.score,streak:progress.streak,bestStreak:progress.bestStreak,
+   canSubmit:progress.canSubmit,totalChecksDisplay:totalChecks+checks
+  })
+ },[problem,stage,slots,answers,outcome,message,rewarding,celebrating,colorHelp,toolView,finished,reportSlide,first,last,hour,progress.correct,progress.score,progress.streak,progress.bestStreak,progress.canSubmit,totalChecks,checks])
+
+ // MathBoard calls this on its external display after the page loads.
+ useEffect(()=>{
+  if(typeof window==='undefined')return
+  const host=window as MathBoardDemoWindow
+  host.mathBoardAppletSetState=state=>{
+   if(!state)return
+   setFirst(state.first??'');setLast(state.last??'');setHour(state.hour??'')
+   setProblem(state.problem??null);setStage(state.stage??'place')
+   setSlots(state.slots??emptyPlacements());setAnswers(state.answers??emptyAnswers())
+   setOutcome(state.outcome??null);setMessage(state.message??'')
+   setRewarding(state.rewarding??false);setCelebrating(state.celebrating??false)
+   setColorHelp(state.colorHelp??false);setToolView(state.toolView??'answers')
+   setFinished(state.finished??'');setReportSlide(state.reportSlide??false)
+  }
+  return ()=>{host.mathBoardAppletSetState=undefined}
+ },[])
  function place(slot:Slot,q:Quantity){if(stage!=='place'||locked)return;setSlots(current=>placeQuantity(current,slot,q));setChosen(null);setMessage('')}
  function pointerDown(e:PointerEvent<HTMLButtonElement>,q:Quantity){if(stage!=='place'||locked)return;e.preventDefault();e.currentTarget.setPointerCapture(e.pointerId);drag.current={id:e.pointerId,q,x:e.clientX,y:e.clientY,moved:false};setChosen(q)}
  function pointerMove(e:PointerEvent<HTMLButtonElement>){const p=drag.current;if(!p||p.id!==e.pointerId)return;e.preventDefault();if(Math.hypot(e.clientX-p.x,e.clientY-p.y)>6)p.moved=true;if(p.moved)setGhost({q:p.q,x:e.clientX,y:e.clientY})}
