@@ -11,7 +11,7 @@ Route: /apps/write-linear-equation. Existing Intro to Point-Slope Form remains a
 
 ## Score / motivation
 L1 up to 2 points (best streak /3); L2 up to 2 points (best streak /3); L3 up to 6 (existing correct-minus-missing-best-streak score /10 ×6). Full completion =10/10.
-One earned random target digit1–9 per completed level. Bonus counters cycle0–9 at1,2,4 digits/sec; dialogs precede timers. One Stop per round, next round unlocks regardless of result. Three matches =+1, maximum11/10. Grade math separately if desired.
+One earned random target digit1–9 per completed level. Bonus counters cycle0–9 at1,3,5 digits/sec; dialogs precede timers. One Stop per round, next round unlocks regardless of result. Three matches =+1, maximum11/10. Grade math separately if desired.
 L3 graph celebrations preserve skier at streak3, goat at4, stars at5; animations skippable. Reduced-motion honored. Role-reversed skier-climbing/goat-skiing surprises deferred for a later refinement.
 
 ## Save / classroom use
@@ -38,3 +38,10 @@ Landscape iPad browser checks, tap targets, scratch tools, keypad caret/backspac
 URL: /apps/write-linear-equation/teacher. Auto-starts as Teacher Demo; no name/hour entry, student resume controls, or score-card/export route. Prominent no-credit label. Normal student URL retains its existing behavior.
 Bottom navigation offers next problem, next level (including the challenge and bonus), level-ending spin previews, previous/next worked steps, and direct jumps to each example, level end, challenge introduction, or bonus. Step previews fill prior quantities without awarding answers. Navigation cancels pending reward/spin timers. Bonus completion shows Demonstration complete rather than scores. Teacher page is public, intentionally ungraded, and marked noindex.
 Test: scripts/test-linear-teacher.mjs plus full student regression flow.
+
+## Follow-up classroom refinements
+- Challenge No opens an Are you sure? confirmation. Confirmation No returns to the readiness question; Yes restarts Level 1’s shared example and clears all scores, streaks, stars, target digits, and warning counters while retaining the entered name/hour. Same flow in teacher demo.
+- Source quantities have pastel fills matching outlines. Empty drop zones stay white; filled zones take the dropped quantity’s color. Neutral gray shading remains when color help is off.
+- Distribution equation text matches checked equations; input sizes unchanged. Extra x in either numeric distribution box produces a no-penalty format reminder. First two scored distribution errors preserve streak and suggest calculator multiplication; second warns, third and later reset streak. This allowance is across the Level 3 session and saved in resume codes. Unscored examples do not consume it.
+- Correct Level 3 answers never auto-open animation. After the star reward, Next: graph animation opens it on demand. Finish math remains available whenever ten correct have been earned, including after later mistakes, and on animation slides; it proceeds to the final spin/bonus. Existing optional early finish at best streak5 is retained.
+- Bonus rates now1,3,5 numbers/sec, prominently labeled rate of change/slope. Explanation distinguishes progression between counter resets from the wrap back to zero.
