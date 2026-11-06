@@ -45,3 +45,18 @@ Test: scripts/test-linear-teacher.mjs plus full student regression flow.
 - Distribution equation text matches checked equations; input sizes unchanged. Extra x in either numeric distribution box produces a no-penalty format reminder. First two scored distribution errors preserve streak and suggest calculator multiplication; second warns, third and later reset streak. This allowance is across the Level 3 session and saved in resume codes. Unscored examples do not consume it.
 - Correct Level 3 answers never auto-open animation. After the star reward, Next: graph animation opens it on demand. Finish math remains available whenever ten correct have been earned, including after later mistakes, and on animation slides; it proceeds to the final spin/bonus. Existing optional early finish at best streak5 is retained.
 - Bonus rates now1,3,5 numbers/sec, prominently labeled rate of change/slope. Explanation distinguishes progression between counter resets from the wrap back to zero.
+
+## MathBoard external-display bridge (teacher route only)
+MathBoard injects window.MathBoardApplet.publishState before loading the teacher URL. After React mounts, the page registers window.mathBoardAppletSetState(snapshot). The native host should wait until that function exists, then apply the most recent snapshot; replay it again when reconnecting a display.
+
+Outgoing snapshot: app=write-linear-equation-teacher, version=1, derived screen, and all 33 visible/stateful parent values. This includes session/progress, problem, answers, active field, stage/placements/selected points, feedback/warning and challenge gates, scratch view, reward/animation/spin flags, drag selection, scratchDataURL, bonusMirror {instructions,running,digit}, and celebrationMirror {replay,sound}. Native code should treat this as an opaque JSON object and forward it unchanged.
+
+Restore marks the receiving WebView as external immediately via a ref and React state, cancels pending local reward/spin timers, and restores every snapshot value. The receiving view never publishes snapshots back. The local external-display role is deliberately not copied from the teacher snapshot. The handler is removed on unmount only if the component still owns it.
+
+Bonus counter state is controlled by the parent on the teacher route; the external copy uses the received digit and runs no independent interval. Animation and Replay are synchronized through animation and celebrationMirror; CSS/SVG animation starts automatically when received. Secondary-display goat audio is suppressed to avoid double playback.
+
+The remote page is inert/read-only, with keyboard, tool tabs and teacher navigation hidden. Answer fields/quantities remain visible as read-only presentation content. Scratch drawing controls are replaced by a read-only image; the teacher's completed pen, erase, undo and clear operations publish a PNG after the stroke/action, using the same local capture mechanism as Intro to Point-Slope. New problems clear the mirrored ink.
+
+No bridge receiver or publishing is registered on the student route or in a regular browser without the injected bridge. No server storage or network score submission is introduced. Reload both native WebViews after deploying this change. Physical iPad/projector behavior must be confirmed in MathBoard; repository tests simulate both ends of the bridge.
+
+Tests: test-linear-mathboard-bridge.mjs checks JSON snapshots, every useState/payload/dependency/restore mapping, echo prevention, cleanup, student/browser isolation and read-only rendering; child tests verify remote counters have no timer and remote animation replays do not allow controls/audio.
