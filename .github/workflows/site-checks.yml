@@ -57,6 +57,7 @@ jobs:
       - run: node scripts/test-linear-bonus.mjs
       - run: node --experimental-strip-types scripts/test-linear-teacher.mjs
       - run: node --experimental-strip-types scripts/test-linear-mathboard-bridge.mjs
+      - run: node --experimental-strip-types scripts/test-linear-student-scenes.mjs
       - run: npm run check:content
       - run: npm run typecheck
       - run: npm run lint
