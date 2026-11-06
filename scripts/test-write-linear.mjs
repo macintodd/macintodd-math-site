@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import {markAnswer,equationTex,missingXParts,newSession,nextStats,done,mathScore,bonusPoint,generateProblem,challenge,checkFinal,saveCode,loadCode} from '../src/lib/write-linear.ts'
 let s=newSession();assert.equal(mathScore(s),0)
-for(let level=1;level<=3;level++){s.level=level;let stats=s.stats[level-1];for(let i=0;i<(level===3?10:3);i++)stats=nextStats(stats,true,true);s.stats[level-1]=stats;assert(done(level,stats));s.targets.push(level+2)}
+for(let level=1;level<=3;level++){s.level=level;let stats=s.stats[level-1];for(let i=0;i<(level===3?5:3);i++)stats=nextStats(stats,true,true);s.stats[level-1]=stats;assert(done(level,stats));s.targets.push(level+2)}
 assert.equal(mathScore(s),10);s.bonus=[3,4,5];assert.equal(bonusPoint(s),1)
 s.bonus=[3,0,5];assert.equal(bonusPoint(s),0)
 assert.equal(nextStats(s.stats[0],true,false).streak,0);assert.equal(nextStats(s.stats[0],false,false).streak,0)
@@ -13,3 +13,5 @@ assert.deepEqual(generateProblem(1,true),generateProblem(1,true));console.log('P
 let trail=newSession();trail=markAnswer(trail,false);trail=markAnswer(trail,false);assert.equal(trail.trail[0].count,2);for(let i=0;i<20;i++)trail=markAnswer(trail,true);assert(trail.trail.length<=6);assert.equal(trail.archived.correct+trail.trail.filter(v=>v.gold).reduce((n,v)=>n+v.count,0),20);assert.equal(trail.archived.misses,2);trail.readingWarnings=2;const restored=loadCode(saveCode(trail,'Mary','Todd','3'),'Mary','Todd','3');assert.deepEqual(restored.trail,trail.trail);assert.deepEqual(restored.archived,trail.archived);assert.equal(restored.readingWarnings,2);assert.equal(loadCode('WL1-3YFE-N3DB-9PJQ-GWLU','Demo','Teacher','3').level,2);assert.equal(equationTex(challenge),String.raw`y=\frac{3}{4}x+1.25`);assert.deepEqual(missingXParts('y=1/2+1'),{before:String.raw`y=\frac{1}{2}`,after:'+1'});console.log('Passed grouped/archived star history, saved warning counters, old checkpoint compatibility and formatted equation feedback.')
 
 trail.distributionWarnings=2;assert.equal(loadCode(saveCode(trail,'Mary','Todd','3'),'Mary','Todd','3').distributionWarnings,2);assert.equal(loadCode('WL1-3Z24-5CEB-EXDB-9PML-RC6R','Demo','Teacher','3').distributionWarnings,0);console.log('Passed saved distribution-warning budget and legacy checkpoint compatibility.')
+
+assert.equal(s.stats[2].correct,5);assert.equal(mathScore(s),10);s.stats[2]={correct:20,attempts:25,streak:2,best:4};assert.equal(mathScore(s),8.8);assert(!done(3,s.stats[2]));console.log('Passed five-correct five-streak full credit, partial mastery scoring and no total-only completion.');

@@ -13,8 +13,8 @@ export function missingXParts(answer:string){const body=answer.replace(/\s/g,'')
 
 function numericTex(s:string){return s.replace(/(-?\d+(?:\.\d+)?)\/(-?\d+(?:\.\d+)?)/g,(_,a,b)=>`\\frac{${a}}{${b}}`)}
 export function nextStats(s:Stats,right:boolean,clean:boolean):Stats{const streak=right&&clean?s.streak+1:0;return {correct:s.correct+(right?1:0),attempts:s.attempts+1,streak,best:Math.max(s.best,streak)}}
-export function done(level:Level,s:Stats){return level<3?s.streak>=3:s.correct>=10&&s.best>=5}
-export function mathScore(s:Session){return Math.round((Math.min(1,s.stats[0].best/3)*2+Math.min(1,s.stats[1].best/3)*2+Math.max(0,Math.min(10,s.stats[2].correct)-Math.max(0,5-s.stats[2].best))*.6)*10)/10}
+export function done(level:Level,s:Stats){return level<3?s.streak>=3:s.best>=5}
+export function mathScore(s:Session){return Math.round((Math.min(1,s.stats[0].best/3)*2+Math.min(1,s.stats[1].best/3)*2+Math.min(1,s.stats[2].best/5)*6)*10)/10}
 export function bonusPoint(s:Session){return s.targets.length===3&&s.bonus.length===3&&s.bonus.every((n,i)=>n===s.targets[i])?1:0}
 export function generateProblem(level:Level,example:boolean,rng=Math.random,recentSlope?:number):IntroProblem{
  if(example)return level===1?{line:{x:0,y:3,rise:2,run:1},point:{x:2,y:7}}:level===2?{line:{x:0,y:2,rise:1,run:2},point:{x:4,y:4}}:{line:{x:0,y:-2,rise:2,run:1},point:{x:3,y:4}}
@@ -39,7 +39,7 @@ export function loadCode(code:string,first:string,last:string,hour:string):Sessi
 
 export type StreakScene='skier'|'goat'|'chase'|'goat-skis'|'haggard'|'ride'
 /** Cosmetic rewards only: examples and teachers never use the student sequence. */
-export function streakScene(streak:number):StreakScene|undefined{return streak>0?(['skier','goat','chase','goat-skis','haggard','ride'] as const)[Math.min(6,Math.floor(streak))-1]:undefined}
+export function streakScene(streak:number):StreakScene|undefined{return streak>0?(['goat','chase','goat-skis','haggard','ride'] as const)[Math.min(5,Math.floor(streak))-1]:undefined}
 export function encouragement(s:Session,first:string){
  const last=s.trail?.at(-1);if(s.example||!last||last.gold||last.count<2)return ''
  const hints=['Take one step at a time: m multiplies x, and b is the starting value.','Start where x = 0, then count rise and run carefully.','Keep the signs, distribute to both terms, then isolate y.']

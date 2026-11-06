@@ -4,7 +4,7 @@ import vm from 'node:vm'
 import ts from 'typescript'
 import * as model from '../src/lib/write-linear.ts'
 import * as geometry from '../src/lib/point-slope-celebration.ts'
-assert.deepEqual([0,1,2,3,4,5,6,7].map(model.streakScene),[undefined,'skier','goat','chase','goat-skis','haggard','ride','ride'])
+assert.deepEqual([0,1,2,3,4,5,6,7].map(model.streakScene),[undefined,'goat','chase','goat-skis','haggard','ride','ride','ride'])
 let s=model.newSession();s.example=false;s.level=3
 s=model.markAnswer(model.markAnswer(s,false),false)
 assert.match(model.encouragement(s,'Maya'),/Maya, you can/)
@@ -12,7 +12,8 @@ assert.match(model.encouragement(s,'Maya'),/distribute/)
 assert.equal(model.encouragement(model.markAnswer(s,true),'Maya'),'')
 assert.equal(model.encouragement({...s,example:true},'Maya'),'')
 assert.equal(model.done(3,{correct:10,attempts:10,streak:5,best:5}),true)
-assert.equal(model.done(3,{correct:9,attempts:9,streak:6,best:6}),false)
+assert.equal(model.done(3,{correct:5,attempts:5,streak:5,best:5}),true)
+assert.equal(model.done(3,{correct:20,attempts:25,streak:4,best:4}),false)
 const jsx=(type,props,key)=>({type,props:props??{},key}),mod={exports:{}}
 vm.runInNewContext(ts.transpileModule(fs.readFileSync('src/app/apps/write-linear-equation/StudentSurprise.tsx','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX}}).outputText,{module:mod,exports:mod.exports,require:n=>n==='react/jsx-runtime'?{jsx,jsxs:jsx}:n==='@/lib/point-slope-celebration'?geometry:{default:'goat-surprise',__esModule:true}})
 function nodes(n){if(Array.isArray(n))return n.flatMap(nodes);return n&&typeof n==='object'?[n,...nodes(n.props?.children)]:[]}
@@ -28,7 +29,7 @@ for(const m of [-2,2])for(const scene of ['skier','goat','chase','goat-skis','ha
  if(['goat-skis','haggard','ride'].includes(scene))assert(all.some(n=>n.type==='image'&&n.props.href==='/images/linear-streak-characters.png'))
 }
 const ui=fs.readFileSync('src/app/apps/write-linear-equation/Practice.tsx','utf8')
-assert(ui.includes('studentScene={!teacherMode&&!s?.example?'))
+assert(ui.includes("studentScene={!teacherMode?s?.example?'skier':"))
 assert(ui.includes('!teacherMode&&encouragement(s,first)'))
 assert(fs.readFileSync('src/app/apps/write-linear-equation/practice.css','utf8').includes('.wl-student-surprise{display:none}'))
 console.log('Passed six-scene pacing/reset, student-only eligibility, both slope signs, shared chase path/timing, new sprite cells, encouragement/reset and unchanged five-streak full-credit rule.')

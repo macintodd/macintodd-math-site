@@ -4,7 +4,7 @@ import {skierRoute,goatRoute} from '@/lib/point-slope-celebration'
 import type {IntroProblem} from '@/lib/intro-point-slope'
 import type {StreakScene} from '@/lib/write-linear'
 type Props={scene:StreakScene;problem:IntroProblem;start:number;clipId:string;sx:(x:number)=>number;sy:(y:number)=>number;sound:boolean}
-const captions={skier:'Nice slope!',goat:'Goat for it!',chase:'Hey! Wait for me!', 'goat-skis':'Now THAT is slope style!',haggard:'Five in a row... worth the climb!',ride:'Six in a row! Teamwork!'}
+const captions={skier:'Nice slope!',goat:'Goat for it!',chase:'Hey! Wait for me!', 'goat-skis':'Now THAT is slope style!',haggard:'Four in a row... worth the climb!',ride:'Five in a row! Teamwork!'}
 /** All travel follows the solved line. Chase actors use the same route, offset in time. */
 export default function StudentSurprise({scene,problem,start,clipId,sx,sy,sound}:Props){
  if(scene==='goat')return <GoatSurprise problem={problem} start={start} clipId={clipId} sx={sx} sy={sy} sound={sound}/>
