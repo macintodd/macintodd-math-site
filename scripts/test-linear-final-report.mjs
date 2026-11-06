@@ -1,0 +1,21 @@
+import assert from 'node:assert/strict'
+import fs from 'node:fs'
+import vm from 'node:vm'
+import ts from 'typescript'
+import * as model from '../src/lib/write-linear.ts'
+let index=0,tree,downloads=0;const hooks=[],drawn=[],ctx={font:'',fillStyle:'',fillRect(){},measureText:s=>({width:s.length*15}),fillText:(s,x,y)=>drawn.push({s,x,y})},canvas={width:0,height:0,getContext:()=>ctx,toDataURL:()=> 'data:image/png;base64,c2NvcmU='}
+const react={useState(initial){const i=index++;hooks[i]??={value:initial};return [hooks[i].value,v=>hooks[i].value=typeof v==='function'?v(hooks[i].value):v]}}
+const jsx=(type,props,key)=>({type,props:props??{},key}),mod={exports:{}}
+vm.runInNewContext(ts.transpileModule(fs.readFileSync('src/app/apps/write-linear-equation/FinalReport.tsx','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX}}).outputText,{module:mod,exports:mod.exports,document:{createElement:tag=>tag==='canvas'?canvas:{click:()=>downloads++}},require:n=>n==='react'?react:n==='react/jsx-runtime'?{jsx,jsxs:jsx}:model})
+const s=model.newSession();s.level=3;s.phase='report';s.example=false;s.date='11/6/2026';s.stats=[3,3,5].map(n=>({correct:n,attempts:n,streak:n,best:n}));s.targets=[2,4,6];s.bonus=[2,4,6]
+function render(){index=0;tree=mod.exports.default({session:s,name:'Maya Student',hour:'3'})}
+function nodes(n=tree){if(Array.isArray(n))return n.flatMap(v=>nodes(v??null));return n&&typeof n==='object'?[n,...nodes(n.props.children??null)]:[]}
+function text(n){return Array.isArray(n)?n.map(text).join(''):n&&typeof n==='object'?text(n.props.children):n==null||typeof n==='boolean'?'':String(n)}
+function button(label){return nodes().find(n=>n.type==='button'&&(n.props['aria-label']===label||text(n)===label))}
+function click(label){const b=button(label);assert(b&&!b.props.disabled,label);b.props.onClick();render()}
+render();assert(button('Show my final scorecard').props.disabled);assert(!button('Download named scorecard'))
+click('Confidence 4 of 5');assert(button('Show my final scorecard').props.disabled);click('Difficulty 3 of 5');assert(!button('Show my final scorecard').props.disabled)
+click('Show my final scorecard');assert(text(tree).includes('4/5 — I can do it independently'));assert(text(tree).includes('3/5 — Just right'));assert(text(tree).includes('Maya Student'));assert(text(tree).includes('11/6/2026'));assert(text(tree).includes('11/10'));assert(text(tree).includes('Google Classroom'));assert(!button('Difficulty 3 of 5'))
+click('Download named scorecard');assert.equal(downloads,1);const lines=drawn.map(v=>v.s).join(' ');for(const item of ['Maya Student','11/6/2026','FINAL SCORE: 11/10','4/5 - I can do it independently','3/5 - Just right','If you have the slope','How was the practice?'])assert(lines.includes(item),item);assert(drawn.every(v=>v.y<canvas.height));assert(nodes().some(n=>n.type==='img'&&n.props.alt.includes('confidence 4/5')))
+click('Edit survey answers');assert(!nodes().some(n=>n.type==='img'));click('Difficulty 5 of 5');click('Show my final scorecard');click('Download named scorecard');assert(drawn.some(v=>v.s==='5/5 - Too difficult'));assert.equal(model.mathScore(s),10)
+console.log('Passed two-question survey gating, named dated scorecard, survey answers in PNG, bonus total, safe layout height, edit invalidation and unchanged score.')
