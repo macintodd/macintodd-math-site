@@ -24,3 +24,12 @@ scripts/test-write-linear.mjs: generators, equation checking, scoring and resume
 scripts/test-write-linear-ui.mjs: all three levels, warnings, examples, challenge, spins and report.
 scripts/test-linear-bonus.mjs: timers, locked rounds, visible digit result, all-match bonus.
 Landscape iPad browser checks, tap targets, scratch tools, keypad caret/backspace, strict KaTeX preview render, content/type/lint/build checks.
+
+## Classroom refinements, November 5
+- Fixed drag buttons to override general touch-action rules with none; pointer capture, prevented native scrolling/selection, and a visible dragged-number ghost. Tap-to-place and keyboard activation remain available. Labels m, x₁, y₁ are larger and below quantities.
+- Tan operation keys, pale red backspace, stronger red Clear. Correct answers display typeset full equation; missing-x warning displays the student's expression with a blinking x after its coefficient, outside any denominator.
+- Level 2: larger prompt/intercept, darker grid, Run below denominator, verified slope under intercept; second coordinate stays only on graph. First completed slope/intercept error preserves streak and warns; subsequent errors break streak. Blank/incomplete entries do not count as attempts.
+- Challenge confidence introduction with Yes/No and review path, red flame-style title, tappable integer points (including1,2 and5,5).
+- Top answer history: gold correct, consecutive misses merged in blue star; eight-icon limit folds earlier counts into blue/gold summaries. Saved in local resume codes along with reading-warning counter; old codes still accepted. Unscored examples and challenge do not add history stars.
+- Resume image has an explicit Show image to save to Photos button and long-press instructions. Files download uses a PNG Blob and a DOM-attached download link, verified as a real downloaded PNG in browser. iPad Photos save still depends on its native long-press menu; not directly tested on a physical iPad.
+- Future character art preserved in workspace assets/future-characters, not published yet.
