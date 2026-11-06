@@ -1,0 +1,33 @@
+import {parseLinearExpression} from './line-equation.ts'
+import {numberAnswer} from './point-slope.ts'
+import type {IntroProblem} from './intro-point-slope.ts'
+export type Stats={correct:number;attempts:number;streak:number;best:number}
+export const blankStats=():Stats=>({correct:0,attempts:0,streak:0,best:0})
+export type Level=1|2|3
+export type Phase='work'|'challenge'|'spin'|'bonus'|'report'
+export type Session={level:Level;phase:Phase;example:boolean;stats:Stats[];targets:number[];warnings:number;bonus:(number|null)[];date:string}
+export const newSession=():Session=>({level:1,phase:'work',example:true,stats:[blankStats(),blankStats(),blankStats()],targets:[],warnings:0,bonus:[],date:new Date().toLocaleDateString()})
+export function nextStats(s:Stats,right:boolean,clean:boolean):Stats{const streak=right&&clean?s.streak+1:0;return {correct:s.correct+(right?1:0),attempts:s.attempts+1,streak,best:Math.max(s.best,streak)}}
+export function done(level:Level,s:Stats){return level<3?s.streak>=3:s.correct>=10&&s.best>=5}
+export function mathScore(s:Session){return Math.round((Math.min(1,s.stats[0].best/3)*2+Math.min(1,s.stats[1].best/3)*2+Math.max(0,Math.min(10,s.stats[2].correct)-Math.max(0,5-s.stats[2].best))*.6)*10)/10}
+export function bonusPoint(s:Session){return s.targets.length===3&&s.bonus.length===3&&s.bonus.every((n,i)=>n===s.targets[i])?1:0}
+export function generateProblem(level:Level,example:boolean,rng=Math.random,recentSlope?:number):IntroProblem{
+ if(example)return level===1?{line:{x:0,y:3,rise:2,run:1},point:{x:2,y:7}}:level===2?{line:{x:0,y:2,rise:1,run:2},point:{x:4,y:4}}:{line:{x:0,y:-2,rise:2,run:1},point:{x:3,y:4}}
+ const slopes=level===1?[[1,1],[-1,1],[2,1],[-2,1],[3,1],[-3,1],[1,2],[-1,2]]:[[1,1],[-1,1],[2,1],[-2,1],[1,2],[-1,2],[2,3],[-2,3],[3,2],[-3,2]]
+ let i=Math.min(slopes.length-1,Math.floor(rng()*slopes.length));if(slopes[i][0]/slopes[i][1]===recentSlope)i=(i+1)%slopes.length
+ const [rise,run]=slopes[i],b=Math.floor(rng()*7)-3,x=(rng()<.5?-1:1)*run*(rng()<.5?1:2)
+ return {line:{x:0,y:b,rise,run},point:{x,y:b+x*rise/run}}
+}
+export const challenge:IntroProblem={line:{x:0,y:1.25,rise:3,run:4},point:{x:5,y:5}}
+/** Require a complete slope-intercept equation, rather than accepting point-slope form. */
+export function checkFinal(text:string,p:IntroProblem){const t=text.replace(/\s/g,'').replace(/−/g,'-');if(!/^y=/i.test(t))return 'format';if(p.line.rise!==0&&!/x/i.test(t)&&parseLinearExpression(t))return 'missing-x';const body=t.slice(2);if(/[()]/.test(body))return 'format';const v=parseLinearExpression(t);return v&&Math.abs(v.m-p.line.rise/p.line.run)<1e-8&&Math.abs(v.b-p.line.y)<1e-8?'correct':'wrong'}
+export {numberAnswer}
+// Short local checkpoint: scrambled numeric initials, base36 payload, and typo checksum.
+// This is not encryption or proof of identity; no names or scores are sent anywhere.
+const phases:Phase[]=['work','challenge','spin','bonus','report']
+function initials(first:string,last:string,hour:string){return [first,last].map(x=>x.normalize('NFKD').toUpperCase().match(/[A-Z]/)?.[0]).join('')+hour}
+function hash(s:string){let h=17;for(const c of s)h=(h*31+c.charCodeAt(0))%65521;return h}
+const alphabet='23456789ABCDEFGHJKLMNPQRSTUVWXYZ'
+function scramble(v:bigint){const width=v.toString(2).length-1,mask=(BigInt(1)<<BigInt(width))-BigInt(1);let salt=BigInt(0);for(let i=0;i<width;i+=32)salt|=BigInt(2654435769)<<BigInt(i);return v^(salt&mask)}
+export function saveCode(s:Session,first:string,last:string,hour:string){let bits='1';const fixed=(n:number,width:number)=>{if(!Number.isSafeInteger(n)||n<0||n>=2**width)throw Error('This session is too large to save.');bits+=n.toString(2).padStart(width,'0')},number=(n:number)=>{if(!Number.isSafeInteger(n)||n<0||n>65535)throw Error('This session is too large to save.');const b=(n+1).toString(2);bits+='0'.repeat(b.length-1)+b};fixed(hash(initials(first,last,hour)),16);fixed(s.level,2);fixed(phases.indexOf(s.phase),3);fixed(+s.example,1);number(s.warnings);s.stats.forEach(x=>[x.correct,x.attempts,x.streak,x.best].forEach(number));fixed(s.targets.length,2);s.targets.forEach(n=>fixed(n,4));fixed(s.bonus.length,2);s.bonus.forEach(n=>fixed(n===null?10:n,4));const body=BigInt('0b'+bits);let value=scramble((body<<BigInt(16))|BigInt(hash(body.toString(36)))),code='';while(value){code=alphabet[Number(value%BigInt(32))]+code;value/=BigInt(32)}return 'WL1-'+code.match(/.{1,4}/g)!.join('-')}
+export function loadCode(code:string,first:string,last:string,hour:string):Session{const clean=code.trim().toUpperCase().replace(/^WL1-/,'').replace(/[\s-]/g,'');if(clean.length<10||clean.length>100||[...clean].some(c=>!alphabet.includes(c)))throw Error('Check the code: a character is missing or changed.');let v=BigInt(0);for(const c of clean)v=v*BigInt(32)+BigInt(alphabet.indexOf(c));v=scramble(v);const body=v>>BigInt(16);if(Number(v&BigInt(65535))!==hash(body.toString(36)))throw Error('The code check did not match. Copy the whole code again.');const bits=body.toString(2);let index=1;const fixed=(width:number)=>{if(index+width>bits.length)throw Error('Incomplete code.');const n=parseInt(bits.slice(index,index+width),2);index+=width;return n},number=()=>{let width=0;while(fixed(1)===0)if(++width>16)throw Error('Invalid saved progress.');return 2**width-1+(width?fixed(width):0)};if(fixed(16)!==hash(initials(first,last,hour)))throw Error('Use the same name initials and class hour as your saved card.');const level=fixed(2) as Level,phase=phases[fixed(3)],example=!!fixed(1),warnings=number(),stats=[0,1,2].map(()=>({correct:number(),attempts:number(),streak:number(),best:number()})),targetCount=fixed(2),targets=Array.from({length:targetCount},()=>fixed(4)),bonusCount=fixed(2),bonus=Array.from({length:bonusCount},()=>{const n=fixed(4);return n===10?null:n});if(index!==bits.length||![1,2,3].includes(level)||!phase||stats.some(s=>s.correct>s.attempts||s.streak>s.best||s.best>s.correct)||targets.some(n=>n<1||n>9)||bonus.some(n=>n!==null&&(n<0||n>9))||targets.length<(phase==='bonus'||phase==='report'?3:level-1))throw Error('This checkpoint has invalid progress.');return {level,phase,example,stats,targets,warnings,bonus,date:new Date().toLocaleDateString()}}

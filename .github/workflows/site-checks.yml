@@ -52,6 +52,9 @@ jobs:
       - run: node --experimental-strip-types scripts/test-resume-code.mjs
       - run: node scripts/test-resume-dialog.mjs
       - run: node --experimental-strip-types scripts/test-graph-resume-flow.mjs
+      - run: node --experimental-strip-types scripts/test-write-linear.mjs
+      - run: node --experimental-strip-types scripts/test-write-linear-ui.mjs
+      - run: node scripts/test-linear-bonus.mjs
       - run: npm run check:content
       - run: npm run typecheck
       - run: npm run lint
