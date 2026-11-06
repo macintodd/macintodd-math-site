@@ -33,3 +33,8 @@ Landscape iPad browser checks, tap targets, scratch tools, keypad caret/backspac
 - Top answer history: gold correct, consecutive misses merged in blue star; eight-icon limit folds earlier counts into blue/gold summaries. Saved in local resume codes along with reading-warning counter; old codes still accepted. Unscored examples and challenge do not add history stars.
 - Resume image has an explicit Show image to save to Photos button and long-press instructions. Files download uses a PNG Blob and a DOM-attached download link, verified as a real downloaded PNG in browser. iPad Photos save still depends on its native long-press menu; not directly tested on a physical iPad.
 - Future character art preserved in workspace assets/future-characters, not published yet.
+
+## Teacher demonstration version
+URL: /apps/write-linear-equation/teacher. Auto-starts as Teacher Demo; no name/hour entry, student resume controls, or score-card/export route. Prominent no-credit label. Normal student URL retains its existing behavior.
+Bottom navigation offers next problem, next level (including the challenge and bonus), level-ending spin previews, previous/next worked steps, and direct jumps to each example, level end, challenge introduction, or bonus. Step previews fill prior quantities without awarding answers. Navigation cancels pending reward/spin timers. Bonus completion shows Demonstration complete rather than scores. Teacher page is public, intentionally ungraded, and marked noindex.
+Test: scripts/test-linear-teacher.mjs plus full student regression flow.

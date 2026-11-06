@@ -55,6 +55,7 @@ jobs:
       - run: node --experimental-strip-types scripts/test-write-linear.mjs
       - run: node --experimental-strip-types scripts/test-write-linear-ui.mjs
       - run: node scripts/test-linear-bonus.mjs
+      - run: node --experimental-strip-types scripts/test-linear-teacher.mjs
       - run: npm run check:content
       - run: npm run typecheck
       - run: npm run lint
