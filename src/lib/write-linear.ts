@@ -1,4 +1,4 @@
-import {parseLinearExpression} from './line-equation.ts'
+import {parseLinearExpression,equationText} from './line-equation.ts'
 import {numberAnswer,slopeTex} from './point-slope.ts'
 import type {IntroProblem} from './intro-point-slope.ts'
 export type Stats={correct:number;attempts:number;streak:number;best:number}
@@ -9,6 +9,16 @@ export type Session={level:Level;phase:Phase;example:boolean;stats:Stats[];targe
 export const newSession=():Session=>({level:1,phase:'work',example:true,stats:[blankStats(),blankStats(),blankStats()],targets:[],warnings:0,bonus:[],date:new Date().toLocaleDateString()})
 export function markAnswer(s:Session,gold:boolean):Session{const trail=(s.trail??[]).map(v=>({...v})),archived={...(s.archived??{correct:0,misses:0})};if(!gold&&trail.at(-1)?.gold===false)trail[trail.length-1].count++;else trail.push({gold,count:1});while(trail.length+((archived.correct||archived.misses)?2:0)>8){const old=trail.shift()!;if(old.gold)archived.correct+=old.count;else archived.misses+=old.count}return {...s,trail,archived}}
 export function equationTex(p:IntroProblem){const m=p.line.rise===p.line.run?'':p.line.rise===-p.line.run?'-':slopeTex(p.line),b=p.line.y;return `y=${m}x${b>0?'+':b<0?'-':''}${b===0?'':Math.abs(b)}`}
+/** The right side after distributing m(x-x1), before moving y1. */
+export function distributionText(p:IntroProblem){return equationText({...p.line,y:-p.line.rise/p.line.run*p.point.x})}
+export function distributionTex(p:IntroProblem){return equationTex({...p,line:{...p.line,y:-p.line.rise/p.line.run*p.point.x}}).slice(2)}
+export function checkDistributedExpression(text:string,p:IntroProblem){
+ const t=text.toLowerCase().replace(/\s/g,'').replace(/−/g,'-').replace(/×|·/g,'*')
+ // Numeric parentheses/fractions are fine; a remaining group containing x is not distributed.
+ if(!t||/[=y]/.test(t)||(t.match(/x/g)?.length??0)!==1||/\([^)]*x/.test(t)||t.replace(/\*(?=x)/g,'').includes('*'))return 'format'
+ const value=parseLinearExpression(t),m=p.line.rise/p.line.run
+ return value&&Math.abs(value.m-m)<1e-8&&Math.abs(value.b+m*p.point.x)<1e-8?'correct':'wrong'
+}
 export function missingXParts(answer:string){const body=answer.replace(/\s/g,'').replace(/−/g,'-').replace(/^y=/i,'');let depth=0,split=body.length;for(let i=0;i<body.length;i++){const c=body[i];if(c==='(')depth++;if(c===')')depth--;if(i>0&&depth===0&&(c==='+'||c==='-')&&!/[+*/(-]/.test(body[i-1])){split=i;break}}return {before:'y='+numericTex(body.slice(0,split)),after:numericTex(body.slice(split))}}
 
 function numericTex(s:string){return s.replace(/(-?\d+(?:\.\d+)?)\/(-?\d+(?:\.\d+)?)/g,(_,a,b)=>`\\frac{${a}}{${b}}`)}

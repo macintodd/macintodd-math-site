@@ -29,7 +29,7 @@ for(const m of [-2,2])for(const scene of ['skier','goat','chase','goat-skis','ha
  if(['goat-skis','haggard','ride'].includes(scene))assert(all.some(n=>n.type==='image'&&n.props.href==='/images/linear-streak-characters.png'))
 }
 const ui=fs.readFileSync('src/app/apps/write-linear-equation/Practice.tsx','utf8')
-assert(ui.includes("studentScene={!teacherMode?s?.example?'skier':"))
+assert(ui.includes("studentScene={s?.example?'skier':"))
 assert(ui.includes('!teacherMode&&encouragement(s,first)'))
 assert(fs.readFileSync('src/app/apps/write-linear-equation/practice.css','utf8').includes('.wl-student-surprise{display:none}'))
-console.log('Passed six-scene pacing/reset, student-only eligibility, both slope signs, shared chase path/timing, new sprite cells, encouragement/reset and unchanged five-streak full-credit rule.')
+console.log('Passed six-scene pacing/reset, shared student/teacher scene eligibility, both slope signs, shared chase path/timing, new sprite cells, encouragement/reset and unchanged five-streak full-credit rule.')
