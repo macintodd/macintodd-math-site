@@ -50,6 +50,7 @@ function app(mode){
   input('Complete equation',`y=${p.line.rise}/${p.line.run}x+${p.line.y}`);click('Check equation');flush()
   if(mode>=3){click('Next: graph animation →');const movie=nodes().find(n=>n.type==='../intro-point-slope/PointSlopeCelebration');assert.equal(movie.props.studentScene,s.example?'skier':model.streakScene(state().stats[2].streak));if(mode===4)assert(movie.props.problem.secondPoint);movie.props.onNext();render()}
   else click(s.example?'Start scored practice →':'Continue →')
+  if(s.example){const goal=nodes().find(n=>n.type==='@/components/practice/SkillGoal');assert(goal,'Skill reminder after demo');goal.props.onContinue();render();assert(!nodes().some(n=>n.type==='@/components/practice/SkillGoal'))}
  }
  render();const fields=nodes().filter(n=>n.type==='input');fields[0].props.onChange({target:{value:'Maya'}});fields[1].props.onChange({target:{value:'Todd'}});nodes().find(n=>n.type==='select').props.onChange({target:{value:'3'}});render();nodes().find(n=>n.type==='form').props.onSubmit({preventDefault(){}});render()
  return {nodes,click,input,flush,render,solve,state,problem,active:()=>hooks[6].value,text:()=>text(tree)}

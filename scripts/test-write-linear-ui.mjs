@@ -21,12 +21,12 @@ function state(){return hooks[3].value}
 function problem(){return hooks[4].value}
 function solve(){const p=problem();input('Complete equation',`y=${p.line.rise}/${p.line.run}x+${p.line.y}`);click('Check equation');flush()}
 render();const fields=nodes().filter(n=>n.type==='input');fields[0].props.onChange({target:{value:'Mary'}});fields[1].props.onChange({target:{value:'Todd'}});nodes().find(n=>n.type==='select').props.onChange({target:{value:'3'}});render();nodes().find(n=>n.type==='form').props.onSubmit({preventDefault(){}});render()
-assert(state().example);solve();assert.equal(state().stats[0].correct,0);click('Start scored practice →');
+assert(state().example);solve();assert.equal(state().stats[0].correct,0);click('Start scored practice →');{const goal=nodes().find(n=>n.type==='@/components/practice/SkillGoal');assert(goal);goal.props.onContinue();render()};
 input('Complete equation','y=2+3');click('Check equation');assert.equal(state().warnings,1);click('Got it');solve();assert.equal(state().stats[0].streak,1);click('Continue →');input('Complete equation','y=2+3');click('Check equation');assert.equal(state().warnings,2);assert.equal(state().stats[0].streak,0);click('Got it');solve();assert.equal(state().stats[0].streak,0);click('Continue →');
 for(let i=0;i<3;i++){solve();click('Continue →')};assert.equal(state().phase,'spin');click('Spin for your number');flush();assert.equal(state().targets.length,1);click('Go to Level 2 →');assert.equal(state().level,2)
 function enterIntercept(){assert(!nodes().some(n=>n.props['aria-label']==='Slope rise'));input('Y-intercept x-coordinate','0');input('Y-intercept y-coordinate',String(problem().line.y));click('Check y-intercept')}
 function graphSolve(){const p=problem();enterIntercept();input('Slope rise',String(p.line.rise));input('Slope run',String(p.line.run));click('Check slope');assert.equal(nodes().find(n=>n.type==='./LineGraph').props.selected.length,0);solve()}
-graphSolve();assert.equal(state().stats[1].correct,0);click('Start scored practice →');
+graphSolve();assert.equal(state().stats[1].correct,0);click('Start scored practice →');{const goal=nodes().find(n=>n.type==='@/components/practice/SkillGoal');assert(goal);goal.props.onContinue();render()};
 graphSolve();click('Continue →');
 function readingMiss(){enterIntercept();input('Slope rise','999');input('Slope run','1');click('Check slope')}
 readingMiss();assert.equal(state().readingWarnings,1);assert.equal(state().stats[1].streak,1);click('Got it');input('Slope rise',String(problem().line.rise));input('Slope run',String(problem().line.run));click('Check slope');solve();assert.equal(state().stats[1].streak,2);click('Continue →');
