@@ -8,5 +8,5 @@ export function LinearSkill({level}:{level:number}){
 export default function SkillGoal({children,onContinue,readOnly=false}:{children:ReactNode;onContinue:()=>void;readOnly?:boolean}){
  const dialog=useRef<HTMLDialogElement>(null)
  useEffect(()=>{const el=dialog.current;if(el&&!el.open)el.showModal();return()=>el?.close()},[])
- return <dialog className="skill-goal-dialog" ref={dialog} aria-labelledby="skill-goal-heading" onCancel={e=>{e.preventDefault();if(!readOnly)onContinue()}}><div className="skill-goal-accent" aria-hidden="true"/><span className="skill-goal-badge">YOUR TARGET SKILL</span><h2 id="skill-goal-heading">Here’s what you’re learning.</h2><div className="skill-goal-statement">{children}</div><button type="button" autoFocus={!readOnly} disabled={readOnly} onClick={onContinue}>I’m ready — let’s practice →</button></dialog>
+ return <dialog className="skill-goal-dialog" ref={dialog} aria-labelledby="skill-goal-heading" onCancel={e=>{e.preventDefault();if(!readOnly)onContinue()}}><div className="skill-goal-accent" aria-hidden="true"/><span className="skill-goal-badge">YOUR TARGET SKILL</span><h2 id="skill-goal-heading">Here’s what you’re learning.</h2><div className="skill-goal-statement">{children}</div><button type="button" className="skill-goal-begin" autoFocus={!readOnly} disabled={readOnly} onClick={onContinue}>Begin →</button></dialog>
 }
