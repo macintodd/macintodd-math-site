@@ -52,7 +52,7 @@ function app(mode){
   else click(s.example?'Start scored practice →':'Continue →')
  }
  render();const fields=nodes().filter(n=>n.type==='input');fields[0].props.onChange({target:{value:'Maya'}});fields[1].props.onChange({target:{value:'Todd'}});nodes().find(n=>n.type==='select').props.onChange({target:{value:'3'}});render();nodes().find(n=>n.type==='form').props.onSubmit({preventDefault(){}});render()
- return {nodes,click,input,flush,render,solve,state,problem,text:()=>text(tree)}
+ return {nodes,click,input,flush,render,solve,state,problem,active:()=>hooks[6].value,text:()=>text(tree)}
 }
 for(const mode of [1,2,3,4]){
  const a=app(mode),idx=Math.min(3,mode)-1
@@ -60,7 +60,7 @@ for(const mode of [1,2,3,4]){
  if(mode===2){let g=a.nodes().find(n=>n.type==='./LineGraph');g.props.onSelect({x:0,y:a.problem().line.y});a.render();g=a.nodes().find(n=>n.type==='./LineGraph');g.props.onSelect(a.problem().point);a.render();assert.equal(a.nodes().find(n=>n.props['aria-label']==='Y-intercept x-coordinate').props.value,String(a.problem().point.x));assert(!a.nodes().some(n=>n.props['aria-label']==='Slope rise'));for(const pt of [...a.nodes().find(n=>n.type==='./LineGraph').props.selected]){a.nodes().find(n=>n.type==='./LineGraph').props.onSelect(pt);a.render()}}
  a.solve();assert.equal(a.state().stats[idx].correct,0);assert(!a.state().example)
  for(let i=0;i<(mode<3?3:5);i++)a.solve()
- if(mode===2){assert.equal(a.state().phase,'challenge');a.click('Yes');a.click('Start the challenge →');a.solve()}
+ if(mode===2){assert.equal(a.state().phase,'challenge');a.click('Yes');a.click('Start the challenge →');assert.equal(a.active(),'equation');a.solve()}
  assert.equal(a.state().phase,'spin');assert.equal(focus.focusedScore(a.state(),mode),10)
  a.click('Spin for your number');a.flush();assert.equal(a.state().targets.length,1);a.click('Play the magic-number game →');assert.equal(a.state().phase,'bonus')
  const b=a.nodes().find(n=>n.type==='./BonusGame');assert.deepEqual(Array.from(b.props.rates),[3]);b.props.onResult(a.state().targets[0]);a.render();a.nodes().find(n=>n.type==='./BonusGame').props.onFinish();a.render();assert.equal(a.state().phase,'report');assert.equal(focus.focusedBonus(a.state()),1);assert.equal(a.nodes().find(n=>n.type==='./FinalReport').props.standaloneLevel,mode)
