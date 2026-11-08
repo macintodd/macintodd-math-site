@@ -40,3 +40,13 @@ const goatProps={problem:props.problem,start:14,clipId:'test',sx:x=>x,sy:y=>y,so
 props.showStreakReward=true;props.firstName='Marques';render();assert(text(tree).includes('Marques!'));assert(text(tree).includes('Five in a row!'));const shower=nodes().find(n=>n.props.className==='streak-star-shower');assert.equal(nodes(shower).filter(n=>n.type==='text'&&text(n)==='★').length,28);assert.equal(parseFloat(nodes().find(n=>n.props.className==='intro-streak-banner').props.style.animationDelay),parseFloat(nodes().find(n=>n.props.className==='success-scoring-star').props.style.animationDelay));console.log('Passed named streak-goal praise and star shower synchronized to scoring star.');
 
 props.readOnly=true;props.demoState={replay:6,sound:true};render();assert.equal(nodes().find(n=>n.props.className==='intro-celebration-sequence').key,6);assert.equal(nodes().filter(n=>n.type==='button').length,0);assert.equal(nodes().find(n=>n.type==='goat-surprise').props.sound,false);let prevented=false;const oldDismissed=dismissed;tree.props.onCancel({preventDefault(){prevented=true}});assert(prevented);assert.equal(dismissed,oldDismissed);props.demoState={replay:7,sound:false};render();assert.equal(nodes().find(n=>n.props.className==='intro-celebration-sequence').key,7);console.log('Passed remote animation replay snapshots, hidden controls, blocked Escape, and no duplicate goat audio.')
+
+props.showSkier=false;props.problem={line:{x:0,y:11/3,rise:-1,run:3},point:{x:-1,y:4},secondPoint:{x:2,y:3}};render();
+assert(text(tree).includes('You did it! You found the equation of the line'));
+for(const pair of ['(-1, 4)','(2, 3)'])assert(nodes().some(n=>n.type==='formula'&&n.props.children===pair));
+assert(nodes().some(n=>n.props.className==='success-given two-point-second'));
+assert(nodes().some(n=>n.props.className==='two-point-solution-line'&&n.props.pathLength==='1'));
+assert(!nodes().some(n=>n.props.className==='success-count-unit'||n.props.className==='success-intercept'));
+assert(text(tree).includes('both given points'));
+assert(nodes().find(n=>n.props.className==='intro-success-graph').props['aria-label'].includes('then second point'));
+console.log('Passed two-point-specific congratulations, both plotted points, full line drawing, accessible sequence, and removal of the single-point slope-counting sequence.');

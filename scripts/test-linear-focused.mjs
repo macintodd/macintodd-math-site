@@ -43,7 +43,7 @@ function app(mode){
   if(s.phase==='challenge'){input('Complete equation','y=.75x+1.25');click('Check equation');click('Got it');click('Finish Level 2 →');return}
   if(mode===2){assert(!nodes().some(n=>n.props['aria-label']==='Slope rise'));input('Y-intercept x-coordinate','0');input('Y-intercept y-coordinate',String(p.line.y));click('Check y-intercept');assert(!nodes().some(n=>n.props['aria-label']==='Complete equation'));input('Slope rise',String(p.line.rise));nodes().find(n=>n.props['aria-label']==='Slope rise').props.onFocus();render();click('/');assert.equal(hooks[6].value,'run');assert.equal(nodes().find(n=>n.props['aria-label']==='Slope rise').props.value,String(p.line.rise));click('2');assert.equal(nodes().find(n=>n.props['aria-label']==='Slope run').props.value,'2');input('Slope run',String(p.line.run));click('Check slope');assert.equal(nodes().find(n=>n.type==='./LineGraph').props.selected.length,0)}
   if(mode>=3){
-   if(mode===4){input('Slope rise',String(p.secondPoint.y-p.point.y));input('Slope run',String(p.secondPoint.x-p.point.x));click('Check slope');assert(nodes().some(n=>n.type==='div'&&n.props.className==='wl-checked'))}
+   if(mode===4){input('Slope rise','');input('Slope run','');nodes().find(n=>n.props['aria-label']==='Slope rise').props.onFocus();render();click('2');click('/');assert.equal(hooks[6].value,'run');assert.equal(nodes().find(n=>n.props['aria-label']==='Slope rise').props.value,'2');click('3');assert.equal(nodes().find(n=>n.props['aria-label']==='Slope run').props.value,'3');input('Slope rise',String(p.secondPoint.y-p.point.y));input('Slope run',String(p.secondPoint.x-p.point.x));click('Check slope');assert(nodes().some(n=>n.type==='div'&&n.props.className==='wl-checked'))}
    for(const [q,slot] of [['y','y1'],['m','m'],['x','x1']]){nodes().find(n=>n.type==='div'&&n.props.className===`wl-quantity wl-${q}`).props.children.find(n=>n?.type==='button').props.onClick();render();nodes().find(n=>n.props['data-slot']===slot).props.onClick();render()}
    click('Check placement');input('Distributed right-hand expression',model.distributionText(p));click('Check distribution')
   }
@@ -53,6 +53,7 @@ function app(mode){
   if(s.example){const goal=nodes().find(n=>n.type==='@/components/practice/SkillGoal');assert(goal,'Skill reminder after demo');goal.props.onContinue();render();assert(!nodes().some(n=>n.type==='@/components/practice/SkillGoal'))}
  }
  render();const fields=nodes().filter(n=>n.type==='input');fields[0].props.onChange({target:{value:'Maya'}});fields[1].props.onChange({target:{value:'Todd'}});nodes().find(n=>n.type==='select').props.onChange({target:{value:'3'}});render();nodes().find(n=>n.type==='form').props.onSubmit({preventDefault(){}});render()
+ if(mode===4){const intro=nodes().find(n=>n.type==='@/components/practice/SkillGoal');assert(intro,'Two-point skill introduction before the example');intro.props.onContinue();render()}
  return {nodes,click,input,flush,render,solve,state,problem,active:()=>hooks[6].value,text:()=>text(tree)}
 }
 for(const mode of [1,2,3,4]){
