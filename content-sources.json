@@ -1093,6 +1093,14 @@
       "selectionReason": "Teacher requested a matching worked practice key. Purple solutions over the original two-page worksheet, two points and arrows on every line, intercepts, aligned algebra and application units. All answers independently checked.",
       "publishedSha256": "8674dfca08499fa133c6f1d087801c5a414a684a412d4ef63d924932df7c530b",
       "publishedPages": 2
+    },
+    {
+      "generated": true,
+      "output": "practice/write-linear-level-4-companion.pdf",
+      "generator": "scripts/create-linear-level4-worksheet.py",
+      "selectionReason": "Teacher-requested companion to the two-point guided app. Shared example matches the app; seven tall practice boxes record randomly generated points and vertical solution work. No student information.",
+      "publishedSha256": "0801a7123085bae59de64e4b38cbd2dab6e2665f514f0056a201a489b266e005",
+      "publishedPages": 2
     }
   ]
 }
