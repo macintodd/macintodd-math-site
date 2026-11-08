@@ -41,7 +41,7 @@ function app(mode){
  const state=()=>hooks[3].value,problem=()=>hooks[4].value
  function solve(){const p=problem(),s=state();
   if(s.phase==='challenge'){input('Complete equation','y=.75x+1.25');click('Check equation');click('Got it');click('Finish Level 2 →');return}
-  if(mode===2){let graph=nodes().find(n=>n.type==='./LineGraph');graph.props.onSelect({x:0,y:p.line.y});render();graph=nodes().find(n=>n.type==='./LineGraph');graph.props.onSelect(p.point);render();input('Slope rise',String(p.line.rise));input('Slope run',String(p.line.run));click('Check intercept & slope')}
+  if(mode===2){assert(!nodes().some(n=>n.props['aria-label']==='Slope rise'));input('Y-intercept x-coordinate','0');input('Y-intercept y-coordinate',String(p.line.y));click('Check y-intercept');assert(!nodes().some(n=>n.props['aria-label']==='Complete equation'));input('Slope rise',String(p.line.rise));input('Slope run',String(p.line.run));click('Check slope');assert.equal(nodes().find(n=>n.type==='./LineGraph').props.selected.length,0)}
   if(mode>=3){
    if(mode===4){input('Slope rise',String(p.secondPoint.y-p.point.y));input('Slope run',String(p.secondPoint.x-p.point.x));click('Check slope');assert(nodes().some(n=>n.type==='div'&&n.props.className==='wl-checked'))}
    for(const [q,slot] of [['y','y1'],['m','m'],['x','x1']]){nodes().find(n=>n.type==='div'&&n.props.className===`wl-quantity wl-${q}`).props.children.find(n=>n?.type==='button').props.onClick();render();nodes().find(n=>n.props['data-slot']===slot).props.onClick();render()}
@@ -57,6 +57,7 @@ function app(mode){
 for(const mode of [1,2,3,4]){
  const a=app(mode),idx=Math.min(3,mode)-1
  assert(a.text().includes(`Write the Linear Equation LEVEL ${mode}`));assert(a.text().includes(`LEVEL ${mode} ·`));assert(!a.nodes().some(n=>n.props['aria-label']==='Teacher demonstration navigation'))
+ if(mode===2){let g=a.nodes().find(n=>n.type==='./LineGraph');g.props.onSelect({x:0,y:a.problem().line.y});a.render();g=a.nodes().find(n=>n.type==='./LineGraph');g.props.onSelect(a.problem().point);a.render();assert.equal(a.nodes().find(n=>n.props['aria-label']==='Y-intercept x-coordinate').props.value,String(a.problem().point.x));assert(!a.nodes().some(n=>n.props['aria-label']==='Slope rise'));for(const pt of [...a.nodes().find(n=>n.type==='./LineGraph').props.selected]){a.nodes().find(n=>n.type==='./LineGraph').props.onSelect(pt);a.render()}}
  a.solve();assert.equal(a.state().stats[idx].correct,0);assert(!a.state().example)
  for(let i=0;i<(mode<3?3:5);i++)a.solve()
  if(mode===2){assert.equal(a.state().phase,'challenge');a.click('Yes');a.click('Start the challenge →');a.solve()}
