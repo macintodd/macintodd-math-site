@@ -34,15 +34,17 @@ export async function createSlopeResultsImage(
   canvas.height = Math.max(1000, top + 530);
   ctx.fillStyle = "#fbf6ec";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = "#16334c";
+  ctx.fillStyle = "#edf4fb";
   ctx.fillRect(0, 0, 1200, 115);
-  ctx.fillStyle = "#ffffff";
+  ctx.fillStyle = "#174d8c";
   ctx.font = "bold 38px sans-serif";
   ctx.fillText("MacIntodd · Slope practice", 64, 73);
-  ctx.fillStyle = "#17633c";
+  ctx.font = "24px sans-serif";
+  ctx.fillText("Skill practiced: Determine slope from a graph using signed rise and run.",64,143,1072);
+  ctx.fillStyle = "#087366";
   ctx.font = "bold 30px sans-serif";
-  ctx.fillText(score.completed ? "GOAL COMPLETED" : "PRACTICE SUBMITTED EARLY", 64, 177);
-  ctx.fillStyle = "#16334c";
+  ctx.fillText(score.completed ? "GOAL COMPLETED" : "PRACTICE SUBMITTED EARLY", 64, 194);
+  ctx.fillStyle = "#653d91";
   ctx.font = "bold 48px sans-serif";
   lines.forEach((text, i) => ctx.fillText(text, 64, 255 + i * 59));
   ctx.font = "30px sans-serif";
@@ -63,14 +65,14 @@ export async function createSlopeResultsImage(
     ctx.fillStyle = "#49616d";
     ctx.font = "24px sans-serif";
     ctx.fillText(label, x, top + 87);
-    ctx.fillStyle = "#176977";
+    ctx.fillStyle = "#087366";
     ctx.font = "bold 78px sans-serif";
     ctx.fillText(value, x, top + 177);
     ctx.fillStyle = "#49616d";
     ctx.font = "21px sans-serif";
     ctx.fillText(detail, x, top + 222);
   });
-  ctx.fillStyle = "#16334c";
+  ctx.fillStyle = "#174d8c";
   ctx.font = "26px sans-serif";
   ctx.fillText(
     `${report.problems.length} graphs · ${score.attempts} submitted answers`,

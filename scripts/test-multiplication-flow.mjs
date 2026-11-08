@@ -1,3 +1,4 @@
+import {mockScorecard} from './scorecard-test-runtime.mjs'
 // Exercise actual component event handlers with deterministic hooks and a fake clock.
 // This is a unit harness, not a browser/layout test.
 import assert from 'node:assert/strict'
@@ -17,7 +18,7 @@ const react={
 const jsx=(type,props)=>({type,props:props||{}}),testModule={exports:{}}
 const RealDate=Date
 class ClockDate extends RealDate{constructor(...args){super(...(args.length?args:[Date.UTC(2026,9,31,15)+clock]))}}
-const context=vm.createContext({exports:testModule.exports,module:testModule,console,Date:ClockDate,Math,HTMLButtonElement:class{},performance:{now:()=>clock},requestAnimationFrame:fn=>{const id=++nextFrame;frames.set(id,fn);return id},cancelAnimationFrame:id=>frames.delete(id),document:{createElement:()=>({width:0,height:0,getContext:()=>new Proxy({fillText:text=>paint.push(text)},{get:(o,key)=>key in o?o[key]:()=>{}}),toDataURL:()=> 'data:image/png;base64,local-report'})},require:name=>name==='react'?react:name==='react/jsx-runtime'?{jsx,jsxs:jsx}:name==='next/link'?{default:'a',__esModule:true}:name==='@/lib/multiplication'?model:(()=>{throw Error(name)})()})
+const context=vm.createContext({exports:testModule.exports,module:testModule,console,Date:ClockDate,Math,HTMLButtonElement:class{},performance:{now:()=>clock},requestAnimationFrame:fn=>{const id=++nextFrame;frames.set(id,fn);return id},cancelAnimationFrame:id=>frames.delete(id),document:{createElement:()=>({width:0,height:0,getContext:()=>new Proxy({fillText:text=>paint.push(text)},{get:(o,key)=>key in o?o[key]:()=>{}}),toDataURL:()=> 'data:image/png;base64,local-report'})},require:name=>name==='@/lib/scorecard'?mockScorecard(typeof paint==='undefined'?[]:paint):['@/components/practice/ReportIdentity','@/components/practice/ScoreImageActions'].includes(name)?{default:'report-presentation',__esModule:true}:name==='react'?react:name==='react/jsx-runtime'?{jsx,jsxs:jsx}:name==='next/link'?{default:'a',__esModule:true}:name==='@/lib/multiplication'?model:(()=>{throw Error(name)})()})
 const source=fs.readFileSync('src/app/apps/multiplication/Multiplication.tsx','utf8')
 vm.runInContext(ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText,context)
 function render(){index=0;effects=[];tree=testModule.exports.default();for(const effect of effects)effect();return tree}

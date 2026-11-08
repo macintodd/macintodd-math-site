@@ -1,3 +1,4 @@
+import {scorecardRuntime} from './scorecard-test-runtime.mjs'
 import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import vm from 'node:vm'
@@ -7,7 +8,7 @@ import * as focus from '../src/lib/linear-focused.ts'
 let index=0,tree,downloads=0,mode;const hooks=[],drawn=[],ctx={font:'',fillStyle:'',fillRect(){},measureText:s=>({width:s.length*15}),fillText:(s,x,y)=>drawn.push({s,x,y})},canvas={width:0,height:0,getContext:()=>ctx,toDataURL:()=> 'data:image/png;base64,c2NvcmU='}
 const react={useState(initial){const i=index++;hooks[i]??={value:initial};return [hooks[i].value,v=>hooks[i].value=typeof v==='function'?v(hooks[i].value):v]}}
 const jsx=(type,props,key)=>({type,props:props??{},key}),mod={exports:{}}
-vm.runInNewContext(ts.transpileModule(fs.readFileSync('src/app/apps/write-linear-equation/FinalReport.tsx','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX}}).outputText,{module:mod,exports:mod.exports,document:{createElement:tag=>tag==='canvas'?canvas:{click:()=>downloads++}},require:n=>n==='react'?react:n==='react/jsx-runtime'?{jsx,jsxs:jsx}:n==='@/lib/linear-focused'?focus:model})
+vm.runInNewContext(ts.transpileModule(fs.readFileSync('src/app/apps/write-linear-equation/FinalReport.tsx','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX}}).outputText,{module:mod,exports:mod.exports,document:{createElement:tag=>tag==='canvas'?canvas:{click:()=>downloads++}},require:n=>n==='@/lib/scorecard'?scorecardRuntime({createElement:()=>canvas}):n==='@/components/practice/ScoreImageActions'?{default:'image-actions',__esModule:true}:n==='@/components/practice/scorecard.css'?{}:n==='react'?react:n==='react/jsx-runtime'?{jsx,jsxs:jsx}:n==='@/lib/linear-focused'?focus:model})
 const s=model.newSession();s.level=3;s.phase='report';s.example=false;s.date='11/6/2026';s.stats=[3,3,5].map(n=>({correct:n,attempts:n,streak:n,best:n}));s.targets=[2,4,6];s.bonus=[2,4,6]
 function render(){index=0;tree=mod.exports.default({session:s,name:'Maya Student',hour:'3',standaloneLevel:mode})}
 function nodes(n=tree){if(Array.isArray(n))return n.flatMap(v=>nodes(v??null));return n&&typeof n==='object'?[n,...nodes(n.props.children??null)]:[]}

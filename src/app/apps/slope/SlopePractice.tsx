@@ -1,4 +1,5 @@
 "use client";
+import ReportIdentity from '@/components/practice/ReportIdentity'
 import Link from "next/link";
 import { useRef, useState } from "react";
 import Graph from "./Graph";
@@ -258,18 +259,18 @@ export default function SlopePractice() {
             {progress.correct > 30 && <span>+{progress.correct - 30}</span>}
           </div>
           {report ? (
-            <section className="slope-complete">
+            <section className="slope-complete"><ReportIdentity slug="slope"/>
               <div className="slope-trophy" aria-hidden="true">
                 ★
               </div>
               <h2>
                 {progress.completed ? "Goal reached!" : "Practice submitted early"}
               </h2>
-              <p>
+              <p className="report-student">
                 {student.firstName} {student.lastName} · Class hour{" "}
                 {student.hour}
               </p>
-              <p><strong>Score: {score}/10</strong></p>
+              <p className="report-score"><strong>Score: {score}/10</strong></p>
               <p>
                 {progress.correct} correct · {progress.firstTry} on the first
                 try · {progress.retryCorrect} on a retry · best streak{" "}

@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import ScoreImageActions from '@/components/practice/ScoreImageActions';
 import type { SlopeReport } from "@/lib/slope";
 import { createSlopeResultsImage } from "@/lib/slope-image";
 
@@ -38,6 +39,7 @@ export default function ResultsImage({ report }: { report: SlopeReport }) {
       <p role="status">{message}</p>
       {image && (
         <>
+          <ScoreImageActions image={image.url}/>
           <div className="slope-actions">
             <a
               className="slope-primary"
