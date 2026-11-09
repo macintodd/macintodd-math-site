@@ -61,6 +61,7 @@ jobs:
       - run: node --experimental-strip-types scripts/test-linear-mathboard-bridge.mjs
       - run: node --experimental-strip-types scripts/test-linear-student-scenes.mjs
       - run: node --experimental-strip-types scripts/test-linear-final-report.mjs
+      - run: node --experimental-strip-types scripts/test-two-point-slope.mjs
       - run: node --experimental-strip-types scripts/test-linear-focused.mjs
       - run: npm run check:content
       - run: npm run typecheck

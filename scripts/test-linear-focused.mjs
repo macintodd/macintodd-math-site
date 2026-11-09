@@ -1,3 +1,4 @@
+import {slopeSetup} from '../src/lib/two-point-slope.ts'
 import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import vm from 'node:vm'
@@ -43,7 +44,7 @@ function app(mode){
   if(s.phase==='challenge'){input('Complete equation','y=.75x+1.25');click('Check equation');click('Got it');click('Finish Level 2 →');return}
   if(mode===2){assert(!nodes().some(n=>n.props['aria-label']==='Slope rise'));input('Y-intercept x-coordinate','0');input('Y-intercept y-coordinate',String(p.line.y));click('Check y-intercept');assert(!nodes().some(n=>n.props['aria-label']==='Complete equation'));input('Slope rise',String(p.line.rise));nodes().find(n=>n.props['aria-label']==='Slope rise').props.onFocus();render();click('/');assert.equal(hooks[6].value,'run');assert.equal(nodes().find(n=>n.props['aria-label']==='Slope rise').props.value,String(p.line.rise));click('2');assert.equal(nodes().find(n=>n.props['aria-label']==='Slope run').props.value,'2');input('Slope run',String(p.line.run));click('Check slope');assert.equal(nodes().find(n=>n.type==='./LineGraph').props.selected.length,0)}
   if(mode>=3){
-   if(mode===4){input('Slope rise','');input('Slope run','');nodes().find(n=>n.props['aria-label']==='Slope rise').props.onFocus();render();click('2');click('/');assert.equal(hooks[6].value,'run');assert.equal(nodes().find(n=>n.props['aria-label']==='Slope rise').props.value,'2');click('3');assert.equal(nodes().find(n=>n.props['aria-label']==='Slope run').props.value,'3');input('Slope rise',String(p.secondPoint.y-p.point.y));input('Slope run',String(p.secondPoint.x-p.point.x));click('Check slope');assert(nodes().some(n=>n.type==='div'&&n.props.className==='wl-checked'))}
+   if(mode===4){const builder=nodes().find(n=>n.type==='./TwoPointSlopeSetup');assert(builder);assert.equal(builder.props.first.x,p.point.x);builder.props.onChecked(slopeSetup({topLeft:'y2',topRight:'y1',bottomLeft:'x2',bottomRight:'x1'},p.point,p.secondPoint));render();assert(nodes().some(n=>n.type==='div'&&n.props.className==='wl-checked'))}
    for(const [q,slot] of [['y','y1'],['m','m'],['x','x1']]){nodes().find(n=>n.type==='div'&&n.props.className===`wl-quantity wl-${q}`).props.children.find(n=>n?.type==='button').props.onClick();render();nodes().find(n=>n.props['data-slot']===slot).props.onClick();render()}
    click('Check placement');input('Distributed right-hand expression',model.distributionText(p));click('Check distribution')
   }
@@ -67,5 +68,5 @@ for(const mode of [1,2,3,4]){
  a.click('Spin for your number');a.flush();assert.equal(a.state().targets.length,1);a.click('Play the magic-number game →');assert.equal(a.state().phase,'bonus')
  const b=a.nodes().find(n=>n.type==='./BonusGame');assert.deepEqual(Array.from(b.props.rates),[mode===2?4:3]);b.props.onResult(a.state().targets[0]);a.render();a.nodes().find(n=>n.type==='./BonusGame').props.onFinish();a.render();assert.equal(a.state().phase,'report');assert.equal(focus.focusedBonus(a.state()),1);assert.equal(a.nodes().find(n=>n.type==='./FinalReport').props.standaloneLevel,mode)
 }
-const retry=app(4);retry.input('Slope rise','0');retry.input('Slope run','0');retry.click('Check slope');assert(retry.text().includes('Subtract in the same order'));assert.equal(retry.state().stats[2].correct,0)
+const retry=app(4);retry.nodes().find(n=>n.type==='./TwoPointSlopeSetup').props.onChecked({correct:false,hint:'Subtract in the same point order.'});retry.render();assert(retry.text().includes('Subtract in the same point order'));assert.equal(retry.state().stats[2].correct,0)
 console.log('Passed four standalone complete flows, Level 2 challenge, two-point slope guidance, fixed unscored examples, animations, one 3/sec bonus, per-activity scores, resume identity/activity separation and 1000 two-point/graph regressions.')
