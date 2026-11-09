@@ -3,6 +3,7 @@ import { practiceScore, summarize, type SlopeReport } from "./slope";
 /** Draw a results image entirely on the student's device. No remote capture service. */
 export async function createSlopeResultsImage(
   report: SlopeReport,
+  reflection: string[] = [],
 ): Promise<Blob> {
   const score = summarize(report.problems);
   if (!report.finished || practiceScore(report.problems) < 6)
@@ -30,8 +31,9 @@ export async function createSlopeResultsImage(
     line += character;
   }
   if (line) lines.push(line);
+  const reflectionRows=reflection.flatMap(row=>row.match(/.{1,76}(?:\s|$)|\S+/g)??[row]);
   const top = Math.max(390, 290 + lines.length * 59);
-  canvas.height = Math.max(1000, top + 530);
+  canvas.height = Math.max(1000, top + 530)+reflectionRows.length*42;
   ctx.fillStyle = "#fbf6ec";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = "#edf4fb";
@@ -85,6 +87,8 @@ export async function createSlopeResultsImage(
     64,
     top + 337,
   );
+  ctx.fillStyle="#111111";ctx.font="23px sans-serif";
+  reflectionRows.forEach((row,i)=>ctx.fillText(row,64,top+395+i*42,1072));
   ctx.fillStyle = "#49616d";
   ctx.font = "20px sans-serif";
   ctx.fillText(

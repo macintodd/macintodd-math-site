@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import PracticeReflection,{usePracticeReflection} from '@/components/practice/PracticeReflection';
 import ScoreImageActions from '@/components/practice/ScoreImageActions';
 import type { SlopeReport } from "@/lib/slope";
 import { createSlopeResultsImage } from "@/lib/slope-image";
@@ -9,10 +10,12 @@ export default function ResultsImage({ report }: { report: SlopeReport }) {
   const [message, setMessage] = useState(
     "Preparing your results image on this device…",
   );
+  const reflection=usePracticeReflection('slope',`${report.id}|${report.finishedAt}`,()=>setImage(null));
   useEffect(() => {
+    if(!reflection.confirmed)return;
     let cancelled = false,
       url: string | undefined;
-    createSlopeResultsImage(report)
+    createSlopeResultsImage(report,reflection.lines)
       .then((blob) => {
         if (cancelled) return;
         url = URL.createObjectURL(blob);
@@ -33,9 +36,9 @@ export default function ResultsImage({ report }: { report: SlopeReport }) {
       cancelled = true;
       if (url) URL.revokeObjectURL(url);
     };
-  }, [report]);
+  }, [report,reflection.confirmed,reflection.lines]);
   return (
-    <div className="slope-result-image">
+    <div className="slope-result-image"><PracticeReflection state={reflection}/>{reflection.confirmed&&<>
       <p role="status">{message}</p>
       {image && (
         <>
@@ -63,6 +66,6 @@ export default function ResultsImage({ report }: { report: SlopeReport }) {
         On an iPad, you can also touch and hold the image to save it, or take a
         screenshot. Save or submit your image before leaving this page.
       </p>
-    </div>
+    </>}</div>
   );
 }

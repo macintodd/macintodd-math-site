@@ -43,7 +43,7 @@ for(let level=0;level<3;level++){
 get('nextLevelBtn').onclick()
 assert.match(get('finalWho').textContent,/Demo Student · Hour 6/)
 assert.match(get('finalTitle').textContent,/30/)
-get('shotBtn').onclick();assert.match(get('shotImg').src,/^data:image\/png/);assert.match(get('shotDl').download,/Demo_Student/)
+assert(get('shotBtn').disabled);get('reflection-confidence-4').onclick();get('reflection-difficulty-3').onclick();get('reflectionConfirm').onclick();assert(!get('shotBtn').disabled);get('shotBtn').onclick();assert.match(get('shotImg').src,/^data:image\/png/);assert.match(get('shotDl').download,/Demo_Student/)
 get('playAgainBtn').onclick();assert.equal(app.snapshot.score,0);assert.equal(app.snapshot.results.every(r=>r===null),true)
 assert(!/\b(?:fetch|XMLHttpRequest|localStorage|sessionStorage|sendBeacon)\b/.test(script),'No networking or browser persistence')
 console.log('Passed: all seven families; graph/equation/mixed rounds; scoring, paused clock, replay, named/hour results and local PNG export.')

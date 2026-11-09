@@ -124,6 +124,7 @@
 
 /* Shared MacInTodd navy/copper theme; retain game sizing and touch controls. */
 :root{--ink:#172b4a;--muted:#536479;--blue:#245ecb;--blue-dk:#204c86;--panel:#faf8f3;--line:#dbe1e7}body{font-family:'Avenir Next','Trebuchet MS',Arial,sans-serif;background:#faf8f3}.card{border-radius:20px}button{border-radius:10px}.nameIn{border-radius:9px}
+#finalBox .card{max-height:calc(100dvh - 30px);overflow:auto}#finalReflection button{min-height:44px;margin:3px;padding:6px 10px}#finalReflection button[aria-pressed=true]{outline:3px solid #174d8c;outline-offset:2px}#finalReflection p{color:#111}
 </style>
 </head>
 <body>
@@ -218,7 +219,7 @@
     <div class="big">🏆</div>
     <div style="color:#174d8c;font-weight:750;font-size:24px">Parent Function Challenge</div><p style="color:#174d8c">Skill practiced: Identify parent-function families from graphs.</p><h2 style="color:#087366" id="finalTitle">Final Score</h2>
     <div id="finalWho" style="font-weight:700;color:#653d91"></div>
-    <table id="finalTable"></table>
+    <table id="finalTable"></table><section id="finalReflection" style="color:#111;text-align:left;margin:14px 0"></section>
     <div class="btns">
       <button class="secondary" id="playAgainBtn">↺ Play Again</button>
       <button id="shotBtn">📸 Take Screenshot</button>
@@ -320,6 +321,8 @@
   $('playAgainBtn').onclick = () => { hide('finalBox'); results = [null, null, null]; finishedAt = null; showIntro(0); };
 
   function showFinal(){
+    finalReflection={confidence:0,difficulty:0,confirmed:false};
+    renderFinalReflection();
     finishedAt = new Date();
     const tot = results.reduce((s, r) => s + (r ? r.score : 0), 0);
     $('finalTitle').textContent = 'Final Score: ' + tot;
@@ -509,8 +512,29 @@
   drawGraph(null);
 
   // ---------- Results picture ----------
+  let finalReflection={confidence:0,difficulty:0,confirmed:false};
+  const reflectionConfidenceLabels=['I need help','I need more practice','I can do some steps','I can do it independently','I can explain it'];
+  const reflectionDifficultyLabels=['Too easy','A little easy','Just right','A little difficult','Too difficult'];
+  const reflectionTask='How independently can you identify a parent-function family from a graph or equation?';
+  function renderFinalReflection(){
+    let content='<h3>Your reflection</h3><p>Both answers are required. They do not change your score.</p>';
+    for(const kind of ['confidence','difficulty']){
+      const question=kind==='confidence'?'1. '+reflectionTask:'2. How was this widget’s practice for you?';
+      const labels=kind==='confidence'?reflectionConfidenceLabels:reflectionDifficultyLabels;
+      content+='<p><b>'+question+'</b></p>';
+      if(finalReflection.confirmed)content+='<p>'+finalReflection[kind]+'/5 — '+labels[finalReflection[kind]-1]+'</p>';
+      else{content+='<div role="group" aria-label="'+kind+' rating">';for(let n=1;n<=5;n++)content+='<button type="button" id="reflection-'+kind+'-'+n+'" aria-label="'+kind+' '+n+' of 5" aria-pressed="'+(finalReflection[kind]===n)+'">'+(n<=finalReflection[kind]?'★':'☆')+' '+n+'</button>';content+='</div><p style="font-size:13px">'+(kind==='confidence'?'1 = I need help · 5 = I can explain it':'1 = Too easy · 3 = Just right · 5 = Too difficult')+'</p>';}
+    }
+    content+='<button id="reflectionConfirm">'+(finalReflection.confirmed?'Edit reflection answers':'Show my final scorecard')+'</button>';
+    $('finalReflection').innerHTML=content;
+    if(!finalReflection.confirmed)for(const kind of ['confidence','difficulty'])for(let n=1;n<=5;n++)$('reflection-'+kind+'-'+n).onclick=()=>{finalReflection[kind]=n;renderFinalReflection();};
+    $('reflectionConfirm').disabled=!finalReflection.confidence||!finalReflection.difficulty;
+    $('reflectionConfirm').onclick=()=>{if(!finalReflection.confidence||!finalReflection.difficulty)return;finalReflection.confirmed=!finalReflection.confirmed;$('shotImg').src='';hide('shotBox');renderFinalReflection();};
+    $('shotBtn').disabled=!finalReflection.confirmed;
+  }
   const stamp = d => d.toLocaleString([], { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' });
   $('shotBtn').onclick = () => {
+    if(!finalReflection.confirmed)return;
     const url = drawResults();
     $('shotImg').src = url; $('shotDl').href = url;
     $('shotDl').download = 'parent-functions-' + playerName.replace(/[^\w-]+/g, '_') + '.png';
@@ -525,7 +549,7 @@
   };
   $('shotClose').onclick = () => hide('shotBox');
   function drawResults(){
-    const W = 1000, pad = 40, rh = 48, H = 210 + rh * 5 + 70;
+    const W = 1000, pad = 40, rh = 48, H = 210 + rh * 5 + 70 + 260;
     const c = document.createElement('canvas'); c.width = W; c.height = H;
     const x = c.getContext('2d');
     x.fillStyle = '#fff'; x.fillRect(0, 0, W, H);
@@ -551,6 +575,7 @@
       y += rh;
     });
     x.textAlign = 'left'; x.fillStyle = '#087366'; x.font = 'bold 30px system-ui, sans-serif'; x.fillText('🏆 Final Score: ' + tot, pad, y + 50);
+    x.fillStyle='#111';x.font='22px system-ui, sans-serif';let ry=y+95;for(const row of ['YOUR REFLECTION','1. '+reflectionTask,finalReflection.confidence+'/5 — '+reflectionConfidenceLabels[finalReflection.confidence-1],'2. How was this widget’s practice for you?',finalReflection.difficulty+'/5 — '+reflectionDifficultyLabels[finalReflection.difficulty-1]]){for(const part of row.match(/.{1,75}(?:\s|$)|\S+/g)??[row]){x.fillText(part,pad,ry,W-pad*2);ry+=30;}}
     return c.toDataURL('image/png');
   }
 })();
