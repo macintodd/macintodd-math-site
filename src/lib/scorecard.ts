@@ -10,6 +10,7 @@ const skills:Record<string,string>={
  'write-linear-equation-level-3':'Use a point and slope to write a slope-intercept equation.',
  'write-linear-equation-level-4':'Find slope from two points and write their line’s equation.',
  'write-linear-equation-level-5':'Choose a method and write a slope-intercept equation from a graph, slope and intercept, point and slope, or two points.',
+ 'parallel-perpendicular':'Write the equation of a line through a point parallel or perpendicular to a given line.',
  'intro-point-slope':'Substitute a point and slope, distribute, then isolate y.',
  'point-slope':'Use a point and slope to write the equation of a line.',
  'graph-linear':'Graph a line using its slope and y-intercept.',
