@@ -35,6 +35,6 @@ function Gate({children,goal}:{children:ReactNode;goal:typeof goals[string]}){
 export default function ActivitySkillIntro({children}:{children:ReactNode}){
  const path=usePathname(),slug=path.replace(/^\/apps\//,'')
  // The linear-equation sequence shows its skill reminder AFTER each classroom example.
- const goal=goals[slug]
+ const goal=slug.startsWith('rigid-transformations')?undefined:goals[slug]
  return goal?<Gate key={path} goal={goal}>{children}</Gate>:children
 }

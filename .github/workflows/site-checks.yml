@@ -50,6 +50,9 @@ jobs:
       - run: node --experimental-strip-types scripts/test-skill-goals.mjs
       - run: node --experimental-strip-types scripts/test-app-directory.mjs
       - run: node --experimental-strip-types scripts/test-app-previews.mjs
+      - run: node --experimental-strip-types scripts/test-rigid-skills.mjs
+      - run: node --experimental-strip-types scripts/test-rigid-skills-flow.mjs
+      - run: node --experimental-strip-types scripts/test-rigid-graph.mjs
       - run: node --experimental-strip-types scripts/test-transformation-notation.mjs
       - run: node --experimental-strip-types scripts/test-transformation-notation-flow.mjs
       - run: node --experimental-strip-types scripts/test-resume-code.mjs

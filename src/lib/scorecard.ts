@@ -1,3 +1,4 @@
+import {skillGoals,skillTitles,type RigidSkill} from './rigid-skills.ts'
 import {practiceApps} from '@/content/practice-apps'
 export const reportColors={activity:'#174d8c',student:'#653d91',score:'#087366',text:'#111111',muted:'#425466',paper:'#ffffff'}
 const skills:Record<string,string>={
@@ -21,7 +22,7 @@ const skills:Record<string,string>={
  transformations:'Connect function parameters to changes in inputs, outputs, and graphs.',
  'mathboard/session-1':'Connect a starting amount and rate of change to an equation and graph.'
 }
-export function reportInfo(slug:string){return {title:practiceApps.find(a=>a.slug===slug)?.title??'Math practice',skill:skills[slug]??'Apply and explain the practiced mathematical skill.'}}
+export function reportInfo(slug:string){const n=Number(slug.match(/^rigid-transformations\/skill-([1-6])$/)?.[1]) as RigidSkill;if(n)return {title:`Rigid Transformations · Skill ${n}: ${skillTitles[n]}`,skill:skillGoals[n]};return {title:practiceApps.find(a=>a.slug===slug)?.title??'Math practice',skill:skills[slug]??'Apply and explain the practiced mathematical skill.'}}
 /** Local canvas only: no student details are uploaded. */
 export function createReportImage(slug:string,name:string,details:string[]){
  const {title,skill}=reportInfo(slug),canvas=document.createElement('canvas');canvas.width=1400
