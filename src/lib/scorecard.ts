@@ -2,6 +2,8 @@ import {skillGoals,skillTitles,type RigidSkill} from './rigid-skills.ts'
 import {practiceApps} from '@/content/practice-apps'
 export const reportColors={activity:'#174d8c',student:'#653d91',score:'#087366',text:'#111111',muted:'#425466',paper:'#ffffff'}
 const skills:Record<string,string>={
+ 'transformation-scales':'Read a, b, h, and k and describe the transformations in order.',
+ 'parent-transformations':'Identify stretches, shrinks, reflections, and shifts in equations written with parent functions.',
  slope:'Determine slope from a line graph using signed rise and run.',
  'line-equations':'Write a slope-intercept equation from a slope and y-intercept.',
  'write-linear-equation':'Write a linear equation from a slope and intercept, a graph, or a point and slope.',

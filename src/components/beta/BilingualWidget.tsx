@@ -28,7 +28,7 @@ export default function BilingualWidget({children}:{children:ReactNode}){
    const all=texts(host),blockContexts=new Map<Element,string>()
    for(const node of all){const el=node.parentElement!;const block=el.closest(blocks)??el;if(!blockContexts.has(block))blockContexts.set(block,english(block))}
    for(const node of all){const el=node.parentElement!,item=source(node),block=el.closest(blocks)??el,locale=selectedLanguage(el),next=locale==='es'?spanishText(item.english,blockContexts.get(block)):item.english;if(node.nodeValue!==next)node.nodeValue=next;item.rendered=next}
-   for(const el of host.querySelectorAll('[aria-label],[placeholder]'))if(!excluded(el)||el.matches('input,textarea')){if(el.closest('[data-no-translate],[data-bilingual-ui]'))continue;translatedAttribute(el,'aria-label');translatedAttribute(el,'placeholder')}
+   for(const el of host.querySelectorAll('[aria-label],[placeholder],[alt]'))if(!excluded(el)||el.matches('input,textarea')){if(el.closest('[data-no-translate],[data-bilingual-ui]'))continue;translatedAttribute(el,'aria-label');translatedAttribute(el,'placeholder');translatedAttribute(el,'alt')}
    for(const el of host.querySelectorAll(blocks)){
     if(excluded(el)||el.closest('button,a,summary,select,svg'))continue
     const available=texts(el).some(n=>hasSpanish(source(n).english,blockContexts.get(el)??english(el)));if(!available)continue

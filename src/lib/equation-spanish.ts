@@ -721,7 +721,7 @@ Correct! y = __0__. Gold star!__1__	¡Correcto! y = __0__. ¡Estrella dorada!__1
 Correct! y = __0__. Gold star!__1__ Compare the y-intercept with your starting point on the revealed graph.	¡Correcto! y = __0__. ¡Estrella dorada!__1__ Compara la intersección con el eje y con tu punto inicial en la gráfica mostrada.	1
 Current streak __0__ · best streak __1__/5	Racha actual __0__ · mejor racha __1__/5
 Current streak: __0__ · Best first-try streak: __1__/5	Racha actual: __0__ · Mejor racha al primer intento: __1__/5
-FINAL SCORE: __0__/10	PUNTUACIÓN FINAL: __0__/10
+FINAL SCORE: __0__/10	Puntuación final: __0__/10
 Final score: __0__/10	Puntuación final: __0__/10
 Hint __0__ · costs ¼ point	Pista __0__ · cuesta ¼ de punto
 Hour __0__ · __1__	Hora __0__ · __1__

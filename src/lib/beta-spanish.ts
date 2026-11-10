@@ -1,3 +1,4 @@
+import {scaleSpanish} from './transformation-scale-spanish.ts'
 import {equationSpanish,equationTemplate} from './equation-spanish.ts'
 /** Reviewed, local classroom translations. Unknown copy stays in English rather than being sent to a service. */
 const rows=String.raw`Write the Linear Equation: Parallel and Perpendicular	Escribe la ecuación lineal: rectas paralelas y perpendiculares
@@ -411,13 +412,15 @@ All hints shown	Todas las pistas mostradas
 Given point and given line.	Punto dado y recta dada.
 `;
 const normalize=(s:string)=>s.replace(/&amp;/g,'&').replace(/\s+/g,' ').trim()
-const translations=new Map((rows.trim()+'\n'+equationSpanish.trim()).split('\n').map(row=>{const i=row.indexOf('\t');return [normalize(row.slice(0,i)).toLowerCase(),row.slice(i+1)]}))
+const translations=new Map((rows.trim()+'\n'+equationSpanish.trim()+'\n'+scaleSpanish.trim()).split('\n').map(row=>{const i=row.indexOf('\t');return [normalize(row.slice(0,i)).toLowerCase(),row.slice(i+1)]}))
 export function spanishText(value:string,context=''):string{
  const body=normalize(value);if(!body)return value
  let translated=translations.get(body.toLowerCase())
  if(/^(parallel|perpendicular)$/i.test(body)){const plural=/\blines\b|\bslopes\b/i.test(context)||body===body.toUpperCase();translated=body.toLowerCase()==='parallel'?(plural?'paralelas':'paralela'):(plural?'perpendiculares':'perpendicular')}
  if(!translated&&body.endsWith(' You can correct it and check again.')){const prefix=body.slice(0,-' You can correct it and check again.'.length),part=spanishText(prefix,context);if(part!==prefix)translated=part+' Puedes corregirla y volver a verificar.'}
  const patterns:[RegExp,(...matches:string[])=>string][]=[
+ [/^Hints viewed: (\d+)$/,(_,n)=>`Pistas consultadas: ${n}`],
+ [/^Level (\d) · (\d+) correct · streak (\d+) · best (\d+)$/,(_,l,n,s,b)=>`Nivel ${l} · ${n} correctas · racha ${s} · mejor ${b}`],
  [/^Hint ([1-9])$/,(_,n)=>`Pista ${n}`],
  [/^Redraw your line\. (.+)$/,(_,tail)=>`Vuelve a dibujar tu recta. ${spanishText(tail,context)}`],
  [/^The slope is (.+)\. Use that value for the parallel line\.$/,(_,m)=>`La pendiente es ${m}. Usa ese valor para la recta paralela.`],
