@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import {spanishText} from '../src/lib/beta-spanish.ts'
 import fs from 'node:fs'
 import vm from 'node:vm'
 import ts from 'typescript'
@@ -15,9 +16,11 @@ const identity={first:'Test',last:'Student',hour:'3'}
 for(const topic of ['parallel','perpendicular'])for(const phase of ['intro','discover','conclude','lesson','practice','finished','identify','slope-only','visual','opening','meaning'])for(const demo of [true,false]){const c={...related.newRelatedCheckpoint(),topic,phase,demo,round:1,index:5,parallel:topic==='parallel'?0:6,perpendicular:0,firstTry:0,checks:4},code=related.saveRelated(c,identity);assert.deepEqual(related.loadRelated(code,identity),{...c,recognition:0,transfer:0});assert.throws(()=>related.loadRelated(code,{...identity,hour:'4'}));assert.throws(()=>related.loadRelated(code.slice(0,-1)+'!',identity))}
 const source=fs.readFileSync('src/app/apps/beta/write-linear-parallel-perpendicular/Tutorial.tsx','utf8'),compiled=ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX}}).outputText
 let index=0,tree;const hooks=[],jsx=(type,props)=>({type,props:props??{}}),mod={exports:{}},exportsLog=[]
-const react={useState(initial){const i=index++;hooks[i]??={value:typeof initial==='function'?initial():initial};return [hooks[i].value,v=>hooks[i].value=typeof v==='function'?v(hooks[i].value):v]},useRef(v){const i=index++;return hooks[i]??(hooks[i]={current:v})}}
-vm.runInNewContext(compiled,{module:mod,exports:mod.exports,requestAnimationFrame:fn=>fn(),require:n=>n==='react'?react:n==='react/jsx-runtime'?{jsx,jsxs:jsx}:n==='@/lib/parallel-foundations'?foundations:n==='@/lib/related-lines-v2'||n==='@/lib/related-lines'?related:n==='@/lib/write-linear'?linear:n==='@/lib/point-slope'?point:n==='@/lib/mathboard/keypad'?keypad:n==='@/lib/scorecard'?{createReportImage:(...args)=>{exportsLog.push(args);return 'data:image/png;base64,local'}}:n==='@/components/practice/PracticeReflection'?{__esModule:true,default:n,usePracticeReflection:()=>({confirmed:true,lines:['Confidence 5','Difficulty 3']})}:n==='@/components/Math'?{Math:'formula'}:{__esModule:true,default:n}})
-function render(){index=0;tree=mod.exports.default()}
+const react={useState(initial){const i=index++;hooks[i]??={value:typeof initial==='function'?initial():initial};return [hooks[i].value,v=>hooks[i].value=typeof v==='function'?v(hooks[i].value):v]},useEffect(){index++},useRef(v){const i=index++;return hooks[i]??(hooks[i]={current:v})}}
+vm.runInNewContext(compiled,{module:mod,exports:mod.exports,requestAnimationFrame:fn=>fn(),require:n=>n==='react'?react:n==='react/jsx-runtime'?{jsx,jsxs:jsx}:n==='@/components/beta/BilingualWidget'?{useBetaLanguage:()=>({language:'en',translate:v=>v})}:n==='@/lib/parallel-foundations'?foundations:n==='@/lib/related-lines-v2'||n==='@/lib/related-lines'?related:n==='@/lib/write-linear'?linear:n==='@/lib/point-slope'?point:n==='@/lib/mathboard/keypad'?keypad:n==='@/lib/scorecard'?{createReportImage:(...args)=>{exportsLog.push(args);return 'data:image/png;base64,local'}}:n==='@/components/practice/PracticeReflection'?{__esModule:true,default:n,usePracticeReflection:()=>({confirmed:true,lines:['Confidence 5','Difficulty 3']})}:n==='@/components/Math'?{Math:'formula'}:{__esModule:true,default:n}})
+const visibleCopy=new Map()
+function auditCopy(n,context=''){if(Array.isArray(n)){n.forEach(v=>auditCopy(v,context));return}if(typeof n==='string'){if(/[A-Za-z]{2}/.test(n)&&! /^[\d\s/:,.APMapm-]+$/.test(n))visibleCopy.set(n,context);return}if(!n||typeof n!=='object'||n.type==='formula'||['input','textarea'].includes(n.type)||n.props['data-no-translate'])return;if(['h1','h2','h3','h4','p','li','legend','label'].includes(n.type))context=text(n);auditCopy(n.props.children,context)}
+function render(){index=0;tree=mod.exports.default();auditCopy(tree)}
 function nodes(n=tree){return Array.isArray(n)?n.flatMap(v=>nodes(v??null)):n&&typeof n==='object'?[n,...nodes(n.props.children??null)]:[]}
 function text(n){return Array.isArray(n)?n.map(text).join(''):n&&typeof n==='object'?text(n.props.children):n==null||typeof n==='boolean'?'':String(n)}
 function click(label){const b=nodes().find(n=>n.type==='button'&&text(n)===label);assert(b&&!b.props.disabled,label);b.props.onClick();render()}
@@ -80,3 +83,6 @@ renderExplanation();for(let frame=0;frame<5;frame++){assert.equal(explainHooks[0
 exClick('Use point-slope form →');assert(continued);exClick('Replay explanation');assert.equal(explainHooks[0].value,0);assert(timer);timer();renderExplanation();assert.equal(explainHooks[0].value,1);exClick('Pause');assert.equal(explainHooks[1].value,false)
 assert(!fs.readFileSync('src/app/apps/beta/write-linear-parallel-perpendicular/Tutorial.tsx','utf8').includes('check the constant b'))
 console.log('Passed five-scene visual explanation, exact star/slope example, manual and play/pause navigation, point-slope substitution/distribution retries, fractional final answer and removal of the separate b-check.')
+
+const missingSpanish=[...visibleCopy].filter(([copy,context])=>spanishText(copy,context)===copy&&copy!=='perpendicular').map(([copy])=>copy);assert.deepEqual(missingSpanish,[],'Visible tutorial copy has Spanish translations');
+if(missingSpanish.length)console.log('MISSING SPANISH:',JSON.stringify(missingSpanish,null,2))
