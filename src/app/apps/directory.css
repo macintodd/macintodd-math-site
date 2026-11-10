@@ -6,3 +6,4 @@
 @media(min-width:1200px){.app-directory .app-card-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.activity-preview{height:225px}.preview-big-problem{font-size:29px}.preview-choice-pills span{padding:7px}.preview-formula{font-size:16px}.pool-preview{font-size:20px}.app-directory .app-card-body{padding:21px}.app-directory .app-card h3{font-size:21px}}
 @media(max-width:650px){.activity-preview{height:225px}.app-directory .app-card-body{padding:21px}.app-category>h2{font-size:24px}}
 @media(prefers-reduced-motion:reduce){.app-directory .app-card{transition:none}}
+.beta-lab-link{display:inline-block;padding:10px 16px;margin-top:12px;border:1px solid #95b1cc;border-radius:12px;font-size:16px;font-weight:700;text-decoration:none}

@@ -37,7 +37,7 @@ export default async function CoursePage({ params }: { params: Promise<{ course:
             </li>
           })}</ol>
         </details>
-      })}</div><aside className="modern-course-aside"><h2>Try it for yourself</h2><p>Practice the skills from your class.</p>{practiceApps.filter(app=>app.courses.includes(course.id)&&app.category==='Linear graphs and equations').slice(0,4).map(app=><Link key={app.slug} href={`/apps/${app.slug}`}>{app.title}<span aria-hidden="true">→</span></Link>)}<Link className="modern-text-link" href="/apps">Browse all practice apps →</Link><div className="modern-aside-note"><h3>Need a fresh start?</h3><p>Revisit a video or compare your work with the completed notes. Take it one step at a time.</p></div></aside></div>
+      })}</div><aside className="modern-course-aside"><h2>Try it for yourself</h2><p>Practice the skills from your class.</p>{practiceApps.filter(app=>!app.slug.startsWith('beta/')&&app.courses.includes(course.id)&&app.category==='Linear graphs and equations').slice(0,4).map(app=><Link key={app.slug} href={`/apps/${app.slug}`}>{app.title}<span aria-hidden="true">→</span></Link>)}<Link className="modern-text-link" href="/apps">Browse all practice apps →</Link><div className="modern-aside-note"><h3>Need a fresh start?</h3><p>Revisit a video or compare your work with the completed notes. Take it one step at a time.</p></div></aside></div>
     </div>
   </section>
 }
