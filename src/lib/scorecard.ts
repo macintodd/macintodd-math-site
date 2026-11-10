@@ -2,6 +2,7 @@ import {skillGoals,skillTitles,type RigidSkill} from './rigid-skills.ts'
 import {practiceApps} from '@/content/practice-apps'
 export const reportColors={activity:'#174d8c',student:'#653d91',score:'#087366',text:'#111111',muted:'#425466',paper:'#ffffff'}
 const skills:Record<string,string>={
+ 'slope-two-points':'Calculate the slope between two points using consistent coordinate subtraction.',
  'horizontal-vertical':'Recognize horizontal and vertical lines, their equations, and their zero or undefined slopes.',
  'transformation-scales':'Read a, b, h, and k and describe the transformations in order.',
  'parent-transformations':'Identify stretches, shrinks, reflections, and shifts in equations written with parent functions.',

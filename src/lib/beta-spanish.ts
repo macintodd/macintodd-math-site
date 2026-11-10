@@ -1,3 +1,4 @@
+import {slopeTwoPointsSpanish} from './slope-two-points-spanish.ts'
 import {horizontalVerticalSpanish} from './horizontal-vertical-spanish.ts'
 import {scaleSpanish} from './transformation-scale-spanish.ts'
 import {equationSpanish,equationTemplate} from './equation-spanish.ts'
@@ -413,7 +414,7 @@ All hints shown	Todas las pistas mostradas
 Given point and given line.	Punto dado y recta dada.
 `;
 const normalize=(s:string)=>s.replace(/&amp;/g,'&').replace(/\s+/g,' ').trim()
-const translations=new Map((rows.trim()+'\n'+equationSpanish.trim()+'\n'+scaleSpanish.trim()+'\n'+horizontalVerticalSpanish.trim()).split('\n').map(row=>{const i=row.indexOf('\t');return [normalize(row.slice(0,i)).toLowerCase(),row.slice(i+1)]}))
+const translations=new Map((rows.trim()+'\n'+equationSpanish.trim()+'\n'+scaleSpanish.trim()+'\n'+horizontalVerticalSpanish.trim()+'\n'+slopeTwoPointsSpanish.trim()).split('\n').map(row=>{const i=row.indexOf('\t');return [normalize(row.slice(0,i)).toLowerCase(),row.slice(i+1)]}))
 export function spanishText(value:string,context=''):string{
  const body=normalize(value);if(!body)return value
  let translated=translations.get(body.toLowerCase())

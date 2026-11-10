@@ -830,6 +830,10 @@ __0__ in a row!	¡__0__ seguidas!
 Level __0__: __1__ correct | Best streak __2__/__3__	Nivel __0__: __1__ correctas | Mejor racha __2__/__3__
 Level __0__: __1__ correct · Best streak __2__/__3__ ✓	Nivel __0__: __1__ correctas · Mejor racha __2__/__3__ ✓
 Level __0__ · streak __1__/__2__ · best __3__/__4__	Nivel __0__ · racha __1__/__2__ · mejor __3__/__4__
+Stage __0__: __1__ solved / __2__ problems | Best streak __3__/5	Etapa __0__: __1__ resueltos / __2__ problemas | Mejor racha __3__/5
+Stage __0__: __1__ solved / __2__ problems · Best streak __3__/5	Etapa __0__: __1__ resueltos / __2__ problemas · Mejor racha __3__/5
+Hinted retries used: __0__	Segundos intentos con pista usados: __0__
+Stage __0__ · streak __1__/5 · best __2__/5	Etapa __0__ · racha __1__/5 · mejor __2__/5
 `
 
 const escapePattern=(s:string)=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')
