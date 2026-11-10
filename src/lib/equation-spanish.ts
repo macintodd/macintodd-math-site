@@ -818,6 +818,9 @@ __0__, you can work through this. __1__ __2__ Your correct answers are still you
 Hint __0__ · costs 0.20 points	Pista __0__ · cuesta 0.20 puntos
 Math score: __0__/10 · Extra credit: __1__/1	Puntuación de matemáticas: __0__/10 · Crédito extra: __1__/1
 Math score: __0__/10 | Extra credit: __1__/1	Puntuación de matemáticas: __0__/10 | Crédito extra: __1__/1
+Final score: __0__ points	Puntuación final: __0__ puntos
+__0__ correct / __1__ answered | __2__% accuracy	__0__ correctas / __1__ contestadas | __2__% de precisión
+__0__ correct / __1__ answered · __2__% accuracy · Best streak: __3__	__0__ correctas / __1__ contestadas · __2__% de precisión · Mejor racha: __3__
 `
 
 const escapePattern=(s:string)=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')
