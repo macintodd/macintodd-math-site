@@ -9,7 +9,7 @@ for(let i=0;i<1000;i++){
  const deck=hvDeck();assert.equal(new Set(deck.map(q=>q.kind)).size,12)
  for(const q of deck){assert.equal(q.choices.length,2);assert(q.answer>=0&&q.answer<2);assert.equal(new Set(q.choices).size,2);if(q.equation){katex.renderToString(q.equation,{throwOnError:true});const [lhs,rhs]=q.equation.split('=');const offset=Number(lhs.slice(1)||0);assert.equal(q.value,Number(rhs)-offset)}
  if(q.kind<2||q.kind===6||q.kind===7)assert.equal(q.answerText,q.horizontal?'0':'Undefined')
- if(q.kind===10)assert.equal(q.answerText,`y=${q.value}`);if(q.kind===11)assert.equal(q.answerText,`x=${q.value}`)
+ if(q.kind>=10){assert.equal(q.equation,`${q.horizontal?'y':'x'}=${q.value}`);assert.equal(q.answerText,q.horizontal?'Horizontal':'Vertical');assert.equal(q.prompt,'Is this the equation of a vertical or horizontal line?')}assert(q.graph||q.equation,'Every question must show a graph or an equation')
  assert.notEqual(spanishText(q.prompt),q.prompt);assert.notEqual(spanishText(q.cue),q.cue)
  }
 }

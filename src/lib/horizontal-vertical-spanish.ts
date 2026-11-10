@@ -1,5 +1,6 @@
 /** Local reviewed Spanish; no translation service or student data transfer. */
 export const horizontalVerticalSpanish=String.raw`
+Is this the equation of a vertical or horizontal line?	¿Esta es la ecuación de una recta vertical u horizontal?
 Horizontal or Vertical?	¿Horizontal o vertical?
 Horizontal or Vertical? · One-Minute Slope Sprint	¿Horizontal o vertical? · Reto de pendientes de un minuto
 One-Minute Slope Sprint	Reto de pendientes de un minuto
