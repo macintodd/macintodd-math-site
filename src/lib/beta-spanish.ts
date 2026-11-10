@@ -351,6 +351,63 @@ Discover the slopes. Write the equation.	Descubre las pendientes. Escribe la ecu
 Do your lines look parallel?	¿Tus rectas parecen paralelas?
 Do your lines look perpendicular?	¿Tus rectas parecen perpendiculares?
 Read the coefficient of x in the given equation. That is the original slope.	Lee el coeficiente de x en la ecuación dada. Esa es la pendiente original.
+Draw a long line through the given point and PARALLEL to the given line.	Dibuja una recta larga que pase por el punto dado y sea PARALELA a la recta dada.
+Redraw your line.	Vuelve a dibujar tu recta.
+SPOT PARALLEL LINES · THREE IN A ROW	IDENTIFICA PARALELAS · TRES SEGUIDAS
+Choose two letters. Look for lines that keep the same direction and never meet.	Elige dos letras. Busca rectas que mantengan la misma dirección y nunca se crucen.
+Correct in a row:	Correctas seguidas:
+Compare slopes →	Comparar pendientes →
+Retry with a new graph	Reintentar con otra gráfica
+Not this pair. Parallel lines keep the same direction and the same distance apart. Try a new graph; build three correct in a row.	Este par no es correcto. Las rectas paralelas mantienen la misma dirección y la misma distancia entre sí. Intenta otra gráfica; acierta tres seguidas.
+Compare the slope data from the two pairs you just measured. Then complete the statement.	Compara las pendientes de los dos pares que acabas de medir. Luego completa la oración.
+Measured pair	Par medido
+Blue line:	Recta azul:
+Orange line:	Recta naranja:
+Parallel lines have	Las rectas paralelas tienen pendientes
+slopes.	.
+Parallel slope conclusion	Conclusión sobre las pendientes paralelas
+Check conclusion	Verificar conclusión
+Exactly! Parallel lines have equal slopes. Different intercepts make them different lines.	¡Exacto! Las rectas paralelas tienen pendientes iguales. Sus diferentes intersecciones con el eje y las hacen rectas distintas.
+Compare each pair of measured slopes. Are they equal or different? Fill the blank with one word.	Compara las pendientes de cada par. ¿Son iguales o diferentes? Completa el espacio con una palabra.
+How do the slopes of parallel lines compare?	¿Cómo se comparan las pendientes de las rectas paralelas?
+First, determine the slope of the blue line. Tap integer points on it if that helps.	Primero determina la pendiente de la recta azul. Si te ayuda, toca puntos con coordenadas enteras en ella.
+Now determine the slope of the orange parallel line.	Ahora determina la pendiente de la recta naranja paralela.
+Write the equation of the orange parallel line in slope-intercept form.	Escribe la ecuación de la recta naranja paralela en la forma pendiente-intersección.
+Compare your two measured slopes before continuing.	Compara las dos pendientes que mediste antes de continuar.
+✓ Blue-line slope checked. A parallel orange line is now drawn. Determine its slope next.	✓ Pendiente azul verificada. Ahora aparece una recta naranja paralela. Determina su pendiente.
+Try again: count signed rise and run between integer points on the blue line. Use 1 for the run of an integer slope.	Intenta otra vez: cuenta el cambio vertical con signo y el cambio horizontal entre puntos enteros de la recta azul. Usa 1 como denominador para una pendiente entera.
+✓ Orange-line slope checked. Now write its equation in slope-intercept form.	✓ Pendiente naranja verificada. Ahora escribe su ecuación en la forma pendiente-intersección.
+Look at both lines. Count the orange line’s rise and run, or compare its direction with the blue line.	Observa las dos rectas. Cuenta los cambios vertical y horizontal de la recta naranja o compara su dirección con la azul.
+Correct! Both lines have the same slope. Your equation describes the orange parallel line.	¡Correcto! Las dos rectas tienen la misma pendiente. Tu ecuación describe la recta naranja paralela.
+Use y = mx + b. Keep the measured slope and read the orange line’s y-intercept. Include x beside the slope.	Usa y = mx + b. Conserva la pendiente medida e identifica la intersección de la recta naranja con el eje y. Incluye x junto a la pendiente.
+Blue-line slope	Pendiente de la recta azul
+Orange-line slope	Pendiente de la recta naranja
+Equation of the orange line: y = …	Ecuación de la recta naranja: y = …
+✓ Blue slope:	✓ Pendiente azul:
+✓ Orange slope:	✓ Pendiente naranja:
+Compare a second pair →	Comparar un segundo par →
+Enter the given point and verified slope in the boxes beside the keypad.	Ingresa el punto dado y la pendiente verificada en los espacios junto al teclado.
+Determine the given line’s slope. A parallel line has that same slope.	Determina la pendiente de la recta dada. Una recta paralela tiene esa misma pendiente.
+Ask yourself: What is the slope of the line given? Keep that same slope for a parallel line. A hint is available.	Pregúntate: ¿Cuál es la pendiente de la recta dada? Usa esa misma pendiente para una recta paralela. Hay pistas disponibles.
+Hint	Pista
+Count rise over run from left to right. A downward change has a negative sign.	Cuenta el cambio vertical sobre el horizontal de izquierda a derecha. Un cambio hacia abajo tiene signo negativo.
+Parallel lines have the same slope. For the orange equation, read its y-intercept and use y = mx + b.	Las rectas paralelas tienen la misma pendiente. Para la ecuación naranja, identifica su intersección con el eje y y usa y = mx + b.
+For perpendicular slopes, flip the fraction and change its sign.	Para pendientes perpendiculares, invierte la fracción y cambia su signo.
+Find the original slope first.	Primero encuentra la pendiente original.
+Keep the same slope, including its sign.	Conserva la misma pendiente, incluido su signo.
+Flip the slope fraction and change its sign.	Invierte la fracción de la pendiente y cambia su signo.
+Use the point in y − y₁ = m(x − x₁). Distribute, then isolate y.	Usa el punto en y − y₁ = m(x − x₁). Distribuye y luego despeja y.
+A parallel line has the same slope, including the sign.	Una recta paralela tiene la misma pendiente, incluido el signo.
+In y = mx + b, the coefficient multiplying x is the slope.	En y = mx + b, el coeficiente que multiplica a x es la pendiente.
+Tap two integer points on the blue line to see their coordinates. Tapping is optional.	Toca dos puntos enteros de la recta azul para ver sus coordenadas. Esto es opcional.
+Count from left to right: change in y is rise; change in x is run. A fall gives a negative rise.	Cuenta de izquierda a derecha: el cambio en y es vertical; el cambio en x es horizontal. Una bajada da un cambio vertical negativo.
+Rewrite the given line in slope-intercept form.	Reescribe la recta dada en la forma pendiente-intersección.
+Subtract 2x from both sides: 5y = −2x + 10.	Resta 2x de ambos lados: 5y = −2x + 10.
+Divide every term by 5: y = (−2/5)x + 2.	Divide cada término entre 5: y = (−2/5)x + 2.
+Parallel slope conclusion:	Conclusión sobre las pendientes paralelas:
+Check	Verificar
+All hints shown	Todas las pistas mostradas
+Given point and given line.	Punto dado y recta dada.
 `;
 const normalize=(s:string)=>s.replace(/&amp;/g,'&').replace(/\s+/g,' ').trim()
 const translations=new Map(rows.trim().split('\n').map(row=>{const i=row.indexOf('\t');return [normalize(row.slice(0,i)).toLowerCase(),row.slice(i+1)]}))
@@ -360,6 +417,11 @@ export function spanishText(value:string,context=''):string{
  if(/^(parallel|perpendicular)$/i.test(body)){const plural=/\blines\b|\bslopes\b/i.test(context)||body===body.toUpperCase();translated=body.toLowerCase()==='parallel'?(plural?'paralelas':'paralela'):(plural?'perpendiculares':'perpendicular')}
  if(!translated&&body.endsWith(' You can correct it and check again.')){const prefix=body.slice(0,-' You can correct it and check again.'.length),part=spanishText(prefix,context);if(part!==prefix)translated=part+' Puedes corregirla y volver a verificar.'}
  const patterns:[RegExp,(...matches:string[])=>string][]=[
+ [/^Hint ([1-9])$/,(_,n)=>`Pista ${n}`],
+ [/^Redraw your line\. (.+)$/,(_,tail)=>`Vuelve a dibujar tu recta. ${spanishText(tail,context)}`],
+ [/^The slope is (.+)\. Use that value for the parallel line\.$/,(_,m)=>`La pendiente es ${m}. Usa ese valor para la recta paralela.`],
+ [/^The slope is (.+)\. An equivalent fraction is also correct\.$/,(_,m)=>`La pendiente es ${m}. Una fracción equivalente también es correcta.`],
+ [/^Parallel slope conclusion: Parallel lines have (.+) slopes\.$/,(_,answer)=>`Conclusión: Las pendientes de las rectas paralelas son iguales. Respuesta: ${answer}.`],
  [/^3 · Pick Q for a (parallel|perpendicular) line through P\.$/,(_,r)=>`3 · Elige Q para una recta ${r==='parallel'?'paralela':'perpendicular'} que pase por P.`],
  [/^Do the lines look (parallel|perpendicular)\? Check your construction, or tap Q to try again\.$/,(_,r)=>`¿Las rectas parecen ${r==='parallel'?'paralelas':'perpendiculares'}? Verifica tu construcción o toca Q para intentarlo de nuevo.`],
  [/^Not (parallel|perpendicular) yet\. (.+)$/,(_,r,tail)=>`Todavía no son ${r==='parallel'?'paralelas':'perpendiculares'}. ${spanishText(tail,context)}`],
