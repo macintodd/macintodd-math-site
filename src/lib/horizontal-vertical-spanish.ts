@@ -91,4 +91,14 @@ Learning progression	Progreso de aprendizaje
 Streak stars	Estrellas de la racha
 % accuracy	% de precisión
 · Best streak:	· Mejor racha:
+Five skills · Build your streak · No timer	Cinco habilidades · Construye tu racha · Sin límite de tiempo
+Connect horizontal and vertical lines to their graphs, equations, and slopes. Complete five levels at your own pace. Reach each level’s streak goal to advance.	Relaciona rectas horizontales y verticales con sus gráficas, ecuaciones y pendientes. Completa cinco niveles a tu ritmo. Alcanza la meta de racha de cada nivel para avanzar.
+Examples do not count. Reach the streak goal at every level.	Los ejemplos no cuentan. Alcanza la meta de racha en cada nivel.
+Scratch paper	Papel para borrador
+Correct graph	Gráfica correcta
+Correct line	Recta correcta
+in a row	seguidas
+in a row!	¡seguidas!
+correct in a row. There is no timer.	correctas seguidas. No hay límite de tiempo.
+5 levels · 8 in a row · No timer	5 niveles · 8 seguidas · Sin límite de tiempo
 `

@@ -824,6 +824,12 @@ __0__ correct / __1__ answered · __2__% accuracy · Best streak: __3__	__0__ co
 Level __0__: __1__ correct | Best streak __2__/5	Nivel __0__: __1__ correctas | Mejor racha __2__/5
 Level __0__: __1__ correct · Best streak __2__/5 ✓	Nivel __0__: __1__ correctas · Mejor racha __2__/5 ✓
 Level __0__ · streak __1__/5 · best __2__/5	Nivel __0__ · racha __1__/5 · mejor __2__/5
+YOUR GOAL: __0__ IN A ROW	TU META: __0__ SEGUIDAS
+Goal: __0__ correct in a row. There is no timer.	Meta: __0__ respuestas correctas seguidas. No hay límite de tiempo.
+__0__ in a row!	¡__0__ seguidas!
+Level __0__: __1__ correct | Best streak __2__/__3__	Nivel __0__: __1__ correctas | Mejor racha __2__/__3__
+Level __0__: __1__ correct · Best streak __2__/__3__ ✓	Nivel __0__: __1__ correctas · Mejor racha __2__/__3__ ✓
+Level __0__ · streak __1__/__2__ · best __3__/__4__	Nivel __0__ · racha __1__/__2__ · mejor __3__/__4__
 `
 
 const escapePattern=(s:string)=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')
