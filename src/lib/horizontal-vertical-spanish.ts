@@ -52,4 +52,43 @@ Zero or undefined slope?	¿Pendiente cero o no definida?
 correct /	correctas /
 answered ·	contestadas ·
 % accuracy · Best streak:	% de precisión · Mejor racha:
+Write the Linear Equations Level 0: Horizontal and Vertical	Escribe las ecuaciones lineales Nivel 0: rectas horizontales y verticales
+Five skills · Five in a row · No timer	Cinco habilidades · Cinco seguidas · Sin límite de tiempo
+Connect horizontal and vertical lines to their graphs, equations, and slopes. Complete five levels at your own pace. Get five correct in a row in each level to advance.	Relaciona las rectas horizontales y verticales con sus gráficas, ecuaciones y pendientes. Completa cinco niveles a tu ritmo. Acierta cinco seguidas en cada nivel para avanzar.
+Read the graph	Leer la gráfica
+Read the slope	Leer la pendiente
+Read the equation	Leer la ecuación
+Match the graph to its equation	Relacionar la gráfica con su ecuación
+Mix them all together	Repasar todo junto
+Identify a graphed line as horizontal or vertical.	Identificar una recta en una gráfica como horizontal o vertical.
+Identify a graphed line’s slope as zero or undefined.	Identificar la pendiente de una recta en una gráfica como cero o no definida.
+Identify the direction or slope of a line from its equation.	Identificar la dirección o la pendiente de una recta a partir de su ecuación.
+Choose the equation of a horizontal or vertical line from its graph.	Elegir la ecuación de una recta horizontal o vertical a partir de su gráfica.
+Connect graphs, equations, direction, and zero or undefined slopes.	Relacionar gráficas, ecuaciones, dirección y pendientes cero o no definidas.
+Which equation matches this graph?	¿Qué ecuación corresponde a esta gráfica?
+Start Level 1 example →	Comenzar ejemplo del Nivel 1 →
+All five levels complete! You connected the graphs, equations, and slopes.	¡Completaste los cinco niveles! Relacionaste las gráficas, ecuaciones y pendientes.
+Save your final scorecard with your name, date, score, and both reflection answers. Submit it in Google Classroom.	Guarda tu tarjeta final con tu nombre, fecha, puntuación y ambas respuestas de reflexión. Entrégala en Google Classroom.
+Five in a row!	¡Cinco seguidas!
+Fantastic work! You completed this skill.	¡Trabajo fantástico! Completaste esta habilidad.
+Next level example →	Ejemplo del siguiente nivel →
+CLASSROOM EXAMPLE · NOT SCORED	EJEMPLO PARA LA CLASE · SIN PUNTUACIÓN
+YOUR GOAL: FIVE IN A ROW	TU META: CINCO SEGUIDAS
+★ Correct! You see the pattern.	★ ¡Correcto! Reconoces el patrón.
+A chance to learn	Una oportunidad para aprender
+Try this example again. It does not affect your score.	Intenta este ejemplo de nuevo. No afecta tu puntuación.
+Your streak restarts at zero. Read the cue, then try a fresh question. Your completed levels are kept.	Tu racha vuelve a cero. Lee la ayuda y prueba una pregunta nueva. Conservas los niveles completados.
+Celebrate this level →	Celebrar este nivel →
+Read the line’s constant coordinate. Match both the variable and the number.	Lee la coordenada constante de la recta. Haz coincidir tanto la variable como el número.
+Take your time. Tap the answer that matches the line.	Tómate tu tiempo. Toca la respuesta que corresponde a la recta.
+Goal: five correct in a row. There is no timer.	Meta: cinco respuestas correctas seguidas. No hay límite de tiempo.
+Use the feedback to learn from mistakes. Completed levels stay complete.	Usa la ayuda para aprender de los errores. Conservas los niveles completados.
+Goal: 5 in a row at every level. Examples do not count.	Meta: 5 seguidas en cada nivel. Los ejemplos no cuentan.
+Use a resume code from this horizontal and vertical practice.	Usa un código para continuar de esta práctica de rectas horizontales y verticales.
+This resume code has invalid progress.	Este código contiene un progreso no válido.
+5 levels · 5 in a row · No timer	5 niveles · 5 seguidas · Sin límite de tiempo
+Learning progression	Progreso de aprendizaje
+Streak stars	Estrellas de la racha
+% accuracy	% de precisión
+· Best streak:	· Mejor racha:
 `

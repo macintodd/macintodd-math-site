@@ -1,22 +1,39 @@
+import {blankStats,saveCode,loadCode,type Stats,type Session} from './write-linear.ts'
+export const hvTitle='Write the Linear Equations Level 0: Horizontal and Vertical'
+export const hvLevelTitles=['Read the graph','Read the slope','Read the equation','Match the graph to its equation','Mix them all together']
+export const hvSkills=[
+ 'Identify a graphed line as horizontal or vertical.',
+ 'Identify a graphed line’s slope as zero or undefined.',
+ 'Identify the direction or slope of a line from its equation.',
+ 'Choose the equation of a horizontal or vertical line from its graph.',
+ 'Connect graphs, equations, direction, and zero or undefined slopes.'
+]
+export type HVLevel=1|2|3|4|5
 export type HVQuestion={id:number;horizontal:boolean;value:number;kind:number;prompt:string;equation?:string;graph:boolean;choices:string[];answer:number;cue:string;answerText:string}
 const integer=(n:number,rng:()=>number)=>Math.min(n-1,Math.floor(rng()*n))
-export function hvDeck(rng=Math.random):HVQuestion[]{
- const kinds=Array.from({length:12},(_,i)=>i)
- for(let i=kinds.length-1;i>0;i--){const j=integer(i+1,rng);[kinds[i],kinds[j]]=[kinds[j],kinds[i]]}
- return kinds.map((kind,id)=>{
-  const horizontal=kind%2===0,value=integer(11,rng)-5,variable=horizontal?'y':'x',slope=horizontal?'0':'Undefined',direction=horizontal?'Horizontal':'Vertical'
-  let prompt='',equation:string|undefined,graph=false,choices:string[]=[],correct=''
-  if(kind<2){graph=true;prompt='What is the slope of this line?';choices=['0','Undefined'];correct=slope}
-  else if(kind<4){graph=true;prompt='Is this line horizontal or vertical?';choices=['Horizontal','Vertical'];correct=direction}
-  else if(kind<8){equation=`${variable}=${value}`;prompt=kind<6?'What kind of line does this equation graph?':'What is the slope of the line?';choices=kind<6?['Horizontal','Vertical']:['0','Undefined'];correct=kind<6?direction:slope}
-  else if(kind<10){const shift=1+integer(7,rng);equation=`${variable}-${shift}=${value-shift}`;prompt=rng()<.5?'What kind of line does this equation graph?':'What is the slope of the line?';choices=prompt.startsWith('What kind')?['Horizontal','Vertical']:['0','Undefined'];correct=choices[0]==='Horizontal'?direction:slope}
-  else {equation=`${variable}=${value}`;prompt='Is this the equation of a vertical or horizontal line?';choices=['Vertical','Horizontal'];correct=direction}
-  if(rng()<.5)choices.reverse()
-  const targetHorizontal=horizontal
-  const cue=targetHorizontal?'Horizontal: y stays constant. Rise is 0, so slope is 0.':'Vertical: x stays constant. Run is 0, so slope is undefined. You cannot divide by 0.'
-  return {id,horizontal:targetHorizontal,value,kind,prompt,equation,graph,choices,answer:choices.indexOf(correct),cue,answerText:correct}
- })
+export function hvQuestion(level:HVLevel,id:number,demo=false,rng=Math.random):HVQuestion{
+ const horizontal=demo?level!==2:rng()<.5,value=demo?3:integer(11,rng)-5,variable=horizontal?'y':'x',direction=horizontal?'Horizontal':'Vertical',slope=horizontal?'0':'Undefined'
+ const kind=demo?[0,1,2,4,3][level-1]:level===1?0:level===2?1:level===3?2+integer(2,rng):level===4?4:integer(5,rng)
+ let prompt='',equation:string|undefined,graph=false,choices:string[]=[],correct=''
+ if(kind===0){graph=true;prompt='Is this line horizontal or vertical?';choices=['Horizontal','Vertical'];correct=direction}
+ if(kind===1){graph=true;prompt='What is the slope of this line?';choices=['0','Undefined'];correct=slope}
+ if(kind===2||kind===3){equation=`${variable}=${value}`;prompt=kind===2?'Is this the equation of a vertical or horizontal line?':'What is the slope of the line?';choices=kind===2?['Horizontal','Vertical']:['0','Undefined'];correct=kind===2?direction:slope}
+ if(kind===4){graph=true;prompt='Which equation matches this graph?';const other=value===0?2:-value;choices=[`y=${value}`,`x=${value}`,`y=${other}`,`x=${other}`];correct=`${variable}=${value}`}
+ // Fixed examples include a fixed choice order for a shared classroom demonstration.
+ if(!demo)for(let i=choices.length-1;i>0;i--){const j=integer(i+1,rng);[choices[i],choices[j]]=[choices[j],choices[i]]}
+ return {id,horizontal,value,kind,prompt,equation,graph,choices,answer:choices.indexOf(correct),answerText:correct,cue:horizontal?'Horizontal: y stays constant. Rise is 0, so slope is 0.':'Vertical: x stays constant. Run is 0, so slope is undefined. You cannot divide by 0.'}
 }
-export type HVResult={right:boolean;question:HVQuestion;chosen:number}
-export function hvTotals(results:HVResult[]){const correct=results.filter(r=>r.right).length;let streak=0,best=0;for(const r of results){streak=r.right?streak+1:0;best=Math.max(best,streak)}return {correct,points:correct*10,attempted:results.length,accuracy:results.length?Math.round(correct/results.length*100):0,streak,best}}
-export function hvAnswerAllowed(deadline:number,now:number,locked:boolean){return !locked&&now<deadline}
+export type HVProgress={level:HVLevel;demo:boolean;stats:Stats[];finished:boolean}
+export const newHV=():HVProgress=>({level:1,demo:true,stats:Array.from({length:5},blankStats),finished:false})
+export function markHV(s:Stats,right:boolean):Stats{const streak=right?s.streak+1:0;return {correct:s.correct+Number(right),attempts:s.attempts+1,streak,best:Math.max(s.best,streak)}}
+export const hvDone=(s:Stats)=>s.streak>=5
+export const hvScore=(p:HVProgress)=>Math.round(p.stats.reduce((n,s)=>n+Math.min(5,s.best),0)*.4*10)/10
+export function hvTotals(p:HVProgress){const correct=p.stats.reduce((n,s)=>n+s.correct,0),attempted=p.stats.reduce((n,s)=>n+s.attempts,0);return {correct,attempted,accuracy:attempted?Math.round(correct/attempted*100):0}}
+export function saveHV(p:HVProgress,first:string,last:string,hour:string){const tail=p.stats.slice(3).flatMap(s=>[s.correct,s.attempts,s.streak,s.best]);const s:Session={level:1,phase:'work',example:p.demo,stats:p.stats.slice(0,3),warnings:p.level*4+Number(p.demo)*2+Number(p.finished),targets:[],bonus:[],date:'',trail:tail.map(n=>({gold:false,count:n+1}))};return saveCode(s,first,last+':horizontal-vertical-v2',hour).replace(/^WL1-/,'HV0-')}
+export function loadHV(code:string,first:string,last:string,hour:string):HVProgress{
+ if(!/^HV0-/i.test(code.trim()))throw Error('Use a resume code from this horizontal and vertical practice.')
+ const s=loadCode(code.trim().replace(/^HV0-/i,'WL1-'),first,last+':horizontal-vertical-v2',hour),level=Math.floor(s.warnings/4) as HVLevel,demo=Boolean(s.warnings&2),finished=Boolean(s.warnings&1),tail=s.trail?.map(v=>v.count-1)??[]
+ const stats=[...s.stats,...[0,4].map(i=>({correct:tail[i],attempts:tail[i+1],streak:tail[i+2],best:tail[i+3]}))]
+ if(level<1||level>5||tail.length!==8||stats.some(t=>![t.correct,t.attempts,t.streak,t.best].every(Number.isSafeInteger)||t.correct>t.attempts||t.streak>t.best||t.best>5||t.best>t.correct)||stats.some((t,i)=>i<level-1&&!hvDone(t)||i>level-1&&t.attempts>0)||(finished&&(level!==5||stats.some(t=>!hvDone(t))))||(demo&&stats[level-1].attempts>0))throw Error('This resume code has invalid progress.')
+ return {level,demo,stats,finished}
+}

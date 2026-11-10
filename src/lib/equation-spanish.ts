@@ -821,6 +821,9 @@ Math score: __0__/10 | Extra credit: __1__/1	Puntuación de matemáticas: __0__/
 Final score: __0__ points	Puntuación final: __0__ puntos
 __0__ correct / __1__ answered | __2__% accuracy	__0__ correctas / __1__ contestadas | __2__% de precisión
 __0__ correct / __1__ answered · __2__% accuracy · Best streak: __3__	__0__ correctas / __1__ contestadas · __2__% de precisión · Mejor racha: __3__
+Level __0__: __1__ correct | Best streak __2__/5	Nivel __0__: __1__ correctas | Mejor racha __2__/5
+Level __0__: __1__ correct · Best streak __2__/5 ✓	Nivel __0__: __1__ correctas · Mejor racha __2__/5 ✓
+Level __0__ · streak __1__/5 · best __2__/5	Nivel __0__ · racha __1__/5 · mejor __2__/5
 `
 
 const escapePattern=(s:string)=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')
