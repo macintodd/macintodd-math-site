@@ -4,12 +4,12 @@ import {createPortal} from 'react-dom'
 import {hasSpanish,spanishText} from '@/lib/beta-spanish'
 import './bilingual.css'
 type Language='en'|'es'
-const LanguageContext=createContext<Language>('en')
-export function useBetaLanguage(){const language=useContext(LanguageContext);return useMemo(()=>({language,translate:(text:string)=>language==='es'?spanishText(text):text}),[language])}
+const LanguageContext=createContext<{language:Language;setLanguage:(language:Language)=>void}>({language:'en',setLanguage:()=>{}})
+export function useBetaLanguage(){const {language,setLanguage}=useContext(LanguageContext);return useMemo(()=>({language,setLanguage,translate:(text:string)=>language==='es'?spanishText(text):text}),[language,setLanguage])}
 type Source={english:string;rendered:string}
 type Control={id:number;element:Element;parent:Element;top:number;left:number;language:Language;label:string}
 const skip='input,textarea,math,.math-inline,.math-display,.katex,[data-no-translate],[data-bilingual-ui],.practice-resume-dialog h3'
-const blocks='h1,h2,h3,h4,p,li,legend,label,figcaption,small,output,.wl-eyebrow,.v2-given-equation,.v2-graph-slope,.rl-status>span,.report-identity>strong'
+const blocks='h1,h2,h3,h4,p,li,legend,label,figcaption,small,output,span,strong,b,[role=status],.wl-message,.slope-feedback,.intro-feedback,.success-callout,.wl-eyebrow,.v2-given-equation,.v2-graph-slope,.rl-status>span,.report-identity>strong'
 /** Scoped text-node updates preserve React's nodes, all event handlers, mathematical markup, and user-entered values. */
 export default function BilingualWidget({children}:{children:ReactNode}){
  const [language,setLanguage]=useState<Language>('en'),[controls,setControls]=useState<Control[]>([]),root=useRef<HTMLDivElement>(null),sources=useRef(new WeakMap<Text,Source>()),attributes=useRef(new WeakMap<Element,Map<string,Source>>()),overrides=useRef(new WeakMap<Element,Language>()),currentLanguage=useRef<Language>('en'),refresh=useRef<()=>void>(()=>{}),ids=useRef(new WeakMap<Element,number>()),serial=useRef(0)
@@ -34,9 +34,9 @@ export default function BilingualWidget({children}:{children:ReactNode}){
     const available=texts(el).some(n=>hasSpanish(source(n).english,blockContexts.get(el)??english(el)));if(!available)continue
     el.setAttribute('data-translate-block','true');if(!el.classList.contains('bt-tap-text'))el.classList.add('bt-tap-text');if(!el.matches('label'))el.setAttribute('tabindex','0');el.setAttribute('lang',selectedLanguage(el));el.setAttribute('title',selectedLanguage(el)==='en'?'Tap to read in Spanish · Toca para español':'Toca para leer en inglés · Tap for English')
    }
-   const next:Control[]=[]
+   const next:Control[]=[],modal=Array.from(host.querySelectorAll('dialog[open],[aria-modal="true"]')).filter(el=>el.getBoundingClientRect().width>0).at(-1)
    for(const el of host.querySelectorAll('button,a,summary,select,svg text')){
-    if(excluded(el)||el.closest('[hidden],dialog:not([open])')||el.closest('[data-bilingual-ui]'))continue
+    if(modal&&!modal.contains(el)||excluded(el)||el.closest('[hidden],dialog:not([open])')||el.closest('[data-bilingual-ui]'))continue
     const closed=el.closest('details:not([open])');if(closed&&!el.matches('summary')&&!el.closest('summary'))continue
     const original=english(el);if(!texts(el).some(n=>hasSpanish(source(n).english,original)))continue
     const rect=el.getBoundingClientRect();if(!rect.width||!rect.height||rect.bottom<0||rect.top>window.innerHeight||rect.right<0||rect.left>window.innerWidth)continue
@@ -54,7 +54,7 @@ export default function BilingualWidget({children}:{children:ReactNode}){
   return()=>{disposed=true;observer.disconnect();resize.disconnect();host.removeEventListener('click',click,true);host.removeEventListener('keydown',key,true);window.removeEventListener('scroll',schedule,true);window.removeEventListener('resize',schedule);if(frame)cancelAnimationFrame(frame);refresh.current=()=>{}}
  },[])
  useEffect(()=>{currentLanguage.current=language;overrides.current=new WeakMap();refresh.current()},[language])
- const value=useMemo(()=>language,[language])
+ const value=useMemo(()=>({language,setLanguage}),[language])
  function toggleControl(control:Control){if(!control.element.isConnected)return;overrides.current.set(control.element,control.language==='en'?'es':'en');refresh.current()}
  return <LanguageContext.Provider value={value}><div className="bt-widget" lang={language}><div className="bt-language-bar" data-bilingual-ui><div role="group" aria-label="Widget language / Idioma"><button type="button" lang="en" aria-pressed={language==='en'} onClick={()=>setLanguage('en')}>English</button><button type="button" lang="es" aria-pressed={language==='es'} onClick={()=>setLanguage('es')}>Español</button></div><small>{language==='en'?'Tap text to translate · Use ES beside controls':'Toca el texto para traducir · Usa EN junto a los controles'}</small></div><div ref={root}>{children}</div></div>{controls.map(control=>createPortal(<button key={control.id} type="button" data-bilingual-ui className="bt-control-translate" style={{position:control.parent.tagName==='DIALOG'?'absolute':'fixed',top:control.top,left:control.left}} aria-label={control.language==='en'?`Translate into Spanish: ${control.label}`:`Leer en inglés: ${control.label}`} title={control.language==='en'?'Translate only · Does not activate this control':'Solo traducir · No activa este control'} onPointerDown={e=>{e.preventDefault();e.stopPropagation()}} onClick={e=>{e.preventDefault();e.stopPropagation();toggleControl(control)}}>{control.language==='en'?'ES':'EN'}</button>,control.parent,String(control.id)))}</LanguageContext.Provider>
 }

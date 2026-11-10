@@ -1,3 +1,4 @@
+import {equationSpanish,equationTemplate} from './equation-spanish.ts'
 /** Reviewed, local classroom translations. Unknown copy stays in English rather than being sent to a service. */
 const rows=String.raw`Write the Linear Equation: Parallel and Perpendicular	Escribe la ecuación lineal: rectas paralelas y perpendiculares
 ← Beta apps	← Aplicaciones beta
@@ -410,7 +411,7 @@ All hints shown	Todas las pistas mostradas
 Given point and given line.	Punto dado y recta dada.
 `;
 const normalize=(s:string)=>s.replace(/&amp;/g,'&').replace(/\s+/g,' ').trim()
-const translations=new Map(rows.trim().split('\n').map(row=>{const i=row.indexOf('\t');return [normalize(row.slice(0,i)).toLowerCase(),row.slice(i+1)]}))
+const translations=new Map((rows.trim()+'\n'+equationSpanish.trim()).split('\n').map(row=>{const i=row.indexOf('\t');return [normalize(row.slice(0,i)).toLowerCase(),row.slice(i+1)]}))
 export function spanishText(value:string,context=''):string{
  const body=normalize(value);if(!body)return value
  let translated=translations.get(body.toLowerCase())
@@ -449,6 +450,8 @@ export function spanishText(value:string,context=''):string{
  [/^(Confidence|Difficulty) ([1-5]) of 5$/,(_,kind,n)=>`${kind==='Confidence'?'Confianza':'Dificultad'} ${n} de 5`]
  ]
  if(!translated)for(const [pattern,replace] of patterns){const match=body.match(pattern);if(match){translated=replace(...match);break}}
+ if(!translated)translated=equationTemplate(body,chunk=>spanishText(chunk,context))
+ if(!translated){const parts=body.split(/(?<=[.!?])\s+(?=[A-Z])/);if(parts.length>1){const next=parts.map(part=>spanishText(part,context));if(next.some((part,i)=>part!==parts[i]))translated=next.join(' ')}}
  if(!translated)return value
  if(/[A-Za-z]/.test(body)&&body===body.toUpperCase())translated=translated.toLocaleUpperCase('es')
  return (value.match(/^\s*/)?.[0]??'')+translated+(value.match(/\s*$/)?.[0]??'')

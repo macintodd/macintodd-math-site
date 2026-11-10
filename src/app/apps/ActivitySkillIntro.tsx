@@ -1,4 +1,5 @@
 'use client'
+import BilingualWidget from '@/components/practice/BilingualWidget'
 import {useSyncExternalStore,useState,type ReactNode} from 'react'
 import {usePathname} from 'next/navigation'
 import SkillGoal from '@/components/practice/SkillGoal'
@@ -23,6 +24,7 @@ const goals:Record<string,{text:string;math?:string;connection:string}>={
  'one-step-solver':{text:'Solve a one-step equation while keeping both sides equal.',connection:'Use the same inverse operation on both sides, then substitute your answer to check it.'},
  'tank-flow':{text:'Model a changing water volume using an initial amount and a net flow rate.',math:'V(t)=V_0+(r_{in}-r_{out})t',connection:'Connect the starting volume to the y-intercept and the net flow rate to the slope.'}
 }
+export const equationLanguageRoutes=new Set(["write-linear-equation", "write-linear-equation/teacher", "write-linear-equation-level-1", "write-linear-equation-level-2", "write-linear-equation-level-3", "write-linear-equation-level-4", "write-linear-equation-level-5", "line-equations", "point-slope", "intro-point-slope", "parallel-perpendicular"])
 const subscribe=()=>()=>{}
 const nativeBridge=()=> 'MathBoardApplet' in window
 const serverBridge=()=>false
@@ -36,5 +38,6 @@ export default function ActivitySkillIntro({children}:{children:ReactNode}){
  const path=usePathname(),slug=path.replace(/^\/apps\//,'')
  // The linear-equation sequence shows its skill reminder AFTER each classroom example.
  const goal=slug.startsWith('rigid-transformations')?undefined:goals[slug]
- return goal?<Gate key={path} goal={goal}>{children}</Gate>:children
+ const content=goal?<Gate key={path} goal={goal}>{children}</Gate>:children
+ return equationLanguageRoutes.has(slug)?<BilingualWidget key={path}>{content}</BilingualWidget>:content
 }
