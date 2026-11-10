@@ -706,6 +706,28 @@ Find the equation of a line when you know a point and its slope.	Encontrar la ec
 Substitute the given quantities, distribute the slope, then isolate y to write slope-intercept form.	Sustituye las cantidades dadas, distribuye la pendiente y luego despeja y para escribir la forma pendiente-intersección.
 Use a point and a slope to write the equation of a line.	Usar un punto y una pendiente para escribir la ecuación de una recta.
 Find slope from the graph, substitute a point, distribute, and isolate y.	Encuentra la pendiente en la gráfica, sustituye un punto, distribuye y despeja y.
+Your slope needs an x beside it. Check the slope, then use your point to recalculate b. You have one retry.	Tu pendiente necesita una x a su lado. Revisa la pendiente y usa tu punto para volver a calcular b. Tienes un intento más.
+Check your slope first: keep rise over run and subtract coordinates in the same order. Then use your point to recalculate b. You have one retry.	Primero revisa la pendiente: cambio vertical sobre cambio horizontal; resta las coordenadas en el mismo orden. Luego usa tu punto para volver a calcular b. Tienes un intento más.
+Your slope is correct! Check your point and its signs. Substitute its coordinates into y = mx + b and recalculate b. You have one retry.	¡Tu pendiente es correcta! Revisa tu punto y sus signos. Sustituye sus coordenadas en y = mx + b y vuelve a calcular b. Tienes un intento más.
+Each hint costs 0.20 points. A correct retry starts at 0.50 points before hints. Uncorrected answers earn 0.	Cada pista cuesta 0.20 puntos. Una corrección correcta empieza con 0.50 puntos antes de las pistas. Las respuestas sin corregir obtienen 0.
+Each problem starts at 1 point. Each hint costs 0.20 points. After a miss, use the feedback and try once more for up to 0.50 points before hint deductions. Finish all ten problems, then play one spinner for a chance at 1 extra-credit point.	Cada problema empieza con 1 punto. Cada pista cuesta 0.20 puntos. Tras un error, usa la ayuda y vuelve a intentarlo por hasta 0.50 puntos antes de descontar pistas. Completa los diez problemas y juega una vez al contador para ganar 1 punto extra.
+Keep learning: compare the slope and the point in your work with the correct equation below. Every correction builds your skill.	Sigue aprendiendo: compara la pendiente y el punto de tu trabajo con la ecuación correcta de abajo. Cada corrección fortalece tu habilidad.
+Check my correction	Verificar mi corrección
+★ You found the line!	★ ¡Encontraste la recta!
+Keep growing!	¡Sigue mejorando!
+A chance to learn — try again!	¡Una oportunidad para aprender: inténtalo de nuevo!
+Check your equation	Revisa tu ecuación
+Final spinner · chance for +1 →	Contador final · oportunidad de +1 →
+FINAL SPINNER · CHANCE FOR +1	CONTADOR FINAL · OPORTUNIDAD DE +1
+See results & reflect →	Ver resultados y reflexionar →
+Match your target to earn 1 extra-credit point. Your math score stays unchanged.	Acierta tu número para ganar 1 punto extra. Tu puntuación de matemáticas no cambia.
+Ten problems · one retry after a miss · hints cost 0.20 points each · one final extra-credit spinner.	Diez problemas · un intento más tras un error · cada pista cuesta 0.20 puntos · un contador final para crédito extra.
+✓ Correct on retry	✓ Corrección correcta
+Correct on retry	Corrección correcta
+Math score:	Puntuación de matemáticas:
+/10 · Extra credit:	/10 · Crédito extra:
+10 problems · hints cost 0.20 points · one half-credit retry · final extra-credit spinner	10 problemas · pistas de 0.20 puntos · un segundo intento por medio crédito · contador final para crédito extra
+. Match your target to earn 1 extra-credit point. Your math score stays unchanged.	. Acierta tu número para ganar 1 punto extra. Tu puntuación de matemáticas no cambia.
 `
 
 export const equationSpanishTemplates=String.raw`
@@ -793,6 +815,9 @@ Five-star form, __0__!	¡Forma de cinco estrellas, __0__!
 Rise and shine, __0__!	¡Arriba y a brillar, __0__!
 You’ve got the point, __0__!	¡Diste en el punto, __0__!
 __0__, you can work through this. __1__ __2__ Your correct answers are still yours.	__0__, puedes resolverlo. __1__ __2__ Tus respuestas correctas se conservan.	1,2
+Hint __0__ · costs 0.20 points	Pista __0__ · cuesta 0.20 puntos
+Math score: __0__/10 · Extra credit: __1__/1	Puntuación de matemáticas: __0__/10 · Crédito extra: __1__/1
+Math score: __0__/10 | Extra credit: __1__/1	Puntuación de matemáticas: __0__/10 | Crédito extra: __1__/1
 `
 
 const escapePattern=(s:string)=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')
