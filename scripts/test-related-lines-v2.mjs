@@ -103,5 +103,5 @@ exClick('Use point-slope form →');assert(continued);exClick('Replay explanatio
 assert(!fs.readFileSync('src/app/apps/beta/write-linear-parallel-perpendicular/Tutorial.tsx','utf8').includes('check the constant b'))
 console.log('Passed five-scene visual explanation, exact star/slope example, manual and play/pause navigation, point-slope substitution/distribution retries, fractional final answer and removal of the separate b-check.')
 
-const missingSpanish=[...visibleCopy].filter(([copy,context])=>spanishText(copy,context)===copy&&copy!=='perpendicular').map(([copy])=>copy);if(missingSpanish.length)console.log('MISSING:',JSON.stringify(missingSpanish));assert.deepEqual(missingSpanish,[],'Visible tutorial copy has Spanish translations');
+const missingSpanish=[...visibleCopy].filter(([copy,context])=>spanishText(copy,context)===copy&&copy!=='perpendicular'&&!/^\d{1,2}\/\d{1,2}\/\d{4}, \d{1,2}:\d{2}/.test(copy)).map(([copy])=>copy);if(missingSpanish.length)console.log('MISSING:',JSON.stringify(missingSpanish));assert.deepEqual(missingSpanish,[],'Visible tutorial copy has Spanish translations');
 if(missingSpanish.length)console.log('MISSING SPANISH:',JSON.stringify(missingSpanish,null,2))

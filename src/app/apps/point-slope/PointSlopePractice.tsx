@@ -33,7 +33,7 @@ export default function PointSlopePractice(){
  function pad(key:string){if(!available.includes(active))return;const input=inputs.current[active],value=answer[active],edited=editAnswer(value,key,input?.selectionStart??value.length,input?.selectionEnd??value.length);caret.current={field:active,position:edited.caret};edit(active,edited.value)}
  function tap(point:Point){if(locked||!['points','slope'].includes(stage))return;const index=selected.findIndex(p=>p.x===point.x);let next:Point[];if(index>=0)next=selected.filter((_,i)=>i!==index);else next=selected.length<2?[...selected,point]:[selected[0],point];setSelected(next);setStage(next.length===2?'slope':'points');setAnswer(empty());setActive('rise');setMessage('')}
  function next(){setBoard('graph');setHistory(records);setTotalChecks(totalChecks+checks);setProblem(generatePointSlope(Math.random,records));setSelected([]);setStage('points');setAnswer(empty());setActive('rise');setMisses(0);setChecks(0);setFinalTries(0);setOutcome(null);setReveal(false);setMessage('')}
- function finish(){setFinished(new Date().toLocaleString());setImage(null)}
+ function finish(){setFinished(new Date().toLocaleString(undefined,{year:'numeric',month:'numeric',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'}));setImage(null)}
  function check(){if(!problem||!p||locked||!available.length)return;const {line}=problem;if(available.some(field=>!answer[field].trim())){setMessage('Fill in each entry for this step.');return}let correct=false
  if(stage==='slope')correct=/^-?\d+$/.test(answer.rise)&&/^-?\d+$/.test(answer.run)&&isCorrect(line,{rise:Number(answer.rise),run:Number(answer.run)})
  if(stage==='pointForm')correct=numberAnswer(answer.y1,p.y)&&numberAnswer(answer.x1,p.x)
