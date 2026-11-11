@@ -40,6 +40,5 @@ export default function ActivitySkillIntro({children}:{children:ReactNode}){
  // The linear-equation sequence shows its skill reminder AFTER each classroom example.
  const goal=slug.startsWith('rigid-transformations')?undefined:goals[slug]
  const content=goal?<Gate key={path} goal={goal}>{children}</Gate>:children
- if(transformationLanguageRoutes.has(slug)||slug==='parallel-perpendicular')return <BilingualWidget key={path} spanishFirst>{content}</BilingualWidget>
- return equationLanguageRoutes.has(slug)?<BilingualWidget key={path}>{content}</BilingualWidget>:content
+ return transformationLanguageRoutes.has(slug)||equationLanguageRoutes.has(slug)?<BilingualWidget key={path} spanishFirst>{content}</BilingualWidget>:content
 }
