@@ -1,0 +1,3 @@
+import {Math as Formula} from '@/components/Math'
+import {lessonSlopeParts,lessonNumber,lineTex,type LessonProblem,type LessonAnimation} from '@/lib/parallel-lesson'
+export default function AnimatedEquation({q,animation}:{q:LessonProblem;animation:LessonAnimation|null}){const {rise,run}=lessonSlopeParts(q.answer.m),phase=animation?.phase;return <div className="lp-equation-readout" aria-label={lineTex(q.answer)}><span>y =</span><span className="lp-coefficient"><span className={phase==='rise'?'lp-number-flash':''}>{rise}</span><span className={phase==='run'?'lp-number-flash':''}>{run}</span></span><span>x</span><span className={phase==='intercept'?'lp-number-flash':''}><Formula>{`${q.answer.b<0?'-':'+'}${lessonNumber(Math.abs(q.answer.b),true)}`}</Formula></span></div>}

@@ -96,4 +96,24 @@ How independently can you write and check a line through a given point parallel 
 Named scorecard with local completion time and both survey answers	Tarjeta con nombre, hora local de finalización y ambas respuestas de reflexión
 Fixed class examples · teacher reveals · two-sided notes	Ejemplos fijos para la clase · pasos revelados por el docente · apuntes de dos caras
 instead of	en lugar de
+Redraw line	Volver a dibujar la recta
+Check line	Verificar recta
+Line checked	Recta verificada
+Draw a longer line before checking.	Dibuja una recta más larga antes de verificar.
+Try again. Your line must pass through the gold point. Start at it, end at it, or draw through it.	Inténtalo de nuevo. Tu recta debe pasar por el punto dorado. Empieza en él, termina en él o atraviesa el punto.
+Try again. Adjust the angle or slant so the two lines would never cross.	Inténtalo de nuevo. Ajusta el ángulo o la inclinación para que las dos rectas nunca se crucen.
+Try again. Adjust the angle so the lines meet at a right angle.	Inténtalo de nuevo. Ajusta el ángulo para que las rectas formen un ángulo recto.
+Your drawn line passes through the point and is parallel. Now write its equation.	La recta que dibujaste pasa por el punto y es paralela. Ahora escribe su ecuación.
+Your drawn line passes through the point and is perpendicular. Now write its equation.	La recta que dibujaste pasa por el punto y es perpendicular. Ahora escribe su ecuación.
+First touch fixes one endpoint. Drag the other endpoint; both snap to integer points.	El primer toque fija un extremo. Arrastra el otro extremo; ambos se ajustan a puntos con coordenadas enteras.
+━ Your drawn line	━ La recta que dibujaste
+Now write the equation of your checked line.	Ahora escribe la ecuación de la recta que verificaste.
+Draw and check your line first.	Primero dibuja y verifica tu recta.
+Enter both the numerator and denominator.	Escribe tanto el numerador como el denominador.
+Plot the y-intercept.	Marca la intersección con el eje y.
+Count the rise.	Cuenta el cambio vertical.
+Count the run.	Cuenta el cambio horizontal.
+Plot the second point.	Marca el segundo punto.
+Draw the line from left to right.	Dibuja la recta de izquierda a derecha.
+Both points lie on your line.	Ambos puntos están en tu recta.
 `

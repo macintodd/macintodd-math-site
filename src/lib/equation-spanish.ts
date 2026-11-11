@@ -841,6 +841,8 @@ __0__/12 first-try successes	__0__/12 aciertos al primer intento
 __0__/12 problems completed | __1__/12 first-try successes	__0__/12 problemas completados | __1__/12 aciertos al primer intento
 __0__: solved on attempt __1__	__0__: resuelto en el intento __1__
 __0__: solved on attempt __1__ | slope correction used	__0__: resuelto en el intento __1__ | pendiente corregida
+__0__ numerator	__0__ numerador	0
+__0__ denominator	__0__ denominador	0
 `
 
 const escapePattern=(s:string)=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')
