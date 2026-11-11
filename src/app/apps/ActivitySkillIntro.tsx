@@ -25,6 +25,7 @@ const goals:Record<string,{text:string;math?:string;connection:string}>={
  'tank-flow':{text:'Model a changing water volume using an initial amount and a net flow rate.',math:'V(t)=V_0+(r_{in}-r_{out})t',connection:'Connect the starting volume to the y-intercept and the net flow rate to the slope.'}
 }
 export const equationLanguageRoutes=new Set(["write-linear-equation", "write-linear-equation/teacher", "write-linear-equation-level-1", "write-linear-equation-level-2", "write-linear-equation-level-3", "write-linear-equation-level-4", "write-linear-equation-level-5", "line-equations", "point-slope", "intro-point-slope", "parallel-perpendicular"])
+export const transformationLanguageRoutes=new Set(['transformations','transformation-notation','transformation-scales','parent-transformations','rigid-transformations',...Array.from({length:6},(_,i)=>`rigid-transformations/skill-${i+1}`)])
 const subscribe=()=>()=>{}
 const nativeBridge=()=> 'MathBoardApplet' in window
 const serverBridge=()=>false
@@ -39,5 +40,6 @@ export default function ActivitySkillIntro({children}:{children:ReactNode}){
  // The linear-equation sequence shows its skill reminder AFTER each classroom example.
  const goal=slug.startsWith('rigid-transformations')?undefined:goals[slug]
  const content=goal?<Gate key={path} goal={goal}>{children}</Gate>:children
+ if(transformationLanguageRoutes.has(slug))return <BilingualWidget key={path} spanishFirst>{content}</BilingualWidget>
  return equationLanguageRoutes.has(slug)?<BilingualWidget key={path}>{content}</BilingualWidget>:content
 }

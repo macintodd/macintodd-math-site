@@ -1,3 +1,4 @@
+import {transformationSpanish,transformationConfidence,transformationTemplate} from './transformation-spanish.ts'
 import {completionSpanish} from './completion-spanish.ts'
 import {parallelClassroomSpanish} from './parallel-classroom-spanish.ts'
 import {slopeTwoPointsSpanish} from './slope-two-points-spanish.ts'
@@ -416,7 +417,7 @@ All hints shown	Todas las pistas mostradas
 Given point and given line.	Punto dado y recta dada.
 `;
 const normalize=(s:string)=>s.replace(/&amp;/g,'&').replace(/\s+/g,' ').trim()
-const translations=new Map((completionSpanish.trim()+'\n'+rows.trim()+'\n'+equationSpanish.trim()+'\n'+scaleSpanish.trim()+'\n'+horizontalVerticalSpanish.trim()+'\n'+slopeTwoPointsSpanish.trim()+'\n'+parallelClassroomSpanish.trim()).split('\n').map(row=>{const i=row.indexOf('\t');return [normalize(row.slice(0,i)).toLowerCase(),row.slice(i+1)]}))
+const translations=new Map((transformationSpanish.trim()+'\n'+transformationConfidence.trim()+'\n'+completionSpanish.trim()+'\n'+rows.trim()+'\n'+equationSpanish.trim()+'\n'+scaleSpanish.trim()+'\n'+horizontalVerticalSpanish.trim()+'\n'+slopeTwoPointsSpanish.trim()+'\n'+parallelClassroomSpanish.trim()).split('\n').map(row=>{const i=row.indexOf('\t');return [normalize(row.slice(0,i)).toLowerCase(),row.slice(i+1)]}))
 export function spanishText(value:string,context=''):string{
  const body=normalize(value);if(!body)return value
  let translated=translations.get(body.toLowerCase())
@@ -456,7 +457,13 @@ export function spanishText(value:string,context=''):string{
  [/^Point (\(.+\))$/,(_,point)=>`Punto ${point}`],
  [/^(Confidence|Difficulty) ([1-5]) of 5$/,(_,kind,n)=>`${kind==='Confidence'?'Confianza':'Dificultad'} ${n} de 5`]
  ]
+ if(!translated){const match=body.match(/^Translated (up|down|left|right) (\d+) units?$/i);if(match)translated=`Traslación ${match[2]} unidades ${({up:'hacia arriba',down:'hacia abajo',left:'hacia la izquierda',right:'hacia la derecha'} as Record<string,string>)[match[1].toLowerCase()]}`}
+ if(!translated){const match=body.match(/^([\d./]+) units (up|down|left|right)\.$/);if(match)translated=`${match[1]} unidades ${({up:'hacia arriba',down:'hacia abajo',left:'hacia la izquierda',right:'hacia la derecha'} as Record<string,string>)[match[2]]}.`}
+ if(!translated){const match=body.match(/^Multiply vertical distances from k by ([\d./]+)\.$/);if(match)translated=`Multiplica las distancias verticales desde k por ${match[1]}.`}
+ if(!translated){const match=body.match(/^Horizontal distances from h multiply by ([\d./]+)\.$/);if(match)translated=`Las distancias horizontales desde h se multiplican por ${match[1]}.`}
  if(!translated)for(const [pattern,replace] of patterns){const match=body.match(pattern);if(match){translated=replace(...match);break}}
+ if(!translated&&body.includes('; then ')){const parts=body.split('; then '),next=parts.map(part=>spanishText(part,context));if(next.every((part,i)=>part!==parts[i]))translated=next.join('; después ')}
+ if(!translated)translated=transformationTemplate(body,chunk=>spanishText(chunk,context))
  if(!translated)translated=equationTemplate(body,chunk=>spanishText(chunk,context))
  if(!translated){const parts=body.split(/(?<=[.!?])\s+(?=[A-Z])/);if(parts.length>1){const next=parts.map(part=>spanishText(part,context));if(next.some((part,i)=>part!==parts[i]))translated=next.join(' ')}}
  if(!translated)return value
