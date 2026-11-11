@@ -834,6 +834,13 @@ Stage __0__: __1__ solved / __2__ problems | Best streak __3__/5	Etapa __0__: __
 Stage __0__: __1__ solved / __2__ problems · Best streak __3__/5	Etapa __0__: __1__ resueltos / __2__ problemas · Mejor racha __3__/5
 Hinted retries used: __0__	Segundos intentos con pista usados: __0__
 Stage __0__ · streak __1__/5 · best __2__/5	Etapa __0__ · racha __1__/5 · mejor __2__/5
+Check attempt __0__	Verificar intento __0__
+Solved on attempt __0__	Resuelto en el intento __0__
+__0__/12 problems complete	__0__/12 problemas completados
+__0__/12 first-try successes	__0__/12 aciertos al primer intento
+__0__/12 problems completed | __1__/12 first-try successes	__0__/12 problemas completados | __1__/12 aciertos al primer intento
+__0__: solved on attempt __1__	__0__: resuelto en el intento __1__
+__0__: solved on attempt __1__ | slope correction used	__0__: resuelto en el intento __1__ | pendiente corregida
 `
 
 const escapePattern=(s:string)=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')
