@@ -116,4 +116,5 @@ Count the run.	Cuenta el cambio horizontal.
 Plot the second point.	Marca el segundo punto.
 Draw the line from left to right.	Dibuja la recta de izquierda a derecha.
 Both points lie on your line.	Ambos puntos están en tu recta.
+How independently can you write and check a line through a given point parallel or perpendicular to a given line?	¿Con cuánta independencia puedes escribir y comprobar una recta que pase por un punto dado y sea paralela o perpendicular a una recta dada?
 `
