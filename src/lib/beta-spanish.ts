@@ -57,9 +57,9 @@ Draw a line through the point that is parallel to the given line.	Traza una rect
 Draw a long stroke through the gold point. Lift your finger or Pencil to check.	Traza una línea larga que pase por el punto dorado. Levanta el dedo o el lápiz para verificarla.
 Draw a longer line so its direction is clear. Start on one side of the gold point and draw through it.	Traza una línea más larga para mostrar su dirección. Empieza a un lado del punto dorado y pasa por él.
 Draw through the gold point, following the blue line’s direction.	Dibuja pasando por el punto dorado y siguiendo la dirección de la recta azul.
-The new line must go through (5, 7). Redraw your line through the gold point.	La nueva recta debe pasar por (5, 7). Vuelve a dibujarla pasando por el punto dorado.
+The new line must go through (6, 7). Redraw your line through the gold point.	La nueva recta debe pasar por (6, 7). Vuelve a dibujarla pasando por el punto dorado.
 Your line goes through the point, but its direction is not parallel to the blue line. Match the blue line’s tilt and redraw.	Tu recta pasa por el punto, pero su dirección no es paralela a la recta azul. Iguala la inclinación de la recta azul y vuelve a dibujar.
-Correct! Your line goes through (5, 7) and is parallel to the blue line.	¡Correcto! Tu recta pasa por (5, 7) y es paralela a la recta azul.
+Correct! Your line goes through (6, 7) and is parallel to the blue line.	¡Correcto! Tu recta pasa por (6, 7) y es paralela a la recta azul.
 Drawing interrupted. Try again.	Se interrumpió el dibujo. Inténtalo de nuevo.
 Try again. Draw through the gold point.	Inténtalo de nuevo. Dibuja pasando por el punto dorado.
 What does parallel mean? →	¿Qué significa paralelas? →
