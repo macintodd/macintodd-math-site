@@ -1,4 +1,5 @@
 'use client'
+import CompletionFlow from '@/components/practice/CompletionFlow'
 import PracticeReflection,{usePracticeReflection} from '@/components/practice/PracticeReflection'
 import {createReportImage} from '@/lib/scorecard'
 import ReportIdentity from '@/components/practice/ReportIdentity'
@@ -74,6 +75,7 @@ export default function GraphPractice({standard=false,convert=false}:{standard?:
   function next(){if(!line)return;setRecent([...recent,line]);newQuestion([...recent,line]);setSelected([]);setDrawn(false);setChecked(null);setMessage('');setEntries({xx:'',xy:'',yx:'',yy:''});setActive('xx');setMissed(null);setSlopeEntries({m:'',b:''});setConversionMiss(null)}
   const reflection=usePracticeReflection(convert?'graph-standard-slope':standardMode?'graph-standard':'graph-linear',`${name}|${student.hour}|${finished}`,()=>setImage(null))
  function imageResult(){if(!reflection.confirmed)return;const rows=[`MacIntodd Math · ${convert?'Standard form to slope-intercept':standardMode?'Standard-form intercept graphing':'Slope-intercept graphing'}`,name,`Class hour ${student.hour}`,`Final score: ${progress.score}/10`,`${progress.correct} correct · ${results.length} graphs checked`,`Best streak: ${progress.bestStreak} / 6 · Final streak: ${progress.streak}`,`Streak deduction: ${progress.deduction} point(s)`,finished??'','Upload this image to Google Classroom yourself.'];setImage(createReportImage(convert?'graph-standard-slope':standardMode?'graph-standard':'graph-linear',name,[...rows.slice(2),...reflection.lines]))}
+ if(finished) return <CompletionFlow slug={convert?'graph-standard-slope':standardMode?'graph-standard':'graph-linear'} name={name} hour={student.hour} completedAt={finished} score={`${progress.score}/10`} stats={[{label:'Correct answers',value:progress.correct},{label:'Scored checks',value:results.length},{label:'Best streak',value:progress.bestStreak}]} details={[`Final streak: ${progress.streak} | Streak deduction: ${progress.deduction}`]} />
   return <div className={`slope-app graph-practice shell ${checked===true?'graph-celebrate':''}`}>
     <nav className="breadcrumb" aria-label="Breadcrumb"><Link href="/apps">Practice apps</Link><span>/</span><span>{title}</span></nav>
     <header className="slope-title"><div><p className="eyebrow">EQUATION TO GRAPH</p><h1>{title}</h1></div></header>

@@ -320,7 +320,10 @@
   $('nextLevelBtn').onclick = () => { hide('endBox'); if (level < 2) showIntro(level + 1); else showFinal(); };
   $('playAgainBtn').onclick = () => { hide('finalBox'); results = [null, null, null]; finishedAt = null; showIntro(0); };
 
+  let completionHost=false;
+  window.addEventListener('message',event=>{if(event.source!==window.parent||event.origin!==new URL(location.href).origin)return;if(event.data?.kind==='macintodd-family-host'){completionHost=true;return;}if(!completionHost||event.data?.kind!=='macintodd-family-return')return;hide('finalBox');results=[null,null,null];finishedAt=null;showIntro(0);});
   function showFinal(){
+    if(completionHost){finishedAt=new Date();window.parent.postMessage({kind:'macintodd-family-completion',name:playerName,hour:String(playerHour),date:finishedAt.toISOString(),results},'*');return;}
     finalReflection={confidence:0,difficulty:0,confirmed:false};
     renderFinalReflection();
     finishedAt = new Date();

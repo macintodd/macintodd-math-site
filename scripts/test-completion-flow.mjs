@@ -1,0 +1,28 @@
+import assert from 'node:assert/strict'
+import fs from 'node:fs'
+import vm from 'node:vm'
+import ts from 'typescript'
+import {scorecardRuntime} from './scorecard-test-runtime.mjs'
+import {reflectionRuntime} from './reflection-test-runtime.mjs'
+import {spanishText} from '../src/lib/beta-spanish.ts'
+let cursor=0,tree,language='en',reloads=0,returns=0
+const hooks=[],paint=[],jsx=(type,props)=>({type,props:props??{}})
+const react={useState(initial){const i=cursor++;hooks[i]??={value:typeof initial==='function'?initial():initial};return [hooks[i].value,v=>hooks[i].value=typeof v==='function'?v(hooks[i].value):v]},useMemo(fn,deps){const i=cursor++,old=hooks[i];if(old&&old.deps.every((v,n)=>v===deps[n]))return old.value;hooks[i]={deps,value:fn()};return hooks[i].value}}
+const context={font:'',fillStyle:'',measureText:s=>({width:s.length*16}),fillRect(){},fillText:(text,x,y,width)=>paint.push({text,x,y,width})},canvas={width:0,height:0,getContext:()=>context,toDataURL:()=> 'data:image/png;base64,Y29tcGxldGlvbg=='}
+const document={createElement:tag=>{assert.equal(tag,'canvas');return canvas}},info=scorecardRuntime(document),reflection=reflectionRuntime(react),mod={exports:{}}
+vm.runInNewContext(ts.transpileModule(fs.readFileSync('src/components/practice/CompletionFlow.tsx','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX}}).outputText,{module:mod,exports:mod.exports,document,window:{location:{reload:()=>reloads++}},require:n=>n==='react'?react:n==='react/jsx-runtime'?{jsx,jsxs:jsx}:n==='@/lib/scorecard'?info:n==='./PracticeReflection'?reflection:n==='./BilingualWidget'?{useWidgetLanguage:()=>({language,translate:s=>language==='es'?spanishText(s):s})}:{__esModule:true,default:n}})
+let props={slug:'write-linear-equation-level-4',name:'Maya Student',hour:'3',completedAt:'11/11/2026, 3:15 PM CST',score:'11/10',stats:[{label:'Correct answers',value:10},{label:'Scored checks',value:12},{label:'Best streak',value:5}],details:['Math: 10/10 | Bonus: +1']}
+function render(){cursor=0;tree=mod.exports.default(props)}
+function nodes(n=tree){return Array.isArray(n)?n.flatMap(nodes):n&&typeof n==='object'?[n,...nodes(n.props.children??null)]:[]}
+function text(n=tree){return Array.isArray(n)?n.map(text).join(''):n&&typeof n==='object'?text(n.props.children):n==null||typeof n==='boolean'?'':String(n)}
+function button(label){return nodes().find(n=>n.type==='button'&&(text(n)===label||n.props['aria-label']===label))}
+function click(label){const b=button(label);assert(b&&!b.props.disabled,label);b.props.onClick();render()}
+render();assert.equal(text().split(info.reportInfo(props.slug).title).length-1,1);assert.equal(text().split('Maya Student').length-1,1);assert.equal(text().split(props.completedAt).length-1,1);assert(!button('Get Completion Record').props.disabled);assert(!nodes().some(n=>n.type==='img'))
+click('Get Completion Record');let popup=nodes().find(n=>n.type==='./SkillGoal');assert.equal(popup.props.headingText,'Rate your skill and the practice before you can submit.');popup.props.onContinue();render();assert(!nodes().some(n=>n.type==='./SkillGoal'))
+click('4: I can do it independently');click('Get Completion Record');assert(nodes().some(n=>n.type==='./SkillGoal'));nodes().find(n=>n.type==='./SkillGoal').props.onContinue();render();click('3: Just right');click('Get Completion Record')
+assert(nodes().some(n=>n.type==='img'));assert(!button('Get Completion Record'));assert(!nodes().some(n=>n.props.className==='completion-reflection'));assert.equal(nodes().find(n=>n.type==='./ScoreImageActions').props.buttonLabel,'Press to save image');assert(button('Return to practice'))
+let lines=paint.map(p=>p.text).join(' ');for(const value of ['Maya Student','11/10','11/11/2026, 3:15 PM CST','10','12','5','4/5 — I can do it independently','3/5 — Just right','Math: 10/10 | Bonus: +1'])assert(lines.includes(value),value);assert(paint.every(p=>p.y<canvas.height));assert.equal(paint.filter(p=>p.text==='Maya Student').length,1);assert(paint.find(p=>p.text.includes('Maya Student')).x>paint.find(p=>p.text.includes('Skill practiced')).x);assert(paint.find(p=>p.text.startsWith('2.')).y>paint.find(p=>p.text.startsWith('1.')).y)
+click('Return to practice');assert.equal(reloads,1)
+language='es';render();assert(!nodes().some(n=>n.type==='img'),'No stale English record');paint.length=0;click('Obtener registro de finalización');assert(nodes().some(n=>n.type==='img'));assert.equal(nodes().find(n=>n.type==='./ScoreImageActions').props.buttonLabel,'Presiona para guardar la imagen');assert(paint.some(p=>p.text==='Maya Student'));assert(paint.map(p=>p.text).join(' ').includes('Registro de finalización'))
+props={...props,name:'New Student',onReturn:()=>returns++};render();assert(!nodes().some(n=>n.type==='img'),'A new identity invalidates the old completion record');language='en';render();click('Get Completion Record');assert(nodes().some(n=>n.type==='./SkillGoal'));nodes().find(n=>n.type==='./SkillGoal').props.onContinue();render();click('5: I can explain it');click('2: A little easy');click('Get Completion Record');click('Return to practice');assert.equal(returns,1)
+console.log('Passed reflection gating, clean separate completion screen, single identity/title/time, stacked questions, local named PNG with score and reflections, native-save label, return handlers, Spanish and identity invalidation.')

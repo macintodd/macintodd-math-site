@@ -1,4 +1,5 @@
 "use client";
+import CompletionFlow from "@/components/practice/CompletionFlow";
 import ReportIdentity from '@/components/practice/ReportIdentity'
 import Link from "next/link";
 import { useRef, useState } from "react";
@@ -128,6 +129,7 @@ export default function SlopePractice() {
     riseInput.current?.focus({ preventScroll: true });
   }
   const pair = line ? points(line) : [];
+ if(Boolean(report)) return <CompletionFlow slug={'slope'} name={`${report!.student.firstName} ${report!.student.lastName}`} hour={report!.student.hour} completedAt={report!.finishedAt} score={`${practiceScore(report!.problems)}/10`} stats={[{label:'Correct answers',value:summarize(report!.problems).correct},{label:'Scored checks',value:report!.problems.length},{label:'Best streak',value:summarize(report!.problems).bestStreak}]} details={[]} />
   return (
     <div className="slope-app shell">
       <nav className="breadcrumb" aria-label="Breadcrumb">
