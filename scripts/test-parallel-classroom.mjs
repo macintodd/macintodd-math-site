@@ -20,15 +20,14 @@ function graph(){return s.nodes().find(n=>n.type==='./LessonGraph').props}
 function feedback(){const q=lib.parallelLesson[s.hooks[3].value.index];const tree=s.mod.exports.LineFeedback({q,record:record()});for(const f of s.nodes(tree).filter(n=>n.type==='formula'))katex.renderToString(f.props.children,{throwOnError:true});return s.text(tree)}
 function equation(value){s.input('Red line equation · y = mx + b',value);s.click(record().attempts?`Check attempt ${record().attempts+1}`:'Check equation');const warning=s.nodes().find(n=>n.type==='./EquationFormatWarning');if(warning){warning.props.onClose();s.render()}return warning}
 function acknowledgeGraph(){
- if(graph().q.id==='P1'){
-  assert.equal(graph().graphicalCalloutName,'Test');
-  assert(!s.nodes().some(n=>n.type==='@/components/practice/SkillGoal'));
-  graph().onAcknowledgeGraph();
- }else{
-  const goal=s.nodes().find(n=>n.type==='@/components/practice/SkillGoal'&&n.props.eyebrow==='GRAPHICAL SUCCESS');
-  assert(goal);assert(s.text(goal).includes('Test'));goal.props.onContinue();
- }
- s.render();assert(s.nodes().some(n=>n.props.className==='lp-algebraic-prompt'));
+ assert.equal(graph().graphicalCalloutName,'Test');
+ assert(!s.nodes().some(n=>n.type==='@/components/practice/SkillGoal'));
+ assert(!s.nodes().some(n=>n.props['aria-label']==='Red line equation · y = mx + b'));
+ assert.equal(graph().continueLabel,graph().q.kind==='triple'&&!record().redCorrect?'Continue to slope checks →':'Now write the equation →');
+ graph().onAcknowledgeGraph();
+ s.render();
+ assert.equal(graph().graphicalCalloutName,null);
+ if(graph().q.kind!=='triple'||record().redCorrect)assert(s.nodes().some(n=>n.props.className==='lp-algebraic-prompt'));
 }
 function arrow(label){return s.nodes().find(n=>n.type==='button'&&n.props['aria-label']===label)}
 assert(arrow('Previous problem').props.disabled);
@@ -57,6 +56,7 @@ for(let i=1;i<12;i++){
   graph().onSketchChange(segment);s.render();
   graph().onSketchCheck(true);s.render();
   assert(record().sketchChecked);
+  acknowledgeGraph();
   assert(!record().solved);
   assert(arrow('Next problem').props.disabled);
   arrow('Previous problem').props.onClick();s.render();

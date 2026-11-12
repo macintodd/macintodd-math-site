@@ -137,6 +137,8 @@ you found the GRAPHICAL answer to the question!	¡encontraste la respuesta GRÁF
 The red line goes	La recta roja pasa
 through the point	por el punto
 and is parallel to blue.	y es paralela a la azul.
+and is perpendicular to blue.	y es perpendicular a la azul.
+Continue to slope checks →	Continuar con las pendientes →
 Given blue line	Recta azul dada
 Use point-slope form with the given point, then rewrite your equation in slope-intercept form. The red line crosses the y-axis between grid marks.	Usa la forma punto-pendiente con el punto dado y luego reescribe tu ecuación en la forma pendiente-intersección. La recta roja cruza el eje y entre las marcas de la cuadrícula.
 GRAPHICAL SUCCESS	LOGRO GRÁFICO
