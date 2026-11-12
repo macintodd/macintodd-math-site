@@ -37,7 +37,7 @@ The M4 Mac mini is the primary editing machine. The AI on the other Mac reviews 
 
 ## Verification and deployment
 
-- MathBoard startup and controller restore update passed typecheck, lint, content checks, production build, diff checks, and parallel lesson, teacher, scratch, completion, and MathBoard regressions. Simulated document-start tests covered drafts, scroll, selected points, scratch undo after restore, and passive and explicitly read-only views. The teacher equation animation sent nine meaningful updates in the tested example. Deployment verification is pending.
+- MathBoard startup and controller restore update passed typecheck, lint, content checks, production build, diff checks, and parallel lesson, teacher, scratch, completion, and MathBoard regressions. Simulated document-start tests covered drafts, scroll, selected points, scratch undo after restore, and passive and explicitly read-only views. The teacher equation animation sent nine meaningful updates in the tested example. Both Vercel deployments for `aa73c80` succeeded. The simulated document-start restore and animation publication checks passed on macintodd.net.
 
 - Parallel-only update passed a simulated iPad walkthrough from the notes through graphing by tap and drag, guided and independent work, standard-form hints, streak resets, resume, both reflections and the completion image. Typecheck, lint, content checks, production build, diff checks, app directory, and the parallel, teacher, Spanish, and MathBoard regressions passed. Both Vercel deployments for `dabb976` succeeded. The full walkthrough passed again on macintodd.net.
 
