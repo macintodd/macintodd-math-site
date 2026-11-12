@@ -28,7 +28,7 @@ The M4 Mac mini is the primary editing machine. The AI on the other Mac reviews 
 
 ## Verification and deployment
 
-- P4 and keypad update passed typecheck, lint, content checks, build, diff check, parallel classroom, Spanish, teacher, and MathBoard regressions. Simulated iPad landscape testing covered touch drag and drop, tap-to-place, rejected and accepted placements, slope and equation keypad entry, scratch drawing and tab switching, Spanish, and read-only MathBoard restoration. Deployment verification is pending.
+- P4 and keypad update passed typecheck, lint, content checks, build, diff check, parallel classroom, Spanish, teacher, and MathBoard regressions. Simulated iPad landscape testing covered touch drag and drop, tap-to-place, rejected and accepted placements, slope and equation keypad entry, scratch drawing and tab switching, Spanish, and read-only MathBoard restoration. Both Vercel deployments for `acd4b2f` succeeded. The touch walkthrough and simulated MathBoard restoration passed again on macintodd.net.
 
 - For the answer glows, typecheck, lint, content checks, build, diff check, and parallel lesson, teacher, Spanish, and MathBoard regressions passed. The simulated iPad landscape check covered correct and incorrect equations, accepted slopes, the final line, and MathBoard restoration. The custom-domain Vercel deployment for `30a907a` succeeded. The secondary deployment was still pending at the last check. The answer-glow and MathBoard checks passed on the live site.
 
