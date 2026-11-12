@@ -117,4 +117,13 @@ Plot the second point.	Marca el segundo punto.
 Draw the line from left to right.	Dibuja la recta de izquierda a derecha.
 Both points lie on your line.	Ambos puntos están en tu recta.
 How independently can you write and check a line through a given point parallel or perpendicular to a given line?	¿Con cuánta independencia puedes escribir y comprobar una recta que pase por un punto dado y sea paralela o perpendicular a una recta dada?
+Answer the question by drawing the line that goes through the point and is parallel to the given line.	Responde la pregunta dibujando la recta que pasa por el punto y es paralela a la recta dada.
+Step 1	Paso 1
+Retry drawing	Volver a dibujar
+Zoomed view of your line and the given point.	Vista ampliada de tu recta y del punto dado.
+Zooming out to show where your line intersects the given line.	Alejando la vista para mostrar dónde tu recta corta la recta dada.
+They intersect here.	Se cortan aquí.
+Look closely at the given point.	Observa de cerca el punto dado.
+Nonparallel lines eventually intersect.	Las rectas no paralelas terminan cortándose.
+Zoomed view. Read the axis labels for scale.	Vista ampliada o reducida. Lee las etiquetas de los ejes para conocer la escala.
 `
