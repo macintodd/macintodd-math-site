@@ -24,7 +24,7 @@ The M4 Mac mini is the primary editing machine. The AI on the other Mac reviews 
 
 ## Verification and deployment
 
-- For the answer glows, typecheck, lint, content checks, build, diff check, and parallel lesson, teacher, Spanish, and MathBoard regressions passed. The simulated iPad landscape check covered correct and incorrect equations, accepted slopes, the final line, and MathBoard restoration. Vercel deployment verification is pending.
+- For the answer glows, typecheck, lint, content checks, build, diff check, and parallel lesson, teacher, Spanish, and MathBoard regressions passed. The simulated iPad landscape check covered correct and incorrect equations, accepted slopes, the final line, and MathBoard restoration. The custom-domain Vercel deployment for `30a907a` succeeded. The secondary deployment was still pending at the last check. The answer-glow and MathBoard checks passed on the live site.
 
 - For the all-sketch success callouts, typecheck, lint, content checks, build, diff check, the parallel classroom, Spanish, teacher, and MathBoard regressions passed. A simulated iPad landscape walkthrough checked all nine sketch problems, both relationship wordings, Spanish, slope and equation continuation, and read-only MathBoard callout restoration. Both Vercel deployments for `037ae3b` succeeded. The same nine-problem walkthrough passed on the custom domain.
 
