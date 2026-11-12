@@ -63,3 +63,7 @@ The M4 Mac mini is the primary editing machine. The AI on the other Mac reviews 
 - Resume format now uses HV's existing extension marker 4 and a separate early-exit flag. Existing eight-streak and older five-streak codes remain supported. Tests cover current/reduced targets, early exits at all five levels, scores, old/new code round trips, wrong-choice styling, double taps and the real named/dated reflection transition.
 - No MathBoard bridge, student data collection, or parallel/perpendicular lesson files were changed.
 - Passed widget regressions, completion-flow regressions, typecheck, lint, content check, production build and diff check. Browser layout/hardware inspection was unavailable on this Mac. Deployment status: feature commit awaiting Vercel/live verification; record the result below once checked.
+
+### Horizontal/Vertical deployment verified
+
+Both Vercel deployments for `c2c12dd` succeeded. Verified the custom-domain `/apps/horizontal-vertical` page's published JavaScript includes the six-streak early-finish control and partial-score details, and that its published stylesheet includes the incorrect-choice flash. The student widget checks and shared reflection tests passed. No physical iPad visual check was performed on this Mac.
