@@ -3,13 +3,14 @@ import {useEffect,useId,useState} from 'react'
 import type {LessonProblem,LessonSegment} from '@/lib/parallel-lesson'
 import {normalSketchCamera,sketchFeedbackCamera,sketchCameraFrame,sketchIntersection,clipSketchLine,sketchGridStep} from '@/lib/parallel-sketch-feedback'
 /** A read-only diagnostic view. Retry unmounts this view and restores the normal drawing grid. */
-export default function SketchFeedbackGraph({q,segment,reason,isExternalDisplay=false,mirroredProgress,onProgressChange}:{q:LessonProblem;segment:LessonSegment;reason:'point'|'direction';isExternalDisplay?:boolean;mirroredProgress?:number|null;onProgressChange?:(progress:number)=>void}){
- const id=useId().replace(/:/g,''),[localProgress,setProgress]=useState(0)
- useEffect(()=>{if(isExternalDisplay)return;let frame=0,start:number|null=null,active=true;const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches,duration=reason==='point'?1300:3200
-  function tick(now:number){if(!active)return;if(start===null)start=now;const p=reduced?1:Math.min(1,(now-start)/duration);setProgress(p);if(p<1)frame=requestAnimationFrame(tick)}
+export default function SketchFeedbackGraph({q,segment,reason,isExternalDisplay=false,mirroredProgress,restoredProgress=0,onProgressChange}:{q:LessonProblem;segment:LessonSegment;reason:'point'|'direction';isExternalDisplay?:boolean;mirroredProgress?:number|null;restoredProgress?:number|null;onProgressChange?:(progress:number)=>void}){
+ const id=useId().replace(/:/g,''),[localProgress,setProgress]=useState(restoredProgress??0)
+ useEffect(()=>{if(isExternalDisplay||restoredProgress===1)return;let frame=0,start:number|null=null,active=true;const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches,duration=reason==='point'?1300:3200
+  function tick(now:number){if(!active)return;if(start===null)start=now;const p=reduced?1:Math.min(1,(restoredProgress??0)+(now-start)/duration);setProgress(p);if(p<1)frame=requestAnimationFrame(tick)}
   frame=requestAnimationFrame(tick);return()=>{active=false;cancelAnimationFrame(frame)}
- },[q,segment,reason,isExternalDisplay])
- useEffect(()=>{if(!isExternalDisplay)onProgressChange?.(localProgress)},[isExternalDisplay,onProgressChange,localProgress])
+ },[q,segment,reason,isExternalDisplay,restoredProgress])
+ const checkpoint=localProgress===1?1:0
+ useEffect(()=>{if(!isExternalDisplay)onProgressChange?.(checkpoint)},[isExternalDisplay,onProgressChange,checkpoint])
  const progress=isExternalDisplay?mirroredProgress??0:localProgress
  const target=sketchFeedbackCamera(q,segment,reason),camera=progress===0?normalSketchCamera:sketchCameraFrame(target,progress),scale=400/camera.span,sx=(x:number)=>250+(x-camera.x)*scale,sy=(y:number)=>250-(y-camera.y)*scale,step=sketchGridStep(camera.span)
  const ticks=(center:number)=>Array.from({length:22},(_,i)=>(Math.ceil((center-camera.span/2)/step)+i)*step).filter(n=>n<=center+camera.span/2+1e-8)

@@ -4,8 +4,8 @@ import {reportInfo} from '@/lib/scorecard'
 import './reflection.css'
 export const confidenceLabels=['I need help','I need more practice','I can do some steps','I can do it independently','I can explain it']
 export const difficultyLabels=['Too easy','A little easy','Just right','A little difficult','Too difficult']
-export function usePracticeReflection(slug:string,identity:string,onChange:()=>void){
- const [saved,setSaved]=useState({identity:'',confidence:0,difficulty:0,confirmed:false})
+export function usePracticeReflection(slug:string,identity:string,onChange:()=>void,initial?:{confidence:number;difficulty:number}|null){
+ const [saved,setSaved]=useState(()=>({identity,confidence:initial?.confidence??0,difficulty:initial?.difficulty??0,confirmed:false}))
  const current=saved.identity===identity?saved:{identity,confidence:0,difficulty:0,confirmed:false}
  const skill=reportInfo(slug).skill.replace(/\.$/,''),question=`How independently can you ${skill.charAt(0).toLowerCase()+skill.slice(1)}?`
  const {confidence,difficulty,confirmed}=current

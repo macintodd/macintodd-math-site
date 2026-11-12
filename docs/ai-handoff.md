@@ -21,6 +21,9 @@ The M4 Mac mini is the primary editing machine. The AI on the other Mac reviews 
 
 ## MathBoard mirroring
 
+- The student and teacher routes install the restore callback before React and queue early snapshots. A restore stays quiet until a trusted user gesture, so the teacher can edit after returning to a slide and a passive receiver stays quiet. The native contract has no projector role field. A projector URL with `?mathboardDisplay=1` hides controls and stays read-only.
+- Student and teacher restore graph state and scroll position. Student scratch checkpoints carry editable strokes and the selected pen or eraser. Older scratch images still restore as a background. Reflection and save dialogs restore their visible state. Diagnostic zoom sends start and end checkpoints. Equation animation sends phase, count and impact checkpoints.
+
 - The student snapshot carries the ready screen, seeded practice records, hints, and scratch image. Both routes retain read-only receivers. The teacher receiver can restore older snapshots of the parallel notes portion and displays six notes examples.
 
 - P4 slope progress, selected and placed quantities, and placement completion travel in the existing progress snapshot. The optional scratch field carries the active tab and a read-only image after each stroke or edit. The student bridge remains version 1 and accepts older snapshots without this field.
@@ -33,6 +36,8 @@ The M4 Mac mini is the primary editing machine. The AI on the other Mac reviews 
 - The existing graphical-success flag now renders the correct sketch callouts for every student sketching problem on the read-only display. The existing progress and graph snapshots carry the reviewed problem index and the P3 sketch. The bridge methods and snapshot version stay the same.
 
 ## Verification and deployment
+
+- MathBoard startup and controller restore update passed typecheck, lint, content checks, production build, diff checks, and parallel lesson, teacher, scratch, completion, and MathBoard regressions. Simulated document-start tests covered drafts, scroll, selected points, scratch undo after restore, and passive and explicitly read-only views. The teacher equation animation sent nine meaningful updates in the tested example. Deployment verification is pending.
 
 - Parallel-only update passed a simulated iPad walkthrough from the notes through graphing by tap and drag, guided and independent work, standard-form hints, streak resets, resume, both reflections and the completion image. Typecheck, lint, content checks, production build, diff checks, app directory, and the parallel, teacher, Spanish, and MathBoard regressions passed. Both Vercel deployments for `dabb976` succeeded. The full walkthrough passed again on macintodd.net.
 

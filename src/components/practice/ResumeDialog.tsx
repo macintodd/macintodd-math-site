@@ -4,7 +4,7 @@ import type {ResumeDisplayState} from '@/lib/mathboard/display-mirror'
 import './resume.css'
 const originalText=(text:string)=>text
 export default function ResumeDialog({name,hour,title,code,summary,onClose,onExit,translate=originalText,readOnly=false,mirror=null,onMirrorChange}:{name:string;hour:string;title:string;code:string;summary:string[];onClose:()=>void;onExit:()=>void;translate?:(text:string)=>string;readOnly?:boolean;mirror?:ResumeDisplayState|null;onMirrorChange?:(state:ResumeDisplayState)=>void}){
- const dialog=useRef<HTMLDialogElement>(null),codeField=useRef<HTMLInputElement>(null),[localCopied,setCopied]=useState(''),[localImage,setImage]=useState(''),[localSaved]=useState(()=>new Date().toLocaleString())
+ const dialog=useRef<HTMLDialogElement>(null),codeField=useRef<HTMLInputElement>(null),[localCopied,setCopied]=useState(mirror?.copied??''),[localImage,setImage]=useState(mirror?.image??''),[localSaved]=useState(()=>mirror?.saved??new Date().toLocaleString())
  useEffect(()=>{if(dialog.current&&!dialog.current.open)dialog.current.showModal()},[])
  const [imageTranslator,setImageTranslator]=useState(()=>translate)
  const visibleImage=localImage&&imageTranslator===translate?localImage:'',copied=readOnly?mirror?.copied??'':localCopied,image=readOnly?mirror?.image??'':visibleImage,saved=readOnly?mirror?.saved??localSaved:localSaved

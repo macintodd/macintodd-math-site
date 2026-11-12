@@ -3,6 +3,7 @@ import Link from 'next/link'
 import './globals.css'
 import './theme.css'
 import {Brand} from '@/components/Brand'
+import {lessonBridgeBootstrap} from '@/lib/mathboard/lesson-bridge'
 import 'katex/dist/katex.min.css'
 
 export const metadata: Metadata = {
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return <html lang="en"><body>
+  return <html lang="en"><head><script dangerouslySetInnerHTML={{__html:lessonBridgeBootstrap}}/></head><body>
     <a className="skip-link" href="#main">Skip to content</a>
     <header className="site-header"><div className="shell header-inner">
       <Link className="brand" href="/" aria-label="MacIntodd Math home"><Brand/></Link>

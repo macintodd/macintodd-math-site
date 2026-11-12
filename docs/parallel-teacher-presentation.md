@@ -1,4 +1,4 @@
-# Parallel/perpendicular teacher presentation
+# Parallel lines teacher presentation
 
 Route: `/apps/beta/parallel-perpendicular-lesson/teacher`.
 
@@ -6,7 +6,7 @@ The teacher page now uses its own `teacher/TeacherLesson.tsx`, not the student `
 
 ## Presentation controls
 
-- Jump to any of the 12 examples immediately, or skip to the next numbered slide.
+- Jump to any of the six parallel notes examples immediately, or skip to the next numbered slide.
 - Previous/next problem and previous slide work without a correct answer.
 - Fill answers inserts both slope fractions and the final equation. It does not automatically check the answer or start the animation.
 - Check slopes or the equation using the regular keypad, with slash-to-denominator navigation and notation warnings.
@@ -16,14 +16,12 @@ The teacher page now uses its own `teacher/TeacherLesson.tsx`, not the student `
 
 ## Native bridge
 
-MathBoard must open the same `/teacher` URL on the controller and external display. It injects `window.MathBoardApplet` at document start and calls `window.mathBoardAppletSetState(snapshot)` on the receiver.
+MathBoard injects `window.MathBoardApplet` at document start. The student and teacher routes install `window.mathBoardAppletSetState` in the document head and queue the latest restore until React subscribes. MathBoard owns `applyState`. The website publishes through the guarded `publishState` method.
 
-The teacher page publishes a separate `parallel-perpendicular-teacher`, version 1 JSON payload. It includes the current problem index, all teacher drafts/reveals/turns, graph snapshots (drawing, points, camera), active input/fraction part, feedback, notation warning, language and current equation-animation frame. The native bridge must relay the complete object unchanged; no server or native API changes are required under the existing relay contract.
+The teacher route uses the `parallel-perpendicular-teacher` version 1 snapshot. It includes the current problem, drafts, checked answers, reveals, graph endpoints, selected coordinates, diagnostic zoom, active answer part, feedback, language, and scroll position. Equation animations publish phase, count, and impact checkpoints. Diagnostic zoom publishes its start and end.
 
-The receiver registers once, validates the payload, marks its role synchronously to avoid echoes, and renders read-only. Native controls are hidden; mathematical entries and graphs stay visible. It does not run an independent equation animation. The graph callback is memoized so receiving a child snapshot cannot cause a parent-child publication loop. Regular browsers have no native bridge and keep working normally.
+The same callback restores the iPad controller and the display. Applying a snapshot suppresses publishing until a trusted user gesture. This keeps the display quiet and lets the teacher continue editing after returning to a slide. The native contract supplies the same payload to both web views. For a projector URL that must hide controls and block editing, open the same route with `?mathboardDisplay=1`.
 
 ## Checks
 
-`node --experimental-strip-types scripts/test-parallel-teacher.mjs` covers answer filling/checks for every example, navigation, reveals/reset, read-only JSON restoration, stable graph callback, graph/zoom channels, language, warnings, animation frames, validation, full publisher dependencies and receiver cleanup. Existing parallel classroom, language and display-mirror checks pass. Typecheck, lint, content check and production build pass.
-
-Physical MathBoard iPad/projector testing is still needed. Native browser inspection on the editing Mac was unavailable; do not report a hardware or visual viewport test as completed.
+The parallel lesson regressions cover early callback delivery, validation, no echo, read-only rendering, sketch state, and navigation. A simulated WKWebView browser test covers pre-hydration delivery, teacher editing after restore, scroll position, projector rendering, student scratch strokes and selected points, and the number of animation publications. Physical MathBoard iPad/projector testing is still pending.

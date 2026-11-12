@@ -14,8 +14,8 @@ type Props={slug:string;name:string;hour:string;completedAt?:string|number;score
 export default function CompletionFlow({slug,name,hour,completedAt,score,stats,details=[],onReturn,readOnly=false,mirror=null,onMirrorChange}:Props){
  const {translate:t,displayText,language}=useWidgetLanguage(),show=displayText??t,info=reportInfo(slug)
  const [fallbackStamp]=useState(()=>new Date().toLocaleString()),stamp=completedAt?typeof completedAt==='number'?new Date(completedAt).toLocaleString():/^\d{4}-\d\d-\d\dT/.test(completedAt)?new Date(completedAt).toLocaleString():completedAt:fallbackStamp,identity=`${name}|${hour}|${stamp}`
- const [localRecord,setRecord]=useState<{image:string;language:string;identity:string}|null>(null),[localNotice,setNotice]=useState(false),[localError,setError]=useState('')
- const localReflection=usePracticeReflection(slug,identity,()=>setRecord(null))
+ const [localRecord,setRecord]=useState<{image:string;language:string;identity:string}|null>(mirror?.record??null),[localNotice,setNotice]=useState(mirror?.notice??false),[localError,setError]=useState(mirror?.error??'')
+ const localReflection=usePracticeReflection(slug,identity,()=>setRecord(null),mirror)
  const reflection=readOnly&&mirror?{...localReflection,confidence:mirror.confidence,difficulty:mirror.difficulty}:localReflection,record=readOnly?mirror?.record??null:localRecord,notice=readOnly?mirror?.notice??false:localNotice,error=readOnly?mirror?.error??'':localError
  useEffect(()=>{if(readOnly||!onMirrorChange)return;onMirrorChange({confidence:localReflection.confidence,difficulty:localReflection.difficulty,record:localRecord,notice:localNotice,error:localError})},[readOnly,onMirrorChange,localReflection.confidence,localReflection.difficulty,localRecord,localNotice,localError])
  const final=record?.language===language&&record.identity===identity?record:null
