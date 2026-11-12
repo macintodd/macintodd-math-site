@@ -20,7 +20,7 @@ The M4 Mac mini is the primary editing machine. The AI on the other Mac reviews 
 
 ## Verification and deployment
 
-- For `f0f8afa`, typecheck, lint, content checks, build, diff check, the parallel lesson and separate teacher regressions, beta Spanish, and MathBoard all passed. Simulated iPad and phone testing covered the updated callouts. The iPad walkthrough also checked larger coordinates, both kinds of sketch error on Slide 2, P3 retry, perpendicular diagnostics, and the separate teacher route. The Vercel rollout is pending.
+- For `f0f8afa`, typecheck, lint, content checks, build, diff check, the parallel lesson and separate teacher regressions, beta Spanish, and MathBoard all passed. Simulated iPad and phone testing covered the updated callouts. The iPad walkthrough also checked larger coordinates, both kinds of sketch error on Slide 2, P3 retry, perpendicular diagnostics, and the separate teacher route. Both Vercel deployments for release `95588b0` succeeded. Repeated the walkthrough on macintodd.net and confirmed the student and teacher diagnostics mirror to simulated read-only MathBoard receivers without echo.
 
 - Passed `npm run typecheck`, `npm run lint`, `npm run check:content`, `npm run build`, and `git diff --check` for the callout, P3 sketch, and navigation update.
 - Passed the parallel lesson regression scripts (`scripts/test-parallel-*.mjs`), the beta Spanish regression, and the MathBoard regression. In simulated iPad landscape and phone viewports, checked the bubble layout. The iPad landscape test also covered Spanish, P3's fractional equation, and navigation that retains a checked sketch and draft equation.
