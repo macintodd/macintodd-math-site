@@ -1,7 +1,6 @@
 import type {LessonAnimation,LessonProgress,LessonPoint,LessonSegment,checkLessonSegment} from './parallel-lesson.ts'
 import type {CompletionDisplayState,ResumeDisplayState} from './mathboard/display-mirror.ts'
-export type SlopeEditorDisplayState={rise:string;run:string;active:'rise'|'run';message:string}
-export type LessonGraphDisplayState={problemId:string;segment:LessonSegment|null;selected:LessonPoint[];check:ReturnType<typeof checkLessonSegment>|null;editing:boolean;revision:number;editor:SlopeEditorDisplayState|null;zoomProgress:number|null}
+export type LessonGraphDisplayState={problemId:string;segment:LessonSegment|null;selected:LessonPoint[];check:ReturnType<typeof checkLessonSegment>|null;zoomProgress:number|null}
 export type ParallelLessonDisplayState={
  app:'parallel-perpendicular-classroom';version:1;teacher:boolean;language:'en'|'es'
  first:string;last:string;hour:string;p:LessonProgress|null;screen:'lesson'|'report';reveal:number;turn:number;active:'blue'|'red'|'equation';activePart:'num'|'den'

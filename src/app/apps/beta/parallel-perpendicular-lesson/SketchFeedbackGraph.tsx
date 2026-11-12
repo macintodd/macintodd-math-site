@@ -15,6 +15,8 @@ export default function SketchFeedbackGraph({q,segment,reason,isExternalDisplay=
  const ticks=(center:number)=>Array.from({length:22},(_,i)=>(Math.ceil((center-camera.span/2)/step)+i)*step).filter(n=>n<=center+camera.span/2+1e-8)
  const number=(n:number)=>Number(n.toPrecision(5)).toString(),path=(s:LessonSegment)=>`M${sx(s.a.x)} ${sy(s.a.y)}L${sx(s.b.x)} ${sy(s.b.y)}`
  const given=clipSketchLine({a:{x:0,y:q.given.b},b:{x:1,y:q.given.m+q.given.b}},camera),extended=reason==='direction'?clipSketchLine(segment,camera):null,intersection=reason==='direction'?sketchIntersection(q,segment):null
+ const drawnSegment=segment.tapped?extended??segment:segment
+ const sketchPoints=segment.tapped?[segment.b]:[segment.a,segment.b]
  const ix=intersection?sx(intersection.x):0,iy=intersection?sy(intersection.y):0,dx=intersection&&intersection.x>camera.x?-85:85,dy=intersection&&intersection.y>camera.y?65:-65
  return <svg className="lp-graph lp-diagnostic-graph" viewBox="0 0 500 500" role="img" aria-label={reason==='point'?'Zoomed view of your line and the given point.':'Zooming out to show where your line intersects the given line.'} data-feedback={reason} data-camera={`${camera.x},${camera.y},${camera.span}`}>
  <defs><clipPath id={`${id}-window`}><rect x="50" y="50" width="400" height="400"/></clipPath><marker id={`${id}-intersection-arrow`} viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10" fill="#9d2032"/></marker></defs>
@@ -23,9 +25,9 @@ export default function SketchFeedbackGraph({q,segment,reason,isExternalDisplay=
  {ticks(camera.y).map(n=><g key={`y${n}`}><path d={`M50 ${sy(n)}H450`} stroke={Math.abs(n)<1e-8?'#3d536b':'#d0d9e4'} strokeWidth={Math.abs(n)<1e-8?2:1}/><text x="40" y={sy(n)+4} textAnchor="end" fontSize="11">{number(n)}</text></g>)}
  <g clipPath={`url(#${id}-window)`}>
  {given&&<path className="lp-diagnostic-given" d={path(given)} fill="none" stroke="#245ecb" strokeWidth="3"/>}
- {extended&&<path className="lp-sketch-extension" d={path(extended)} fill="none" stroke="#c32c3c" strokeWidth="3" strokeDasharray="9 6"/>}
- <path className="lp-student-segment" d={path(segment)} fill="none" stroke="#c32c3c" strokeWidth="4"/>
- {[segment.a,segment.b].map((p,i)=><circle key={i} cx={sx(p.x)} cy={sy(p.y)} r="4" fill="#c32c3c" stroke="white"/>)}
+ {extended&&!segment.tapped&&<path className="lp-sketch-extension" d={path(extended)} fill="none" stroke="#c32c3c" strokeWidth="3" strokeDasharray="9 6"/>}
+ <path className="lp-student-segment" d={path(drawnSegment)} fill="none" stroke="#c32c3c" strokeWidth="4"/>
+ {sketchPoints.map((p,i)=><circle key={i} cx={sx(p.x)} cy={sy(p.y)} r="4" fill="#c32c3c" stroke="white"/>)}
  <circle cx={sx(q.point.x)} cy={sy(q.point.y)} r="7" fill="#efbd36" stroke="#795500" strokeWidth="2"/>
  </g>
  <text x={sx(q.point.x)+16} y={sy(q.point.y)+27} fontSize="22" fontWeight="700" fill="#6e5005" stroke="white" strokeWidth="4" paintOrder="stroke">P ({q.point.x}, {q.point.y})</text>

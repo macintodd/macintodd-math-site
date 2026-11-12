@@ -105,7 +105,7 @@ Try again. Adjust the angle or slant so the two lines would never cross.	Intént
 Try again. Adjust the angle so the lines meet at a right angle.	Inténtalo de nuevo. Ajusta el ángulo para que las rectas formen un ángulo recto.
 Your drawn line passes through the point and is parallel. Now write its equation.	La recta que dibujaste pasa por el punto y es paralela. Ahora escribe su ecuación.
 Your drawn line passes through the point and is perpendicular. Now write its equation.	La recta que dibujaste pasa por el punto y es perpendicular. Ahora escribe su ecuación.
-First touch fixes one endpoint. Drag the other endpoint; both snap to integer points.	El primer toque fija un extremo. Arrastra el otro extremo; ambos se ajustan a puntos con coordenadas enteras.
+Tap a grid point to draw a line through the gold point, or drag from one grid point to another.	Toca un punto de la cuadrícula para dibujar una recta que pase por el punto dorado, o arrastra de un punto de la cuadrícula a otro.
 ━ Your drawn line	━ La recta que dibujaste
 Now write the equation of your checked line.	Ahora escribe la ecuación de la recta que verificaste.
 Draw and check your line first.	Primero dibuja y verifica tu recta.
@@ -136,14 +136,6 @@ Now give the algebraic answer for the line. What is the equation of the	Ahora da
 red	roja
 line in	en la forma
 form?	?
-Adjust the red line’s slope	Ajustar la pendiente de la recta roja
-Adjust slope	Ajustar pendiente
-Red slope numerator	Numerador de la pendiente roja
-Red slope denominator	Denominador de la pendiente roja
-Slope number pad	Teclado de la pendiente
-Update slope	Actualizar pendiente
-Use whole numbers and a nonzero denominator.	Usa números enteros y un denominador distinto de cero.
-Slope updated. Check your line.	Pendiente actualizada. Comprueba tu recta.
 Include the whole equation.	Incluye la ecuación completa.
 CHECK YOUR NOTATION	REVISA TU NOTACIÓN
 Let me fix it →	Déjame corregirla →
