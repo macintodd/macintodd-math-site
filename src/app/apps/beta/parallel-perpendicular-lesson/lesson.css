@@ -30,3 +30,8 @@
 .lp-graphical-blue{background:#eef5ff;color:#194ea8}
 .lp-callout-leader{fill:none;stroke:#253b52;stroke-width:2.5;pointer-events:none}
 .lp-app .lp-graphical-continue{display:block;margin:5px auto}
+
+/* Keep accepted answers and the final student line highlighted through review. */
+.lp-app .lp-input[data-correct=true] :is(input,.lp-equation-readout),
+.lp-app .lp-slope-checks .lp-checked{border:2px solid #16814d;box-shadow:0 0 0 2px #18874b38,0 0 12px #27a96160}
+.lp-app:not(.lp-teacher) .lp-graph path[data-correct=true]{filter:drop-shadow(0 0 2px #ed334a) drop-shadow(0 0 4px #ed334a90)}
