@@ -2,6 +2,7 @@ import {skillGoals,skillTitles,type RigidSkill} from './rigid-skills.ts'
 import {practiceApps} from '@/content/practice-apps'
 export const reportColors={activity:'#174d8c',student:'#653d91',score:'#087366',text:'#111111',muted:'#425466',paper:'#ffffff'}
 const skills:Record<string,string>={
+ 'beta/parallel-drawing':'Draw a second line that stays the same perpendicular distance from the first line.',
  'beta/parallel-perpendicular-lesson':'Write the equation of a parallel line through a given point.',
  'slope-two-points':'Calculate the slope between two points using consistent coordinate subtraction.',
  'horizontal-vertical':'Recognize horizontal and vertical lines, their equations, and their zero or undefined slopes.',

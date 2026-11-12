@@ -1,0 +1,38 @@
+import assert from 'node:assert/strict'
+import fs from 'node:fs'
+import vm from 'node:vm'
+import ts from 'typescript'
+import * as game from '../src/lib/parallel-drawing-game.ts'
+import {spanishText} from '../src/lib/beta-spanish.ts'
+const stroke=(angle=0,offset=0,count=51,reverse=false)=>{const d={x:Math.cos(angle),y:Math.sin(angle)},n={x:-d.y,y:d.x},out=Array.from({length:count},(_,i)=>({x:100+d.x*700*i/(count-1)+n.x*offset,y:100+d.y*700*i/(count-1)+n.y*offset}));return reverse?out.reverse():out}
+for(const angle of [0,.2,-.8,Math.PI/2,Math.PI/2+.1,Math.PI]){
+ const reference=game.firstStroke(stroke(angle)).line;assert(reference);assert(Math.abs(reference.span-700)<1e-6)
+ for(const offset of [-150,-40,40,150])for(const reverse of [false,true]){
+  const checked=game.scoreParallel(reference,stroke(angle,offset,51,reverse));assert.equal(checked.error,null);assert.equal(checked.result.percent,100)
+  for(const m of checked.result.markers){const dx=m.point.x-m.foot.x,dy=m.point.y-m.foot.y;assert(Math.abs(dx*reference.direction.x+dy*reference.direction.y)<1e-6);assert(Math.abs(Math.hypot(dx,dy)-Math.abs(offset))<1e-6)}
+ }
+ assert.equal(game.scoreParallel(reference,stroke(angle,0)).error,'overlap')
+}
+const ref=game.firstStroke(stroke()).line
+const angled=degrees=>Array.from({length:81},(_,i)=>({x:100+700*i/80,y:250+Math.tan(degrees*Math.PI/180)*700*i/80}))
+const scores=[0,2,5,10,20,45,90].map(d=>game.scoreParallel(ref,d===90?[{x:400,y:100},{x:400,y:500}]:angled(d)).result.percent);assert.equal(scores[0],100);assert.equal(scores.at(-1),0);for(let i=1;i<scores.length;i++)assert(scores[i]<scores[i-1],scores.join(','))
+const wavy=stroke(0,140).map((p,i)=>({...p,y:p.y+30*Math.sin(i*.6)}));assert(game.scoreParallel(ref,wavy).result.percent<100)
+const crossing=game.scoreParallel(ref,[{x:100,y:0},{x:800,y:200}]).result;assert(crossing.crosses);assert(crossing.percent<20)
+assert.equal(game.firstStroke([{x:1,y:2},{x:2,y:3}]).error,'short');assert.equal(game.firstStroke(Array.from({length:101},(_,i)=>({x:400+200*Math.cos(i/100*Math.PI*2),y:250+200*Math.sin(i/100*Math.PI*2)}))).error,'curve');assert.equal(game.scoreParallel(ref,[{x:50,y:200},{x:100,y:200}]).error,'short');assert.equal(game.fitStroke([{x:1,y:1},{x:1,y:1}]),null)
+const dense=[{x:100,y:240},...Array.from({length:500},(_,i)=>({x:101+i/500,y:240})),{x:800,y:240}];assert.equal(game.scoreParallel(ref,dense).result.percent,100)
+for(let i=0;i<500;i++){const raw=Array.from({length:30},(_,j)=>({x:20+j*30,y:200+Math.random()*200})),s=game.scoreParallel(ref,raw);if(s.result){assert(Number.isFinite(s.result.percent));assert(s.result.percent>=0&&s.result.percent<=100)}}
+const file='src/app/apps/beta/parallel-drawing/ParallelDrawing.tsx',source=fs.readFileSync(file,'utf8'),jsx=(type,props)=>({type,props:props??{}});let cursor=0,tree;const hooks=[],react={useState(initial){const i=cursor++;if(!hooks[i]){const h={value:typeof initial==='function'?initial():initial,set(v){h.value=typeof v==='function'?v(h.value):v}};hooks[i]=h}return[hooks[i].value,hooks[i].set]},useRef(v){const i=cursor++;return hooks[i]??(hooks[i]={current:v})}},mod={exports:{}};vm.runInNewContext(ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX}}).outputText,{module:mod,exports:mod.exports,Date,DOMPoint:class{constructor(x,y){this.x=x;this.y=y}matrixTransform(){return this}},require:n=>n==='react'?react:n==='react/jsx-runtime'?{jsx,jsxs:jsx}:n==='@/lib/parallel-drawing-game'?game:{__esModule:true,default:n}})
+function render(){cursor=0;tree=mod.exports.default()}
+function nodes(n=tree){return Array.isArray(n)?n.flatMap(nodes):n&&typeof n==='object'?[n,...nodes(n.props?.children??null)]:[]}
+function text(n){return Array.isArray(n)?n.map(text).join(''):n&&typeof n==='object'?text(n.props?.children):n==null||typeof n==='boolean'?'':String(n)}
+function click(label){const b=nodes().find(n=>n.type==='button'&&text(n)===label);assert(b&&!b.props.disabled,label);b.props.onClick();render()}
+const event=(x,y,id=1)=>({clientX:x,clientY:y,pointerId:id,isPrimary:true,preventDefault(){},currentTarget:{getScreenCTM:()=>({inverse:()=>({})}),setPointerCapture(){}}})
+function canvas(){return nodes().find(n=>n.type==='svg'&&n.props.className==='pd-canvas')}
+function draw(points){canvas().props.onPointerDown(event(points[0].x,points[0].y));render();for(const p of points.slice(1)){canvas().props.onPointerMove(event(p.x,p.y));render()}const last=points.at(-1);canvas().props.onPointerUp(event(last.x,last.y));render()}
+render();const inputs=nodes().filter(n=>n.type==='input');inputs[0].props.onChange({target:{value:'Maya'}});inputs[1].props.onChange({target:{value:'Student'}});nodes().find(n=>n.type==='select').props.onChange({target:{value:'4'}});render();nodes().find(n=>n.type==='form').props.onSubmit({preventDefault(){}});render();assert(text(tree).includes('Maya Student'));assert(text(tree).includes('Hour 4'));assert(!nodes().find(n=>n.type==='button'&&text(n)==='Finish & reflect').props.onClick())
+canvas().props.onPointerDown(event(-10,-10));render();assert(!nodes().some(n=>n.props.className==='pd-straight-line'));draw([{x:20,y:20},{x:30,y:30}]);assert(text(tree).includes('Make the first line longer.'))
+draw([{x:100,y:180},{x:500,y:180},{x:800,y:180}]);assert(nodes().some(n=>n.props.className==='pd-straight-line'));draw([{x:100,y:350},{x:450,y:350},{x:800,y:350}]);assert(text(tree).includes('100'));const locked=JSON.stringify(hooks);canvas().props.onPointerUp(event(800,350));render();assert.equal(JSON.stringify(hooks),locked,'Duplicate pointer-up cannot count twice');click('Reveal distances');assert.equal(nodes().filter(n=>n.type==='path'&&n.props.stroke==='#178875').length,5);click('Try the same line again');assert(nodes().some(n=>n.props.className==='pd-straight-line'));assert(!nodes().some(n=>n.props.className==='pd-result'));draw([{x:100,y:200},{x:450,y:300},{x:800,y:400}]);click('Draw a new first line');assert(!nodes().some(n=>n.props.className==='pd-straight-line'))
+canvas().props.onPointerDown(event(40,100));render();canvas().props.onPointerCancel(event(40,100));render();assert(!nodes().some(n=>n.props.className==='pd-straight-line'));click('Finish & reflect');assert.equal(tree.type,'@/components/practice/CompletionFlow');assert.equal(tree.props.name,'Maya Student');assert(tree.props.completedAt);assert.equal(tree.props.stats.find(s=>s.label==='Rounds played').value,2);assert.equal(tree.props.details.filter(s=>s.startsWith('Round ')).length,2);tree.props.onReturn();render();assert(text(tree).includes('Maya Student'))
+const ast=ts.createSourceFile(file,source,ts.ScriptTarget.Latest,true,ts.ScriptKind.TSX);let missing=[];function visit(n){if(ts.isJsxText(n)){const s=n.text.replace(/\s+/g,' ').trim();if(/[A-Za-z]{3}/.test(s)&&spanishText(s)===s)missing.push(s)}ts.forEachChild(n,visit)}visit(ast);assert.deepEqual(missing,[]);assert.notEqual(spanishText(game.parallelDrawingSkill),game.parallelDrawingSkill);for(const n of [0,40,60,80,95,100])assert.notEqual(spanishText(game.parallelPraise(n)),game.parallelPraise(n));assert.equal(spanishText('Round 2: 97% parallel'),'Ronda 2: 97% de paralelismo')
+const css=fs.readFileSync('src/app/apps/beta/parallel-drawing/drawing.css','utf8');assert(css.includes('touch-action:none'));assert(css.includes('prefers-reduced-motion:reduce'));assert(!/localStorage|sessionStorage|fetch\(/.test(source));
+console.log('Passed horizontal/vertical/diagonal/reversed perfect matches, angular degradation, crossing/wobble penalties, tiny/overlap rejection, event-rate independence, perpendicular distance markers, pointer drawing/cancel/duplicate guards, retry/new-line history, named/date reflection handoff, local-only data and Spanish coverage.');

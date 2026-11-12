@@ -1,3 +1,4 @@
+import {parallelDrawingSpanish,parallelDrawingTemplate} from './parallel-drawing-spanish.ts'
 import {transformationSpanish,transformationConfidence,transformationTemplate} from './transformation-spanish.ts'
 import {completionSpanish} from './completion-spanish.ts'
 import {parallelClassroomSpanish} from './parallel-classroom-spanish.ts'
@@ -417,7 +418,7 @@ All hints shown	Todas las pistas mostradas
 Given point and given line.	Punto dado y recta dada.
 `;
 const normalize=(s:string)=>s.replace(/&amp;/g,'&').replace(/\s+/g,' ').trim()
-const translations=new Map((transformationSpanish.trim()+'\n'+transformationConfidence.trim()+'\n'+completionSpanish.trim()+'\n'+rows.trim()+'\n'+equationSpanish.trim()+'\n'+scaleSpanish.trim()+'\n'+horizontalVerticalSpanish.trim()+'\n'+slopeTwoPointsSpanish.trim()+'\n'+parallelClassroomSpanish.trim()).split('\n').map(row=>{const i=row.indexOf('\t');return [normalize(row.slice(0,i)).toLowerCase(),row.slice(i+1)]}))
+const translations=new Map((transformationSpanish.trim()+'\n'+transformationConfidence.trim()+'\n'+completionSpanish.trim()+'\n'+rows.trim()+'\n'+equationSpanish.trim()+'\n'+scaleSpanish.trim()+'\n'+horizontalVerticalSpanish.trim()+'\n'+slopeTwoPointsSpanish.trim()+'\n'+parallelClassroomSpanish.trim()+'\n'+parallelDrawingSpanish.trim()).split('\n').map(row=>{const i=row.indexOf('\t');return [normalize(row.slice(0,i)).toLowerCase(),row.slice(i+1)]}))
 export function spanishText(value:string,context=''):string{
  const body=normalize(value);if(!body)return value
  let translated=translations.get(body.toLowerCase())
@@ -463,6 +464,7 @@ export function spanishText(value:string,context=''):string{
  if(!translated){const match=body.match(/^Horizontal distances from h multiply by ([\d./]+)\.$/);if(match)translated=`Las distancias horizontales desde h se multiplican por ${match[1]}.`}
  if(!translated)for(const [pattern,replace] of patterns){const match=body.match(pattern);if(match){translated=replace(...match);break}}
  if(!translated&&body.includes('; then ')){const parts=body.split('; then '),next=parts.map(part=>spanishText(part,context));if(next.every((part,i)=>part!==parts[i]))translated=next.join('; después ')}
+ if(!translated)translated=parallelDrawingTemplate(body)
  if(!translated)translated=transformationTemplate(body,chunk=>spanishText(chunk,context))
  if(!translated)translated=equationTemplate(body,chunk=>spanishText(chunk,context))
  if(!translated){const parts=body.split(/(?<=[.!?])\s+(?=[A-Z])/);if(parts.length>1){const next=parts.map(part=>spanishText(part,context));if(next.some((part,i)=>part!==parts[i]))translated=next.join(' ')}}

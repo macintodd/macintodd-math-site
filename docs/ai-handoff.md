@@ -80,3 +80,11 @@ The M4 Mac mini is the primary editing machine. The AI on the other Mac reviews 
 ### Horizontal/Vertical deployment verified
 
 Both Vercel deployments for `c2c12dd` succeeded. Verified the custom-domain `/apps/horizontal-vertical` page's published JavaScript includes the six-streak early-finish control and partial-score details, and that its published stylesheet includes the incorrect-choice flash. The student widget checks and shared reflection tests passed. No physical iPad visual check was performed on this Mac.
+
+## Standalone parallel drawing game (review Mac)
+
+- Added `/apps/beta/parallel-drawing`: **Parallel Lines · Draw the Match**. New Beta Apps card has a drawing preview. Regular app directory still excludes beta routes. Parallel student/teacher lesson components were not changed.
+- Students draw a first stroke that straightens, then freehand a red match. 0–100 game score combines constant signed perpendicular spacing with matching direction; reverse, horizontal and vertical strokes work. Short/overlapping strokes receive prompts and are not counted. Optional perpendicular distance markers explain the result. Retry the reference or draw a new one; untimed, no fixed round count.
+- Local name/hour and session timestamp remain visible. Finish opens the shared two-reflection completion record with local date/time, average/best percentage, round count and every round result. No new student data transmission/storage. Spanish whole-page/tap-English system is included. No MathBoard bridge was added to this standalone game.
+- New math helper/test are **parallel-drawing-game.ts** and **test-parallel-drawing-game.mjs**; the older parallel-drawing.ts / test-parallel-drawing.mjs remain unchanged and their original opening-lesson tests pass. See docs/parallel-drawing-game.md for score design and integration boundaries.
+- Passed new game checks, earlier drawing regression, parallel language regression, shared completion tests, typecheck, lint, content checks, production build and diff check. Physical iPad/Pencil feel and visual viewport testing remain open. Feature commit awaiting live deployment verification; record result below once checked.
