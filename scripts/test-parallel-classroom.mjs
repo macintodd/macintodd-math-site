@@ -19,7 +19,21 @@ function record(){return s.hooks[3].value.records[s.hooks[3].value.index]}
 function graph(){return s.nodes().find(n=>n.type==='./LessonGraph').props}
 function feedback(){const q=lib.parallelLesson[s.hooks[3].value.index];const tree=s.mod.exports.LineFeedback({q,record:record()});for(const f of s.nodes(tree).filter(n=>n.type==='formula'))katex.renderToString(f.props.children,{throwOnError:true});return s.text(tree)}
 function equation(value){s.input('Red line equation · y = mx + b',value);s.click(record().attempts?`Check attempt ${record().attempts+1}`:'Check equation');const warning=s.nodes().find(n=>n.type==='./EquationFormatWarning');if(warning){warning.props.onClose();s.render()}return warning}
-function acknowledgeGraph(){const goal=s.nodes().find(n=>n.type==='@/components/practice/SkillGoal'&&n.props.eyebrow==='GRAPHICAL SUCCESS');assert(goal);assert(s.text(goal).includes('Test'));goal.props.onContinue();s.render();assert(s.nodes().some(n=>n.props.className==='lp-algebraic-prompt'))}
+function acknowledgeGraph(){
+ if(graph().q.id==='P1'){
+  assert.equal(graph().graphicalCalloutName,'Test');
+  assert(!s.nodes().some(n=>n.type==='@/components/practice/SkillGoal'));
+  graph().onAcknowledgeGraph();
+ }else{
+  const goal=s.nodes().find(n=>n.type==='@/components/practice/SkillGoal'&&n.props.eyebrow==='GRAPHICAL SUCCESS');
+  assert(goal);assert(s.text(goal).includes('Test'));goal.props.onContinue();
+ }
+ s.render();assert(s.nodes().some(n=>n.props.className==='lp-algebraic-prompt'));
+}
+function arrow(label){return s.nodes().find(n=>n.type==='button'&&n.props['aria-label']===label)}
+assert(arrow('Previous problem').props.disabled);
+assert(arrow('Next problem').props.disabled);
+arrow('Next problem').props.onClick();s.render();assert.equal(graph().q.id,'P1');
 assert(!s.nodes().some(n=>n.props['aria-label']==='Red line equation · y = mx + b'));graph().onSketchChange({a:{x:0,y:-6},b:{x:9,y:0}});s.render();graph().onSketchCheck(true);s.render();acknowledgeGraph();const both=equation('not an equation');assert(both.props.missing.prefix&&both.props.missing.x);const noY=equation('2/3x-6');assert(noY.props.missing.prefix&&!noY.props.missing.x);const noX=equation('y=2/3-6');assert(noX.props.missing.x&&!noX.props.missing.prefix);assert.equal(record().attempts,0);assert.equal(graph().line,null)
 equation('y=2/3x-4');assert.equal(record().attempts,1);assert.equal(record().solved,false);assert.equal(graph().line.b,-4);assert(feedback().includes('The slope is correct.'));assert(feedback().includes('y=0'));assert(feedback().includes('instead of'));assert(!graph().correct)
 equation('y=-3/2x+7');assert(feedback().includes('Your line is perpendicular'));assert(feedback().includes('passes through'));assert.equal(record().attempts,2)
@@ -35,7 +49,27 @@ for(let i=1;i<12;i++){
   s.input('What is the slope of the red line supposed to be?',lib.lessonNumber(q.answer.m));s.click('Check red slope');assert(graph().arrows);assert.equal(graph().line,null);assert(!record().solved)
  }
  if(q.slide===5){s.click('Reveal quarter turn');assert.equal(s.hooks[6].value,1);graph().onSketchChange({a:{x:0,y:7},b:{x:6,y:-2}});s.render();graph().onSketchCheck(true);s.render();acknowledgeGraph()}
- if(q.kind==='exact'){assert(!graph().drawing);equation('y=99x+99');assert.equal(graph().line.m,99);assert(feedback().includes('Both the slope and the point'))}
+ if(q.id==='P3'){
+  assert(graph().drawing);
+  assert(s.text(s.tree).includes('crosses the y-axis between grid marks'));
+  const segment={a:q.point,b:{x:7,y:0},tapped:true};
+  assert(lib.checkLessonSegment(q,segment).correct);
+  graph().onSketchChange(segment);s.render();
+  graph().onSketchCheck(true);s.render();
+  assert(record().sketchChecked);
+  assert(!record().solved);
+  assert(arrow('Next problem').props.disabled);
+  arrow('Previous problem').props.onClick();s.render();
+  assert.equal(graph().q.id,'P2c');
+  assert(record().solved);
+  assert(!arrow('Next problem').props.disabled);
+  arrow('Next problem').props.onClick();s.render();
+  assert.equal(graph().q.id,'P3');
+  assert.deepEqual(graph().sketch,segment);
+  assert(graph().sketchChecked);
+  assert(arrow('Next problem').props.disabled);
+ }
+ if(q.kind==='exact'){assert.equal(graph().drawing,q.id==='P3');equation('y=99x+99');assert.equal(graph().line.m,99);assert(feedback().includes('Both the slope and the point'))}
  if(q.id==='P2a'||q.id==='T6a'){equation(`y=${lib.lessonNumber(q.answer.m)}x+99`);assert(!record().solved);assert.equal(lib.lessonGroupCount(s.hooks[3].value,q.slide),0)}
  equation(`y=${lib.lessonNumber(q.answer.m)}x${q.answer.b<0?'-':'+'}${lib.lessonNumber(Math.abs(q.answer.b))}`);assert(record().solved);assert(graph().correct);if(q.id==='P2a')assert.equal(graph().animation,null);if(q.id==='P2b')assert.equal(graph().animation.phase,'done');if(q.id==='P2c'||q.id==='T6c')assert.equal(lib.lessonGroupCount(s.hooks[3].value,q.slide),3)
  s.click(i===11?'Finish & reflect →':'Next →')
@@ -90,7 +124,7 @@ const animationReact={useState(initial){const i=ai++;ah[i]??={value:initial};ret
 vm.runInNewContext(ts.transpileModule(fs.readFileSync('src/app/apps/beta/parallel-perpendicular-lesson/useEquationAnimation.ts','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX}}).outputText,{module:animationModule,exports:animationModule.exports,performance:{now:()=>clock},window:{matchMedia:()=>({matches:reduced})},requestAnimationFrame:fn=>{callbacks.set(++rafId,fn);return rafId},cancelAnimationFrame:id=>callbacks.delete(id),require:n=>n==='react'?animationReact:lib});
 function animationRender(){ai=0;frameResult=animationModule.exports.useEquationAnimation(lib.parallelLesson[1],enabled);const jobs=effectJobs;effectJobs=[];jobs.forEach(fn=>fn())}function advanceClock(t){clock=t;const [id,fn]=callbacks.entries().next().value;callbacks.delete(id);fn(t);animationRender()}
 animationRender();assert.equal(frameResult.phase,'intercept');advanceClock(1800);assert.equal(frameResult.phase,'rise');advanceClock(3400);assert.equal(frameResult.phase,'run');enabled=false;animationRender();assert.equal(callbacks.size,0);await Promise.resolve();enabled=true;reduced=true;animationRender();advanceClock(clock);assert.equal(frameResult.phase,'done');assert(frameResult.hitTarget);assert.equal(callbacks.size,0);
-console.log('Passed all 12 fixed equations and notes IDs, integer-snapped fixed-endpoint drawing and Check line gates, stacked slope entries with slash navigation, requested P1 overlap/perpendicular/correct sequence, valid and format retries, separate slope gates, both three-problem checkpoints, exact fractional slides, teacher-independent navigation/reveals, dashed submitted lines, intercept/rise/run/point/line animation timing and coefficient flashes, mature impact sparks with persistent glow, right-angle/burst gating, no algebra drawing, compact saved progress and completion time, required reflections and named export.')
+console.log('Passed all 12 fixed equations and notes IDs, integer-snapped fixed-endpoint drawing, P1 graph callouts, P3 optional sketch, bounded review arrows, and Check line gates, stacked slope entries with slash navigation, requested P1 overlap/perpendicular/correct sequence, valid and format retries, separate slope gates, both three-problem checkpoints, exact fractional slides, teacher-independent navigation/reveals, dashed submitted lines, intercept/rise/run/point/line animation timing and coefficient flashes, mature impact sparks with persistent glow, right-angle/burst gating, no algebra drawing, compact saved progress and completion time, required reflections and named export.')
 // Restore graph-local state directly; external gestures cannot mutate it.
 const remoteGraph={problemId:lib.parallelLesson[0].id,segment:{a:{x:6,y:-2},b:{x:9,y:0},tapped:true},selected:[{x:3,y:-4}],check:null,zoomProgress:null};
 gi=0;tree=gmod.exports.default({...drawProps,isExternalDisplay:true,mirror:remoteGraph});

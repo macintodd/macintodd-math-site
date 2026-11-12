@@ -35,6 +35,8 @@ Reveal the work	Revelar el trabajo
 Previous step	Paso anterior
 Reveal next step	Revelar el siguiente paso
 Previous problem	Problema anterior
+Next problem	Siguiente problema
+Problem navigation	Navegación entre problemas
 Next problem →	Siguiente problema →
 No student score is created in presentation mode.	El modo presentación no genera puntuaciones de estudiantes.
 Check both slopes, then write the equation.	Verifica ambas pendientes y después escribe la ecuación.
@@ -127,6 +129,11 @@ Look closely at the given point.	Observa de cerca el punto dado.
 Nonparallel lines eventually intersect.	Las rectas no paralelas terminan cortándose.
 Zoomed view. Read the axis labels for scale.	Vista ampliada o reducida. Lee las etiquetas de los ejes para conocer la escala.
 You found the GRAPHICAL answer!	¡Encontraste la respuesta GRÁFICA!
+you found the GRAPHICAL answer to the question!	¡encontraste la respuesta GRÁFICA a la pregunta!
+The red line goes	La recta roja pasa
+through the point	por el punto
+and is parallel to the given blue line.	y es paralela a la recta azul dada.
+Use point-slope form with the given point, then rewrite your equation in slope-intercept form. The red line crosses the y-axis between grid marks.	Usa la forma punto-pendiente con el punto dado y luego reescribe tu ecuación en la forma pendiente-intersección. La recta roja cruza el eje y entre las marcas de la cuadrícula.
 GRAPHICAL SUCCESS	LOGRO GRÁFICO
 Now write the equation →	Ahora escribe la ecuación →
 , you just found the	, acabas de encontrar la

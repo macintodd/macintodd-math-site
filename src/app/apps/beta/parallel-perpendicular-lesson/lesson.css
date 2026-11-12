@@ -19,3 +19,14 @@
 
 /* MathBoard TV/projector view: retain the mathematical display, omit action controls. */
 .lp-external-display button,.lp-external-display .lp-keypad,.lp-external-display .lp-teacher-actions,.lp-external-display .lp-top-links,.lp-external-display .lp-problem-header>label,.lp-external-display .completion-actions{display:none!important}.lp-external-display input,.lp-external-display select{pointer-events:none}.lp-external-display input[data-remote-active=true]{outline:3px solid #e2b855;outline-offset:2px}body:has(.lp-external-display) .bt-language-bar,body:has(.lp-external-display) .bt-dialog-language,body:has(.lp-external-display) .bt-control-translate{display:none!important}
+
+.lp-student-nav{display:flex;gap:6px}
+.lp-app .lp-student-nav button{min-width:42px;min-height:40px;padding:4px 10px;font-size:20px}
+.lp-graphical-title{color:#17344f;font-size:20px;font-weight:800;text-align:center;line-height:1.12}
+.lp-graphical-bubble{box-sizing:border-box;display:block;padding:6px 10px;border:2px solid;border-radius:12px;font-size:18px;font-weight:750;line-height:1.15;text-align:center}
+.lp-graphical-title [data-no-translate]{display:inline-block;max-width:12ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:bottom}
+.lp-graphical-red u{display:block;text-underline-offset:2px}
+.lp-graphical-red{background:#fff4f4;color:#9a2334}
+.lp-graphical-blue{background:#eef5ff;color:#194ea8}
+.lp-callout-leader{fill:none;stroke:#253b52;stroke-width:2.5;pointer-events:none}
+.lp-app .lp-graphical-continue{display:block;margin:5px auto}
