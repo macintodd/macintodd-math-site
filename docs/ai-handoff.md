@@ -34,7 +34,7 @@ The M4 Mac mini is the primary editing machine. The AI on the other Mac reviews 
 
 ## Verification and deployment
 
-- Parallel-only update passed a simulated iPad walkthrough from the notes through graphing by tap and drag, guided and independent work, standard-form hints, streak resets, resume, both reflections and the completion image. Deployment verification is pending.
+- Parallel-only update passed a simulated iPad walkthrough from the notes through graphing by tap and drag, guided and independent work, standard-form hints, streak resets, resume, both reflections and the completion image. Typecheck, lint, content checks, production build, diff checks, app directory, and the parallel, teacher, Spanish, and MathBoard regressions passed. Both Vercel deployments for `dabb976` succeeded. The full walkthrough passed again on macintodd.net.
 
 - P4 and keypad update passed typecheck, lint, content checks, build, diff check, parallel classroom, Spanish, teacher, and MathBoard regressions. Simulated iPad landscape testing covered touch drag and drop, tap-to-place, rejected and accepted placements, slope and equation keypad entry, scratch drawing and tab switching, Spanish, and read-only MathBoard restoration. Both Vercel deployments for `acd4b2f` succeeded. The touch walkthrough and simulated MathBoard restoration passed again on macintodd.net.
 
