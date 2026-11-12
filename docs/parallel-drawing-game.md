@@ -1,6 +1,6 @@
 # Parallel Lines · Draw the Match
 
-Standalone experimental route: `/apps/beta/parallel-drawing`, listed only in Beta Apps. The parallel notes lesson and teacher presentation are not changed.
+Standalone game: `/apps/parallel-drawing`, listed in the Games category. The old `/apps/beta/parallel-drawing` address remains a working alias. The same drawing component also provides the unscored opening warm-up in the parallel-lines lesson.
 
 ## Student flow
 
@@ -23,3 +23,13 @@ Reject first strokes shorter than 160 units and highly curved first strokes. Sec
 `node --experimental-strip-types scripts/test-parallel-drawing-game.mjs` checks perfect horizontal/vertical/diagonal/reversed matches, angular score degradation, crossing/wobble penalties, short/overlap rejection, event-density independence, perpendicular marker geometry, pointer interactions, duplicate/cancel guards, retry history, named/dated reflection transition and Spanish strings.
 
 The earlier `scripts/test-parallel-drawing.mjs` was preserved and still passes, as do the parallel language and shared completion-flow regressions. Required typecheck, lint, content checks, production build and diff check pass. Physical iPad/Apple Pencil feel and viewport layout still need user testing; no physical-device or browser screenshot check was completed on this Mac.
+
+## Lesson warm-up and canonical addresses
+
+The classroom lesson is now titled **Write Linear Equations: Parallel Lines**, with canonical student route `/apps/beta/parallel-lines` and teacher route `/apps/beta/parallel-lines/teacher`. Previous `/apps/beta/parallel-perpendicular-lesson` routes remain functional aliases. Keep the historical `lessonSlug`/resume-code identity unchanged; report-title lookup maps it to the new catalog title.
+
+The student page opts into `introGame`. After entering name/hour for a new session, it renders the drawing component in embedded mode. One valid scored drawing round enables **Continue to lesson**; unlimited retries are available. Game percentages do not count toward the lesson grade, and the embedded component has no separate reflection screen. The lesson's existing final reflection remains in place. Restoring a lesson resume code bypasses the opening game.
+
+Embedded game state (reference, live draft, completed stroke, percentage/result, round scores, error and distance toggle) is included as `warmupGame` in the lesson's native bridge snapshot, with `screen: 'warmup'`. Read-only receivers consume the snapshot without sending updates back or advancing independently. Controller restores remount the embedded game with its saved drawing state. The document-start bootstrap recognizes both new and legacy lesson/teacher paths, so existing MathBoard URLs continue working. Standalone play still has no native bridge of its own.
+
+The standalone game, embedding and mirroring regressions cover the same component. The new Games catalog filter and retained old routes are checked in `test-app-directory.mjs`; canonical/legacy startup bridge matching is checked in `test-parallel-bridge-startup.mjs`. The lesson warm-up and resume bypass are checked in `test-parallel-display-mirror.mjs`.

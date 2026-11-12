@@ -1,5 +1,10 @@
 /** Local game translations: drawing samples and names never leave the device. */
 export const parallelDrawingSpanish=String.raw`
+Draw a straight line on the canvas.	Dibuja una recta en el lienzo.
+Continue to lesson →	Continuar a la lección →
+Warm-up: Draw a parallel match	Calentamiento: dibuja una recta paralela
+Play one round, or keep trying to beat your best. The game does not change your lesson score.	Juega una ronda o sigue intentando superar tu mejor resultado. El juego no cambia tu puntuación de la lección.
+
 Parallel Lines · Draw the Match	Rectas paralelas · Dibuja la pareja
 A steady hand. A steady gap.	Un trazo firme. Una distancia constante.
 How parallel can you draw?	¿Qué tan paralela puedes dibujarla?

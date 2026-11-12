@@ -2,10 +2,10 @@ import assert from 'node:assert/strict'
 import vm from 'node:vm'
 import {lessonBridgeBootstrap} from '../src/lib/mathboard/lesson-bridge.ts'
 
-function host(search='',native=true){
+function host(search='',native=true,pathname='/apps/beta/parallel-perpendicular-lesson/teacher'){
  const callbacks=new Map()
  const window={
-  location:{pathname:'/apps/beta/parallel-perpendicular-lesson/teacher',search},
+  location:{pathname,search},
   addEventListener:(name,listener)=>callbacks.set(name,listener),
  }
  if(native)window.MathBoardApplet={applyState:state=>window.mathBoardAppletSetState(state)}
@@ -52,3 +52,7 @@ assert(displayBridge.displayOnly)
 display.dispatch('pointerdown',true)
 assert(!displayBridge.canPublish())
 console.log('Passed document-start restore queue, controller rearm, validation, stable callback, and read-only projector mode.')
+
+for(const path of ['/apps/beta/parallel-lines','/apps/beta/parallel-lines/teacher','/apps/beta/parallel-perpendicular-lesson','/apps/beta/parallel-perpendicular-lesson/teacher'])assert.equal(typeof host('',true,path).window.mathBoardAppletSetState,'function',path);
+assert.equal(host('',true,'/apps/parallel-drawing').window.mathBoardAppletSetState,undefined);
+console.log('Passed canonical and legacy parallel-lesson bridge routes, excluding standalone game.');

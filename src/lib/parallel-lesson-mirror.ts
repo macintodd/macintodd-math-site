@@ -1,3 +1,4 @@
+import type {DrawingGameState} from './parallel-drawing-game.ts'
 import type {ScratchStroke} from '../app/apps/graph-linear/ScratchPad'
 import {parallelNotes,parallelLesson} from './parallel-lesson.ts'
 import type {LessonAnimation,LessonProgress,LessonPoint,LessonSegment,checkLessonSegment} from './parallel-lesson.ts'
@@ -6,7 +7,7 @@ export type LessonGraphDisplayState={problemId:string;segment:LessonSegment|null
 export type LessonScratchDisplayState={open:boolean;image:string|null;strokes?:ScratchStroke[];erase?:boolean}
 export type ParallelLessonDisplayState={
  app:'parallel-perpendicular-classroom';version:1;teacher:boolean;language:'en'|'es'
- first:string;last:string;hour:string;p:LessonProgress|null;screen:'lesson'|'ready'|'report';reveal:number;turn:number;active:'blue'|'red'|'equation';activePart:'num'|'den'
+ first:string;last:string;hour:string;p:LessonProgress|null;screen:'warmup'|'lesson'|'ready'|'report';warmupGame?:DrawingGameState|null;reveal:number;turn:number;active:'blue'|'red'|'equation';activePart:'num'|'den'
  notice:string;hint:boolean;saved:boolean;resume:string;date:string;session:number
  graphicalNotice:boolean;graphicalAcknowledged:boolean;formatWarning:{prefix:boolean;x:boolean}|null
  scratch?:LessonScratchDisplayState;scrollY?:number
@@ -15,7 +16,7 @@ export type ParallelLessonDisplayState={
 export function isParallelLessonDisplayState(value:unknown):value is ParallelLessonDisplayState{
  if(!value||typeof value!=='object')return false
  const s=value as Partial<ParallelLessonDisplayState>
- if(s.app!=='parallel-perpendicular-classroom'||s.version!==1||typeof s.teacher!=='boolean'||!['en','es'].includes(s.language??'')||!['lesson','ready','report'].includes(s.screen??''))return false
+ if(s.app!=='parallel-perpendicular-classroom'||s.version!==1||typeof s.teacher!=='boolean'||!['en','es'].includes(s.language??'')||!['warmup','lesson','ready','report'].includes(s.screen??''))return false
  if(s.p===null)return true
  const p=s.p
  if(!p||!Array.isArray(p.records)||!Number.isInteger(p.index)||p.index<0||p.index>=p.records.length)return false

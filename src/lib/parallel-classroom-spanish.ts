@@ -1,5 +1,7 @@
 /** Local classroom translations; no names or work are sent to a translation service. */
 export const parallelClassroomSpanish=String.raw`
+Begin with the drawing game →	Comenzar con el juego de dibujo →
+Write Linear Equations: Parallel Lines	Escribe ecuaciones lineales: rectas paralelas
 Write the Linear Equation: Parallel Lines · Classroom Lesson	Escribe la ecuación lineal: rectas paralelas · Lección para la clase
 Work through four classroom slides, then build streaks with graphing, point-slope form, and standard form.	Completa cuatro diapositivas en clase y luego consigue rachas con gráficas, forma punto-pendiente y forma estándar.
 Write the equation of a parallel line through a given point.	Escribe la ecuación de una recta paralela que pase por un punto dado.

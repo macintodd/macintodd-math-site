@@ -1,6 +1,6 @@
 # Parallel lines teacher presentation
 
-Route: `/apps/beta/parallel-perpendicular-lesson/teacher`.
+Canonical route: `/apps/beta/parallel-lines/teacher`. The old `/apps/beta/parallel-perpendicular-lesson/teacher` address remains supported.
 
 The teacher page now uses its own `teacher/TeacherLesson.tsx`, not the student `Lesson.tsx`. It shares reviewed problem data, graph rendering, equation animation and mathematical checks. Student progression, scorecards, reflections and resume codes are not used by this page.
 

@@ -44,3 +44,5 @@ export function scoreParallel(line:FittedStroke,raw:DrawPoint[]):{result:Paralle
 }
 export function parallelPraise(score:number){return score>=98?'Parallel perfection. Those lines are keeping their distance!':score>=90?'Beautifully matched. Same direction, steady gap!':score>=75?'Close! Keep that gap steady all the way across.':score>=50?'Getting there. Watch where the gap starts to change.':'Try again. Match the direction and keep an even gap.'}
 export const parallelDrawingSkill='Draw a second line that stays the same perpendicular distance from the first line.'
+
+export type DrawingGameState={line:FittedStroke|null;draft:DrawPoint[];stroke:DrawPoint[];result:ParallelResult|null;scores:number[];error:string;markers:boolean}

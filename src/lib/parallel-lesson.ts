@@ -14,7 +14,7 @@ export const parallelLesson:LessonProblem[]=[
  problem('T7',7,'perpendicular','exact',2/3,-4,3,1),problem('T8',8,'perpendicular','independent',-2/3,1,1,0)
 ]
 export const parallelNotes=parallelLesson.slice(0,6)
-export const parallelOnlyTitle='Write the Linear Equation: Parallel Lines · Classroom Lesson'
+export const parallelOnlyTitle='Write Linear Equations: Parallel Lines'
 export const lessonTitle='Write the Linear Equation: Parallel and Perpendicular · Classroom Lesson'
 export const lessonSlug='beta/parallel-perpendicular-lesson'
 export const notesPath='/handouts/parallel-perpendicular-classroom-notes.pdf'
