@@ -112,3 +112,7 @@ Both Vercel deployments for `8728e21` succeeded. Live checks confirmed `/apps/be
 - Student code saving maps active notes back to legacy IDs and fills the retired slot only after earlier notes are complete, maintaining old sequential-code validation. Loading maps legacy IDs to active notes, discarding P2c only. Old practice tails retain the same seed/serial/stage history. An old code stopped at P2c resumes at P3.
 - Previous six-note MathBoard snapshots are normalized to the five-note order. Student draft/progress and teacher P3/P4 mappings are preserved, and a snapshot focused on retired P2c advances to P3. Current generated-practice snapshots are not remapped.
 - Added `scripts/test-parallel-retired-note.mjs` for old/new PPL compatibility, old completed-practice codes and snapshot index migration. Passed classroom, teacher, mirroring, language and bridge checks, typecheck, lint, content check, production build and diff check. Physical device check remains open. Feature commit awaiting live deployment verification.
+
+### P2c removal verified live
+
+Both Vercel deployments for `d359002` succeeded. Live canonical and legacy teacher pages now list exactly P1, P2a, P2b, P3, P4, with no P2c option. Both student lesson URLs return HTTP 200. Student progression, old/new resume mapping and native snapshot migration passed the regression checks.
