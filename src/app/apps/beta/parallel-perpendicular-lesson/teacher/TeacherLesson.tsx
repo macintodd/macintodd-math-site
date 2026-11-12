@@ -4,7 +4,7 @@ import {useCallback,useEffect,useRef,useState} from 'react'
 import {Math as Formula} from '@/components/Math'
 import {useWidgetLanguage} from '@/components/practice/BilingualWidget'
 import {editAnswer} from '@/lib/mathboard/keypad'
-import {parallelNotes,parallelOnlyTitle,notesPath,blankLessonRecord,lessonNumber,lineTex,pointSlopeLesson,distributedLesson,readLessonLine,inspectLessonLine,lessonSlopeCorrect,type LessonRecord,type LessonAnimation} from '@/lib/parallel-lesson'
+import {parallelLesson,parallelNotes,parallelOnlyTitle,notesPath,blankLessonRecord,lessonNumber,lineTex,pointSlopeLesson,distributedLesson,readLessonLine,inspectLessonLine,lessonSlopeCorrect,type LessonRecord,type LessonAnimation} from '@/lib/parallel-lesson'
 import type {LessonGraphDisplayState} from '@/lib/parallel-lesson-mirror'
 import {missingLessonNotation} from '@/lib/parallel-graph-tools'
 import LessonGraph from '../LessonGraph'
@@ -20,10 +20,18 @@ type Demo={generation:number;record:LessonRecord;reveal:number;turn:number;graph
 type Snapshot={app:'parallel-perpendicular-teacher';version:1;index:number;demos:Demo[];active:Field;part:'num'|'den';notice:string;warning:{prefix:boolean;x:boolean}|null;language:'en'|'es';animation:LessonAnimation|null;scrollY?:number}
 const fraction=(n:number)=>{const [a,b='1']=lessonNumber(n).split('/');return `${a}/${b}`}
 const fresh=():Demo=>({generation:0,record:blankLessonRecord(),reveal:0,turn:0,graph:null})
+export function normalizeTeacherSnapshot(value:unknown):unknown{
+ if(!value||typeof value!=='object')return value
+ const s=value as Snapshot
+ if(!Array.isArray(s.demos)||![6,12].includes(s.demos.length))return value
+ const old=parallelLesson[s.index],index=old?.id==='P2c'?parallelNotes.findIndex(q=>q.id==='P3'):parallelNotes.findIndex(q=>q.id===old?.id)
+ if(index<0)return value
+ return {...s,index,demos:parallelNotes.map(q=>s.demos[parallelLesson.findIndex(old=>old.id===q.id)]),...(old?.id==='P2c'?{animation:null,notice:'',warning:null}:{} )}
+}
 export function validTeacherSnapshot(value:unknown):value is Snapshot{
  if(!value||typeof value!=='object')return false
  const s=value as Snapshot
- return s.app==='parallel-perpendicular-teacher'&&s.version===1&&Number.isInteger(s.index)&&s.index>=0&&s.index<parallelNotes.length&&['en','es'].includes(s.language)&&['blue','red','equation'].includes(s.active)&&['num','den'].includes(s.part)&&Array.isArray(s.demos)&&(s.demos.length===parallelNotes.length||s.demos.length===12)&&s.demos.slice(0,parallelNotes.length).every((d,i)=>!!d?.record&&Number.isInteger(d.generation)&&d.generation>=0&&Number.isInteger(d.reveal)&&d.reveal>=0&&d.reveal<=4&&(!d.graph||d.graph.problemId===parallelNotes[i].id))
+ return s.app==='parallel-perpendicular-teacher'&&s.version===1&&Number.isInteger(s.index)&&s.index>=0&&s.index<parallelNotes.length&&['en','es'].includes(s.language)&&['blue','red','equation'].includes(s.active)&&['num','den'].includes(s.part)&&Array.isArray(s.demos)&&s.demos.length===parallelNotes.length&&s.demos.slice(0,parallelNotes.length).every((d,i)=>!!d?.record&&Number.isInteger(d.generation)&&d.generation>=0&&Number.isInteger(d.reveal)&&d.reveal>=0&&d.reveal<=4&&(!d.graph||d.graph.problemId===parallelNotes[i].id))
 }
 /** Separate teacher controller: no student progress gates, scorecards or completion path. */
 export default function TeacherLesson(){
@@ -39,7 +47,8 @@ export default function TeacherLesson(){
   if(!bridgeActive)return
   const bridge=installLessonBridge(window as LessonMathBoardWindow)
   if(bridge.displayOnly)external.current=true
-  return bridge.listen(value=>{
+  return bridge.listen(incoming=>{
+   const value=normalizeTeacherSnapshot(incoming)
    if(!validTeacherSnapshot(value))return false
    setIsExternalDisplay(bridge.displayOnly);setIndex(value.index);setDemos(value.demos.slice(0,parallelNotes.length))
    setActive(value.active);setPart(value.part);setNotice(value.notice);setWarning(value.warning)

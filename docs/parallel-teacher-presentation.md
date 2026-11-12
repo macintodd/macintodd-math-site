@@ -25,3 +25,5 @@ The same callback restores the iPad controller and the display. Applying a snaps
 ## Checks
 
 The parallel lesson regressions cover early callback delivery, validation, no echo, read-only rendering, sketch state, and navigation. A simulated WKWebView browser test covers pre-hydration delivery, teacher editing after restore, scroll position, projector rendering, student scratch strokes and selected points, and the number of animation publications. Physical MathBoard iPad/projector testing is still pending.
+
+P2c has been retired from active notes. The current presentation offers five notes examples: P1, P2a, P2b, P3, P4. Legacy six-note and 12-record native snapshots are mapped by problem ID, with a restored P2c focus sent to P3. The underlying historical PPL catalog remains unchanged for old resume-code compatibility.

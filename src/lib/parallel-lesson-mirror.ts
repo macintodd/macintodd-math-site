@@ -25,3 +25,12 @@ export function isParallelLessonDisplayState(value:unknown):value is ParallelLes
  if(!Number.isInteger(p.practiceSeed)||p.practiceSeed<0||p.practiceSeed>0xffffffff||p.records.length<=parallelNotes.length)return false
  return p.records.slice(parallelNotes.length).every(r=>r&&Number.isInteger(r.practiceStage)&&r.practiceStage!>=0&&r.practiceStage!<=3)
 }
+
+/** Drop the retired P2c slot from snapshots produced by the previous six-note client. */
+export function normalizeParallelSnapshot(value:unknown):unknown{
+ if(!value||typeof value!=='object')return value
+ const s=value as ParallelLessonDisplayState,p=s.p
+ if(s.app!=='parallel-perpendicular-classroom'||s.teacher||!p||!Array.isArray(p.records)||p.records.length<6||p.records[5]?.practiceStage!==undefined)return value
+ const records=p.records.filter((_,i)=>i!==3),index=p.index>3?p.index-1:p.index
+ return {...s,p:{...p,records,index},...(p.index===3?{graphMirror:null,animation:null,graphicalNotice:false,graphicalAcknowledged:false,formatWarning:null}:{} )}
+}

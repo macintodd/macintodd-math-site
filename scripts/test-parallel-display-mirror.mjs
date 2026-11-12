@@ -38,7 +38,7 @@ student.find('./LessonGraph').props.onMirrorChange(graphState);student.render();
 const ready=JSON.parse(JSON.stringify(student.snapshot()));
 ready.screen='ready';
 ready.p.records=ready.p.records.map(r=>({...r,solved:true}));
-ready.p.index=5;
+ready.p.index=lesson.parallelNotes.length-1;
 screen.restore(ready);
 assert(text(screen.tree).includes('Show this screen to your teacher.'));
 assert(!nodes(screen.tree).some(n=>n.type==='button'));

@@ -61,7 +61,7 @@ equation('y=2/3x-4');assert(!s.nodes().some(n=>n.props['data-correct']));assert.
 equation('y=-3/2x+7');assert(feedback().includes('Your line is perpendicular'));assert(feedback().includes('passes through'));assert.equal(record().attempts,2)
 equation('y=2/3x-6');assert(record().solved);assert(s.nodes().some(n=>n.props['data-correct']&&n.props.className==='lp-input equation'));assert(graph().correct);assert(feedback().includes('Solved on attempt 3'));s.click('Stop & save');const checkpoint=s.nodes().find(n=>n.type==='@/components/practice/ResumeDialog');const resumed=lib.loadLesson(checkpoint.props.code,'Test','Student','3');assert.equal(resumed.index,1);assert.equal(resumed.records[0].attempts,3);assert.throws(()=>lib.loadLesson(checkpoint.props.code,'Other','Name','3'));assert.throws(()=>lib.loadLesson(checkpoint.props.code+'!', 'Test','Student','3'));checkpoint.props.onClose();s.render();s.click('Next →')
 for(let i=1;i<lib.parallelNotes.length;i++){
- assert.equal(s.hooks[3].value.index,i);const q=lib.parallelLesson[i]
+ assert.equal(s.hooks[3].value.index,i);const q=lib.parallelNotes[i]
  if(q.kind==='triple'){
   if(q.id==='P2a'){graph().onSketchChange({a:{x:3,y:1},b:{x:6,y:3}});s.render();graph().onSketchCheck(true);s.render();acknowledgeGraph()}
   if(q.id==='P2a'){const label='What is the slope of the blue line?';s.input(label+' numerator','2');s.nodes().find(n=>n.props['aria-label']===label+' numerator').props.onFocus();s.render();let prevented=false;s.nodes().find(n=>n.props['aria-label']===label+' numerator').props.onKeyDown({key:'/',preventDefault(){prevented=true}});s.render();assert(prevented);s.nodes().find(n=>n.type==='./LessonTools').props.onKey('3');s.render();assert.equal(record().blue,'2/3')}
@@ -83,7 +83,7 @@ for(let i=1;i<lib.parallelNotes.length;i++){
   assert(!record().solved);
   assert(arrow('Next problem').props.disabled);
   arrow('Previous problem').props.onClick();s.render();
-  assert.equal(graph().q.id,'P2c');
+  assert.equal(graph().q.id,'P2b');
   assert(record().solved);
   assert(!arrow('Next problem').props.disabled);
   arrow('Next problem').props.onClick();s.render();
@@ -115,7 +115,7 @@ for(let i=1;i<lib.parallelNotes.length;i++){
   assert(arrow('Next problem').props.disabled);
  }
  if(q.id==='P2a'||q.id==='T6a'){equation(`y=${lib.lessonNumber(q.answer.m)}x+99`);assert(!record().solved);assert.equal(lib.lessonGroupCount(s.hooks[3].value,q.slide),0)}
- equation(`y=${lib.lessonNumber(q.answer.m)}x${q.answer.b<0?'-':'+'}${lib.lessonNumber(Math.abs(q.answer.b))}`);assert(record().solved);if(q.id!=='P4')assert(graph().correct);if(q.id==='P2a')assert.equal(graph().animation,null);if(q.id==='P2b')assert.equal(graph().animation.phase,'done');if(q.id==='P2c'||q.id==='T6c')assert.equal(lib.lessonGroupCount(s.hooks[3].value,q.slide),3)
+ equation(`y=${lib.lessonNumber(q.answer.m)}x${q.answer.b<0?'-':'+'}${lib.lessonNumber(Math.abs(q.answer.b))}`);assert(record().solved);if(q.id!=='P4')assert(graph().correct);if(q.id==='P2a')assert.equal(graph().animation,null);if(q.id==='P2b')assert.equal(graph().animation.phase,'done');if(q.id==='P2b')assert.equal(lib.lessonGroupCount(s.hooks[3].value,q.slide),2)
  if(q.id!=='P4')s.click('Next →')
 }
 assert.equal(s.hooks[4].value,'ready');
@@ -225,7 +225,7 @@ const animationReact={useState(initial){const i=ai++;ah[i]??={value:initial};ret
 vm.runInNewContext(ts.transpileModule(fs.readFileSync('src/app/apps/beta/parallel-perpendicular-lesson/useEquationAnimation.ts','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX}}).outputText,{module:animationModule,exports:animationModule.exports,performance:{now:()=>clock},window:{matchMedia:()=>({matches:reduced})},requestAnimationFrame:fn=>{callbacks.set(++rafId,fn);return rafId},cancelAnimationFrame:id=>callbacks.delete(id),require:n=>n==='react'?animationReact:lib});
 function animationRender(){ai=0;frameResult=animationModule.exports.useEquationAnimation(lib.parallelLesson[1],enabled);const jobs=effectJobs;effectJobs=[];jobs.forEach(fn=>fn())}function advanceClock(t){clock=t;const [id,fn]=callbacks.entries().next().value;callbacks.delete(id);fn(t);animationRender()}
 animationRender();assert.equal(frameResult.phase,'intercept');advanceClock(1800);assert.equal(frameResult.phase,'rise');advanceClock(3400);assert.equal(frameResult.phase,'run');enabled=false;animationRender();assert.equal(callbacks.size,0);await Promise.resolve();enabled=true;reduced=true;animationRender();advanceClock(clock);assert.equal(frameResult.phase,'done');assert(frameResult.hitTarget);assert.equal(callbacks.size,0);
-console.log('Passed six parallel notes problems, all four practice streaks and resume checkpoints, integer-snapped fixed-endpoint drawing, P1 graph callouts, P3 optional sketch, bounded review arrows, and Check line gates, stacked slope entries with slash navigation, requested P1 overlap/perpendicular/correct sequence, valid and format retries, separate slope gates, both three-problem checkpoints, exact fractional slides, teacher-independent navigation/reveals, dashed submitted lines, intercept/rise/run/point/line animation timing and coefficient flashes, mature impact sparks with persistent glow, right-angle/burst gating, no algebra drawing, compact saved progress and completion time, required reflections and named export.')
+console.log('Passed five parallel notes problems, all four practice streaks and resume checkpoints, integer-snapped fixed-endpoint drawing, P1 graph callouts, P3 optional sketch, bounded review arrows, and Check line gates, stacked slope entries with slash navigation, requested P1 overlap/perpendicular/correct sequence, valid and format retries, separate slope gates, both three-problem checkpoints, exact fractional slides, teacher-independent navigation/reveals, dashed submitted lines, intercept/rise/run/point/line animation timing and coefficient flashes, mature impact sparks with persistent glow, right-angle/burst gating, no algebra drawing, compact saved progress and completion time, required reflections and named export.')
 // Restore graph-local state directly; external gestures cannot mutate it.
 const remoteGraph={problemId:lib.parallelLesson[0].id,segment:{a:{x:6,y:-2},b:{x:9,y:0},tapped:true},selected:[{x:3,y:-4}],check:null,zoomProgress:null};
 gi=0;tree=gmod.exports.default({...drawProps,isExternalDisplay:true,mirror:remoteGraph});

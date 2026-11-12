@@ -73,7 +73,7 @@ const invalid=()=>Error('The saved progress is inconsistent.')
 
 export function saveStudentLesson(p:LessonProgress,first:string,last:string,hour:string):string{
  // Keep the original notes checkpoint and add compact practice data.
- const records=parallelLesson.map((_,i)=>i<parallelNotes.length?p.records[i]:blankLessonRecord())
+ const records=parallelLesson.map(q=>{const index=parallelNotes.findIndex(note=>note.id===q.id);if(index>=0)return p.records[index];if(q.id==='P2c'&&p.records.slice(0,3).every(r=>r.solved))return {...blankLessonRecord(),solved:true,attempts:1};return blankLessonRecord()})
  const notes=saveLesson({...p,records,completedAt:null},first,last,hour)
  if(p.practiceSeed===undefined)return notes
  const history=p.records.slice(parallelNotes.length).map(r=>{
@@ -88,7 +88,7 @@ export function loadStudentLesson(code:string,first:string,last:string,hour:stri
  const clean=code.trim().replace(/\s/g,'').toLowerCase()
  const [notes,seed,time,history,check,...extra]=clean.split('.')
  const legacy=loadLesson(notes,first,last,hour)
- const records=legacy.records.slice(0,parallelNotes.length)
+ const records=parallelNotes.map(q=>legacy.records[parallelLesson.findIndex(old=>old.id===q.id)])
  const firstUnsolved=records.findIndex(r=>!r.solved)
  const initial={index:firstUnsolved<0?records.length-1:firstUnsolved,records,completedAt:null}
  if(seed===undefined)return initial

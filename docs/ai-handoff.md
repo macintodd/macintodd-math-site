@@ -104,3 +104,11 @@ Both Vercel deployments for `4ac84ef` succeeded. Verified the custom-domain `/ap
 ### Drawing warm-up and canonical URLs verified
 
 Both Vercel deployments for `8728e21` succeeded. Live checks confirmed `/apps/beta/parallel-lines` and the old lesson URL both show the parallel-only title and drawing-game entry; `/apps/parallel-drawing` and its old beta URL show the revised step 1. Verified the new teacher URL, warm-up/mirroring bundles, standalone Games entry and new Beta lesson link. Existing saved-work bypass is covered by the regression test. Physical device testing remains open.
+
+## Retired notes problem P2c (review Mac)
+
+- User requested removal of the fourth integer-intercept graph/equation example, Slide 2 P2c. Active `parallelNotes` now contain **P1, P2a, P2b, P3, P4**. Both student and teacher navigation omit P2c. Slide 2 counter now uses its actual two-problem total. The opening game and generated practice requirements are unchanged.
+- The original 12-entry `parallelLesson` array remains intact exclusively for legacy PPL encoding and old presentation compatibility. Do not delete/reorder its P2c slot: active notes filter it out instead.
+- Student code saving maps active notes back to legacy IDs and fills the retired slot only after earlier notes are complete, maintaining old sequential-code validation. Loading maps legacy IDs to active notes, discarding P2c only. Old practice tails retain the same seed/serial/stage history. An old code stopped at P2c resumes at P3.
+- Previous six-note MathBoard snapshots are normalized to the five-note order. Student draft/progress and teacher P3/P4 mappings are preserved, and a snapshot focused on retired P2c advances to P3. Current generated-practice snapshots are not remapped.
+- Added `scripts/test-parallel-retired-note.mjs` for old/new PPL compatibility, old completed-practice codes and snapshot index migration. Passed classroom, teacher, mirroring, language and bridge checks, typecheck, lint, content check, production build and diff check. Physical device check remains open. Feature commit awaiting live deployment verification.
