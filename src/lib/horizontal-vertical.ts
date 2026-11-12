@@ -23,20 +23,22 @@ export function hvQuestion(level:HVLevel,id:number,demo=false,rng=Math.random):H
  if(!demo)for(let i=choices.length-1;i>0;i--){const j=integer(i+1,rng);[choices[i],choices[j]]=[choices[j],choices[i]]}
  return {id,horizontal,value,kind,prompt,equation,graph,choices,answer:choices.indexOf(correct),answerText:correct,cue:horizontal?'Horizontal: y stays constant. Rise is 0, so slope is 0.':'Vertical: x stays constant. Run is 0, so slope is undefined. You cannot divide by 0.'}
 }
-export type HVProgress={level:HVLevel;demo:boolean;stats:Stats[];finished:boolean}
+export type HVProgress={level:HVLevel;demo:boolean;stats:Stats[];finished:boolean;earlyExit?:true}
 export const newHV=():HVProgress=>({level:1,demo:true,stats:Array.from({length:5},blankStats),finished:false})
 export function markHV(s:Stats,right:boolean):Stats{const streak=right?s.streak+1:0;return {correct:s.correct+Number(right),attempts:s.attempts+1,streak,best:Math.max(s.best,streak)}}
 export const hvTargets=[8,8,8,8,8] as const
-export const hvTarget=(level:number)=>hvTargets[level-1]
-export const hvDone=(s:Stats,level:number)=>s.streak>=hvTarget(level)
+export const hvTarget=(level:number,stats?:Stats)=>stats&&stats.attempts>=20?6:hvTargets[level-1]
+export const hvDone=(s:Stats,level:number)=>s.streak>=hvTarget(level,s)
+export const hvCanExit=(p:HVProgress)=>!p.demo&&!p.finished&&p.stats[p.level-1].attempts>=20&&p.stats[p.level-1].streak>=6&&p.stats[p.level-1].streak<8
+// Keep the original eight-streak rubric: the easier goal and unattempted levels do not earn full credit.
 export const hvScore=(p:HVProgress)=>Math.round(p.stats.reduce((n,s,i)=>n+Math.min(1,s.best/hvTarget(i+1)),0)*20)/10
 export function hvTotals(p:HVProgress){const correct=p.stats.reduce((n,s)=>n+s.correct,0),attempted=p.stats.reduce((n,s)=>n+s.attempts,0);return {correct,attempted,accuracy:attempted?Math.round(correct/attempted*100):0}}
-export function saveHV(p:HVProgress,first:string,last:string,hour:string){const tail=p.stats.slice(3).flatMap(s=>[s.correct,s.attempts,s.streak,s.best]);const s:Session={level:1,phase:'work',example:p.demo,stats:p.stats.slice(0,3),warnings:p.level*4+Number(p.demo)*2+Number(p.finished),targets:[],bonus:[],date:'',readingWarnings:3,trail:tail.map(n=>({gold:false,count:n+1}))};return saveCode(s,first,last+':horizontal-vertical-v2',hour).replace(/^WL1-/,'HV0-')}
+export function saveHV(p:HVProgress,first:string,last:string,hour:string){const tail=p.stats.slice(3).flatMap(s=>[s.correct,s.attempts,s.streak,s.best]);const s:Session={level:1,phase:'work',example:p.demo,stats:p.stats.slice(0,3),warnings:p.level*4+Number(p.demo)*2+Number(p.finished),targets:[],bonus:[],date:'',readingWarnings:4,distributionWarnings:p.earlyExit?1:0,trail:tail.map(n=>({gold:false,count:n+1}))};return saveCode(s,first,last+':horizontal-vertical-v2',hour).replace(/^WL1-/,'HV0-')}
 export function loadHV(code:string,first:string,last:string,hour:string):HVProgress{
  if(!/^HV0-/i.test(code.trim()))throw Error('Use a resume code from this horizontal and vertical practice.')
  const s=loadCode(code.trim().replace(/^HV0-/i,'WL1-'),first,last+':horizontal-vertical-v2',hour),level=Math.floor(s.warnings/4) as HVLevel,demo=Boolean(s.warnings&2),finished=Boolean(s.warnings&1),tail=s.trail?.map(v=>v.count-1)??[]
  const stats=[...s.stats,...[0,4].map(i=>({correct:tail[i],attempts:tail[i+1],streak:tail[i+2],best:tail[i+3]}))]
- const legacy=s.readingWarnings!==3
+ const legacy=s.readingWarnings!==3&&s.readingWarnings!==4,earlyExit=s.readingWarnings===4&&s.distributionWarnings===1
  const validStats=stats.every(t=>[t.correct,t.attempts,t.streak,t.best].every(n=>Number.isSafeInteger(n)&&n>=0)&&t.correct<=t.attempts&&t.streak<=t.best&&t.best<=10&&t.best<=t.correct)
  if(level<1||level>5||tail.length!==8||!validStats)throw Error('This resume code has invalid progress.')
  if(legacy){
@@ -45,6 +47,7 @@ export function loadHV(code:string,first:string,last:string,hour:string):HVProgr
   const next=stats.findIndex((t,i)=>!hvDone(t,i+1))
   return {level:(next<0?5:next+1) as HVLevel,demo:next>=0&&stats[next].attempts===0,stats,finished:next<0}
  }
- if(stats.some((t,i)=>i<level-1&&!hvDone(t,i+1))||(finished&&(level!==5||stats.some((t,i)=>!hvDone(t,i+1))))||(demo&&stats[level-1].attempts>0))throw Error('This resume code has invalid progress.')
- return {level,demo,stats,finished}
+ if(earlyExit&&(!finished||demo||!hvCanExit({level,demo,stats,finished:false})||stats.some((t,i)=>i>level-1&&t.attempts>0)))throw Error('This resume code has invalid progress.')
+ if(stats.some((t,i)=>i<level-1&&!hvDone(t,i+1))||(!earlyExit&&finished&&(level!==5||stats.some((t,i)=>!hvDone(t,i+1))))||(demo&&stats[level-1].attempts>0))throw Error('This resume code has invalid progress.')
+ return {level,demo,stats,finished,...(earlyExit?{earlyExit:true as const}:{})}
 }

@@ -101,4 +101,9 @@ in a row	seguidas
 in a row!	¡seguidas!
 correct in a row. There is no timer.	correctas seguidas. No hay límite de tiempo.
 5 levels · 8 in a row · No timer	5 niveles · 8 seguidas · Sin límite de tiempo
+New goal: six in a row.	Nueva meta: seis seguidas.
+You have tried 20 questions in this level. Keep practicing, or finish early after six in a row. Your score still uses the original eight-in-a-row goal.	Has intentado 20 preguntas en este nivel. Sigue practicando o termina antes después de seis seguidas. Tu puntuación sigue usando la meta original de ocho seguidas.
+Record Score and Skip to End	Registrar puntuación y pasar al final
+Early finish: six-in-a-row option used. Unfinished work earns partial credit.	Finalización anticipada: se usó la opción de seis seguidas. El trabajo sin terminar recibe crédito parcial.
+Each level earns up to 2 points based on its best streak out of 8. Unattempted levels earn 0.	Cada nivel vale hasta 2 puntos según su mejor racha de 8. Los niveles no intentados valen 0.
 `
