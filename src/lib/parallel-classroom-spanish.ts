@@ -153,4 +153,13 @@ Include x next to the slope.	Incluye x junto a la pendiente.
 This notation warning does not count as an incorrect equation.	Este aviso de notación no cuenta como una ecuación incorrecta.
 The blue and red line equations	Las ecuaciones de las rectas azul y roja
 The line must go through the point.	La recta debe pasar por el punto.
+Demonstrate the answer	Demuestra la respuesta
+Given slope	Pendiente dada
+New slope	Pendiente nueva
+Fill answers	Completar respuestas
+Answers filled. Check or reveal the work when ready.	Respuestas completadas. Comprueba o revela los pasos cuando estés listo.
+Previous slide	Diapositiva anterior
+Skip to next slide →	Saltar a la siguiente diapositiva →
+Reset this problem	Reiniciar este problema
+Teacher presentation controls	Controles de la presentación docente
 `
