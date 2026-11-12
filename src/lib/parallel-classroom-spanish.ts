@@ -126,4 +126,32 @@ They intersect here.	Se cortan aquí.
 Look closely at the given point.	Observa de cerca el punto dado.
 Nonparallel lines eventually intersect.	Las rectas no paralelas terminan cortándose.
 Zoomed view. Read the axis labels for scale.	Vista ampliada o reducida. Lee las etiquetas de los ejes para conocer la escala.
+You found the GRAPHICAL answer!	¡Encontraste la respuesta GRÁFICA!
+GRAPHICAL SUCCESS	LOGRO GRÁFICO
+Now write the equation →	Ahora escribe la ecuación →
+, you just found the	, acabas de encontrar la
+GRAPHICAL answer	respuesta GRÁFICA
+to the question.	a la pregunta.
+Now give the algebraic answer for the line. What is the equation of the	Ahora da la respuesta algebraica de la recta. ¿Cuál es la ecuación de la recta
+red	roja
+line in	en la forma
+form?	?
+Adjust the red line’s slope	Ajustar la pendiente de la recta roja
+Adjust slope	Ajustar pendiente
+Red slope numerator	Numerador de la pendiente roja
+Red slope denominator	Denominador de la pendiente roja
+Slope number pad	Teclado de la pendiente
+Update slope	Actualizar pendiente
+Use whole numbers and a nonzero denominator.	Usa números enteros y un denominador distinto de cero.
+Slope updated. Check your line.	Pendiente actualizada. Comprueba tu recta.
+Include the whole equation.	Incluye la ecuación completa.
+CHECK YOUR NOTATION	REVISA TU NOTACIÓN
+Let me fix it →	Déjame corregirla →
+Write your complete answer in slope-intercept form. Fix the highlighted part and check again.	Escribe tu respuesta completa en forma pendiente-intersección. Corrige la parte resaltada y comprueba de nuevo.
+Slope-intercept form with missing parts highlighted	Forma pendiente-intersección con las partes que faltan resaltadas
+Include y = at the beginning of the equation.	Incluye y = al principio de la ecuación.
+Include x next to the slope.	Incluye x junto a la pendiente.
+This notation warning does not count as an incorrect equation.	Este aviso de notación no cuenta como una ecuación incorrecta.
+The blue and red line equations	Las ecuaciones de las rectas azul y roja
+The line must go through the point.	La recta debe pasar por el punto.
 `
