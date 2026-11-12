@@ -1,3 +1,4 @@
+import type {Placements,Quantity} from './intro-point-slope.ts'
 import {parseLinearExpression} from './line-equation.ts'
 export type LessonLine={m:number;b:number}
 export type LessonPoint={x:number;y:number}
@@ -22,7 +23,7 @@ export function distributedLesson(q:LessonProblem){return `y${signed(-q.point.y)
 export function readLessonLine(text:string):{line:LessonLine|null;format:boolean}{const t=text.trim().replace(/−/g,'-');if(!/^y\s*=/i.test(t))return {line:null,format:true};const value=parseLinearExpression(t);if(!value)return {line:null,format:true};return {line:value,format:/\([^)]*x/i.test(t)}}
 export function inspectLessonLine(q:LessonProblem,line:LessonLine){const close=(a:number,b:number)=>Math.abs(a-b)<1e-8;const yAt=line.m*q.point.x+line.b,slopeOK=close(line.m,q.answer.m),pointOK=close(yAt,q.point.y);return {correct:slopeOK&&pointOK,slopeOK,pointOK,yAt,overlap:close(line.m,q.given.m)&&close(line.b,q.given.b),relation:close(line.m,q.given.m)?'parallel':close(line.m*q.given.m,-1)?'perpendicular':'neither'}}
 export function lessonSlopeCorrect(text:string,m:number){const value=parseLinearExpression(text.replace(/^m\s*=/i,''));return !!value&&value.m===0&&Math.abs(value.b-m)<1e-8}
-export type LessonRecord={blue:string;red:string;equation:string;blueCorrect:boolean;redCorrect:boolean;redTried?:boolean;hadSlopeMiss:boolean;attempts:number;solved:boolean;line:LessonLine|null;format:boolean;turn:number;sketch?:LessonSegment|null;sketchChecked?:boolean}
+export type LessonRecord={blue:string;red:string;equation:string;blueCorrect:boolean;redCorrect:boolean;redTried?:boolean;hadSlopeMiss:boolean;attempts:number;solved:boolean;line:LessonLine|null;format:boolean;turn:number;sketch?:LessonSegment|null;sketchChecked?:boolean;placements?:Placements;chosenQuantity?:Quantity|null;pointSlopeChecked?:boolean}
 export const blankLessonRecord=():LessonRecord=>({blue:'',red:'',equation:'',blueCorrect:false,redCorrect:false,hadSlopeMiss:false,attempts:0,solved:false,line:null,format:false,turn:0})
 export type LessonProgress={index:number;records:LessonRecord[];completedAt:number|null}
 export const newLessonProgress=():LessonProgress=>({index:0,records:parallelLesson.map(blankLessonRecord),completedAt:null})

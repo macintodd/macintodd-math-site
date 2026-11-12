@@ -4,6 +4,8 @@ The M4 Mac mini is the primary editing machine. The AI on the other Mac reviews 
 
 ## Latest application change
 
+- Student P4 now shows a graph-free left workspace. Check the given slope, check the new slope, place the three signed quantities in point-slope form, then submit the final slope-intercept equation. The preparatory checks leave the existing equation scoring in place. The keypad on every student slide uses the Level 3 layout and switches to local scratch paper. Scratch work stays available when switching tabs and clears when changing problems.
+
 - Correct student equation fields and accepted slope readouts keep a green border glow. The red solution line glows after the equation is correct, whether it preserves a checked sketch or comes from the submitted equation.
 
 - Every correct student sketch shows the graphical-answer heading and two small callouts. One arrow points to the gold point and the other to the given blue line. The red bubble describes the parallel or perpendicular relationship. Continue returns to slope checks or equation entry, according to the problem’s progress.
@@ -15,6 +17,8 @@ The M4 Mac mini is the primary editing machine. The AI on the other Mac reviews 
 
 ## MathBoard mirroring
 
+- P4 slope progress, selected and placed quantities, and placement completion travel in the existing progress snapshot. The optional scratch field carries the active tab and a read-only image after each stroke or edit. The student bridge remains version 1 and accepts older snapshots without this field.
+
 - The answer and line glows use the existing correct-slope and solved-equation state. A simulated read-only receiver reproduced both glows with the existing snapshot format.
 
 - `c56cf8f` added the native bridge. The controller sends snapshots through `window.MathBoardApplet.publishState(snapshot)`. The external display receives them through `window.mathBoardAppletSetState(snapshot)`, registers once, and renders read-only without sending received state back. Regular browsers work without the native bridge.
@@ -23,6 +27,8 @@ The M4 Mac mini is the primary editing machine. The AI on the other Mac reviews 
 - The existing graphical-success flag now renders the correct sketch callouts for every student sketching problem on the read-only display. The existing progress and graph snapshots carry the reviewed problem index and the P3 sketch. The bridge methods and snapshot version stay the same.
 
 ## Verification and deployment
+
+- P4 and keypad update passed typecheck, lint, content checks, build, diff check, parallel classroom, Spanish, teacher, and MathBoard regressions. Simulated iPad landscape testing covered touch drag and drop, tap-to-place, rejected and accepted placements, slope and equation keypad entry, scratch drawing and tab switching, Spanish, and read-only MathBoard restoration. Deployment verification is pending.
 
 - For the answer glows, typecheck, lint, content checks, build, diff check, and parallel lesson, teacher, Spanish, and MathBoard regressions passed. The simulated iPad landscape check covered correct and incorrect equations, accepted slopes, the final line, and MathBoard restoration. The custom-domain Vercel deployment for `30a907a` succeeded. The secondary deployment was still pending at the last check. The answer-glow and MathBoard checks passed on the live site.
 

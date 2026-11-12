@@ -45,6 +45,15 @@ Try it independently.	Inténtalo de forma independiente.
 Sketch, discuss, then write the equation.	Dibuja, conversa y después escribe la ecuación.
 Use the four steps on your notes sheet. Enter only your final slope-intercept equation here.	Usa los cuatro pasos de tu hoja de apuntes. Escribe aquí solo tu ecuación final en forma pendiente-intersección.
 ✓ Blue slope	✓ Pendiente azul
+Find the given slope.	Encuentra la pendiente dada.
+Find the new slope.	Encuentra la pendiente nueva.
+What is the slope of the given line?	¿Cuál es la pendiente de la recta dada?
+What is the slope of the new line?	¿Cuál es la pendiente de la recta nueva?
+Build the point-slope equation.	Construye la ecuación en forma punto-pendiente.
+Write the final equation.	Escribe la ecuación final.
+Distribute the slope, then isolate y. Enter your final equation in slope-intercept form.	Distribuye la pendiente y despeja y. Escribe tu ecuación final en forma pendiente-intersección.
+Use your equation to revise.	Usa tu ecuación para corregir la respuesta.
+Finish distributing and write y = mx + b, then check again.	Termina de distribuir y escribe y = mx + b, luego vuelve a verificar.
 Check blue slope	Verificar pendiente azul
 ✓ New slope	✓ Nueva pendiente
 Check red slope	Verificar pendiente roja

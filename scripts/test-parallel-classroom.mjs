@@ -41,7 +41,7 @@ for(let i=1;i<12;i++){
  assert.equal(s.hooks[3].value.index,i);const q=lib.parallelLesson[i]
  if(q.kind==='triple'){
   if(q.id==='P2a'){graph().onSketchChange({a:{x:3,y:1},b:{x:6,y:3}});s.render();graph().onSketchCheck(true);s.render();acknowledgeGraph()}
-  if(q.id==='P2a'){const label='What is the slope of the blue line?';s.input(label+' numerator','2');s.nodes().find(n=>n.props['aria-label']===label+' numerator').props.onFocus();s.render();let prevented=false;s.nodes().find(n=>n.props['aria-label']===label+' numerator').props.onKeyDown({key:'/',preventDefault(){prevented=true}});s.render();assert(prevented);assert.equal(s.hooks[15].value,'den');s.click('3');assert.equal(record().blue,'2/3')}
+  if(q.id==='P2a'){const label='What is the slope of the blue line?';s.input(label+' numerator','2');s.nodes().find(n=>n.props['aria-label']===label+' numerator').props.onFocus();s.render();let prevented=false;s.nodes().find(n=>n.props['aria-label']===label+' numerator').props.onKeyDown({key:'/',preventDefault(){prevented=true}});s.render();assert(prevented);assert.equal(s.hooks[15].value,'den');s.nodes().find(n=>n.type==='./LessonTools').props.onKey('3');s.render();assert.equal(record().blue,'2/3')}
   assert(!s.nodes().some(n=>n.props['aria-label']==='Red line equation · y = mx + b'))
   if(q.id==='P2a'||q.id==='T6a'){s.input('What is the slope of the blue line?','99');s.click('Check blue slope');assert(!record().blueCorrect)}
   s.input('What is the slope of the blue line?',lib.lessonNumber(q.given.m));s.click('Check blue slope');assert.equal(lib.lessonGroupCount(s.hooks[3].value,q.slide),i===1||i===7?0:(i===2||i===8)?1:2)
@@ -70,8 +70,29 @@ for(let i=1;i<12;i++){
   assert(arrow('Next problem').props.disabled);
  }
  if(q.kind==='exact'){assert.equal(graph().drawing,q.id==='P3');equation('y=99x+99');assert.equal(graph().line.m,99);assert(feedback().includes('Both the slope and the point'))}
+ if(q.id==='P4'){
+  assert(!s.nodes().some(n=>n.type==='./LessonGraph'));
+  assert(!s.nodes().some(n=>n.type==='./PointSlopePlacement'));
+  s.input('What is the slope of the given line?','1');
+  s.click('Check blue slope');
+  assert(!record().blueCorrect);
+  assert(!record().hadSlopeMiss);
+  s.input('What is the slope of the given line?','-2/3');
+  s.click('Check blue slope');
+  s.input('What is the slope of the new line?','-2/3');
+  s.click('Check red slope');
+  let placement=s.nodes().find(n=>n.type==='./PointSlopePlacement');
+  assert(placement&&!placement.props.checked);
+  assert(!s.nodes().some(n=>n.props['aria-label']==='Red line equation · y = mx + b'));
+  placement.props.onPlace({m:'m',x1:'x',y1:'y'});s.render();
+  placement=s.nodes().find(n=>n.type==='./PointSlopePlacement');
+  placement.props.onCheck(true,'Correct');s.render();
+  assert(record().pointSlopeChecked);
+  assert.equal(record().attempts,0);
+  assert(arrow('Next problem').props.disabled);
+ }
  if(q.id==='P2a'||q.id==='T6a'){equation(`y=${lib.lessonNumber(q.answer.m)}x+99`);assert(!record().solved);assert.equal(lib.lessonGroupCount(s.hooks[3].value,q.slide),0)}
- equation(`y=${lib.lessonNumber(q.answer.m)}x${q.answer.b<0?'-':'+'}${lib.lessonNumber(Math.abs(q.answer.b))}`);assert(record().solved);assert(graph().correct);if(q.id==='P2a')assert.equal(graph().animation,null);if(q.id==='P2b')assert.equal(graph().animation.phase,'done');if(q.id==='P2c'||q.id==='T6c')assert.equal(lib.lessonGroupCount(s.hooks[3].value,q.slide),3)
+ equation(`y=${lib.lessonNumber(q.answer.m)}x${q.answer.b<0?'-':'+'}${lib.lessonNumber(Math.abs(q.answer.b))}`);assert(record().solved);if(q.id!=='P4')assert(graph().correct);if(q.id==='P2a')assert.equal(graph().animation,null);if(q.id==='P2b')assert.equal(graph().animation.phase,'done');if(q.id==='P2c'||q.id==='T6c')assert.equal(lib.lessonGroupCount(s.hooks[3].value,q.slide),3)
  s.click(i===11?'Finish & reflect →':'Next →')
 }
 assert.equal(s.hooks[4].value,'report');assert.equal(s.tree.type,'@/components/practice/CompletionFlow');assert.equal(s.tree.props.score,'10/10');assert.equal(s.tree.props.name,'Test Student');assert.equal(s.tree.props.stats.find(s=>s.label==='Completed problems').value,12);assert.equal(s.tree.props.details.length,12);assert.equal(s.report.length,0);assert.equal(teacher.hooks[3].value.index,0,'Student retries never move teacher display');

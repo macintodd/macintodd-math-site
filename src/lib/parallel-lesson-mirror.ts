@@ -1,11 +1,13 @@
 import type {LessonAnimation,LessonProgress,LessonPoint,LessonSegment,checkLessonSegment} from './parallel-lesson.ts'
 import type {CompletionDisplayState,ResumeDisplayState} from './mathboard/display-mirror.ts'
 export type LessonGraphDisplayState={problemId:string;segment:LessonSegment|null;selected:LessonPoint[];check:ReturnType<typeof checkLessonSegment>|null;zoomProgress:number|null}
+export type LessonScratchDisplayState={open:boolean;image:string|null}
 export type ParallelLessonDisplayState={
  app:'parallel-perpendicular-classroom';version:1;teacher:boolean;language:'en'|'es'
  first:string;last:string;hour:string;p:LessonProgress|null;screen:'lesson'|'report';reveal:number;turn:number;active:'blue'|'red'|'equation';activePart:'num'|'den'
  notice:string;hint:boolean;saved:boolean;resume:string;date:string;session:number;image:{url:string;language:string}|null
  graphicalNotice:boolean;graphicalAcknowledged:boolean;formatWarning:{prefix:boolean;x:boolean}|null
+ scratch?:LessonScratchDisplayState
  graphMirror:LessonGraphDisplayState|null;animation:LessonAnimation|null;completionMirror:CompletionDisplayState|null;resumeMirror:ResumeDisplayState|null
 }
 export type ParallelLessonBridgeWindow=Window & {MathBoardApplet?:{publishState?:(state:ParallelLessonDisplayState)=>void};mathBoardAppletSetState?:((state:unknown)=>void)}
