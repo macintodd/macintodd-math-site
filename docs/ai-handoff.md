@@ -88,3 +88,7 @@ Both Vercel deployments for `c2c12dd` succeeded. Verified the custom-domain `/ap
 - Local name/hour and session timestamp remain visible. Finish opens the shared two-reflection completion record with local date/time, average/best percentage, round count and every round result. No new student data transmission/storage. Spanish whole-page/tap-English system is included. No MathBoard bridge was added to this standalone game.
 - New math helper/test are **parallel-drawing-game.ts** and **test-parallel-drawing-game.mjs**; the older parallel-drawing.ts / test-parallel-drawing.mjs remain unchanged and their original opening-lesson tests pass. See docs/parallel-drawing-game.md for score design and integration boundaries.
 - Passed new game checks, earlier drawing regression, parallel language regression, shared completion tests, typecheck, lint, content checks, production build and diff check. Physical iPad/Pencil feel and visual viewport testing remain open. Feature commit awaiting live deployment verification; record result below once checked.
+
+### Parallel drawing game deployment verified
+
+Both Vercel deployments for `4ac84ef` succeeded. Verified the custom-domain `/apps/beta/parallel-drawing` page, published game controls/scoring prompts and touch-safe canvas CSS. Verified its card/link appears in Beta Apps and remains absent from the regular app directory. Physical iPad/Pencil drawing feel remains for teacher testing.
