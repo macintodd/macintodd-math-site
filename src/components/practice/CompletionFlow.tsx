@@ -1,5 +1,6 @@
 'use client'
-import {useState} from 'react'
+import {useEffect,useState} from 'react'
+import type {CompletionDisplayState} from '@/lib/mathboard/display-mirror'
 import Link from 'next/link'
 import {reportInfo} from '@/lib/scorecard'
 import {useWidgetLanguage} from './BilingualWidget'
@@ -8,15 +9,18 @@ import SkillGoal from './SkillGoal'
 import ScoreImageActions from './ScoreImageActions'
 import './completion.css'
 export type CompletionStat={label:string;value:string|number}
-type Props={slug:string;name:string;hour:string;completedAt?:string|number;score:string;stats:CompletionStat[];details?:string[];onReturn?:()=>void}
+type Props={slug:string;name:string;hour:string;completedAt?:string|number;score:string;stats:CompletionStat[];details?:string[];onReturn?:()=>void;readOnly?:boolean;mirror?:CompletionDisplayState|null;onMirrorChange?:(state:CompletionDisplayState)=>void}
 /** All records are generated on this device. No student information is uploaded. */
-export default function CompletionFlow({slug,name,hour,completedAt,score,stats,details=[],onReturn}:Props){
+export default function CompletionFlow({slug,name,hour,completedAt,score,stats,details=[],onReturn,readOnly=false,mirror=null,onMirrorChange}:Props){
  const {translate:t,displayText,language}=useWidgetLanguage(),show=displayText??t,info=reportInfo(slug)
  const [fallbackStamp]=useState(()=>new Date().toLocaleString()),stamp=completedAt?typeof completedAt==='number'?new Date(completedAt).toLocaleString():/^\d{4}-\d\d-\d\dT/.test(completedAt)?new Date(completedAt).toLocaleString():completedAt:fallbackStamp,identity=`${name}|${hour}|${stamp}`
- const [record,setRecord]=useState<{image:string;language:string;identity:string}|null>(null),[notice,setNotice]=useState(false),[error,setError]=useState('')
- const reflection=usePracticeReflection(slug,identity,()=>setRecord(null))
+ const [localRecord,setRecord]=useState<{image:string;language:string;identity:string}|null>(null),[localNotice,setNotice]=useState(false),[localError,setError]=useState('')
+ const localReflection=usePracticeReflection(slug,identity,()=>setRecord(null))
+ const reflection=readOnly&&mirror?{...localReflection,confidence:mirror.confidence,difficulty:mirror.difficulty}:localReflection,record=readOnly?mirror?.record??null:localRecord,notice=readOnly?mirror?.notice??false:localNotice,error=readOnly?mirror?.error??'':localError
+ useEffect(()=>{if(readOnly||!onMirrorChange)return;onMirrorChange({confidence:localReflection.confidence,difficulty:localReflection.difficulty,record:localRecord,notice:localNotice,error:localError})},[readOnly,onMirrorChange,localReflection.confidence,localReflection.difficulty,localRecord,localNotice,localError])
  const final=record?.language===language&&record.identity===identity?record:null
  function createRecord(){
+  if(readOnly)return
   if(!reflection.confidence||!reflection.difficulty){setNotice(true);return}
   try{
    const canvas=document.createElement('canvas');canvas.width=1500
@@ -44,9 +48,10 @@ export default function CompletionFlow({slug,name,hour,completedAt,score,stats,d
  }
  function rating(kind:'confidence'|'difficulty'){
   const value=reflection[kind],labels=kind==='confidence'?confidenceLabels:difficultyLabels
+  if(readOnly)return <p className="completion-rating-label">{'★'.repeat(value)}{'☆'.repeat(5-value)} · {value}/5 {value?show(labels[value-1]):''}</p>
   return <><div className="completion-stars" role="group" aria-label={show(kind==='confidence'?'Confidence rating':'Difficulty rating')}>{[1,2,3,4,5].map(n=><button key={n} type="button" aria-label={`${n}: ${show(labels[n-1])}`} aria-pressed={value===n} onClick={()=>reflection.rate(kind,n)}><span aria-hidden="true">{n<=value?'★':'☆'}</span><small>{n}</small></button>)}</div><p className="completion-rating-label">{value?`${value}/5 — ${show(labels[value-1])}`:show(kind==='confidence'?'1 = I need help · 5 = I can explain it':'1 = Too easy · 3 = Just right · 5 = Too difficult')}</p></>
  }
- return <main className="completion-flow"><Link href="/apps">{show('← Practice apps')}</Link>{final?<section className="completion-record" aria-label={show('Completion Record')}><h1>{show('Completion Record')}</h1><p className="completion-instruction">{show('Save this final record. Open Google Classroom, attach the saved image, and turn it in.')}</p><div className="completion-actions"><ScoreImageActions image={final.image} filename={`${slug.replace(/\//g,'-')}-completion.png`} buttonLabel={show('Press to save image')}/><button type="button" onClick={()=>onReturn?onReturn():window.location.reload()}>{show('Return to practice')}</button></div>
+ return <main className={`completion-flow ${readOnly?'lp-external-display':''}`} inert={readOnly?true:undefined}><Link href="/apps">{show('← Practice apps')}</Link>{final?<section className="completion-record" aria-label={show('Completion Record')}><h1>{show('Completion Record')}</h1><p className="completion-instruction">{show('Save this final record. Open Google Classroom, attach the saved image, and turn it in.')}</p><div className="completion-actions"><ScoreImageActions image={final.image} filename={`${slug.replace(/\//g,'-')}-completion.png`} buttonLabel={show('Press to save image')}/><button type="button" onClick={()=>onReturn?onReturn():window.location.reload()}>{show('Return to practice')}</button></div>
  {/* eslint-disable-next-line @next/next/no-img-element */}
- <img className="completion-image" src={final.image} alt={show('Final completion record including student name, date, time, score, and both reflection answers')}/></section>:<><header className="completion-header"><div><h1>{show(info.title)}</h1><p className="completion-skill"><b>{show('Skill practiced:')}</b> {show(info.skill)}</p></div><aside className="completion-summary"><strong data-no-translate>{name}</strong><span>{show('Class hour')} {hour}</span><span data-no-translate>{stamp}</span><b className="completion-score">{show('Final score')}: {score}</b>{stats.map((stat,i)=><span key={i}>{show(stat.label)}: {stat.value}</span>)}</aside></header><section className="completion-reflection"><h2>{show('Last step · Your reflection')}</h2><p>{show('Rate both questions. Then get the single completion record you will turn in.')}</p><div><h3>1. {show(reflection.question)}</h3>{rating('confidence')}</div><div><h3>2. {show('How was this widget’s practice for you?')}</h3>{rating('difficulty')}</div><button className="completion-primary" type="button" onClick={createRecord}>{show('Get Completion Record')}</button>{error&&<p role="alert">{error}</p>}</section></>}{notice&&<SkillGoal headingText={show('Rate your skill and the practice before you can submit.')} eyebrow={show('Last step · Your reflection')} buttonLabel={show('Return to reflection')} onContinue={()=>setNotice(false)}><p>{show('Rate both questions. Then get the single completion record you will turn in.')}</p></SkillGoal>}</main>
+ <img className="completion-image" src={final.image} alt={show('Final completion record including student name, date, time, score, and both reflection answers')}/></section>:<><header className="completion-header"><div><h1>{show(info.title)}</h1><p className="completion-skill"><b>{show('Skill practiced:')}</b> {show(info.skill)}</p></div><aside className="completion-summary"><strong data-no-translate>{name}</strong><span>{show('Class hour')} {hour}</span><span data-no-translate>{stamp}</span><b className="completion-score">{show('Final score')}: {score}</b>{stats.map((stat,i)=><span key={i}>{show(stat.label)}: {stat.value}</span>)}</aside></header><section className="completion-reflection"><h2>{show('Last step · Your reflection')}</h2><p>{show('Rate both questions. Then get the single completion record you will turn in.')}</p><div><h3>1. {show(reflection.question)}</h3>{rating('confidence')}</div><div><h3>2. {show('How was this widget’s practice for you?')}</h3>{rating('difficulty')}</div><button className="completion-primary" type="button" onClick={createRecord}>{show('Get Completion Record')}</button>{error&&<p role="alert">{error}</p>}</section></>}{notice&&<SkillGoal readOnly={readOnly} headingText={show('Rate your skill and the practice before you can submit.')} eyebrow={show('Last step · Your reflection')} buttonLabel={show('Return to reflection')} onContinue={()=>setNotice(false)}><p>{show('Rate both questions. Then get the single completion record you will turn in.')}</p></SkillGoal>}</main>
 }
