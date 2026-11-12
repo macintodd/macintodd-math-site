@@ -1,5 +1,32 @@
 /** Local classroom translations; no names or work are sent to a translation service. */
 export const parallelClassroomSpanish=String.raw`
+Write the Linear Equation: Parallel Lines · Classroom Lesson	Escribe la ecuación lineal: rectas paralelas · Lección para la clase
+Work through four classroom slides, then build streaks with graphing, point-slope form, and standard form.	Completa cuatro diapositivas en clase y luego consigue rachas con gráficas, forma punto-pendiente y forma estándar.
+Write the equation of a parallel line through a given point.	Escribe la ecuación de una recta paralela que pase por un punto dado.
+How independently can you write the equation of a parallel line through a given point?	¿Con cuánta independencia puedes escribir la ecuación de una recta paralela que pase por un punto dado?
+Parallel lines notes (PDF)	Apuntes de rectas paralelas (PDF)
+Beta · classroom notes and randomized practice · local results	Beta · apuntes y práctica con ejercicios variados · resultados locales
+complete	completados
+The saved progress is inconsistent.	El progreso guardado no es coherente.
+Write an equation for a line parallel to a given line and through a given point. Work through the notes with your teacher, then practice in the app.	Escribe la ecuación de una recta paralela a la recta dada que pase por un punto dado. Completa los apuntes con tu docente y luego practica en la aplicación.
+I’m ready to Practice	Estoy listo para practicar
+Show this screen to your teacher.	Muéstrale esta pantalla a tu docente.
+Start practice →	Comenzar la práctica →
+Practice level	Nivel de práctica
+Graph and check	Grafica y verifica
+Build point-slope form	Construye la forma punto-pendiente
+Independent practice	Práctica independiente
+Standard form	Forma estándar
+correct in a row	correctas seguidas
+Without hints	Sin pistas
+Draw and check the parallel line.	Dibuja y verifica la recta paralela.
+Next hint	Siguiente pista
+A hint resets the no-hint streak.	Una pista reinicia la racha sin pistas.
+Rewrite the given equation in slope-intercept form.	Reescribe la ecuación dada en la forma pendiente-intersección.
+Subtract the x-term from both sides.	Resta el término con x en ambos lados.
+Divide every term by the coefficient of y.	Divide cada término entre el coeficiente de y.
+Correct. Try a fresh problem to rebuild your streak.	Correcto. Resuelve un problema nuevo para volver a empezar la racha.
+
 Write the Linear Equation: Parallel and Perpendicular · Classroom Lesson	Escribe la ecuación lineal: paralelas y perpendiculares · Lección para la clase
 Teacher presentation · reveal work at your pace	Presentación docente · revela el trabajo a tu ritmo
 Teacher-led notes lesson · same examples, your own progress	Lección guiada con apuntes · mismos ejemplos, tu propio progreso

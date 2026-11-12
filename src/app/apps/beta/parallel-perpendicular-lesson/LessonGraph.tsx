@@ -9,7 +9,7 @@ import SketchFeedbackGraph from './SketchFeedbackGraph'
 import GraphicalCallouts from './GraphicalCallouts'
 import {coordinateLabels} from '@/lib/graph-coordinate-labels'
 const selectedLabelSize=24,scale=20,sx=(x:number)=>250+x*scale,sy=(y:number)=>250-y*scale
-export default function LessonGraph({q,line,correct=false,drawing=false,arrows=false,turn=0,sketch=null,sketchChecked=false,graphicalCalloutName=null,continueLabel='Now write the equation →',onAcknowledgeGraph,onSketchChange,onSketchCheck,animation=null,isExternalDisplay=false,mirror=null,onMirrorChange}:{q:LessonProblem;line:LessonLine|null;correct?:boolean;drawing?:boolean;arrows?:boolean;turn?:number;sketch?:LessonSegment|null;sketchChecked?:boolean;graphicalCalloutName?:string|null;continueLabel?:string;onAcknowledgeGraph?:()=>void;onSketchChange?:(s:LessonSegment|null)=>void;onSketchCheck?:(correct:boolean)=>void;animation?:LessonAnimation|null;isExternalDisplay?:boolean;mirror?:LessonGraphDisplayState|null;onMirrorChange?:(state:LessonGraphDisplayState)=>void}){
+export default function LessonGraph({q,line,correct=false,drawing=false,arrows=false,turn=0,sketch=null,sketchChecked=false,graphicalCalloutName=null,continueLabel='Now write the equation →',onAcknowledgeGraph,onSketchChange,onSketchCheck,animation=null,isExternalDisplay=false,mirror=null,onMirrorChange}:{q:LessonProblem;line:LessonLine|null;correct?:boolean;drawing?:boolean;arrows?:boolean;turn?:number;sketch?:LessonSegment|null;sketchChecked?:boolean;graphicalCalloutName?:string|null;continueLabel?:string;onAcknowledgeGraph?:()=>void;onSketchChange?:(s:LessonSegment|null)=>void;onSketchCheck?:(correct:boolean,reason:ReturnType<typeof checkLessonSegment>['reason'])=>void;animation?:LessonAnimation|null;isExternalDisplay?:boolean;mirror?:LessonGraphDisplayState|null;onMirrorChange?:(state:LessonGraphDisplayState)=>void}){
  const id=useId().replace(/:/g,'')
  const [localSegment,setSegment]=useState<LessonSegment|null>(sketch)
  const [localSelected,setSelected]=useState<LessonPoint[]>([])
@@ -53,7 +53,7 @@ export default function LessonGraph({q,line,correct=false,drawing=false,arrows=f
  function cancel(e:PointerEvent<SVGSVGElement>){
   if(pointer.current?.id===e.pointerId)pointer.current=null
  }
- function checkLine(){if(isExternalDisplay)return;const result=checkLessonSegment(q,segment);setCheck(result);onSketchCheck?.(result.correct)}
+ function checkLine(){if(isExternalDisplay)return;const result=checkLessonSegment(q,segment);setCheck(result);onSketchCheck?.(result.correct,result.reason)}
  const path=(l:LessonLine)=>`M${sx(-12)} ${sy(l.m*-12+l.b)} L${sx(12)} ${sy(l.m*12+l.b)}`
  const accepted=!!segment&&!!check?.correct,acceptedLine=accepted&&segment?sketchLine(segment):null,graphical=!!segment&&checkLessonSegment(q,segment).correct
  const drawnSegment=segment?.tapped?clipSketchLine(segment,normalSketchCamera):segment

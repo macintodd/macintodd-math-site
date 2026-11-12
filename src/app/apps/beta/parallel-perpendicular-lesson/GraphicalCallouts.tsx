@@ -1,16 +1,26 @@
-import type {LessonProblem} from '@/lib/parallel-lesson'
+import {visibleLessonSegment,type LessonProblem} from '@/lib/parallel-lesson'
 
 export default function GraphicalCallouts({id,name,q,sx,sy}:{id:string;name:string;q:LessonProblem;sx:(x:number)=>number;sy:(y:number)=>number}){
- const first=q.id==='P1'
- const redY=first?270:330
- const leftBlue=q.given.m<0
- const blueX=leftBlue?62:254
- const lineX=leftBlue?-3:Math.min(8,(4-q.given.b)/q.given.m)
+ const first=q.id==='P1',practice=q.id.startsWith('Practice ')
  const point={x:sx(q.point.x),y:sy(q.point.y)}
- const start={x:250,y:redY}
+ const redX=practice&&point.x<250?216:62
+ const redAbove=practice&&point.y>250
+ const redY=first?270:redAbove?72:330
+ const leftBlue=practice?redX>62:q.given.m<0
+ const blueX=leftBlue?62:254,blueY=redAbove?384:92
+ const lineX=leftBlue?-3:Math.min(8,(4-q.given.b)/q.given.m)
+ const start={x:practice?redX+111:250,y:redAbove?redY+96:redY}
  const inset=13/Math.hypot(point.x-start.x,point.y-start.y)
  const pointLeader=first?'M277 317L357 297':`M${start.x} ${start.y}L${point.x+(start.x-point.x)*inset} ${point.y+(start.y-point.y)*inset}`
- const lineLeader=`M${blueX+(leftBlue?92:122)} 128L${sx(lineX)} ${sy(q.given.m*lineX+q.given.b)}`
+ const blueStart={x:blueX+(leftBlue?92:122),y:redAbove?blueY:blueY+36}
+ let lineTip={x:sx(lineX),y:sy(q.given.m*lineX+q.given.b)}
+ if(practice){
+  const {a,b}=visibleLessonSegment(q.given)
+  const candidates=[.2,.35,.5,.65,.8].map(t=>({x:sx(a.x+(b.x-a.x)*t),y:sy(a.y+(b.y-a.y)*t)}))
+  // The middle of the graph remains clear of both bubbles on generated problems.
+  lineTip=candidates.find(v=>v.y>174&&v.y<320&&Math.hypot(v.x-point.x,v.y-point.y)>22)??candidates[2]
+ }
+ const lineLeader=`M${blueStart.x} ${blueStart.y}L${lineTip.x} ${lineTip.y}`
  const arrow=`url(#${id}-callout-arrow)`
  return <g className="lp-graphical-callouts">
   <defs>
@@ -23,10 +33,10 @@ export default function GraphicalCallouts({id,name,q,sx,sy}:{id:string;name:stri
   </foreignObject>
   <path className="lp-callout-leader" d={pointLeader} markerEnd={arrow}/>
   <path className="lp-callout-leader" d={lineLeader} markerEnd={arrow}/>
-  <foreignObject x="62" y={redY} width="222" height="112">
+  <foreignObject x={redX} y={redY} width="222" height="112">
    <div className="lp-graphical-bubble lp-graphical-red"><span>The red line goes</span>{' '}<u>through the point</u>{' '}<span>{q.relation==='parallel'?'and is parallel to blue.':'and is perpendicular to blue.'}</span></div>
   </foreignObject>
-  <foreignObject x={blueX} y="92" width="184" height="70">
+  <foreignObject x={blueX} y={blueY} width="184" height="70">
    <div className="lp-graphical-bubble lp-graphical-blue">Given blue line</div>
   </foreignObject>
  </g>

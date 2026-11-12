@@ -1,8 +1,9 @@
 import type {Placements,Quantity} from './intro-point-slope.ts'
 import {parseLinearExpression} from './line-equation.ts'
+export type PracticeStage=0|1|2|3
 export type LessonLine={m:number;b:number}
 export type LessonPoint={x:number;y:number}
-export type LessonProblem={id:string;slide:number;relation:'parallel'|'perpendicular';kind:'draw'|'triple'|'exact'|'independent';given:LessonLine;point:LessonPoint;answer:LessonLine}
+export type LessonProblem={id:string;slide:number;relation:'parallel'|'perpendicular';kind:'draw'|'triple'|'exact'|'independent';given:LessonLine;point:LessonPoint;answer:LessonLine;standardForm?:string}
 const problem=(id:string,slide:number,relation:LessonProblem['relation'],kind:LessonProblem['kind'],m:number,b:number,x:number,y:number):LessonProblem=>{const newM=relation==='parallel'?m:-1/m;return {id,slide,relation,kind,given:{m,b},point:{x,y},answer:{m:newM,b:y-newM*x}}}
 export const parallelLesson:LessonProblem[]=[
  problem('P1',1,'parallel','draw',2/3,-4,6,-2),
@@ -12,6 +13,8 @@ export const parallelLesson:LessonProblem[]=[
  problem('T6a',6,'perpendicular','triple',2/3,-4,2,1),problem('T6b',6,'perpendicular','triple',-.5,3,2,1),problem('T6c',6,'perpendicular','triple',1.5,-1,3,0),
  problem('T7',7,'perpendicular','exact',2/3,-4,3,1),problem('T8',8,'perpendicular','independent',-2/3,1,1,0)
 ]
+export const parallelNotes=parallelLesson.slice(0,6)
+export const parallelOnlyTitle='Write the Linear Equation: Parallel Lines · Classroom Lesson'
 export const lessonTitle='Write the Linear Equation: Parallel and Perpendicular · Classroom Lesson'
 export const lessonSlug='beta/parallel-perpendicular-lesson'
 export const notesPath='/handouts/parallel-perpendicular-classroom-notes.pdf'
@@ -23,11 +26,11 @@ export function distributedLesson(q:LessonProblem){return `y${signed(-q.point.y)
 export function readLessonLine(text:string):{line:LessonLine|null;format:boolean}{const t=text.trim().replace(/−/g,'-');if(!/^y\s*=/i.test(t))return {line:null,format:true};const value=parseLinearExpression(t);if(!value)return {line:null,format:true};return {line:value,format:/\([^)]*x/i.test(t)}}
 export function inspectLessonLine(q:LessonProblem,line:LessonLine){const close=(a:number,b:number)=>Math.abs(a-b)<1e-8;const yAt=line.m*q.point.x+line.b,slopeOK=close(line.m,q.answer.m),pointOK=close(yAt,q.point.y);return {correct:slopeOK&&pointOK,slopeOK,pointOK,yAt,overlap:close(line.m,q.given.m)&&close(line.b,q.given.b),relation:close(line.m,q.given.m)?'parallel':close(line.m*q.given.m,-1)?'perpendicular':'neither'}}
 export function lessonSlopeCorrect(text:string,m:number){const value=parseLinearExpression(text.replace(/^m\s*=/i,''));return !!value&&value.m===0&&Math.abs(value.b-m)<1e-8}
-export type LessonRecord={blue:string;red:string;equation:string;blueCorrect:boolean;redCorrect:boolean;redTried?:boolean;hadSlopeMiss:boolean;attempts:number;solved:boolean;line:LessonLine|null;format:boolean;turn:number;sketch?:LessonSegment|null;sketchChecked?:boolean;placements?:Placements;chosenQuantity?:Quantity|null;pointSlopeChecked?:boolean}
+export type LessonRecord={blue:string;red:string;equation:string;blueCorrect:boolean;redCorrect:boolean;redTried?:boolean;hadSlopeMiss:boolean;attempts:number;solved:boolean;line:LessonLine|null;format:boolean;turn:number;sketch?:LessonSegment|null;sketchChecked?:boolean;placements?:Placements;chosenQuantity?:Quantity|null;pointSlopeChecked?:boolean;practiceStage?:PracticeStage;practiceMiss?:boolean;hintsUsed?:number}
 export const blankLessonRecord=():LessonRecord=>({blue:'',red:'',equation:'',blueCorrect:false,redCorrect:false,hadSlopeMiss:false,attempts:0,solved:false,line:null,format:false,turn:0})
-export type LessonProgress={index:number;records:LessonRecord[];completedAt:number|null}
+export type LessonProgress={index:number;records:LessonRecord[];completedAt:number|null;practiceSeed?:number}
 export const newLessonProgress=():LessonProgress=>({index:0,records:parallelLesson.map(blankLessonRecord),completedAt:null})
-export function lessonTotals(p:LessonProgress){const solved=p.records.filter(r=>r.solved).length;return {solved,score:Math.round(solved/12*100)/10,firstTry:p.records.filter(r=>r.solved&&r.attempts===1&&!r.hadSlopeMiss).length,attempts:p.records.reduce((n,r)=>n+r.attempts,0)}}
+export function lessonTotals(p:LessonProgress){const solved=p.records.filter(r=>r.solved).length;return {solved,score:Math.round(solved/12*100)/10,firstTry:p.records.filter(r=>r.solved&&r.attempts===1&&!r.hadSlopeMiss&&!r.practiceMiss&&!r.hintsUsed).length,attempts:p.records.reduce((n,r)=>n+r.attempts,0)}}
 export function lessonGroupCount(p:LessonProgress,slide:number){return parallelLesson.filter((q,i)=>q.slide===slide&&p.records[i].solved).length}
 const alphabet='23456789ABCDEFGHJKLMNPQRSTUVWXYZ',hash=(s:string)=>{let n=17;for(const c of s)n=(31*n+c.charCodeAt(0))%65521;return n},identity=(first:string,last:string,hour:string)=>[first,last].map(s=>s.normalize('NFKD').toUpperCase().match(/[A-Z]/)?.[0]??'').join('')+hour+':PPL1'
 export function saveLesson(p:LessonProgress,first:string,last:string,hour:string){let bits='1';const fixed=(n:number,w:number)=>{if(!Number.isSafeInteger(n)||n<0||n>=2**w)throw Error('This lesson is too large to save.');bits+=n.toString(2).padStart(w,'0')},gamma=(n:number)=>{if(n>65534)throw Error('This lesson is too large to save.');const s=(n+1).toString(2);bits+='0'.repeat(s.length-1)+s};fixed(1,2);fixed(hash(identity(first,last,hour)),16);fixed(p.completedAt===null?0:1,1);if(p.completedAt!==null)fixed(Math.floor(p.completedAt/60000),32);p.records.forEach(r=>{fixed(+r.solved,1);fixed(+r.hadSlopeMiss,1);gamma(r.attempts)});const body=BigInt('0b'+bits);let v=body<<BigInt(16)|BigInt(hash(body.toString(36))),code='';while(v){code=alphabet[Number(v%BigInt(32))]+code;v/=BigInt(32)}return 'PPL-'+code.match(/.{1,4}/g)!.join('-')}

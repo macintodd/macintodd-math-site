@@ -59,3 +59,13 @@
 .lp-app .lp-point-slope :is(.wl-quantity.wl-y button,.wl-slot[data-quantity=y]){background:#fbe5e9;color:#b52439}
 .lp-app.lp-external-display .lp-point-slope :is(.wl-quantity button,.wl-slot){display:inline-grid!important;place-items:center;opacity:1}
 @media(max-width:760px){.lp-tool-card{position:static}.lp-point-slope .wl-place{font-size:20px}}
+
+.lp-ready{display:grid;justify-items:center;text-align:center;align-content:center;min-height:min(65vh,540px);margin:clamp(25px,8vh,85px) auto;max-width:800px;background:#f4fbf6;border-color:#7ebb94}
+.lp-ready h1{font-size:clamp(32px,6vw,66px);color:#126344}
+.lp-ready p{font-size:clamp(18px,2.6vw,30px);margin:8px 0}
+.lp-ready button{margin-top:22px}
+.lp-form-reference{display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:#edf4fb;padding:8px 12px;border-radius:10px;margin:8px 0 12px}
+.lp-form-reference .math-inline{font-size:22px}
+.lp-work>.scratch-pad .scratch-surface{aspect-ratio:504/350}
+.lp-standard-hints ol{padding-left:26px;margin:6px 0 12px}
+.lp-standard-hints li{margin:4px 0}

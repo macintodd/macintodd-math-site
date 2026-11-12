@@ -4,6 +4,10 @@ The M4 Mac mini is the primary editing machine. The AI on the other Mac reviews 
 
 ## Latest application change
 
+- The classroom lesson now ends the notes at P4. A correct P4 opens **I’m ready to Practice** with a prompt to show the teacher. The teacher route also lists only the six parallel notes examples. The existing handout link opens to the front.
+- Generated parallel practice uses integer y-intercepts. Students need three consecutive correct graph problems, two guided point-slope problems, two independent problems, and two standard-form problems without hints. A mistake or standard-form hint resets the current streak. A corrected answer advances to a fresh problem. Independent and standard-form problems show scratch paper above the equation field. Independent practice also shows a point-slope reference.
+- Original PPL codes restore parallel notes progress. Practice codes preserve generated questions, attempts, streaks, hints, and completion. Historical perpendicular records remain available to the old decoder.
+
 - Student P4 now shows a graph-free left workspace. Check the given slope, check the new slope, place the three signed quantities in point-slope form, then submit the final slope-intercept equation. The preparatory checks leave the existing equation scoring in place. The keypad on every student slide uses the Level 3 layout and switches to local scratch paper. Scratch work stays available when switching tabs and clears when changing problems.
 
 - Correct student equation fields and accepted slope readouts keep a green border glow. The red solution line glows after the equation is correct, whether it preserves a checked sketch or comes from the submitted equation.
@@ -17,6 +21,8 @@ The M4 Mac mini is the primary editing machine. The AI on the other Mac reviews 
 
 ## MathBoard mirroring
 
+- The student snapshot carries the ready screen, seeded practice records, hints, and scratch image. Both routes retain read-only receivers. The teacher receiver can restore older snapshots of the parallel notes portion and displays six notes examples.
+
 - P4 slope progress, selected and placed quantities, and placement completion travel in the existing progress snapshot. The optional scratch field carries the active tab and a read-only image after each stroke or edit. The student bridge remains version 1 and accepts older snapshots without this field.
 
 - The answer and line glows use the existing correct-slope and solved-equation state. A simulated read-only receiver reproduced both glows with the existing snapshot format.
@@ -27,6 +33,8 @@ The M4 Mac mini is the primary editing machine. The AI on the other Mac reviews 
 - The existing graphical-success flag now renders the correct sketch callouts for every student sketching problem on the read-only display. The existing progress and graph snapshots carry the reviewed problem index and the P3 sketch. The bridge methods and snapshot version stay the same.
 
 ## Verification and deployment
+
+- Parallel-only update passed a simulated iPad walkthrough from the notes through graphing by tap and drag, guided and independent work, standard-form hints, streak resets, resume, both reflections and the completion image. Deployment verification is pending.
 
 - P4 and keypad update passed typecheck, lint, content checks, build, diff check, parallel classroom, Spanish, teacher, and MathBoard regressions. Simulated iPad landscape testing covered touch drag and drop, tap-to-place, rejected and accepted placements, slope and equation keypad entry, scratch drawing and tab switching, Spanish, and read-only MathBoard restoration. Both Vercel deployments for `acd4b2f` succeeded. The touch walkthrough and simulated MathBoard restoration passed again on macintodd.net.
 
