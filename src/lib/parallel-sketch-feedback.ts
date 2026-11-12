@@ -10,7 +10,17 @@ export function sketchIntersection(q:LessonProblem,s:LessonSegment):LessonPoint|
 }
 export function sketchFeedbackCamera(q:LessonProblem,s:LessonSegment,reason:'point'|'direction'):SketchCamera{
  if(reason==='point')return {x:q.point.x,y:q.point.y,span:4}
- const hit=sketchIntersection(q,s);if(!hit)return normalSketchCamera
+ const hit=sketchIntersection(q,s)
+ if(q.relation==='perpendicular'){
+  if(hit)return {...hit,span:8}
+  // Show both parallel lines near the given point when there is no crossing.
+  const {m,b}=q.given
+  const offset=(m*q.point.x+b-q.point.y)/(1+m*m)
+  const nearest={x:q.point.x-m*offset,y:q.point.y+offset}
+  return {x:(q.point.x+nearest.x)/2,y:(q.point.y+nearest.y)/2,span:Math.max(8,Math.hypot(q.point.x-nearest.x,q.point.y-nearest.y)+4)}
+ }
+ if(!hit)return normalSketchCamera
+ if(Math.max(Math.abs(hit.x),Math.abs(hit.y))<=10)return {...hit,span:8}
  const left=Math.min(-10,hit.x),right=Math.max(10,hit.x),bottom=Math.min(-10,hit.y),top=Math.max(10,hit.y)
  return {x:(left+right)/2,y:(bottom+top)/2,span:Math.max(right-left,top-bottom)*1.35}
 }
