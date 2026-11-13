@@ -122,3 +122,7 @@ Both Vercel deployments for `d359002` succeeded. Live canonical and legacy teach
 - Added `/apps/ap-rational-practice`, original questions based on the ten teacher-selected 1.7A–1.9 packet/solution/extra PDFs. No originals uploaded or changed. New generator/resume/Spanish modules, app files, test and documentation; shared edits are directory preview/catalog, translation registry and scorecard skill.
 - Default 10 no-calculator + 10 calculator-allowed questions, selectable parts/topics. +10 correct, -5 missed, signed totals, no streak. Worked feedback, missed-question review, scratch paper, local identity/resume, Spanish, two required reflections and named/local-time completion image.
 - Passed 30,000 generated-question checks and actual component flow, shared directory/scorecard/completion regressions, typecheck, lint, content check, production build and diff check. No MathBoard bridge changes. Physical iPad layout testing remains open. See docs/ap-rational-practice.md. Deployment pending live verification.
+
+### AP rational-functions deployment verified
+
+Both Vercel deployments for `ce8a3f3` succeeded. Verified HTTP 200 and the activity title on `/apps/ap-rational-practice`, its regular app-directory entry, and the published app JavaScript/CSS including calculator sections and RAT1 resume logic. Shared completion-flow tests passed before deployment. Physical iPad visual testing remains open.
