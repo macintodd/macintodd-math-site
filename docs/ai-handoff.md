@@ -132,3 +132,7 @@ Both Vercel deployments for `ce8a3f3` succeeded. Verified HTTP 200 and the activ
 - Split the right-hand controls into Equation A (orange) and Equation B (purple), each with independent selected-parameter sliders and reset. Circular checkbox selectors allow A, B or both; the last visible equation cannot be hidden. Hiding preserves values. Shared function-family selection and parameter menu still apply to both, with unselected parameters reset to identity at launch.
 - Graph draws only enabled equations plus the dashed parent, including independent mapped dots and rational holes. Mapping/same-input tables show both enabled configurations. Recorded views and the named completion record preserve both settings and visibility. No student-data/network or MathBoard bridge changes.
 - Updated actual-component regression covers independent sliders, visibility guard, table columns, resets and recorded A/B settings. Math checks cover 6,525 mapped points and rational branch/domain behavior; typecheck, lint, content check and production build passed. Browser/iPad visual inspection remains open on this Mac. Deployment pending verification.
+
+### Dual-equation explorer verified live
+
+Both Vercel deployments for `fdef8b1` succeeded. Verified the custom-domain `/apps/transformations` page returns HTTP 200 and its published JavaScript includes independent B controls/reset/comparison data; its stylesheet includes the two-column equation layout and B styling. Physical iPad visual verification remains open.
