@@ -126,3 +126,9 @@ Both Vercel deployments for `d359002` succeeded. Live canonical and legacy teach
 ### AP rational-functions deployment verified
 
 Both Vercel deployments for `ce8a3f3` succeeded. Verified HTTP 200 and the activity title on `/apps/ap-rational-practice`, its regular app-directory entry, and the published app JavaScript/CSS including calculator sections and RAT1 resume logic. Shared completion-flow tests passed before deployment. Physical iPad visual testing remains open.
+
+## Transformation Explorer: compare two equations
+
+- Split the right-hand controls into Equation A (orange) and Equation B (purple), each with independent selected-parameter sliders and reset. Circular checkbox selectors allow A, B or both; the last visible equation cannot be hidden. Hiding preserves values. Shared function-family selection and parameter menu still apply to both, with unselected parameters reset to identity at launch.
+- Graph draws only enabled equations plus the dashed parent, including independent mapped dots and rational holes. Mapping/same-input tables show both enabled configurations. Recorded views and the named completion record preserve both settings and visibility. No student-data/network or MathBoard bridge changes.
+- Updated actual-component regression covers independent sliders, visibility guard, table columns, resets and recorded A/B settings. Math checks cover 6,525 mapped points and rational branch/domain behavior; typecheck, lint, content check and production build passed. Browser/iPad visual inspection remains open on this Mac. Deployment pending verification.

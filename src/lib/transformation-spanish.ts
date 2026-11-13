@@ -1,5 +1,16 @@
 /** Classroom translations for the explorer and all rigid-transformation skills. */
 export const transformationSpanish=String.raw`
+Visible functions evaluated at the same x. A dash means the function is undefined there. This compares outputs, not matching points.	Funciones visibles evaluadas en la misma x. Un guion indica que la función no está definida allí. Esto compara salidas, no puntos correspondientes.
+Equation A	Ecuación A
+Equation B	Ecuación B
+Reset B sliders	Restablecer controles B
+Show either equation or both. Each has independent sliders.	Muestra una ecuación o ambas. Cada una tiene controles independientes.
+A: New x	A: nueva x
+A: New y	A: nueva y
+B: New x	B: nueva x
+B: New y	B: nueva y
+Parent point:	Punto original:
+
 Outside multiplier	Multiplicador exterior
 Inside multiplier	Multiplicador interior
 Horizontal shift	Desplazamiento horizontal
