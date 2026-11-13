@@ -1,0 +1,16 @@
+import {rationalDeck,rationalTopics,type RationalMode,type RationalProgress} from './rational-mcq.ts'
+type Identity={first:string;last:string;hour:string}
+const alphabet='23456789ABCDEFGHJKLMNPQRSTUVWXYZ',modes:RationalMode[]=['both','no-calculator','calculator']
+const hash=(s:string)=>{let v=17;for(const c of s)v=(Math.imul(v,31)+c.charCodeAt(0))>>>0;return v&65535}
+function identity(id:Identity){const first=id.first.normalize('NFKD').replace(/\p{M}/gu,'').toUpperCase().match(/\p{L}/u)?.[0],last=id.last.normalize('NFKD').replace(/\p{M}/gu,'').toUpperCase().match(/\p{L}/u)?.[0];if(!first||!last||!['2','3','4','6','7','8'].includes(id.hour))throw Error('Enter your first name, last name, and class hour.');return hash(`${first}|${last}|${id.hour}`)}
+function validate(p:RationalProgress){const total=rationalDeck(p.seed,p.topics,p.mode).length;if(!Number.isInteger(p.seed)||p.seed<0||p.seed>0xffffffff||!modes.includes(p.mode)||!p.topics.length||new Set(p.topics).size!==p.topics.length||p.topics.some(t=>!rationalTopics.includes(t))||p.answers.length>total||p.answers.some(a=>!Number.isInteger(a)||a<0||a>3)||(p.answers.length===total)!==(p.completedAt!==null)||p.completedAt!==null&&(!Number.isSafeInteger(p.completedAt)||p.completedAt<=0||p.completedAt>=2**48))throw Error('This practice code has invalid progress.')}
+export function saveRational(p:RationalProgress,id:Identity){validate(p);let bits='1';const fixed=(n:number,w:number)=>{bits+=n.toString(2).padStart(w,'0')};fixed(1,2);fixed(82,8);fixed(identity(id),16);fixed(p.seed,32);fixed(rationalTopics.reduce((mask,t,i)=>mask|(p.topics.includes(t)?1<<i:0),0),4);fixed(modes.indexOf(p.mode),2);fixed(p.answers.length,5);p.answers.forEach(a=>fixed(a,2));fixed(p.completedAt===null?0:1,1);if(p.completedAt!==null)fixed(p.completedAt,48);const body=BigInt('0b'+bits);let value=(body<<BigInt(16))|BigInt(hash(body.toString(36))),code='';while(value){code=alphabet[Number(value%BigInt(32))]+code;value/=BigInt(32)}return 'RAT1-'+code.match(/.{1,4}/g)!.join('-')}
+export function loadRational(code:string,id:Identity):RationalProgress{
+ if(!/^RAT1-/i.test(code.trim()))throw Error('Use a code from Rational Functions Practice.')
+ const clean=code.trim().replace(/^RAT1-/i,'').toUpperCase().replace(/[\s-]/g,'');if(clean.length<10||clean.length>60||[...clean].some(c=>!alphabet.includes(c)))throw Error('Check the complete practice code.')
+ let value=BigInt(0);for(const c of clean)value=value*BigInt(32)+BigInt(alphabet.indexOf(c));const body=value>>BigInt(16);if(Number(value&BigInt(65535))!==hash(body.toString(36)))throw Error('Check the complete practice code.')
+ const bits=body.toString(2);let cursor=1;const take=(w:number)=>{if(cursor+w>bits.length)throw Error('Check the complete practice code.');const n=parseInt(bits.slice(cursor,cursor+w),2);cursor+=w;return n}
+ if(take(2)!==1||take(8)!==82)throw Error('Use a code from Rational Functions Practice.');if(take(16)!==identity(id))throw Error('Use the same name initials and class hour as your saved card.')
+ const seed=take(32),mask=take(4),mode=modes[take(2)],length=take(5),answers=Array.from({length},()=>take(2)),completedAt=take(1)?take(48):null,p={seed,topics:rationalTopics.filter((_,i)=>mask&(1<<i)),mode,answers,completedAt}
+ if(cursor!==bits.length)throw Error('Check the complete practice code.');validate(p);return p
+}

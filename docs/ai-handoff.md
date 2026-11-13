@@ -116,3 +116,9 @@ Both Vercel deployments for `8728e21` succeeded. Live checks confirmed `/apps/be
 ### P2c removal verified live
 
 Both Vercel deployments for `d359002` succeeded. Live canonical and legacy teacher pages now list exactly P1, P2a, P2b, P3, P4, with no P2c option. Both student lesson URLs return HTTP 200. Student progression, old/new resume mapping and native snapshot migration passed the regression checks.
+
+## AP Precalculus rational-functions MCQ practice
+
+- Added `/apps/ap-rational-practice`, original questions based on the ten teacher-selected 1.7A–1.9 packet/solution/extra PDFs. No originals uploaded or changed. New generator/resume/Spanish modules, app files, test and documentation; shared edits are directory preview/catalog, translation registry and scorecard skill.
+- Default 10 no-calculator + 10 calculator-allowed questions, selectable parts/topics. +10 correct, -5 missed, signed totals, no streak. Worked feedback, missed-question review, scratch paper, local identity/resume, Spanish, two required reflections and named/local-time completion image.
+- Passed 30,000 generated-question checks and actual component flow, shared directory/scorecard/completion regressions, typecheck, lint, content check, production build and diff check. No MathBoard bridge changes. Physical iPad layout testing remains open. See docs/ap-rational-practice.md. Deployment pending live verification.
