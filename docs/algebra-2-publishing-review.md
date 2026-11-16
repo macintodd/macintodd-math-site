@@ -79,3 +79,9 @@ Replaced the above answer sheet with `U1B2 Practice Slope & Rate of Change.pdf`.
 - Prepared practice key uses the original worksheet layout, purple answers, fraction notation, two marked points and arrows for each graph, vertical/horizontal lines, both intercepts, aligned algebra, and units in applications. Problems 1-12 verified by substitution into each equation. Special lines in 13 are y=5, x=3, x=0, y=3. Applications: L(w)=0.35w+120; M(t)=15t+50 and t=6 hours; V(t)=-8t+200 and empty at t=25 minutes.
 - Review: `U1B_L1-L3_Review.pdf` pages 1-2; omit its completely blank third page. The two-page `Unit 1B Completed/U1B_L1-L3_Review_Answer_Key.pdf` matches R1-R3 and questions 1-20. Preserve teacher-supplied solutions unchanged.
 - Review appears after Lesson 3, with blank/completed PDF links and links back to Lessons 1-3. No quizzes or tests published.
+
+## Unit 1B Lesson 4 — Writing Equations of Lines
+
+Teacher requested blank notes only and online practice in place of PDFs. Selected `Algebra 2/Unit 1B/U1B L4 Notes Writing Equations of Lines.pdf` after text and visual review of both pages. It has the Lesson 4 title, slope/intercept, graph, point-slope and two-point sections with blank work areas. The older three-page `U1BL4 Writing Equations of Lines.pdf` was compared and excluded. Source PDF bytes are unchanged and their SHA-256 is in content-sources.json. No completed notes or practice PDFs were selected or copied.
+
+New page `/courses/algebra-2/writing-linear-equations` has the blank-notes link and the six online Levels 0–5. The combined Levels 1–3 activity is explicitly an alternative, not another required assignment. Shared lesson renderer supports a data-driven activity list; existing video and review pages retain their behavior. The catalog tags these seven activities to Lesson 4 as well as their previous relevant lessons.

@@ -6,6 +6,7 @@ import katex from 'katex'
 import { lessons, courses } from '../src/content/lessons.ts'
 import { precalculusAssessments } from '../src/content/precalculus.ts'
 import { units, getUnit } from '../src/content/units.ts'
+import {practiceApps} from '../src/content/practice-apps.ts'
 import { vocabulary, getLessonVocabulary, getCourseVocabulary } from '../src/content/vocabulary.ts'
 import { canonicalFactors } from '../src/lib/factoring.ts'
 for (const term of Object.values(vocabulary)) {
@@ -45,7 +46,8 @@ for (const l of lessons) {
   assert(!ids.has(id), `Duplicate lesson: ${id}`); ids.add(id)
   if (l.materialSet !== 'resources') assert.equal(l.materials.length, 4, `Required materials: ${id}`)
   if (l.followUpOf) assert(lessons.some(parent => parent.slug === l.followUpOf && parent.course === l.course && !parent.followUpOf), `Follow-up needs a parent lesson: ${id}`)
-  assert(l.videos.length > 0 || l.reviewGuide)
+  assert(l.videos.length > 0 || l.reviewGuide || l.practiceActivities?.length)
+  for(const activity of l.practiceActivities??[]) assert(practiceApps.some(app=>app.slug===activity.slug), `Unknown lesson activity: ${activity.slug}`)
   if (l.reviewGuide) for (const slug of l.reviewGuide.lessonSlugs) assert(lessons.some(item => item.course === l.course && item.slug === slug), `Review links to a missing lesson: ${slug}`)
   for (const v of l.videos) assert(/^[\w-]{11}$/.test(v.id), 'Invalid YouTube ID')
   const examples = new Set()

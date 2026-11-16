@@ -1,9 +1,11 @@
+import { writingLinearLesson } from './writing-linear-lesson.ts'
 import { mathboardLesson, unit1bReviewLesson } from './mathboard-lesson.ts'
 import { precalculusLessons } from './precalculus.ts'
 export type CourseId = 'algebra-2' | 'precalculus'
 export type Step = { math: string; explanation: string }
 export type Example = { id: string; title: string; category: string; prompt: string; steps: Step[]; points?: { x: number; y: number; label: string }[]; triangle?: boolean }
 export type Lesson = {
+  practiceActivities?: {slug:string;description:string}[];
   interactiveLesson?: {href:string;teacherHref?:string;title:string};
   reviewGuide?: { instructions: string[]; lessonSlugs: string[]; practiceUrl: string; practiceTitle: string; practiceInstructions?: string; privacyUrl?: string; privacyNote: string }; indexLabel?: string; materialSet?: 'resources'; materialsNote?: string; followUpOf?: string; sortOrder?: number; course: CourseId; unitSlug: string; slug: string; title: string; unit: string; number: string; description: string;
   goals: string[]; prerequisites: string; concepts: { title: string; text: string; formula?: string; note?: string }[];
@@ -905,7 +907,7 @@ const functionNotationPractice: Lesson = {
     { file: 'algebra-2/function-notation/completed-practice-2.pdf', label: 'Completed Practice 2', title: 'Completed Practice 2', description: 'Second Function Notation practice with classroom solutions, problems 1-23.', kind: 'completed-practice', pages: 2 },
   ],
 }
-export const lessons: Lesson[] = [...originalLessons, ...additionalAlgebraLessons, functionNotationPractice, mathboardLesson, unit1bReviewLesson, ...precalculusLessons].sort((a, b) =>
+export const lessons: Lesson[] = [...originalLessons, ...additionalAlgebraLessons, functionNotationPractice, mathboardLesson, unit1bReviewLesson, writingLinearLesson, ...precalculusLessons].sort((a, b) =>
   a.course.localeCompare(b.course) || a.unitSlug.localeCompare(b.unitSlug) ||
   (a.sortOrder ?? Number(a.number.match(/\d+/)?.[0] ?? 0)) - (b.sortOrder ?? Number(b.number.match(/\d+/)?.[0] ?? 0))
 )

@@ -115,7 +115,7 @@
       "publishedPages": 2
     },
     {
-      "source": "Algebra 2/Unit 1A/U1AL2  Solving Two-Step Equations \u2014 NOTES.pdf",
+      "source": "Algebra 2/Unit 1A/U1AL2  Solving Two-Step Equations — NOTES.pdf",
       "output": "algebra-2/two-step-equations/notes.pdf",
       "pages": [
         1,
@@ -1100,6 +1100,14 @@
       "generator": "scripts/create-linear-level4-worksheet.py",
       "selectionReason": "Teacher-requested companion to the two-point guided app. Shared example matches the app; seven tall practice boxes record randomly generated points and vertical solution work. No student information.",
       "publishedSha256": "0801a7123085bae59de64e4b38cbd2dab6e2665f514f0056a201a489b266e005",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1B/U1B L4 Notes Writing Equations of Lines.pdf",
+      "output": "algebra-2/writing-linear-equations/notes.pdf",
+      "selectionReason": "Teacher requested blank Lesson 1.4 notes only. Reviewed both pages: Unit 1B Lesson 4 title, slope/intercept, graph, point-slope and two-point prompts with blank workspaces. The differently named older three-page file and all completed/practice files are excluded.",
+      "sourceSha256": "6d36ba0aa16349b7fb7f86a96c57b7fddeceaa32cddc034ffb8647634cfd17a4",
+      "publishedSha256": "6d36ba0aa16349b7fb7f86a96c57b7fddeceaa32cddc034ffb8647634cfd17a4",
       "publishedPages": 2
     }
   ]
