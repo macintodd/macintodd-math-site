@@ -200,3 +200,7 @@ Both Vercel deployments for `2d2db7b` succeeded. Verified live HTTP 200 for `/ap
 ### Warm-up skip verified live
 
 Production build and diff checks passed. Both Vercel deployments for `3fd7651` succeeded. Verified HTTP 200 and published Skip Warm-up, direct-independent-practice explanation and skipped-work completion-label JavaScript on both `/apps/beta/parallel-lines` and `/apps/beta/parallel-perpendicular-lesson`. No physical iPad inspection was performed. Existing teacher page and student data transport remain unchanged.
+
+## Level 4 best-streak requirement reduced to three
+
+Write the Linear Equation LEVEL 4 now requires 10 correct plus a best streak of 3 for full math credit. Updated focused completion/scoring, welcome/goal/streak/early-finish text, Spanish strings and app-directory metadata. Other levels and support fading (three-streak calculation, eight-correct independent stage) unchanged; resume-code format unchanged. Focused full-flow/support/resume and language regressions, typecheck, lint, content checks, production build and diff checks passed. Deployment verification pending.

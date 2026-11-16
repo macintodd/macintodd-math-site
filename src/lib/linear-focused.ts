@@ -10,8 +10,8 @@ export function focusedProblem(level:FocusedLevel,example:boolean,rng=Math.rando
  const p=generateProblem(3,false,rng,recentSlope),direction=p.point.x>0?-1:1
  return {...p,secondPoint:{x:p.point.x+direction*p.line.run,y:p.point.y+direction*p.line.rise}}
 }
-export function focusedDone(s:Session,level:FocusedLevel){const stats=s.stats[Math.min(3,level)-1];return level===4?stats.correct>=10&&stats.best>=5:done(Math.min(3,level) as Level,stats)}
-export function focusedScore(s:Session,level:FocusedLevel){if(level===4){const t=s.stats[2];return Math.max(0,Math.min(10,t.correct)-Math.max(0,5-t.best))}return Math.round(Math.min(1,s.stats[Math.min(3,level)-1].best/(level<3?3:5))*100)/10}
+export function focusedDone(s:Session,level:FocusedLevel){const stats=s.stats[Math.min(3,level)-1];return level===4?stats.correct>=10&&stats.best>=3:done(Math.min(3,level) as Level,stats)}
+export function focusedScore(s:Session,level:FocusedLevel){if(level===4){const t=s.stats[2];return Math.max(0,Math.min(10,t.correct)-Math.max(0,3-t.best))}return Math.round(Math.min(1,s.stats[Math.min(3,level)-1].best/(level<3?3:5))*100)/10}
 export function focusedBonus(s:Session){return s.targets.length===1&&s.bonus.length===1&&s.targets[0]===s.bonus[0]?1:0}
 // Reuse the compact checksum/initials codec with an activity-bound identity salt.
 // Padding exists only inside the codec envelope; the actual activity has one target.

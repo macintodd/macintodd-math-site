@@ -22,6 +22,11 @@ export const equationSpanish=String.raw`
 1 · Place	1 · Sustituir
 1. Determine the slope	1. Determina la pendiente
 1. Tap the y-intercept	1. Toca la intersección con el eje y
+10 correct + best streak of 3	10 correctas + mejor racha de 3
+10 correct and a best streak of 3 earn 10/10.	10 correctas y una mejor racha de 3 dan 10/10.
+10 correct and best streak of three	10 correctas y mejor racha de tres
+10 correct plus a best streak of 3 earn	10 correctas y una mejor racha de 3 dan
+__0__ / 10 correct · best streak __1__ / 3	__0__ / 10 correctas · mejor racha __1__ / 3
 10 correct + best streak of 5	10 correctas + mejor racha de 5
 10 correct and a best streak of 5 earn 10/10.	10 correctas y una mejor racha de 5 dan 10/10.
 10 correct and best streak of five	10 correctas y mejor racha de cinco
