@@ -151,4 +151,8 @@ Both Vercel deployments for `e0e5afb` succeeded. Verified HTTP 200 for canonical
 
 - Teacher requested only blank Lesson 1.4 notes, no completed notes and no practice PDFs. Reviewed both pages of `U1B L4 Notes Writing Equations of Lines.pdf` and compared the older similarly named three-page copy; selected the explicit two-page notes unchanged. One allowlisted PDF only, with source/published SHA-256.
 - Added `/courses/algebra-2/writing-linear-equations`, Lesson 4 under Unit 1B, vocabulary and resource-only materials. Added data-driven `practiceActivities` to the existing lesson reader: Levels 0–5 plus combined Levels 1–3 labeled as an alternative. Catalog lesson tags updated. Existing video/review flows unchanged, no worked examples added, no MathBoard changes.
-- Content checker now validates activity slugs against the app catalog and permits activity-based lessons without videos. Required checks/deployment verification pending below; PDF pages visually reviewed. No physical iPad check performed.
+- Content checker now validates activity slugs against the app catalog and permits activity-based lessons without videos. Typecheck, lint, content check, directory regression, production build and diff check passed. Generated HTML verified: one notes PDF, seven app links, Algebra 2 index and Unit 1B lesson sidebar. Deployment verification pending below; PDF pages visually reviewed. No physical iPad check performed.
+
+### Lesson 4 verified live
+
+Both Vercel deployments for `f68d386` succeeded. Verified the live Lesson 4 page, all six Levels 0–5 links plus the alternative combined app, its Algebra 2 index link, and exactly one published PDF anchor. The live blank-notes PDF SHA-256 matches the reviewed original. No completed notes or practice PDFs were uploaded. Physical iPad layout inspection remains open.
