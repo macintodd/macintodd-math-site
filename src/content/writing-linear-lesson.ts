@@ -7,6 +7,7 @@ export const writingLinearLesson:Lesson={
  materials:[{kind:'notes',title:'Blank Notes',label:'Blank Notes',file:'algebra-2/writing-linear-equations/notes.pdf',description:'Two-page Unit 1B Lesson 4 blank guided notes: Writing Equations of Lines.',pages:2}],
  materialsNote:'Practice for this lesson is in the online activities below. Completed notes and practice PDFs are not posted for this lesson.',
  practiceActivities:[
+  {slug:'unit-1b-lesson-4-practice',description:'Online companion to the 16-problem paper practice. Enter, check and revise your answers in any order. Submit both your paper work and your online record.'},
   {slug:'horizontal-vertical',description:'Level 0: identify horizontal and vertical lines, their equations, and zero or undefined slope.'},
   {slug:'write-linear-equation-level-1',description:'Write an equation when the slope and y-intercept are given.'},
   {slug:'write-linear-equation-level-2',description:'Read the y-intercept and slope from a graph, then write the equation.'},
