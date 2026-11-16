@@ -204,3 +204,7 @@ Production build and diff checks passed. Both Vercel deployments for `3fd7651` s
 ## Level 4 best-streak requirement reduced to three
 
 Write the Linear Equation LEVEL 4 now requires 10 correct plus a best streak of 3 for full math credit. Updated focused completion/scoring, welcome/goal/streak/early-finish text, Spanish strings and app-directory metadata. Other levels and support fading (three-streak calculation, eight-correct independent stage) unchanged; resume-code format unchanged. Focused full-flow/support/resume and language regressions, typecheck, lint, content checks, production build and diff checks passed. Deployment verification pending.
+
+### Level 4 streak change verified live
+
+Custom-domain Vercel deployment for `769c6ed` succeeded. Verified HTTP 200 for `/apps/write-linear-equation-level-4` and published welcome/goal text stating 10 correct plus a best streak of 3. Local regression verifies completion at 10/3, noncompletion at 10/2 and 5/3, full 10/10 math scoring at the new threshold, and preserved support milestones/resume behavior.
