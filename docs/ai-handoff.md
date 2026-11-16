@@ -136,3 +136,9 @@ Both Vercel deployments for `ce8a3f3` succeeded. Verified HTTP 200 and the activ
 ### Dual-equation explorer verified live
 
 Both Vercel deployments for `fdef8b1` succeeded. Verified the custom-domain `/apps/transformations` page returns HTTP 200 and its published JavaScript includes independent B controls/reset/comparison data; its stylesheet includes the two-column equation layout and B styling. Physical iPad visual verification remains open.
+
+## Remove unrelated quarter-turn demo from Parallel Lines
+
+- Removed the quarter-turn prompt, reveal/replay controls and example text from all student problems and the separate teacher presentation, plus the graph's rotation overlay. Generated practice stage 0 uses slide number 5, which accidentally activated the legacy perpendicular demonstration.
+- Retained legacy turn fields in MathBoard snapshots/types for compatibility, but they no longer render rotation content or trigger slope arrows in this parallel-only lesson. No changes to problem generation, completion gates, scoring, resume codes or other widgets.
+- Classroom, teacher, display-mirroring and language regressions passed; added a no-quarter-turn regression for all three renderers. Typecheck, lint, content check, production build and diff check passed. Deployment verification pending below. No physical iPad check performed for this removal.

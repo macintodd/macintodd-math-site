@@ -237,3 +237,9 @@ const before=JSON.stringify(gh);s.nodes(tree).find(n=>n.type==='svg').props.onPo
 gi=0;tree=gmod.exports.default({...drawProps,line:null,correct:false,isExternalDisplay:true,mirror:{...remoteGraph,check:{correct:false,reason:'point'},zoomProgress:.45}});
 const camera=s.nodes(tree).find(n=>n.props.mirroredProgress===.45);assert(camera.props.isExternalDisplay);assert.equal(camera.props.onProgressChange,undefined);
 console.log('Passed actual graph restoration of tapped line, pinned coordinates and diagnostic zoom, with read-only gestures and no child feedback.');
+// Parallel-only lesson must not inherit the legacy slide-5 perpendicular demo.
+for(const file of ['Lesson.tsx','teacher/TeacherLesson.tsx','LessonGraph.tsx']){
+ const source=fs.readFileSync(`src/app/apps/beta/parallel-perpendicular-lesson/${file}`,'utf8')
+ assert(!/quarter[ -]turn/i.test(source),`${file}: no quarter-turn UI or animation`)
+}
+console.log('Passed parallel-only student/teacher/graph regression: no quarter-turn controls or animation.')
