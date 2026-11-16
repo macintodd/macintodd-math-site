@@ -1,4 +1,5 @@
 export const completionSpanish=String.raw`
+Continue practice	Continuar la práctica
 Get Completion Record	Obtener registro de finalización
 Completion Record	Registro de finalización
 Press to save image	Presiona para guardar la imagen
