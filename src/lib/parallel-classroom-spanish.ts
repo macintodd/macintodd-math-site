@@ -207,4 +207,7 @@ Previous slide	Diapositiva anterior
 Skip to next slide →	Saltar a la siguiente diapositiva →
 Reset this problem	Reiniciar este problema
 Teacher presentation controls	Controles de la presentación docente
+Skip Warm-up	Saltar el repaso
+Go directly to independent practice. Completed work is kept.	Ve directamente a la práctica independiente. Se conserva el trabajo completado.
+Optional warm-up skipped	Repaso opcional omitido
 `

@@ -48,6 +48,15 @@ export function startParallelPractice(p:LessonProgress,seed:number):LessonProgre
  return {...p,index:parallelNotes.length,practiceSeed:seed,records:[...p.records,{...blankLessonRecord(),practiceStage:0}]}
 }
 
+// Optional classroom examples never become fabricated correct answers.
+export function skipParallelWarmup(p:LessonProgress,seed:number):LessonProgress{
+ const independent=p.records.findIndex(r=>r.practiceStage!==undefined&&r.practiceStage>=2&&!r.solved)
+ const existing=p.records.reduce((last,r,i)=>r.practiceStage!==undefined&&r.practiceStage>=2?i:last,-1)
+ if(existing>=0)return {...p,index:independent>=0?independent:existing}
+ return {...p,warmupSkipped:true,practiceSeed:p.practiceSeed??seed,completedAt:null,
+  index:p.records.length,records:[...p.records,{...blankLessonRecord(),practiceStage:2}]}
+}
+
 export function practiceStreak(records:LessonRecord[],stage:PracticeStage):number{
  let streak=0
  for(const record of records){
@@ -72,6 +81,7 @@ const checksum=(value:string)=>{let n=17;for(const c of value)n=(Math.imul(n,31)
 const invalid=()=>Error('The saved progress is inconsistent.')
 
 export function saveStudentLesson(p:LessonProgress,first:string,last:string,hour:string):string{
+ if(p.warmupSkipped)return saveIndependentLesson(p,first,last,hour)
  // Keep the original notes checkpoint and add compact practice data.
  const records=parallelLesson.map(q=>{const index=parallelNotes.findIndex(note=>note.id===q.id);if(index>=0)return p.records[index];if(q.id==='P2c'&&p.records.slice(0,3).every(r=>r.solved))return {...blankLessonRecord(),solved:true,attempts:1};return blankLessonRecord()})
  const notes=saveLesson({...p,records,completedAt:null},first,last,hour)
@@ -85,6 +95,7 @@ export function saveStudentLesson(p:LessonProgress,first:string,last:string,hour
 }
 
 export function loadStudentLesson(code:string,first:string,last:string,hour:string):LessonProgress{
+ if(/^PPI-/i.test(code.trim()))return loadIndependentLesson(code,first,last,hour)
  const clean=code.trim().replace(/\s/g,'').toLowerCase()
  const [notes,seed,time,history,check,...extra]=clean.split('.')
  const legacy=loadLesson(notes,first,last,hour)
@@ -110,4 +121,45 @@ export function loadStudentLesson(code:string,first:string,last:string,hour:stri
  const lastRecord=records.at(-1)!
  if(lastRecord.solved&&stage!==null)records.push({...blankLessonRecord(),practiceStage:stage})
  return {records,index:records.length-1,practiceSeed,completedAt:minutes?minutes*60000:null}
+}
+
+// A separate version preserves old PPL codes and records which optional work was skipped.
+const independentIdentity=(first:string,last:string,hour:string)=>checksum(`${first.trim()[0]?.toLowerCase()??''}:${last.trim()[0]?.toLowerCase()??''}:${hour}:ppi1`)
+function saveIndependentLesson(p:LessonProgress,first:string,last:string,hour:string):string{
+ const notes=p.records.slice(0,parallelNotes.length).map(r=>((r.solved?1:0)+(r.hadSlopeMiss?2:0)).toString(4)+r.attempts.toString(36)).join('-')
+ const history=p.records.slice(parallelNotes.length).map(r=>`${r.practiceStage}${((r.solved?1:0)+(r.practiceMiss?2:0)+(r.hintsUsed??0)*4).toString(16)}${r.attempts.toString(36)}`).join('-')
+ const payload=[independentIdentity(first,last,hour),p.practiceSeed!.toString(36),Math.floor((p.completedAt??0)/60000).toString(36),notes,history].join('.')
+ return 'PPI-'+payload+'.'+checksum(payload)
+}
+function loadIndependentLesson(code:string,first:string,last:string,hour:string):LessonProgress{
+ const clean=code.trim().replace(/\s/g,'').toLowerCase().slice(4)
+ const [identity,seed,time,notes,history,check,...extra]=clean.split('.')
+ const payload=[identity,seed,time,notes,history].join('.')
+ if(extra.length||!notes||!history||check!==checksum(payload)||identity!==independentIdentity(first,last,hour))throw invalid()
+ const integer=(s:string,max:number)=>{if(!/^[0-9a-z]+$/.test(s))throw invalid();const n=parseInt(s,36);if(!Number.isSafeInteger(n)||n<0||n>max||n.toString(36)!==s)throw invalid();return n}
+ const practiceSeed=integer(seed,0xffffffff),minutes=integer(time,0xffffffff)
+ const records:LessonRecord[]=notes.split('-').map((entry,i)=>{
+  if(!/^[0-3][0-9a-z]+$/.test(entry)||!parallelNotes[i])throw invalid()
+  const flags=Number(entry[0]),attempts=integer(entry.slice(1),65534),solved=!!(flags&1)
+  if(solved&&!attempts)throw invalid()
+  return confirmedRecord(parallelNotes[i],{...blankLessonRecord(),solved,attempts,hadSlopeMiss:!!(flags&2)})
+ })
+ if(records.length!==parallelNotes.length)throw invalid()
+ let expected:PracticeStage|null=2,previous=-1,started=false
+ const entries=history.split('-')
+ for(const [serial,entry] of entries.entries()){
+  if(!/^[0-3][0-9a-f][0-9a-z]+$/.test(entry))throw invalid()
+  const stage=Number(entry[0]) as PracticeStage,flags=parseInt(entry[1],16),attempts=integer(entry.slice(2),65534),solved=!!(flags&1),hintsUsed=flags>>2
+  if(stage<previous||solved&&!attempts||hintsUsed&&stage!==3)throw invalid()
+  if(stage>=2){
+   started=true
+   if(stage!==expected||!solved&&serial!==entries.length-1)throw invalid()
+  }else if(started)throw invalid()
+  records.push(confirmedRecord(parallelPracticeProblem(practiceSeed,serial,stage),{...blankLessonRecord(),practiceStage:stage,solved,attempts,practiceMiss:!!(flags&2),hintsUsed}))
+  if(stage>=2&&solved)expected=followingPracticeStage(records,stage)
+  previous=stage
+ }
+ if(!started||(expected===null)!==(minutes>0))throw invalid()
+ if(records.at(-1)!.solved&&expected!==null)records.push({...blankLessonRecord(),practiceStage:expected})
+ return {records,index:records.length-1,practiceSeed,completedAt:minutes?minutes*60000:null,warmupSkipped:true}
 }

@@ -69,3 +69,5 @@
 .lp-work>.scratch-pad .scratch-surface{aspect-ratio:504/350}
 .lp-standard-hints ol{padding-left:26px;margin:6px 0 12px}
 .lp-standard-hints li{margin:4px 0}
+
+.lp-skip-warmup{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin:1rem 0}.lp-skip-warmup span{font-size:1rem}

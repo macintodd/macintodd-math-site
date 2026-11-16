@@ -29,7 +29,7 @@ export function inspectLessonLine(q:LessonProblem,line:LessonLine){const close=(
 export function lessonSlopeCorrect(text:string,m:number){const value=parseLinearExpression(text.replace(/^m\s*=/i,''));return !!value&&value.m===0&&Math.abs(value.b-m)<1e-8}
 export type LessonRecord={blue:string;red:string;equation:string;blueCorrect:boolean;redCorrect:boolean;redTried?:boolean;hadSlopeMiss:boolean;attempts:number;solved:boolean;line:LessonLine|null;format:boolean;turn:number;sketch?:LessonSegment|null;sketchChecked?:boolean;placements?:Placements;chosenQuantity?:Quantity|null;pointSlopeChecked?:boolean;practiceStage?:PracticeStage;practiceMiss?:boolean;hintsUsed?:number}
 export const blankLessonRecord=():LessonRecord=>({blue:'',red:'',equation:'',blueCorrect:false,redCorrect:false,hadSlopeMiss:false,attempts:0,solved:false,line:null,format:false,turn:0})
-export type LessonProgress={index:number;records:LessonRecord[];completedAt:number|null;practiceSeed?:number}
+export type LessonProgress={index:number;records:LessonRecord[];completedAt:number|null;practiceSeed?:number;warmupSkipped?:true}
 export const newLessonProgress=():LessonProgress=>({index:0,records:parallelLesson.map(blankLessonRecord),completedAt:null})
 export function lessonTotals(p:LessonProgress){const solved=p.records.filter(r=>r.solved).length;return {solved,score:Math.round(solved/12*100)/10,firstTry:p.records.filter(r=>r.solved&&r.attempts===1&&!r.hadSlopeMiss&&!r.practiceMiss&&!r.hintsUsed).length,attempts:p.records.reduce((n,r)=>n+r.attempts,0)}}
 export function lessonGroupCount(p:LessonProgress,slide:number){return parallelNotes.filter((q,i)=>q.slide===slide&&p.records[i]?.solved).length}
