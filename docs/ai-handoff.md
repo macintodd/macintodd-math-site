@@ -257,3 +257,7 @@ Both Vercel deployments for `59f9a91` succeeded. Verified HTTP 200 and the self-
 - Independent all-30-answer/key and symbolic/parser tests, source graphs/curve fitting, boundary/vertex criteria, actual section/input/hint/review/scratch/resume/report behavior, pointer/read-only-point aids, complete Spanish/LaTeX and schema/checksum/identity round trips passed. Day 1 and shared completion regressions passed; typecheck/content/lint/build passed before the final anchor/keypad polish. Final checks and deployment below. See docs/precalculus-review-widget.md. Physical iPad/Photos inspection remains open (browser native pipe unavailable).
 
 Final all-30-answer/UI/gesture/symbolic/LaTeX/Spanish/resume regression, typecheck, content checks, lint, production build and diff checks passed. Generated HTML confirms the 30-question self-evaluation welcome and links from the app directory and Precalculus review page. Deployment verification pending.
+
+### Precalculus review widget verified live
+
+Custom-domain Vercel deployment for `6625069` succeeded. Verified HTTP 200, the 30-question/self-evaluation-only welcome, and links from `/apps` and the Precalculus quiz-review page. Retrieved live JavaScript containing PCR1 saves, formula input, hints, sketch controls, editable review and reflection flow; confirmed compact operation-keypad/touch-safe graph styles. All source-matched math, UI, graph-gesture, parser, bilingual, resume and production checks passed locally. Physical iPad/Photos-picker verification remains open.
