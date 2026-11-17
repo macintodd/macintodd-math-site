@@ -1,0 +1,19 @@
+# Precalculus Sections 1.6–1.7B · Review & Learn
+
+Route: `/apps/precalculus-quiz-review`. Exact fixed source: teacher's two-page `U1 Quiz Review Sections 1.6-1.7B.pdf`, checked against its corresponding review key. No actual quiz questions/keys are imported or changed.
+
+Three mutually exclusive section buttons preserve original paper numbering: 1.6 (questions 1–10), 1.7A (11–19), 1.7B (20–30). Free navigation, per-question drafts, hints/check counts, and editable selected-section review. Numeric and ordered-pair entries use the custom keypad; parent names, domain/range, reflection and transformation descriptions use clear choices to support the review's learning purpose. Defaults are not preselected. All requested subparts are checked and correct components stay identified while others receive targeted guidance.
+
+- Linear function from two points; greatest-integer evaluation including negative inputs; parent graphs with domains/ranges; piecewise endpoint conventions and evaluations; overtime wages.
+- Shifts/reflections with h/k, descriptions, explicit function equations and graph reading.
+- a/b/h/k, scale/reflection descriptions, mapped points, graph-derived equations and sketches.
+
+Reference graphs reproduce the source rules. Integer-point coordinate taps are optional and never graded. Original labeled points stay labeled; the unlabelled anchors on questions 17/18 reveal their coordinates only on a tap. Greatest-integer plots have closed left/open right endpoints. Question 8 requires both boundary points and one other point per half-plane ray, plus open/closed choices. Questions 19 and 30 require vertex-containing parent/child point sets on both sides (five points each for the parabolas, three each for absolute value), then Draw and Check. Curves are fitted to the student's own points, not auto-corrected to the hidden answer. Graph taps prevent page scrolling; keyboard arrows/Enter are supported.
+
+A restricted math grammar accepts x, numbers/fractions, + − × ÷, parentheses, powers 0–3, abs()/bars, sqrt()/√ and f(input) with the given parent. Equivalence uses bounded polynomial coefficients and normalized shifted absolute-value/square-root expressions, not JavaScript evaluation or sampled answer checks. Equivalent expanded forms are accepted. AST-based LaTeX previews preserve grouping and function prefixes. The compact keypad keeps the number keys in a 3×3 block with a separate operation area and bottom delete/clear. Question 1 offers f(x)=; later equations offer g(x)=.
+
+Score: self-evaluation only, explicitly not a quiz grade. One point per checked-correct problem; each of three hints costs 0.2, with a correct-completion floor of 0.5. Free unlimited retries, no timer/streak. Partial finish is allowed. Shared two-reflection completion images include name/local completion time, skill, score, per-question counts and answers, and the self-evaluation notice. Return preserves work.
+
+PCR1 local progress file/backup code includes section/question, fields/checks/hints, selected curve, points/endpoints/drawing state, optional read points, per-problem scratch strokes, tool, language, view/scroll, completion time and ratings. The initials/hour checksum is a mismatch/corruption aid, not authentication. Nothing is uploaded or stored in browser storage. Existing D1R1/L4P1 codes remain unchanged. Spanish-with-tap-English covers prompts, hints, fields, feedback and reflections. New app directory preview and review-page link; no native MathBoard changes.
+
+Regression independently checks all 30 source/key answers; symbolic equivalence and rejected unsafe expressions; graph values, half-plane and vertex/point criteria; original numbering and section counts; actual UI input/retry/hint/scratch/review/restore/report paths; graph gestures and student-derived curve drawing; Spanish and LaTeX. Physical iPad/browser/Photos-picker verification remains open because browser inspection is unavailable on this machine.

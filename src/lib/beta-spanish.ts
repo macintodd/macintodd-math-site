@@ -1,3 +1,5 @@
+import {precalcReviewSpanish} from './precalc-review.ts'
+import {precalcReviewUiSpanish} from './precalc-review-spanish.ts'
 import {day1Spanish} from './day1-review.ts'
 import {day1ReviewUiSpanish} from './day1-review-spanish.ts'
 import {linearWorksheetSpanish} from './linear-worksheet-spanish.ts'
@@ -423,7 +425,7 @@ All hints shown	Todas las pistas mostradas
 Given point and given line.	Punto dado y recta dada.
 `;
 const normalize=(s:string)=>s.replace(/&amp;/g,'&').replace(/\s+/g,' ').trim()
-const translations=new Map((transformationSpanish.trim()+'\n'+transformationConfidence.trim()+'\n'+completionSpanish.trim()+'\n'+rows.trim()+'\n'+equationSpanish.trim()+'\n'+scaleSpanish.trim()+'\n'+horizontalVerticalSpanish.trim()+'\n'+slopeTwoPointsSpanish.trim()+'\n'+parallelClassroomSpanish.trim()+'\n'+parallelDrawingSpanish.trim()+'\n'+rationalSpanish.trim()+'\n'+parentGraphSpanish.trim()+'\n'+linearWorksheetSpanish.trim()+'\n'+day1Spanish.trim()+'\n'+day1ReviewUiSpanish.trim()).split('\n').map(row=>{const i=row.indexOf('\t');return [normalize(row.slice(0,i)).toLowerCase(),row.slice(i+1)]}))
+const translations=new Map((transformationSpanish.trim()+'\n'+transformationConfidence.trim()+'\n'+completionSpanish.trim()+'\n'+rows.trim()+'\n'+equationSpanish.trim()+'\n'+scaleSpanish.trim()+'\n'+horizontalVerticalSpanish.trim()+'\n'+slopeTwoPointsSpanish.trim()+'\n'+parallelClassroomSpanish.trim()+'\n'+parallelDrawingSpanish.trim()+'\n'+rationalSpanish.trim()+'\n'+parentGraphSpanish.trim()+'\n'+linearWorksheetSpanish.trim()+'\n'+day1Spanish.trim()+'\n'+day1ReviewUiSpanish.trim()+'\n'+precalcReviewSpanish.trim()+'\n'+precalcReviewUiSpanish.trim()).split('\n').map(row=>{const i=row.indexOf('\t');return [normalize(row.slice(0,i)).toLowerCase(),row.slice(i+1)]}))
 export function spanishText(value:string,context=''):string{
  const body=normalize(value);if(!body)return value
  let translated=translations.get(body.toLowerCase())

@@ -189,9 +189,9 @@ export const testReviewLessons:Lesson[] = [
         "transformations-shifts-reflections",
         "transformations-stretches-shrinks"
       ],
-      "practiceUrl": "/apps/parent-transformations",
-      "practiceTitle": "All Transformations: Parent Functions",
-      "practiceInstructions": "Optional additional transformation practice; your review also includes parent, step and piecewise functions.",
+      "practiceUrl": "/apps/precalculus-quiz-review",
+      "practiceTitle": "Precalculus · Sections 1.6–1.7B Review & Learn",
+      "practiceInstructions": "Check all 30 questions from this review online. Use paid hints and free retries to learn; the score is self-evaluation only, not a quiz grade.",
       "privacyNote": "Names, work, and results stay locally in the page; submit any assigned record manually."
     }
   }
