@@ -243,3 +243,7 @@ Custom-domain Vercel deployment for `6d3d7ac` succeeded. Verified HTTP 200 for a
 - Independent all-39-answer and graph math regression, actual component flow, pointer gestures, resume/schema/checksum/identity, translations and LaTeX passed. Existing Lesson 4 worksheet, shared CompletionFlow and equation-language regressions passed; typecheck/content/lint/build passed before final simplified-expression grading refinement. Final build/deployment below. Browser/iPad visual inspection unavailable (native browser pipe missing).
 
 Final grading refinements (distribute variable expressions and equations before accepting simplified form), full regression, typecheck, content checks, lint, production build and diff checks passed. Generated HTML verifies the self-evaluation welcome and links from the app directory and Day 1 review lesson. Deployment verification pending below.
+
+### Day 1 review widget verified live
+
+Both Vercel deployments for `59f9a91` succeeded. Verified HTTP 200 and the self-evaluation-only welcome at `/apps/unit-1b-day-1-review`, plus working links from `/apps` and the Day 1 review lesson. Retrieved published JavaScript chunks containing D1R1 resume, paid hints, editable answer review, two-line graphing and final reflection flow; confirmed live responsive/touch-safe graph CSS. All 39 answer/component/gesture/resume regressions and production checks passed locally. Physical iPad/Photos-picker inspection remains open.
