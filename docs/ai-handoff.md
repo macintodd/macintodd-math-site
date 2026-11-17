@@ -217,3 +217,7 @@ Custom-domain Vercel deployment for `769c6ed` succeeded. Verified HTTP 200 for `
 - All selected source and browser-rewritten pages inspected; verified identical rendered pixels for the first 14 source/PDF pairs. Added L4 key also inspected on both pages. Content checks now cover 34 lessons and 110 allowlisted PDFs. Typecheck, worksheet-companion grading/state regression and initial lint/build passed; final lint/build and deployment verification below. Physical iPad inspection remains open. No native bridge, score transport or widget behavior changes.
 
 Final lint/build and diff checks passed. Verified all 15 affected source/published PDF pairs have matching source hashes, two pages and identical rendered pixels. Inspected generated lesson HTML for all four material positions, selected PDF links and the typeset problem-7 correction. All original teacher files remain unchanged.
+
+### Course handouts verified live
+
+Both Vercel deployments for `3efbca2` succeeded. Verified HTTP 200 and expected material links on Algebra 2 Writing Equations of Lines, Precalculus parent functions, 1.7A shifts/reflections and 1.7B stretches/shrinks pages. Confirmed both new lessons appear in the Precalculus contents. All 15 affected PDF links return HTTP 200 with PDF content type; live Lesson 4 practice-key SHA-256 matches the reviewed published file. Problem-7 correction is present on the live lesson page. The 1.7B completed-practice PDF remains unlocated/unpublished and explicitly marked Not posted yet.
