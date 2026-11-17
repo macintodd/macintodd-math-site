@@ -230,3 +230,7 @@ Both Vercel deployments for `3efbca2` succeeded. Verified HTTP 200 and expected 
 - Reviewed all 19 PDF pages; verified all ten source/published pairs by source hash, page count and exact rendered pixels. Content checks cover 37 lessons and 120 allowlisted PDFs; typecheck passed. Final lint/build and deployment verification below.
 
 Final lint/build and diff checks passed. Generated HTML confirms all three review pages, all ten PDF links and both class-index entries.
+
+### Separate reviews verified live
+
+Custom-domain Vercel deployment for `6d3d7ac` succeeded. Verified HTTP 200 for all three new review pages, their links in both course contents, and all ten review/answer PDF URLs with PDF content type. Algebra 2 Part A/B reviews and worked answers are grouped by test day; Precalculus review/key is on its separate 1.6–1.7B page. Actual assessments remain unpublished.
