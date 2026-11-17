@@ -1,0 +1,15 @@
+# Unit 1B Day 1 · Review & Learn
+
+Route: `/apps/unit-1b-day-1-review`. Source: published Algebra 2 Unit 1B Day 1 Review Parts A/B and their matching worked answer sheets. No test questions or test keys were imported.
+
+Part A keeps the paper's 21 questions: arithmetic/expression prerequisites, function evaluation/substitution, two-point slopes and directions, quadratic average rates, and water rates with units/sign interpretation. Part B keeps 18 questions: slope/intercept reading, solving for y, standard-form intercepts plus equations, six lines across three graphing questions, and the six original multiple-choice items. Multiple requested answers are checked separately and correct components stay identified. A copied undistributed variable expression is not accepted as simplified.
+
+Part buttons are mutually exclusive; only the chosen part's numbered questions appear. All questions are unlocked. Work and hints persist across switching, reviewing, and reopening questions. Graphing uses two distinct integer points for each labeled/color-coded line, a Draw action and a separate Check. Taps toggle points, two-point lines extend through the visible plane, coordinate labels avoid collisions, and graph/scratch gestures prevent page scrolling.
+
+The score is explicitly self-evaluation only, not a test grade. One point per checked-correct question, −0.2 per hint, minimum 0.5 for completed work; three hints per question; unlimited free checks/retries. No streak, timer, submission mandate or backend scoring. Unfinished work can be reflected on at any time. The editable selected-part review and named/local-timestamped two-reflection completion image are shared with the normal CompletionFlow. Return to practice preserves work.
+
+D1R1 saves encode part, question, active answer, tool, selected graph line, every draft/check/hint, graph, per-question scratch strokes, language, screen/scroll, completion time and reflection ratings. A local JSON progress download is easier than the long backup code. Initial/hour hash and checksum detect mismatches/corruption; they are not authentication. Names and work are never uploaded or written to browser storage. Restored completion images regenerate locally from saved ratings. Existing L4P1 files/codes remain separate.
+
+English/Spanish-with-tap-English mode includes prompts, hints, fields, feedback, menus and final skill reflection. New app directory preview shows a real slope example. The Day 1 review lesson links directly to the widget. No MathBoard bridge changes.
+
+Automated regression independently checks all 39 answers, equivalent fractions, sign/zero/undefined cases, six lines, paid hints/floor, edited answer invalidation, per-part totals, LaTeX, translated copy, schema/identity/checksum handling, all-screen restores and actual component events (part controls, retries, scratch, review, reflection return). Graph pointer tests cover SVG mapping, toggling, touch prevention and independent line grading. Physical iPad/Photos-picker inspection remains necessary; browser inspection was unavailable on this Mac (native browser pipe missing).

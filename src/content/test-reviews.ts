@@ -64,9 +64,9 @@ export const testReviewLessons:Lesson[] = [
         "slope-rate-of-change",
         "graphing-linear-equations"
       ],
-      "practiceUrl": "/apps/graph-mixed",
-      "practiceTitle": "Graph the Line: Mixed Practice",
-      "practiceInstructions": "Use this optional practice to review skills you want to strengthen.",
+      "practiceUrl": "/apps/unit-1b-day-1-review",
+      "practiceTitle": "Unit 1B Day 1 · Review & Learn",
+      "practiceInstructions": "Check the exact Part A and Part B review questions online. Hints cost self-evaluation points; retries are free. This score is for self-evaluation only, not a test grade.",
       "privacyNote": "Names, work, and results stay locally in the page; submit any assigned record manually."
     }
   },
