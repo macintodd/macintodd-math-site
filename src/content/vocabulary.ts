@@ -337,6 +337,9 @@ const lessonTerms: Record<string, string[]> = {
   "unit-1b-lessons-1-3-review": ["function-notation","slope","rate-of-change","y-intercept","slope-intercept-form"],
   "transformations-shifts-reflections": ["parent-function","translation","reflection","function-notation"],
   "transformations-stretches-shrinks": ["parent-function","vertical-scale","horizontal-scale","translation","reflection"],
+  "unit-1b-test-day-1-review": ["function-notation","slope","rate-of-change","y-intercept","slope-intercept-form"],
+  "unit-1b-test-day-2-review": ["slope","y-intercept","slope-intercept-form","point-slope-form"],
+  "quiz-review-sections-1-6-to-1-7": ["parent-function","translation","reflection","vertical-scale","horizontal-scale"],
   "parent-functions": ["parent-function", "greatest-integer-function", "piecewise-function", "domain", "range", "even-function", "odd-function", "interval-notation"],
   "graphing-linear-equations": ["linear-equation","slope","rate-of-change","y-intercept","slope-intercept-form","function-notation"],
   "one-step-equations": [

@@ -1213,6 +1213,86 @@
       "publishedSha256": "99c09cde2de38b1e77285b3e922b66f5ca241098347304c5c906f9261608414f",
       "publishedPages": 2,
       "selectionReason": "Teacher supplied the matching 16-problem handwritten practice key during this publication review. Original remains unchanged. Problem 7 final boxed answer has the wrong intercept sign: correct y = (-5/4)x + 3/2. A prominent typeset correction appears beside the PDF links on the lesson page."
+    },
+    {
+      "source": "Algebra 2/Unit 1B/Test Unit 1B 2026 1.1 - 1.4/Day 1 Review/Unit_1B_Day_1_Review_Part_A.pdf",
+      "output": "algebra-2/unit-1b-test-day-1-review/part-a-review.pdf",
+      "selectionReason": "Explicitly requested review practice and matching worked answer sheet, not the test. Reviewed all pages and matched problem numbers and givens.",
+      "sourceSha256": "88381643d400f19e9da1715834546b7480ba47d90e073e6ddc470fde051130f6",
+      "publishedSha256": "23a6c4719ea7785308bd500ef9e62252ebecbc796dabb9227c1dd99543dbeeeb",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1B/Test Unit 1B 2026 1.1 - 1.4/Day 1 Review/Unit_1B_Day_1_Review_Part_A_Answer_Sheet.pdf",
+      "output": "algebra-2/unit-1b-test-day-1-review/part-a-worked-answers.pdf",
+      "selectionReason": "Explicitly requested review practice and matching worked answer sheet, not the test. Reviewed all pages and matched problem numbers and givens.",
+      "sourceSha256": "2f6d09f77f95a31019dc62bce669fcc7a2bbc18fa9d9cd87d214db7cce674980",
+      "publishedSha256": "69f9e1e0a9816ba47d5a19a99f1b6cb2ed9aa7fb44c70257ab8b209e6a566221",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1B/Test Unit 1B 2026 1.1 - 1.4/Day 1 Review/Unit_1B_Day_1_Review_Part_B.pdf",
+      "output": "algebra-2/unit-1b-test-day-1-review/part-b-review.pdf",
+      "selectionReason": "Explicitly requested review practice and matching worked answer sheet, not the test. Reviewed all pages and matched problem numbers and givens.",
+      "sourceSha256": "4b01670676d602a67d5790085397801faec4bdadc0d5ffa5ad3ed2966e210b66",
+      "publishedSha256": "25205b1b9b2563215b168dd3a2946e3c4dd310d25763e83e60fb483c40f683e7",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1B/Test Unit 1B 2026 1.1 - 1.4/Day 1 Review/Unit_1B_Day_1_Review_Part_B_Answer_Sheet.pdf",
+      "output": "algebra-2/unit-1b-test-day-1-review/part-b-worked-answers.pdf",
+      "selectionReason": "Explicitly requested review practice and matching worked answer sheet, not the test. Reviewed all pages and matched problem numbers and givens.",
+      "sourceSha256": "8fdfe9c37e7b26fff53e227ef65742886568c86d4e536a0134ccbd17c334997a",
+      "publishedSha256": "52aaafda68a1ed4acd3d9f25429ef78cd52ee47912b9b17f388f8d6e4a67ecdb",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1B/Test Unit 1B 2026 1.1 - 1.4/Day 2 Review/Unit_1B_Day_2_Review_Part_A.pdf",
+      "output": "algebra-2/unit-1b-test-day-2-review/part-a-review.pdf",
+      "selectionReason": "Explicitly requested review practice and matching worked answer sheet, not the test. Reviewed all pages and matched problem numbers and givens.",
+      "sourceSha256": "a55085c4e9edbd5badb1583b6acc153ec6650e9adab99121d66bb9b323295ab9",
+      "publishedSha256": "5bae3c332a16fda988f5bb225f2e36ce22ad6e0ab4b87bf2a34b32926bf8583d",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1B/Test Unit 1B 2026 1.1 - 1.4/Day 2 Review/Unit_1B_Day_2_Review_Part_A_Answer_Sheet.pdf",
+      "output": "algebra-2/unit-1b-test-day-2-review/part-a-worked-answers.pdf",
+      "selectionReason": "Explicitly requested review practice and matching worked answer sheet, not the test. Reviewed all pages and matched problem numbers and givens.",
+      "sourceSha256": "637eed277f7b5f1201b606b710571322817567bf06cf4a9e6181fb9fd716b90d",
+      "publishedSha256": "babdaa5b7d82f92e7d2ed09fea3fb7f3c29c3f3ee75819fafacb31ea0633a5a9",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1B/Test Unit 1B 2026 1.1 - 1.4/Day 2 Review/Unit_1B_Day_2_Review_Part_B.pdf",
+      "output": "algebra-2/unit-1b-test-day-2-review/part-b-review.pdf",
+      "selectionReason": "Explicitly requested review practice and matching worked answer sheet, not the test. Reviewed all pages and matched problem numbers and givens.",
+      "sourceSha256": "1a41578cbf53c958dddb665780e4e5240895124d47a1fdbcc14e13af10421720",
+      "publishedSha256": "6e5091fc77113bc2b8957d9dab576682be3dcfcdf6ae469792d6bfc40d7ba560",
+      "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1B/Test Unit 1B 2026 1.1 - 1.4/Day 2 Review/Unit_1B_Day_2_Review_Part_B_Answer_Sheet.pdf",
+      "output": "algebra-2/unit-1b-test-day-2-review/part-b-worked-answers.pdf",
+      "selectionReason": "Explicitly requested review practice and matching worked answer sheet, not the test. Reviewed all pages and matched problem numbers and givens.",
+      "sourceSha256": "79b56e9d7e414585100e272a22101ae60fec2ab7375cf522e2aaa32c06389d4d",
+      "publishedSha256": "3619489eeb023b5655c34891c31e5997971549b272aaed4e98bdfd4e5a136fa6",
+      "publishedPages": 2
+    },
+    {
+      "source": "Precalculus/Chapter 1 Sections 1.6-1.10/U1 Quiz Review Sections 1.6-1.7B.pdf",
+      "output": "precalculus/quiz-review-sections-1-6-to-1-7/blank-review.pdf",
+      "selectionReason": "Teacher-requested quiz REVIEW and its corresponding review answer key, not the quiz or quiz answer key. Exported existing Word documents without content changes and inspected all PDF pages.",
+      "sourceSha256": "3f24fd19119e3eb19f3a218df5eb97390c4803416bdc9bbbd66f5c9f082b21f3",
+      "publishedSha256": "2c7d6e524dcb463ad6ed37b120aaab59620f65702329cb3dd3f2f04d479a2acf",
+      "publishedPages": 2
+    },
+    {
+      "source": "Precalculus/Chapter 1 Sections 1.6-1.10/U1 Quiz Review Sections 1.6-1.7B KEY.pdf",
+      "output": "precalculus/quiz-review-sections-1-6-to-1-7/worked-answers.pdf",
+      "selectionReason": "Teacher-requested quiz REVIEW and its corresponding review answer key, not the quiz or quiz answer key. Exported existing Word documents without content changes and inspected all PDF pages.",
+      "sourceSha256": "cf1b1803711950eabc7bd129eea4bc6c997d2a6786a231aa92ceedac7683ba7a",
+      "publishedSha256": "87a6041fc4a198a3d8927ac2893acef1321b224fb2af737d4b2e7fefa3fe3331",
+      "publishedPages": 1
     }
   ]
 }

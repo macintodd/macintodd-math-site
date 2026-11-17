@@ -221,3 +221,12 @@ Final lint/build and diff checks passed. Verified all 15 affected source/publish
 ### Course handouts verified live
 
 Both Vercel deployments for `3efbca2` succeeded. Verified HTTP 200 and expected material links on Algebra 2 Writing Equations of Lines, Precalculus parent functions, 1.7A shifts/reflections and 1.7B stretches/shrinks pages. Confirmed both new lessons appear in the Precalculus contents. All 15 affected PDF links return HTTP 200 with PDF content type; live Lesson 4 practice-key SHA-256 matches the reviewed published file. Problem-7 correction is present on the live lesson page. The 1.7B completed-practice PDF remains unlocated/unpublished and explicitly marked Not posted yet.
+
+## Separate test/quiz review pages
+
+- Added Algebra 2 Unit 1B Day 1 and Day 2 review pages, each grouping Part A/B blank reviews and corresponding worked answer sheets. Slugs: `unit-1b-test-day-1-review` and `unit-1b-test-day-2-review` under `/courses/algebra-2`. All eight PDFs are two pages.
+- Added Precalculus `/courses/precalculus/quiz-review-sections-1-6-to-1-7`, covering 1.6–1.7B, with blank review (two pages) and matching review answer key (one page). Exported existing Word sources without content changes; PDF copies are beside originals in the Chapter 1 Sections 1.6-1.10 folder. Actual test/quiz files and test/quiz keys are excluded.
+- Data-driven pages use the existing lesson reader, explicit review/answer labels, lesson links, study directions, optional practice and vocabulary. New content module `src/content/test-reviews.ts`. No native bridge, widget progress or score changes.
+- Reviewed all 19 PDF pages; verified all ten source/published pairs by source hash, page count and exact rendered pixels. Content checks cover 37 lessons and 120 allowlisted PDFs; typecheck passed. Final lint/build and deployment verification below.
+
+Final lint/build and diff checks passed. Generated HTML confirms all three review pages, all ten PDF links and both class-index entries.

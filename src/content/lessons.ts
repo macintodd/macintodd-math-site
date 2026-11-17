@@ -1,3 +1,4 @@
+import {testReviewLessons} from './test-reviews.ts'
 import { writingLinearLesson } from './writing-linear-lesson.ts'
 import { mathboardLesson, unit1bReviewLesson } from './mathboard-lesson.ts'
 import { precalculusLessons } from './precalculus.ts'
@@ -907,7 +908,7 @@ const functionNotationPractice: Lesson = {
     { file: 'algebra-2/function-notation/completed-practice-2.pdf', label: 'Completed Practice 2', title: 'Completed Practice 2', description: 'Second Function Notation practice with classroom solutions, problems 1-23.', kind: 'completed-practice', pages: 2 },
   ],
 }
-export const lessons: Lesson[] = [...originalLessons, ...additionalAlgebraLessons, functionNotationPractice, mathboardLesson, unit1bReviewLesson, writingLinearLesson, ...precalculusLessons].sort((a, b) =>
+export const lessons: Lesson[] = [...originalLessons, ...additionalAlgebraLessons, functionNotationPractice, mathboardLesson, unit1bReviewLesson, writingLinearLesson, ...precalculusLessons, ...testReviewLessons].sort((a, b) =>
   a.course.localeCompare(b.course) || a.unitSlug.localeCompare(b.unitSlug) ||
   (a.sortOrder ?? Number(a.number.match(/\d+/)?.[0] ?? 0)) - (b.sortOrder ?? Number(b.number.match(/\d+/)?.[0] ?? 0))
 )
