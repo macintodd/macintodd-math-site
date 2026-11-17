@@ -3,6 +3,10 @@ import type { Lesson } from "./lessons"
 export type VocabularyTerm = { id: string; term: string; definition: string }
 
 export const vocabulary: Record<string, VocabularyTerm> = {
+  "translation": {id:"translation",term:"Translation",definition:"A shift of every graph point by the same horizontal or vertical amount. In $g(x)=f(x-h)+k$, h shifts the graph horizontally and k shifts it vertically."},
+  "reflection": {id:"reflection",term:"Reflection",definition:"A flip across an axis. $-f(x)$ reflects across the x-axis; $f(-x)$ reflects across the y-axis."},
+  "vertical-scale": {id:"vertical-scale",term:"Vertical scale factor",definition:"In $g(x)=af(x)$, each output is multiplied by a. A magnitude greater than 1 stretches vertically; a magnitude between 0 and 1 shrinks vertically."},
+  "horizontal-scale": {id:"horizontal-scale",term:"Horizontal scale factor",definition:"In $g(x)=f(bx)$ with nonzero b, each x-coordinate is divided by b. The horizontal scale factor is $1/|b|$."},
   "parent-function": {id:"parent-function",term:"Parent function",definition:"A basic function whose graph is a starting point for a family of related functions."},
   "greatest-integer-function": {id:"greatest-integer-function",term:"Greatest integer function",definition:"The function $f(x)=[[x]]$ returns the greatest integer less than or equal to the input. For example, $[[-1.5]]=-2$."},
   "piecewise-function": {id:"piecewise-function",term:"Piecewise-defined function",definition:"A function defined by different rules on different parts of its domain. Use the rule whose interval contains the input."},
@@ -331,6 +335,8 @@ export const vocabulary: Record<string, VocabularyTerm> = {
 const lessonTerms: Record<string, string[]> = {
   "writing-linear-equations": ["linear-equation","slope","y-intercept","slope-intercept-form","point-slope-form"],
   "unit-1b-lessons-1-3-review": ["function-notation","slope","rate-of-change","y-intercept","slope-intercept-form"],
+  "transformations-shifts-reflections": ["parent-function","translation","reflection","function-notation"],
+  "transformations-stretches-shrinks": ["parent-function","vertical-scale","horizontal-scale","translation","reflection"],
   "parent-functions": ["parent-function", "greatest-integer-function", "piecewise-function", "domain", "range", "even-function", "odd-function", "interval-notation"],
   "graphing-linear-equations": ["linear-equation","slope","rate-of-change","y-intercept","slope-intercept-form","function-notation"],
   "one-step-equations": [

@@ -94,7 +94,9 @@ export const units: Unit[] = [
   "skills": [
     "Identify parent functions by their graphs and equations.",
     "Describe domain, range, and symmetry.",
-    "Evaluate greatest integer functions and sketch piecewise graphs."
+    "Evaluate greatest integer functions and sketch piecewise graphs.",
+    "Describe shifts, reflections, stretches, and shrinks using function notation.",
+    "Map points between parent and transformed functions."
   ],
   "relevance": [
     {

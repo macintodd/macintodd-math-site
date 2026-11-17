@@ -115,7 +115,7 @@
       "publishedPages": 2
     },
     {
-      "source": "Algebra 2/Unit 1A/U1AL2  Solving Two-Step Equations — NOTES.pdf",
+      "source": "Algebra 2/Unit 1A/U1AL2  Solving Two-Step Equations \u2014 NOTES.pdf",
       "output": "algebra-2/two-step-equations/notes.pdf",
       "pages": [
         1,
@@ -1019,9 +1019,9 @@
       "publishedPages": 2
     },
     {
-      "source": "Precalculus/Precalc 2026 Completed/PC Unit 1B/MathBoard Slides.pdf",
+      "source": "Precalculus/Precalc 2026 Completed/PC Unit 1B/PC 1.6A Library of Parent Functions - Completed.pdf",
       "output": "precalculus/parent-functions/completed-notes.pdf",
-      "selectionReason": "Teacher requested U1B Section 1.6 parent-functions completed notes. Reviewed both pages: linear functions, greatest integer, piecewise graphs, and eight parent families; source is named MathBoard Slides.pdf.",
+      "selectionReason": "Teacher requested publication of reviewed Lesson 1.4 / Precalculus 1.6\u20131.7B materials. Matched lesson headings and exercises; retained original classroom annotations. Descriptive completed-folder copies preserve originals.",
       "sourceSha256": "31d0744c0f01b83abf17cb5aaf57fe02f01777c18427a7f56ca2fefbd67c80f7",
       "publishedSha256": "85a58ccb6f605575d0828481ad1c580daa46b0aa262121faf1d8a230b4ab192f",
       "publishedPages": 2
@@ -1039,13 +1039,13 @@
       "publishedPages": 2
     },
     {
-      "source": "Algebra 2/Unit 1B/Notes lesson 3 u1b competed.pdf",
+      "source": "Algebra 2/Unit 1B/Unit 1B Completed/U1B L3 Graphing Lines - Completed Notes.pdf",
       "output": "algebra-2/graphing-linear-equations/completed-notes.pdf",
       "pages": [
         1,
         2
       ],
-      "selectionReason": "Teacher requested completed Lesson 3 notes. Matching two-page handwritten classroom copy is in the Unit 1B root; preserve original work.",
+      "selectionReason": "Teacher requested completed Lesson 3 notes. Matching two-page handwritten classroom copy is in the Unit 1B root; preserve original work. A descriptive completed-folder copy was made at the teacher\u2019s request; source content is unchanged.",
       "sourceSha256": "af7867f077f5bc036e819b9c1947ea550b530f305538660d7cb84882be95369f",
       "publishedSha256": "8ec99958a70332a0fee551a188dd7e6d83ee8836eb4fc4a9d51865c93437948e",
       "publishedPages": 2
@@ -1105,10 +1105,114 @@
     {
       "source": "Algebra 2/Unit 1B/U1B L4 Notes Writing Equations of Lines.pdf",
       "output": "algebra-2/writing-linear-equations/notes.pdf",
-      "selectionReason": "Teacher requested blank Lesson 1.4 notes only. Reviewed both pages: Unit 1B Lesson 4 title, slope/intercept, graph, point-slope and two-point prompts with blank workspaces. The differently named older three-page file and all completed/practice files are excluded.",
+      "selectionReason": "Matching two-page Unit 1B Lesson 4 blank guided notes. Teacher now also authorizes the corresponding completed notes and paper practice. Older three-page variant remains excluded.",
       "sourceSha256": "6d36ba0aa16349b7fb7f86a96c57b7fddeceaa32cddc034ffb8647634cfd17a4",
       "publishedSha256": "6d36ba0aa16349b7fb7f86a96c57b7fddeceaa32cddc034ffb8647634cfd17a4",
       "publishedPages": 2
+    },
+    {
+      "source": "Algebra 2/Unit 1B/Unit 1B Completed/U1B L4 Find Eq of Line.pdf",
+      "output": "algebra-2/writing-linear-equations/completed-notes.pdf",
+      "sourceSha256": "35440ec4013109d3953552a3c14fa7465f60f9403a33bc0564b64862709a7841",
+      "publishedSha256": "f2f29b6c881c9801713c3ad2ccaff2f7793a8ce4f71b0e2ba39f01753f32f248",
+      "publishedPages": 2,
+      "selectionReason": "Teacher requested publication of reviewed Lesson 1.4 / Precalculus 1.6\u20131.7B materials. Matched lesson headings and exercises; retained original classroom annotations. Descriptive completed-folder copies preserve originals."
+    },
+    {
+      "source": "Algebra 2/Unit 1B/Unit 1B Completed/U1B L4 Practice Writing Equations of Lines - Blank.pdf",
+      "output": "algebra-2/writing-linear-equations/practice.pdf",
+      "sourceSha256": "0799d74e98f60d3d1aa4fcd4c4161c4c8c6403e7624f27220cd877f43289e66a",
+      "publishedSha256": "45f39d007e97d1e5d0d793e9b8e58ebdca1d89c4f7a9ef661bac9683d0c6b83e",
+      "publishedPages": 2,
+      "selectionReason": "Teacher requested publication of reviewed Lesson 1.4 / Precalculus 1.6\u20131.7B materials. Matched lesson headings and exercises; retained original classroom annotations. Descriptive completed-folder copies preserve originals."
+    },
+    {
+      "source": "Precalculus/1.6 A Library of Parent Functions.pdf",
+      "output": "precalculus/parent-functions/notes.pdf",
+      "sourceSha256": "1328a4dab66f0f8978c3d7304119f535b6bb02f1630c59d0d51ed80ab86aaca8",
+      "publishedSha256": "f5d61e353c7f0fb5a10c9b8f6287c18186fdd0e640526a43fe4fd414a00ccbc0",
+      "publishedPages": 2,
+      "selectionReason": "Teacher requested publication of reviewed Lesson 1.4 / Precalculus 1.6\u20131.7B materials. Matched lesson headings and exercises; retained original classroom annotations. Descriptive completed-folder copies preserve originals."
+    },
+    {
+      "source": "Precalculus/Precalc 2026 Completed/PC Unit 1B/PC 1.6 Library of Parent Functions - Blank Practice.pdf",
+      "output": "precalculus/parent-functions/practice.pdf",
+      "sourceSha256": "5d2c1f27bd507fa08b635beb7085ce4373560d909377a3cdbbfe140954a159c5",
+      "publishedSha256": "25706c070e4f6bee62e8c0809da06ca2eaff544c00c7b9217aa71137310d6ba8",
+      "publishedPages": 2,
+      "selectionReason": "Teacher requested publication of reviewed Lesson 1.4 / Precalculus 1.6\u20131.7B materials. Matched lesson headings and exercises; retained original classroom annotations. Descriptive completed-folder copies preserve originals."
+    },
+    {
+      "source": "Precalculus/Precalc 2026 Completed/PC Unit 1B/PC 1.6 Library of Parent Functions - Completed Practice.pdf",
+      "output": "precalculus/parent-functions/completed-practice.pdf",
+      "sourceSha256": "7f3dd6fef3c08446dbd5da6983f9a1a6b9606dd7f40ab28bdcc4c26ab9ba9e13",
+      "publishedSha256": "59058fb754ff85e62d23928e3710df1b28fae6080f41f48c8529438fb30b5abd",
+      "publishedPages": 2,
+      "selectionReason": "Teacher requested publication of reviewed Lesson 1.4 / Precalculus 1.6\u20131.7B materials. Matched lesson headings and exercises; retained original classroom annotations. Descriptive completed-folder copies preserve originals."
+    },
+    {
+      "source": "Precalculus/1.7A New Notes Transformations Shifts and Reflections.pdf",
+      "output": "precalculus/transformations-shifts-reflections/notes.pdf",
+      "sourceSha256": "0a9c85952047e51b62f0c79b82853f3e88ec2b4a867b4a5e0e885f8f2a2ba8bf",
+      "publishedSha256": "3db79bb507774e383bc38e50841e8ab0137c4b058ff12bb49624e661e1f951ac",
+      "publishedPages": 2,
+      "selectionReason": "Teacher requested publication of reviewed Lesson 1.4 / Precalculus 1.6\u20131.7B materials. Matched lesson headings and exercises; retained original classroom annotations. Descriptive completed-folder copies preserve originals."
+    },
+    {
+      "source": "Precalculus/Precalc 2026 Completed/PC Unit 1B/PC 1.7A Transformations Shifts and Reflections - Completed Notes.pdf",
+      "output": "precalculus/transformations-shifts-reflections/completed-notes.pdf",
+      "sourceSha256": "0d1fd0237521233b1cc85090acf9403314b4478b179d8a6715f2d009f2870771",
+      "publishedSha256": "5003235119c8f2f9c66f53d4f72b317e26fc22ad4b655e20ddccf921a50423f0",
+      "publishedPages": 2,
+      "selectionReason": "Teacher requested publication of reviewed Lesson 1.4 / Precalculus 1.6\u20131.7B materials. Matched lesson headings and exercises; retained original classroom annotations. Descriptive completed-folder copies preserve originals."
+    },
+    {
+      "source": "Precalculus/Precalc 2026 Completed/PC Unit 1B/PC 1.7A Transformations Shifts and Reflections - Blank Practice.pdf",
+      "output": "precalculus/transformations-shifts-reflections/practice.pdf",
+      "sourceSha256": "ec39c1258d4de9ff0d6f835673a0f415f127473fb5af4220245724dfc2e33e92",
+      "publishedSha256": "498d45c8fd40964f6d34d12e58575eb76f573a587a328887b115029f19cbf375",
+      "publishedPages": 2,
+      "selectionReason": "Teacher requested publication of reviewed Lesson 1.4 / Precalculus 1.6\u20131.7B materials. Matched lesson headings and exercises; retained original classroom annotations. Descriptive completed-folder copies preserve originals."
+    },
+    {
+      "source": "Precalculus/Precalc 2026 Completed/PC Unit 1B/PC 1.7A Transformations Shifts and Reflections - Completed Practice.pdf",
+      "output": "precalculus/transformations-shifts-reflections/completed-practice.pdf",
+      "sourceSha256": "d5d4d4ea302530c848545fac33a3e513f19aa3af6e692b4f56d9ce178fd75067",
+      "publishedSha256": "95b4af0b96d0467dc540bca4119aaef033124e0bda124904bc961f419f57f1b6",
+      "publishedPages": 2,
+      "selectionReason": "Teacher requested publication of reviewed Lesson 1.4 / Precalculus 1.6\u20131.7B materials. Matched lesson headings and exercises; retained original classroom annotations. Descriptive completed-folder copies preserve originals."
+    },
+    {
+      "source": "Precalculus/1.7B New Notes Transformations Stretches and Shrinks.pdf",
+      "output": "precalculus/transformations-stretches-shrinks/notes.pdf",
+      "sourceSha256": "25be4ee57651223b91109ca9124755b913c694c3532a16aa75f5350e46c786e2",
+      "publishedSha256": "02d469f881b6a8b4e804d0123a4b6fd7bbb90f03960f200205fa7c50085ca776",
+      "publishedPages": 2,
+      "selectionReason": "Teacher requested publication of reviewed Lesson 1.4 / Precalculus 1.6\u20131.7B materials. Matched lesson headings and exercises; retained original classroom annotations. Descriptive completed-folder copies preserve originals."
+    },
+    {
+      "source": "Precalculus/Precalc 2026 Completed/PC Unit 1B/PC 1.7B Transformations Stretches and Shrinks - Completed Notes.pdf",
+      "output": "precalculus/transformations-stretches-shrinks/completed-notes.pdf",
+      "sourceSha256": "96cae1ecf49273672727ef64372a65cb19835061f0af52e9b3bc1803a95c92b3",
+      "publishedSha256": "725f41a37d1503478b6908f746e06619e4b47bb5d68a18e37f267e9f7c218abe",
+      "publishedPages": 2,
+      "selectionReason": "Teacher requested publication of reviewed Lesson 1.4 / Precalculus 1.6\u20131.7B materials. Matched lesson headings and exercises; retained original classroom annotations. Descriptive completed-folder copies preserve originals."
+    },
+    {
+      "source": "Precalculus/Precalc 2026 Completed/PC Unit 1B/PC 1.7B Transformations Stretches and Shrinks - Blank Practice.pdf",
+      "output": "precalculus/transformations-stretches-shrinks/practice.pdf",
+      "sourceSha256": "ace69fe2c65e5b5138aefc19378b0ec715a23c246e7e54236a78ce3404b7c83a",
+      "publishedSha256": "4c0572082f1313393b1d53fb123b2b1469fa478b886c61db136bf994a2924a8a",
+      "publishedPages": 2,
+      "selectionReason": "Teacher requested publication of reviewed Lesson 1.4 / Precalculus 1.6\u20131.7B materials. Matched lesson headings and exercises; retained original classroom annotations. Descriptive completed-folder copies preserve originals. Exported the existing 1.7B New Practice Transformations Stretches and Shrinks.docx from the Precalculus Chapter 1 Sections 1.6-1.10 folder with LibreOffice; inspected both PDF pages. No content authored or altered."
+    },
+    {
+      "source": "Algebra 2/Unit 1B/Unit 1B Completed/U1B L4 Practice Write Eq of Lines.pdf",
+      "output": "algebra-2/writing-linear-equations/completed-practice.pdf",
+      "sourceSha256": "9d5b6f4862c51127860d3a3ec1961f1aecdedacced46a00b5db359ea9c29cf0a",
+      "publishedSha256": "99c09cde2de38b1e77285b3e922b66f5ca241098347304c5c906f9261608414f",
+      "publishedPages": 2,
+      "selectionReason": "Teacher supplied the matching 16-problem handwritten practice key during this publication review. Original remains unchanged. Problem 7 final boxed answer has the wrong intercept sign: correct y = (-5/4)x + 3/2. A prominent typeset correction appears beside the PDF links on the lesson page."
     }
   ]
 }

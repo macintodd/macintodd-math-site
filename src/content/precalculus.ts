@@ -42,18 +42,184 @@ export const precalculusLessons: Lesson[] = [
       "author": "Mathispower4u"
     }
   ],
-  "materialSet": "resources",
-  "materialsNote": "Completed classroom notes for Section 1.6. Additional handouts will be linked after review.",
   "materials": [
     {
-      "file": "precalculus/parent-functions/completed-notes.pdf",
-      "title": "Completed notes",
-      "label": "Completed Notes",
-      "description": "Two annotated classroom pages covering parent functions, linear functions, greatest integer, and piecewise-defined functions.",
+      "kind": "notes",
+      "title": "Blank Notes",
+      "label": "Blank Notes",
+      "description": "Blank Notes for this section.",
       "pages": 2,
-      "kind": "completed-notes"
+      "file": "precalculus/parent-functions/notes.pdf"
+    },
+    {
+      "kind": "completed-notes",
+      "title": "Completed Notes",
+      "label": "Completed Notes",
+      "description": "Completed Notes for this section.",
+      "pages": 2,
+      "file": "precalculus/parent-functions/completed-notes.pdf"
+    },
+    {
+      "kind": "practice",
+      "title": "Blank Practice",
+      "label": "Blank Practice",
+      "description": "Blank Practice for this section.",
+      "pages": 2,
+      "file": "precalculus/parent-functions/practice.pdf"
+    },
+    {
+      "kind": "completed-practice",
+      "title": "Completed Practice",
+      "label": "Completed Practice",
+      "description": "Completed Practice for this section.",
+      "pages": 2,
+      "file": "precalculus/parent-functions/completed-practice.pdf"
+    }
+  ],
+  "practiceActivities": [
+    {
+      "slug": "graph-parent-functions",
+      "description": "Plot and check parent-function graphs."
+    },
+    {
+      "slug": "function-families",
+      "description": "Recognize common parent-function families."
     }
   ]
+},
+{
+  "course": "precalculus",
+  "unitSlug": "unit-1b",
+  "slug": "transformations-shifts-reflections",
+  "title": "Transformations: Shifts & Reflections",
+  "unit": "Unit 1B",
+  "number": "Section 1.7A",
+  "indexLabel": "1.7A",
+  "sortOrder": 7,
+  "description": "Use function notation and parent graphs to describe shifts and reflections.",
+  "goals": [
+    "Read horizontal and vertical shifts from function notation.",
+    "Identify reflections across the x-axis and y-axis.",
+    "Write a transformed function and sketch its graph."
+  ],
+  "prerequisites": "Function notation, parent functions, ordered pairs, and signed-number arithmetic.",
+  "concepts": [],
+  "examples": [],
+  "videos": [],
+  "materials": [
+    {
+      "kind": "notes",
+      "title": "Blank Notes",
+      "label": "Blank Notes",
+      "description": "Blank Notes for this section.",
+      "pages": 2,
+      "file": "precalculus/transformations-shifts-reflections/notes.pdf"
+    },
+    {
+      "kind": "completed-notes",
+      "title": "Completed Notes",
+      "label": "Completed Notes",
+      "description": "Completed Notes for this section.",
+      "pages": 2,
+      "file": "precalculus/transformations-shifts-reflections/completed-notes.pdf"
+    },
+    {
+      "kind": "practice",
+      "title": "Blank Practice",
+      "label": "Blank Practice",
+      "description": "Blank Practice for this section.",
+      "pages": 2,
+      "file": "precalculus/transformations-shifts-reflections/practice.pdf"
+    },
+    {
+      "kind": "completed-practice",
+      "title": "Completed Practice",
+      "label": "Completed Practice",
+      "description": "Completed Practice for this section.",
+      "pages": 2,
+      "file": "precalculus/transformations-shifts-reflections/completed-practice.pdf"
+    }
+  ],
+  "practiceActivities": [
+    {
+      "slug": "rigid-transformations",
+      "description": "Practice identifying shifts and reflections."
+    },
+    {
+      "slug": "transformations",
+      "description": "Explore how the parameters change a parent graph."
+    }
+  ],
+  "materialsNote": "Blank handouts and the corresponding classroom notes and practice answer key."
+},
+{
+  "course": "precalculus",
+  "unitSlug": "unit-1b",
+  "slug": "transformations-stretches-shrinks",
+  "title": "Transformations: Stretches & Shrinks",
+  "unit": "Unit 1B",
+  "number": "Section 1.7B",
+  "indexLabel": "1.7B",
+  "sortOrder": 7.1,
+  "description": "Use function notation and parent graphs to describe stretches, shrinks, and combined transformations.",
+  "goals": [
+    "Identify vertical and horizontal stretches and shrinks.",
+    "Map parent-function points onto transformed graphs.",
+    "Combine scale factors, reflections, and translations."
+  ],
+  "prerequisites": "Function notation, parent functions, ordered pairs, and signed-number arithmetic.",
+  "concepts": [],
+  "examples": [],
+  "videos": [],
+  "materials": [
+    {
+      "kind": "notes",
+      "title": "Blank Notes",
+      "label": "Blank Notes",
+      "description": "Blank Notes for this section.",
+      "pages": 2,
+      "file": "precalculus/transformations-stretches-shrinks/notes.pdf"
+    },
+    {
+      "kind": "completed-notes",
+      "title": "Completed Notes",
+      "label": "Completed Notes",
+      "description": "Completed Notes for this section.",
+      "pages": 2,
+      "file": "precalculus/transformations-stretches-shrinks/completed-notes.pdf"
+    },
+    {
+      "kind": "practice",
+      "title": "Blank Practice",
+      "label": "Blank Practice",
+      "description": "Blank Practice for this section.",
+      "pages": 2,
+      "file": "precalculus/transformations-stretches-shrinks/practice.pdf"
+    },
+    {
+      "kind": "completed-practice",
+      "title": "Completed Practice",
+      "label": "Completed Practice",
+      "description": "Completed Practice for this section.",
+      "pages": 0,
+      "unavailableReason": "A matching completed practice PDF has not been located in the course files."
+    }
+  ],
+  "practiceActivities": [
+    {
+      "slug": "transformation-scales",
+      "description": "Practice reading scale factors and combined transformations."
+    },
+    {
+      "slug": "parent-transformations",
+      "description": "Identify transformations of specific parent functions."
+    },
+    {
+      "slug": "transformations",
+      "description": "Explore how the parameters change a parent graph."
+    }
+  ],
+  "materialsNote": "The annotated classroom notes are reproduced as written; some reference-table entries remain blank."
 },
   {
     "course": "precalculus",
