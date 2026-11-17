@@ -125,8 +125,8 @@ Write the complete equation beginning with y =. Question 13 is the vertical-line
 Finish distributing and combining terms. Write the answer in slope-intercept form.	Termina de distribuir y combinar términos. Escribe la respuesta en forma pendiente-intersección.
 Write a simplified equation in y = mx + b form. Put the slope before x.	Escribe una ecuación simplificada en la forma y = mx + b. Coloca la pendiente antes de x.
 Check the fraction and signs. Each denominator must be nonzero.	Revisa la fracción y los signos. Ningún denominador puede ser cero.
-Check the slope first. Then use the given point or y-intercept to recalculate b.	Revisa primero la pendiente. Luego usa el punto o la intersección dada para recalcular b.
-Your slope is correct. Check the point and its signs, then recalculate b.	Tu pendiente es correcta. Revisa el punto y sus signos y vuelve a calcular b.
+Check the slope first. Substitute a point and slope into y − y₁ = m(x − x₁) and simplify to y = mx + b.	Revisa primero la pendiente. Sustituye un punto y la pendiente en y − y₁ = m(x − x₁) y simplifica a y = mx + b.
+Your slope is correct. Check the point and its signs. Substitute a point and slope into y − y₁ = m(x − x₁) and simplify to y = mx + b.	Tu pendiente es correcta. Revisa el punto y sus signos. Sustituye un punto y la pendiente en y − y₁ = m(x − x₁) y simplifica a y = mx + b.
 Your equation is correct. Return to Problem 16, plot two points on your line, and draw it before checking again.	Tu ecuación es correcta. Vuelve al problema 16, traza dos puntos de tu recta y dibújala antes de comprobar de nuevo.
 Correct! Your equation matches the given information.	¡Correcto! Tu ecuación corresponde a la información dada.
 `

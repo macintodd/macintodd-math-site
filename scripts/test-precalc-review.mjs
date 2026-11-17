@@ -64,3 +64,5 @@ console.log('Passed piecewise drawing/half-plane rays, open-boundary controls, i
 assert.equal(parser.functionPreview('g(x)=(x-3)(x-3)+2'),String.raw`g(x)=\left(x-3\right)\left(x-3\right)+2`)
 assert.equal(parser.functionPreview('g(x)=sqrt(x+2)-1'),String.raw`g(x)=\sqrt{x+2}-1`)
 assert.equal(parser.functionPreview('g(x)=x-(3+2)'),String.raw`g(x)=x-\left(3+2\right)`)
+assert.equal(model.reviewQuestions[0].hints[2],'Substitute a point and slope into $y-y_1=m(x-x_1)$ and simplify to $y=mx+b$.')
+assert(!/find b|use y = mx \+ b with/i.test(model.reviewQuestions[0].fields[0].help))

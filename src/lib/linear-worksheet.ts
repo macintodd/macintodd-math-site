@@ -36,8 +36,8 @@ export function worksheetGrade(id:number,r:WorksheetRow){const q=worksheetProble
  const n='(?:\\d+(?:\\.\\d*)?|\\.\\d+)(?:/[+-]?(?:\\d+(?:\\.\\d*)?|\\.\\d+))?',form=new RegExp(`^(?:[+-]?(?:${n}\\*?)?x(?:/[+-]?${n})?(?:[+-]${n})?|[+-]?${n})$`)
  if(!form.test(body))return {correct:false,message:'Write a simplified equation in y = mx + b form. Put the slope before x.'}
  const value=parseLinearExpression('y='+body);if(!value)return {correct:false,message:'Check the fraction and signs. Each denominator must be nonzero.'}
- if(!near(value.m,target.m))return {correct:false,message:'Check the slope first. Then use the given point or y-intercept to recalculate b.'}
- if(!near(value.b,target.b))return {correct:false,message:'Your slope is correct. Check the point and its signs, then recalculate b.'}
+ if(!near(value.m,target.m))return {correct:false,message:'Check the slope first. Substitute a point and slope into y − y₁ = m(x − x₁) and simplify to y = mx + b.'}
+ if(!near(value.b,target.b))return {correct:false,message:'Your slope is correct. Check the point and its signs. Substitute a point and slope into y − y₁ = m(x − x₁) and simplify to y = mx + b.'}
  if(q.plot&&(!r.drawn||r.points.length!==2||r.points[0].x===r.points[1].x||r.points.some(p=>!near(p.y,target.m*p.x+target.b))))return {correct:false,message:'Your equation is correct. Return to Problem 16, plot two points on your line, and draw it before checking again.'}
  return {correct:true,message:'Correct! Your equation matches the given information.'}
 }

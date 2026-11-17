@@ -27,7 +27,7 @@ export const mixedPraise=['That line is so sharp, the graph paper asked for an a
 /** Diagnose the submitted equation without revealing the answer before a retry. */
 export function mixedCorrection(answer:string,p:MixedProblem){
  const value=parseLinearExpression(answer),m=p.line.rise/p.line.run
- if(!/x/i.test(answer))return 'Your slope needs an x beside it. Check the slope, then use your point to recalculate b. You have one retry.'
- if(!value||Math.abs(value.m-m)>1e-8)return 'Check your slope first: keep rise over run and subtract coordinates in the same order. Then use your point to recalculate b. You have one retry.'
- return 'Your slope is correct! Check your point and its signs. Substitute its coordinates into y = mx + b and recalculate b. You have one retry.'
+ if(!/x/i.test(answer))return 'Your slope needs an x beside it. Check the slope. Substitute a point and slope into y − y₁ = m(x − x₁) and simplify to y = mx + b. You have one retry.'
+ if(!value||Math.abs(value.m-m)>1e-8)return 'Check your slope first: keep rise over run and subtract coordinates in the same order. Substitute a point and slope into y − y₁ = m(x − x₁) and simplify to y = mx + b. You have one retry.'
+ return 'Your slope is correct! Check your point and its signs. Substitute a point and slope into y − y₁ = m(x − x₁) and simplify to y = mx + b. You have one retry.'
 }

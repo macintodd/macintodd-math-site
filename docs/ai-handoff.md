@@ -261,3 +261,9 @@ Final all-30-answer/UI/gesture/symbolic/LaTeX/Spanish/resume regression, typeche
 ### Precalculus review widget verified live
 
 Custom-domain Vercel deployment for `6625069` succeeded. Verified HTTP 200, the 30-question/self-evaluation-only welcome, and links from `/apps` and the Precalculus quiz-review page. Retrieved live JavaScript containing PCR1 saves, formula input, hints, sketch controls, editable review and reflection flow; confirmed compact operation-keypad/touch-safe graph styles. All source-matched math, UI, graph-gesture, parser, bilingual, resume and production checks passed locally. Physical iPad/Photos-picker verification remains open.
+
+## Point-slope teaching convention
+
+Teacher clarified that finding a line from a point and slope must use y − y₁ = m(x − x₁), then simplify to y = mx + b, rather than substituting into y = mx + b to solve for b. Updated Precalculus review Problem 1 hint 3 (typeset LaTeX) and its corrective prompt, plus matching obsolete “recalculate b” feedback in Lesson 4 worksheet and mixed Level 5 practice. Spanish updated alongside English. Given-slope-and-intercept tasks still use y = mx + b directly; standard-form intercept finding is unchanged. No grading/progress behavior changes. Precalculus review, Lesson 4 worksheet and mixed-practice regressions passed; final checks/deployment below.
+
+Precalculus hint regression (exact point-slope wording), worksheet and mixed flows, equation Spanish, typecheck, lint, content checks, production build and diff check all passed.
