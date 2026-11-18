@@ -13,7 +13,7 @@ export function beginRound(source,category,level,now,seed){
  const room=clone(source);if(room.paused)return room;if(!['lobby','review','difficulty'].includes(room.status)||!Number.isInteger(category)||category<1||category>8||!Number.isInteger(level)||level<1||level>4)return room;
  const names=connected(room);if(names.length<2)return room;
  const round=makeRound(seed,category,level,room.seconds);round.id=`${room.roundNumber+1}-${seed}`;round.seed=seed;round.players=Object.fromEntries(names.map(name=>[name,{uid:room.players[name].uid,online:true,points:0}]));
- room.round=startRound(round,now);room.roundNumber++;room.id=round.id;room.status='playing';room.processed={};room.commands={};delete room.spin;delete room.nextSpinner;delete room.phaseStartedAt;delete room.paused;return room;
+ room.round=startRound(round,now);room.roundNumber++;room.id=round.id;room.status='playing';room.showNames=false;room.processed={};room.commands={};delete room.spin;delete room.nextSpinner;delete room.phaseStartedAt;delete room.paused;return room;
 }
 function finalize(source,now){
  const room=source;if(room.status!=='playing'||!room.round)return room;
@@ -53,5 +53,5 @@ export function commandClassroom(source,name,command,now,seed){
 export function endRound(source,now){const room=clone(source);if(room.status!=='playing'||room.paused)return room;for(const p of Object.values(room.round.players))if(!p.done){p.done=true;p.outcome='Round ended';p.finishedAt=now;}return finalize(room,now);}
 export function pauseClassroom(source,now){const room=clone(source);if(room.paused||!['playing','spinning','difficulty','spinReady'].includes(room.status))return room;room.paused={at:now};return room;}
 export function resumeClassroom(source,now){const room=clone(source);if(!room.paused)return room;const delta=Math.max(0,now-room.paused.at);if(room.status==='playing')room.round.startedAt+=delta;if(room.status==='spinning')room.spin.startedAt+=delta;if(room.phaseStartedAt)room.phaseStartedAt+=delta;delete room.paused;return room;}
-export function finishClassroom(source,now){let room=clone(source);if(room.paused)room=resumeClassroom(room,now);if(room.status==='playing')room=endRound(room,now);room.status='ended';room.completedAt=now;delete room.paused;return room;}
+export function finishClassroom(source,now){let room=clone(source);if(room.paused)room=resumeClassroom(room,now);if(room.status==='playing')room=endRound(room,now);room.status='ended';room.showNames=false;room.completedAt=now;delete room.paused;return room;}
 export function releaseClassPlayer(source,name){return releasePlayer(source,name);}

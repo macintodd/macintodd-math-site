@@ -1,3 +1,4 @@
+import {roundResult} from './round.js';
 export const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function renderMath(root=document){for(const el of root.querySelectorAll('[data-math]')){if(window.katex)window.katex.render(el.dataset.math,el,{throwOnError:false,displayMode:el.dataset.display==='true'});else el.textContent=el.dataset.math;}}
 export const prose=s=>escape(s).replace(/\\frac\{(-?\d+)\}\{(\d+)\}/g,token=>`<span data-math="${escape(token)}"></span>`);
@@ -12,13 +13,13 @@ export function drawGraph(svg,{line,marked=[],points=[],drawn=false,onTap}={}){
  svg.onpointerdown=onTap?e=>{e.preventDefault();const box=svg.getBoundingClientRect(),x=Math.round(((e.clientX-box.left)*500/box.width-250)/27),y=Math.round((250-(e.clientY-box.top)*500/box.height)/27);if(Math.abs(x)<=8&&Math.abs(y)<=8)onTap({x,y});}:null;
 }
 export function keypad(root,getInput){
- const keys=['7','8','9','x','4','5','6','+','1','2','3','−','0','.','/','=','(',')',',','y','a','undefined','⌫','Clear'];
- root.innerHTML=keys.map(k=>`<button type="button" class="${['+','−','/','=','x','(',')',','].includes(k)?'op':['⌫','Clear'].includes(k)?'erase':''}" data-key="${k}">${k}</button>`).join('');
+ const keys=['7','8','9','+','4','5','6','−','1','2','3','/','0','.','=','(','x','y',')',',','undefined','⌫','Clear'];
+ root.innerHTML=keys.map(k=>`<button type="button" class="${/^[0-9.]$/.test(k)?'key-number':['x','y'].includes(k)?'key-variable':['+','−','/','=','(',')'].includes(k)?'key-operation':'key-extra'}" data-key="${k}">${k}</button>`).join('');
  root.onpointerdown=e=>{if(e.target.closest('button'))e.preventDefault();};
  root.onclick=e=>{const b=e.target.closest('button');if(!b)return;const input=getInput();if(!input)return;input.focus();const k=b.dataset.key,a=input.selectionStart??input.value.length,z=input.selectionEnd??a;if(k==='Clear'){input.value='';input.setSelectionRange(0,0);}else if(k==='⌫'){const start=a===z?Math.max(0,a-1):a;input.setRangeText('',start,z,'end');}else input.setRangeText(k==='−'?'-':k,a,z,'end');input.dispatchEvent(new Event('input',{bubbles:true}));};
 }
 export function scratch(canvas){
- const ctx=canvas.getContext('2d');canvas.width=1000;canvas.height=520;let down=false,tool='black',pointer;
+ const ctx=canvas.getContext('2d');canvas.width=1000;const bounds=canvas.getBoundingClientRect();canvas.height=Math.max(1,Math.round(1000*bounds.height/bounds.width));let down=false,tool='black',pointer;
  const point=e=>{const r=canvas.getBoundingClientRect();return [(e.clientX-r.left)*canvas.width/r.width,(e.clientY-r.top)*canvas.height/r.height];};
  const ink=()=>{ctx.globalCompositeOperation=tool==='eraser'?'destination-out':'source-over';ctx.strokeStyle=tool==='red'?'#c52b37':'#151515';ctx.lineWidth=(tool==='eraser'?22:2.5)*canvas.width/canvas.getBoundingClientRect().width;ctx.lineCap='round';ctx.lineJoin='round';};
  canvas.onpointerdown=e=>{if(down)return;e.preventDefault();down=true;pointer=e.pointerId;canvas.setPointerCapture(e.pointerId);ink();const [x,y]=point(e);ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+.01,y+.01);ctx.stroke();};
@@ -26,3 +27,6 @@ export function scratch(canvas){
  canvas.onpointerup=canvas.onpointercancel=canvas.onlostpointercapture=e=>{if(e.pointerId===pointer){down=false;pointer=undefined;}};
  return {clear(){ctx.clearRect(0,0,canvas.width,canvas.height);},setTool(value){if(['black','red','eraser'].includes(value))tool=value;}};
 }
+
+export function roundScoreMarkup(round,name){const result=roundResult(round,name);if(!result)return '';const ordinal=n=>`${n}${n===1?'st':n===2?'nd':n===3?'rd':'th'}`;return `<section class="round-score" aria-label="Round result"><strong>${result.final?'Round score':'Round score so far'}: ${result.points} points</strong>${result.place?`<p class="finish-place">${result.tied?'Joint ':''}${ordinal(result.place)} correct finish ★</p>`:''}<p class="small">Hints: ${round.players[name].hints||0} · Answer checks: ${round.players[name].checks||0}</p>${result.final?'':'<p class="small">Points finalize when the round ends.</p>'}</section>`;}
+export function scratchTools(){return `<div class="scratch-toolbar" role="group" aria-label="Drawing tools"><span>Scratch paper</span><button type="button" data-tool="black" class="pen-black" aria-label="Black pen" title="Black pen"><span class="pen-dot" aria-hidden="true"></span></button><button type="button" data-tool="red" class="pen-red" aria-label="Red pen" title="Red pen"><span class="pen-dot" aria-hidden="true"></span></button><button type="button" data-tool="eraser" aria-label="Eraser" title="Eraser"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="m3 15 10-11a2 2 0 0 1 3 0l5 5a2 2 0 0 1 0 3l-8 9H8L3 17a2 2 0 0 1 0-2Z M8 10l9 8 M12 21h10" fill="none" stroke="currentColor" stroke-width="2"/></svg></button><button id="clearScratch" type="button">Clear</button></div>`;}

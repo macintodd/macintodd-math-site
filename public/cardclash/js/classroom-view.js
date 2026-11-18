@@ -11,3 +11,6 @@ export function renderSelection(room,name='',teacher=false){
 }
 
 export function updateChoiceClock(root,room,now){if(room?.status!=='difficulty')return;const seconds=Math.max(0,Math.ceil((room.phaseStartedAt+30000-(room.paused?.at||now))/1000));root.querySelectorAll('[data-choice-clock]').forEach(el=>el.textContent=`Choose in ${seconds} seconds`);}
+
+export function availableCodeNames(room){return Object.entries(room.players||{}).filter(([,p])=>!p.uid).map(([name])=>name);}
+export function availableCodesMarkup(room){const names=availableCodeNames(room);return `<section class="panel code-pool"><h2>Choose your code name</h2><p class="prompt">Pick an available name below and type it on your iPad. First come, first served!</p><p class="muted">${names.length} available · Names disappear as students join.</p><div class="available-codes">${names.map(name=>`<span class="code-choice" data-code-name="${escape(name)}">${escape(name)}</span>`).join('')}</div>${names.length?'':'<p>All names are reserved. Ask your teacher to release an unused code name.</p>'}</section>`;}

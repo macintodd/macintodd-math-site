@@ -51,3 +51,11 @@ export function releasePlayer(source,name){
  if(r.processed)delete r.processed[name];
  return r;
 }
+
+// Until the round closes, score previews can change if an equal-time finish creates a tie.
+export function roundResult(round,name){
+ const p=round.players?.[name];if(!p?.done)return null;
+ const correct=Object.values(round.players).filter(player=>player.correct),earlier=correct.filter(player=>player.finishedAt<p.finishedAt).length,ties=correct.filter(player=>player.finishedAt===p.finishedAt).length;
+ const speed=p.correct&&earlier===0&&ties===1?1:0,base=p.misses?Math.ceil(round.level/2):round.level;
+ return {points:round.status==='review'?(p.points||0):p.correct?Math.max(0,base-(p.hints||0))+(p.hints?0:1)+speed:0,final:round.status==='review',place:p.correct&&earlier<5?earlier+1:null,tied:ties>1};
+}
