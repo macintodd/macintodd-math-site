@@ -297,3 +297,11 @@ Passed 6,400 generator regressions plus transfer reducer checks, all 32 student 
 ### Card Clash transfer fix verified live
 
 Retrieved custom-domain teacher.js and round.js over HTTP 200 and confirmed Release code name UI/handler and releasePlayer reducer are live for `b04c16a`. Existing teacher tab should be refreshed (same tab retains host auth/session), then release fox-27 and join from iPad using the same game code. Firebase rules unchanged. Physical device check remains with teacher.
+
+## Card Clash scratch layout and drawing tools
+
+Round 1 confirmed working on teacher/student devices. Teacher requested scratch paper directly under the problem in the left column beside the keypad. Moved the pad out of the collapsed full-width section into that column and made it always visible. Added black/red pen controls, true alpha-erasing tool and Clear; selected tool and local canvas snapshot persist through hint/check rerenders. Touch-safe pointer capture, pointer-ID isolation, CSS-size-aware strokes and edge-to-edge coordinates. Drawing remains device-local; no database/rules/scoring changes.
+
+Passed drawing-tool/coordinate/pointer/placement tests, student DOM regression all 32 variants, existing 6,400 question/round tests, typecheck, lint and content check. Production build passed on retry after the previously disclosed Next.js security warning. Physical iPad positioning should be confirmed by teacher. Deployment verification pending.
+
+Teacher also proposed winner-triggered synchronized category spinner on their display, selecting a color/category and a random student to choose difficulty. Explained feasible as a shared Firebase phase, with text labels as well as color; this mechanic is NOT implemented in the current two-player-round milestone. Current +1 speed bonus remains unchanged. Preserve this proposal for full class/tournament implementation.

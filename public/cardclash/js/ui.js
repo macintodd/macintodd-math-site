@@ -17,4 +17,12 @@ export function keypad(root,getInput){
  root.onpointerdown=e=>{if(e.target.closest('button'))e.preventDefault();};
  root.onclick=e=>{const b=e.target.closest('button');if(!b)return;const input=getInput();if(!input)return;input.focus();const k=b.dataset.key,a=input.selectionStart??input.value.length,z=input.selectionEnd??a;if(k==='Clear'){input.value='';input.setSelectionRange(0,0);}else if(k==='⌫'){const start=a===z?Math.max(0,a-1):a;input.setRangeText('',start,z,'end');}else input.setRangeText(k==='−'?'-':k,a,z,'end');input.dispatchEvent(new Event('input',{bubbles:true}));};
 }
-export function scratch(canvas){const ctx=canvas.getContext('2d');canvas.width=1000;canvas.height=520;let down=false;const p=e=>{const r=canvas.getBoundingClientRect();return [(e.clientX-r.left)*1000/r.width,(e.clientY-r.top)*520/r.height];};canvas.onpointerdown=e=>{e.preventDefault();down=true;canvas.setPointerCapture(e.pointerId);ctx.beginPath();ctx.moveTo(...p(e));};canvas.onpointermove=e=>{if(!down)return;e.preventDefault();ctx.lineWidth=3;ctx.lineCap='round';ctx.lineTo(...p(e));ctx.stroke();};canvas.onpointerup=canvas.onpointercancel=()=>{down=false;};return()=>ctx.clearRect(0,0,1000,520);}
+export function scratch(canvas){
+ const ctx=canvas.getContext('2d');canvas.width=1000;canvas.height=520;let down=false,tool='black',pointer;
+ const point=e=>{const r=canvas.getBoundingClientRect();return [(e.clientX-r.left)*canvas.width/r.width,(e.clientY-r.top)*canvas.height/r.height];};
+ const ink=()=>{ctx.globalCompositeOperation=tool==='eraser'?'destination-out':'source-over';ctx.strokeStyle=tool==='red'?'#c52b37':'#151515';ctx.lineWidth=(tool==='eraser'?22:2.5)*canvas.width/canvas.getBoundingClientRect().width;ctx.lineCap='round';ctx.lineJoin='round';};
+ canvas.onpointerdown=e=>{if(down)return;e.preventDefault();down=true;pointer=e.pointerId;canvas.setPointerCapture(e.pointerId);ink();const [x,y]=point(e);ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+.01,y+.01);ctx.stroke();};
+ canvas.onpointermove=e=>{if(!down||e.pointerId!==pointer)return;e.preventDefault();ctx.lineTo(...point(e));ctx.stroke();};
+ canvas.onpointerup=canvas.onpointercancel=canvas.onlostpointercapture=e=>{if(e.pointerId===pointer){down=false;pointer=undefined;}};
+ return {clear(){ctx.clearRect(0,0,canvas.width,canvas.height);},setTool(value){if(['black','red','eraser'].includes(value))tool=value;}};
+}
