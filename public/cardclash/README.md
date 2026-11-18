@@ -42,4 +42,4 @@ Official setup references:
 
 ## Verification limits
 
-The rules require Firebase console publication by the owner. Until then the app displays a clear database-locked error. Automated local tests do not establish live multi-device behavior or prove rules enforcement; a teacher + two-device smoke test is required after publishing rules. Physical iPad layout, Pencil behavior and connection recovery need that test as well.
+The owner published the rules and enabled Anonymous sign-in. A live Firebase REST smoke test passed with three temporary identities: host creation/start, both student claims, hints, answers, finalized scores and review. Denial checks passed for unauthenticated reads, duplicate claims, cross-student presence/commands, score edits and host takeover. All temporary data and identities were removed. This verifies the backend paths, not browser SDK subscriptions or physical devices. A teacher + two-device smoke test is still needed for iPad layout, Pencil behavior and connection recovery.
