@@ -417,3 +417,7 @@ Custom-domain Vercel deployment succeeded for f572f02. Live HTTP 200 verificatio
 ## Day 1/Day 2 review workspace width
 
 Rebalanced both paper-aligned Algebra 2 review widgets to a 45% question / 55% tools split above 600px, replacing the previous 270px desktop tools column. At 1024px landscape this expands tools to about 530px instead of 270px while retaining readable question controls and scrollable long equations. Below 601px the existing stacked layout remains, with the keypad allowed to use full available width. At 800px+ widened the variable-key rail, digit spacing and key symbols. Scratch paper automatically uses the expanded column; its coordinate model/strokes/saved progress are unchanged. Scoped only to each Day 1/Day 2 stylesheet; Precalculus and other widgets unchanged. Typecheck, lint, content check, production build and diff check pass; both stylesheet breakpoints/column ratios verified. Live publication pending; physical iPad visual check remains owner confirmation.
+
+### Wider Day 1/Day 2 review workspaces verified live
+
+Both Vercel projects succeeded for d2eb6aa. Retrieved each live review page and its linked CSS over HTTP 200; verified the new 45/55 column ratio and full-width keypad rule on both. Refresh already-open review tabs to receive the layout. Saved progress and scratch strokes were not migrated or altered.
