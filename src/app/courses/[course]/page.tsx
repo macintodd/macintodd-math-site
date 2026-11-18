@@ -4,6 +4,7 @@ import { courses, lessons, type Lesson } from '@/content/lessons'
 import { units } from '@/content/units'
 import {practiceApps} from '@/content/practice-apps'
 import { precalculusAssessments } from '@/content/precalculus'
+import './review-links.css'
 
 export function generateStaticParams() { return courses.map(course => ({ course: course.id })) }
 export async function generateMetadata({ params }: { params: Promise<{ course: string }> }) {
@@ -21,6 +22,12 @@ export default async function CoursePage({ params }: { params: Promise<{ course:
     <nav className="book-breadcrumb" aria-label="Breadcrumb"><Link href="/">Classes</Link><span aria-hidden="true">/</span><span>{course.title}</span></nav>
     <div className="course-index-content">
       <header><p className="eyebrow">LEARN IT. TRY IT. MAKE IT CLICK.</p><h1>{course.title}</h1><p className="course-intro">Lesson notes, videos, and practice, organized by unit.</p><p className="course-glossary-link"><Link href={`/courses/${courseId}/vocabulary`}>Vocabulary &amp; definitions →</Link></p></header>
+      {courseId === 'algebra-2' && <section className="course-test-review" aria-labelledby="test-review-heading">
+        <h2 id="test-review-heading">Test Review Widgets</h2>
+        <p>Preparing for the chapter test? Start with the Unit 1B review collection, then choose the skills you need to practice.</p>
+        <Link className="course-test-review-main" href="/apps/unit-1b-test-practice"><strong>Unit 1B Test Practice</strong><span>Function evaluation, slope, graphing, and writing equations—all organized by test topic.</span><span aria-hidden="true">→</span></Link>
+        <nav className="course-review-skill-links" aria-label="More linear equation practice"><Link href="/apps/writing-linear-equations">Writing Linear Equations · Levels 0–5 <span aria-hidden="true">→</span></Link><Link href="/apps/graphing-linear-equations">Graphing Linear Equations <span aria-hidden="true">→</span></Link></nav>
+      </section>}
       <div className="modern-course-layout"><div>{courseUnits.map(unit => {
         const entries: ContentsEntry[] = [
           ...lessons.filter(lesson => lesson.course === courseId && lesson.unitSlug === unit.slug).map(lesson => ({ lesson, sortOrder: lesson.sortOrder ?? Number(lesson.number.match(/\d+/)?.[0] ?? 0) })),

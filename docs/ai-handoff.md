@@ -375,3 +375,7 @@ Validation: typecheck, lint, content check and new scripts/test-practice-hubs.mj
 ### Practice hubs published
 
 Custom-domain Vercel project succeeded for a23e4e7. Verified HTTP 200 and expected compact row markup on all three new hubs; Function Evaluation Practice present on Unit 1B page and all three collection links present on live /apps. Local build/typecheck/lint/content and hub regression passed. No widget logic or files changed. Physical iPad layout still requires owner visual confirmation.
+
+## Algebra 2 index: discoverable test review collections
+
+Added an always-visible Test Review Widgets section immediately above the unit folders on /courses/algebra-2. Main compact row links to Unit 1B Test Practice and describes the covered topics; supporting links go to Writing Linear Equations Levels 0–5 and Graphing Linear Equations. Section is outside collapsible unit folders so students can find it without opening a unit. Scoped responsive styling preserves title/description row on iPad and stacks on phones, with 44px minimum link targets. Precalculus index and widget behavior unchanged. Typecheck, lint, content check, production build and diff check pass. Generated HTML confirms all three links appear above the unit layout and Precalculus has no new section. Live publication pending.
