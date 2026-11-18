@@ -1,0 +1,5 @@
+import PracticeHub from '../PracticeHub'
+import {practiceHubs} from '@/content/practice-hubs'
+const hub=practiceHubs.find(hub=>hub.slug==='graphing-linear-equations')!
+export const metadata={title:hub.title,description:hub.description}
+export default function Page(){return <PracticeHub hub={hub}/>}
