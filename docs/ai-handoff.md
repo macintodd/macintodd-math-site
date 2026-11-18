@@ -305,3 +305,7 @@ Round 1 confirmed working on teacher/student devices. Teacher requested scratch 
 Passed drawing-tool/coordinate/pointer/placement tests, student DOM regression all 32 variants, existing 6,400 question/round tests, typecheck, lint and content check. Production build passed on retry after the previously disclosed Next.js security warning. Physical iPad positioning should be confirmed by teacher. Deployment verification pending.
 
 Teacher also proposed winner-triggered synchronized category spinner on their display, selecting a color/category and a random student to choose difficulty. Explained feasible as a shared Firebase phase, with text labels as well as color; this mechanic is NOT implemented in the current two-player-round milestone. Current +1 speed bonus remains unchanged. Preserve this proposal for full class/tournament implementation.
+
+### Card Clash scratch layout verified live
+
+Both Vercel deployments succeeded for `23b478b`. Retrieved live student.js, ui.js and CSS over HTTP 200, confirming scratch-area placement, pen/eraser control implementation and toolbar styles. Refresh student page before next round to load changes. Spinner remains proposed future work, not part of this release.
