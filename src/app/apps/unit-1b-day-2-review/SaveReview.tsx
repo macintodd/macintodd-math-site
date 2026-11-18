@@ -1,0 +1,10 @@
+'use client'
+import {useEffect,useRef,useState} from 'react'
+import {useWidgetLanguage} from '@/components/practice/BilingualWidget'
+export default function SaveReview({code,name,hour,onClose,onExit}:{code:string;name:string;hour:string;onClose:()=>void;onExit:()=>void}){
+ const ref=useRef<HTMLDialogElement>(null),field=useRef<HTMLTextAreaElement>(null),[notice,setNotice]=useState(''),{translate:t}=useWidgetLanguage()
+ useEffect(()=>{if(ref.current&&!ref.current.open)ref.current.showModal()},[])
+ function download(){const blob=new Blob([JSON.stringify({activity:'Unit 1B Day 2 · Review & Learn',code},null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='MacInTodd-Day-2-Review-Progress.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);setNotice('Progress file requested. Save it in Files; on return, choose that file on the start screen.')}
+ async function copy(){try{await navigator.clipboard.writeText(code);setNotice('Code copied. Paste it into a document before leaving.')}catch{field.current?.focus();field.current?.select();setNotice('Code selected. Choose Copy and save it before leaving.')}}
+ return <dialog className="lw-save" ref={ref} onCancel={e=>{e.preventDefault();onClose()}}><h2>Save this exact place</h2><p><strong data-no-translate>{name}</strong> · {t('Class hour')} {hour}</p><p>The progress file includes every answer, hint, check, graph, and the screen you are viewing. Nothing is uploaded.</p><p>Use the progress file for the easiest return. The backup code is long because it contains all of your work.</p><div className="lw-actions"><button className="lw-primary" onClick={download}>Download progress file</button><button onClick={copy}>Copy backup code</button></div><label>Backup code<textarea ref={field} readOnly value={code}/></label><p role="status">{t(notice)}</p><div className="lw-actions"><button onClick={onClose}>Keep working</button><button onClick={onExit}>Return to start</button></div></dialog>
+}

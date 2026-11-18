@@ -1,0 +1,13 @@
+# Unit 1B Day 2 · Review & Learn
+
+Route: `/apps/unit-1b-day-2-review`. Based on the teacher-provided Unit_1B_Day_2_Review_Part_A.pdf and Part_B.pdf in Algebra 2 / Unit 1B / Test Unit 1B 2026 1.1 - 1.4 / Day 2 Review. All four source pages visually inspected and text extracted. Existing public paper guides have identical extracted text (binary metadata differs); no PDF replacement needed.
+
+42 questions: 21 in each part. A1–3 prerequisites; A4–9 slope/intercept; A10–12 and A19–21 point/slope; A13–18 read a graph and state slope, intercept and equation. Graphs independently checked as (m,b): (1/2,−3), (−2/3,2), (3/4,−2), (−1/2,4), (2/3,−1), (−3/2,3). B1–3 prerequisites; B4–9 two points; B10–15 horizontal lines; B16–21 cost models with budget calculations and explicit units.
+
+Same interaction model as Day 1. Part buttons, arbitrary problem navigation, per-problem scratch/keypad, free checks/retries, three hints per problem costing 0.2 each with a 0.5 minimum for correct completion. No timer/streak. Self-evaluation only displayed at start, throughout practice and on completion. Point/slope and two-point hints use point-slope form, not substitution into slope-intercept form to find b. Graph taps only select integer points on the given line, toggle on/off, never affect correctness. Answers accept equivalent simplified slopes/equations; cost models accept C(x)=, y=, or the expression after the displayed label.
+
+Progress file/code is local, D2R1 namespace distinct from Day 1. Saves answers, hints/checks, selected graph points, scratch strokes, selected part/problem, review/report screen, language, reflection and scroll position. Completion uses shared reflection/image workflow with local name/hour/date/time and all per-problem hints/checks/credit. Return to practice preserves work. English/Spanish with tap-English translation, shared class hours 2,3,4,6,7,8. No network student-data collection.
+
+Discoverable from Practice Apps, Writing Linear Equations collection, U1B Test Practice collection, and the Day 2 review lesson's online-practice link (replaces generic Level 5 link).
+
+Validation: scripts/test-day2-review.mjs independently verifies all 42 answer sets, source graph parameters, cost-model forms, typeset math, translated prompts/help/UI, grading, free retries, hint floor, edit invalidation, entire-screen resume, wrong-user/damaged/Day1-code rejection, actual part buttons/navigation/keypad-field state, scratch persistence, final-answer editing, reflection return, integer graph tapping/toggle/keyboard and touch-scroll handling. Existing Day 1 and hub tests also run. Physical iPad visual verification remains owner check.

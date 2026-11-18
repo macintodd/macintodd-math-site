@@ -3,6 +3,7 @@ import {practiceApps} from '@/content/practice-apps'
 export const reportColors={activity:'#174d8c',student:'#653d91',score:'#087366',text:'#111111',muted:'#425466',paper:'#ffffff'}
 const skills:Record<string,string>={
  'precalculus-quiz-review':'Evaluate step and piecewise functions, identify parent graphs, and describe, graph, and write function transformations.',
+ 'unit-1b-day-2-review':'Write linear equations from slopes, intercepts, graphs, and points, and use linear cost models.',
  'unit-1b-day-1-review':'Evaluate functions, calculate slope and rates of change, find intercepts, and graph and recognize linear equations.',
  'unit-1b-lesson-4-practice':'Write equations of lines from slopes, points, and graphs, including horizontal, vertical, and parallel lines.',
  'graph-parent-functions':'Plot points and recognize the graphs of linear, constant, quadratic, cubic, square-root, and absolute-value parent functions.',

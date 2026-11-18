@@ -31,6 +31,7 @@ export const practiceHubs:PracticeHub[] = [
   {id:'slope',title:'Strengthen your slope skills',items:slopes},
   {id:'guided',title:'More guided equation practice',items:guided},
   {id:'apply',title:'Apply and extend',items:[
+   {slug:'unit-1b-day-2-review',description:'Review both Day 2 guides: equations from points, slopes, and graphs, horizontal lines, and cost models.'},
    {slug:'unit-1b-lesson-4-practice',description:'Check the Lesson 1.4 paper practice, revisit any problem, and use hints when needed.'},
    {slug:'parallel-perpendicular',label:'Extension',description:'Explore parallel and perpendicular lines, then write equations through a given point.'}
   ]}
@@ -45,7 +46,7 @@ export const practiceHubs:PracticeHub[] = [
   ]}
  ]},
  {slug:'unit-1b-test-practice',title:'Unit 1B Test Practice',description:'Review functions, slope, rate of change, graphing, and writing equations. Choose the skills you need; you do not need to complete every overlapping activity.',sections:[
-  {id:'review',title:'Begin with the review',items:[{slug:'unit-1b-day-1-review',description:'Work through Parts A and B of the Day 1 review with checks and hints. The online score is for self-evaluation.'}]},
+  {id:'review',title:'Begin with the review',items:[{slug:'unit-1b-day-1-review',description:'Work through Parts A and B of the Day 1 review with checks and hints. The online score is for self-evaluation.'},{slug:'unit-1b-day-2-review',description:'Check all 42 Day 2 review problems with hints, tappable graphs, free retries, and saved progress. Self-evaluation only.'}]},
   {id:'functions',title:'Day 1 · Function evaluation',items:[{slug:'function-evaluation',description:'Practice function notation and substituting inputs. Choose the function types assigned in class.'}]},
   {id:'slope',title:'Day 1 · Slope and rate of change',items:slopes},
   {id:'graph',title:'Day 1 · Lines, intercepts, and graphing',items:[levels[0],...graphing]},

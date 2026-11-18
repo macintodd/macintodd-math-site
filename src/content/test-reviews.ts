@@ -134,9 +134,9 @@ export const testReviewLessons:Lesson[] = [
         "slope-rate-of-change",
         "graphing-linear-equations"
       ],
-      "practiceUrl": "/apps/write-linear-equation-level-5",
-      "practiceTitle": "Write the Linear Equation LEVEL 5",
-      "practiceInstructions": "Use this optional practice to review skills you want to strengthen.",
+      "practiceUrl": "/apps/unit-1b-day-2-review",
+      "practiceTitle": "Unit 1B Day 2 · Review & Learn",
+      "practiceInstructions": "Check the questions from Parts A and B with hints and free retries. The online score is for self-evaluation only.",
       "privacyNote": "Names, work, and results stay locally in the page; submit any assigned record manually."
     }
   },
