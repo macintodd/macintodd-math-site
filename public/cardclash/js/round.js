@@ -41,3 +41,13 @@ export function startRound(source,now){
  if(r.status!=='lobby'||!Object.values(r.players).every(p=>p.uid))return r;
  r.status='playing';r.startedAt=now;return r;
 }
+
+// The host may transfer a code name between devices without resetting earned progress.
+export function releasePlayer(source,name){
+ const r=structuredClone(source),p=r.players?.[name];
+ if(!p)return r;
+ p.uid='';p.online=false;
+ if(r.commands)delete r.commands[name];
+ if(r.processed)delete r.processed[name];
+ return r;
+}

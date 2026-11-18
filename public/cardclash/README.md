@@ -13,6 +13,7 @@ This milestone is a **single two-player round**, not the complete eight-card tou
 
 - Teacher: `/cardclash/teacher.html`. Choose a skill, difficulty and time limit; create the round.
 - Students: `/cardclash/index.html`. Enter the four-letter game code and one of the two animal names (`fox-27`, `owl-42`). Do not enter real names.
+- To move a player to a different device, close the old student page. On the teacher page, press **Release code name** beside that player and confirm. Rejoin on the new device with the same game code and animal name. Progress/score stay intact, pending old commands are cleared, and the round timer continues. No Firebase rules update is needed.
 - Both students must join before Start is enabled. Two distinct tabs can test this on one computer; use a separate tab for each student. The same tab can reconnect with its current anonymous identity.
 - **Keep the teacher page open and awake.** It is the authority that processes answer commands. Students cannot write scores or round settings. If the host disconnects, submissions wait; on return the teacher checks pending submissions against the original timer deadline. This milestone has no pause/resume or offline scoring.
 - Students can use two hints, two attempts, an on-screen keypad, optional integer graph taps and local scratch paper. A notation/simplification correction does not use an attempt.
