@@ -1,0 +1,45 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "cardClashRounds": {
+      "$code": {
+        ".read": "auth != null",
+        ".write": "auth != null && ((!data.exists() && newData.child('hostUid').val() === auth.uid && newData.child('status').val() === 'lobby') || data.child('hostUid').val() === auth.uid)",
+        "players": {
+          "$name": {
+            "uid": {
+              ".write": "auth != null && data.parent().exists() && ((!data.exists() || data.val() === '') && newData.val() === auth.uid || data.val() === auth.uid && newData.val() === auth.uid)",
+              ".validate": "newData.isString()"
+            },
+            "online": {
+              ".write": "auth != null && data.parent().child('uid').val() === auth.uid",
+              ".validate": "newData.isBoolean()"
+            },
+            "lastSeen": {
+              ".write": "auth != null && data.parent().child('uid').val() === auth.uid",
+              ".validate": "newData.isNumber()"
+            }
+          }
+        },
+        "commands": {
+          "$name": {
+            ".write": "auth != null && data.parent().parent().child('players').child($name).child('uid').val() === auth.uid",
+            ".validate": "newData.hasChildren(['id','type','roundId']) && newData.child('id').isString() && newData.child('id').val().length <= 80 && newData.child('roundId').isString() && (newData.child('type').val() === 'answer' || newData.child('type').val() === 'hint')",
+            "answers": {
+              ".validate": "newData.numChildren() <= 8",
+              "$field": {
+                ".validate": "(newData.isString() && newData.val().length <= 200) || (newData.hasChildren(['points','drawn']) && newData.child('points').numChildren() <= 2 && newData.child('drawn').isBoolean())",
+                "points": {
+                  "$index": {
+                    ".validate": "newData.hasChildren(['x','y']) && newData.child('x').isNumber() && newData.child('y').isNumber() && newData.child('x').val() >= -8 && newData.child('x').val() <= 8 && newData.child('y').val() >= -8 && newData.child('y').val() <= 8"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
