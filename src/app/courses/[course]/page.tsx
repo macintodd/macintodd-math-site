@@ -28,6 +28,12 @@ export default async function CoursePage({ params }: { params: Promise<{ course:
         <Link className="course-test-review-main" href="/apps/unit-1b-test-practice"><strong>Unit 1B Test Practice</strong><span>Function evaluation, slope, graphing, and writing equations—all organized by test topic.</span><span aria-hidden="true">→</span></Link>
         <nav className="course-review-skill-links" aria-label="More linear equation practice"><Link href="/apps/writing-linear-equations">Writing Linear Equations · Levels 0–5 <span aria-hidden="true">→</span></Link><Link href="/apps/graphing-linear-equations">Graphing Linear Equations <span aria-hidden="true">→</span></Link></nav>
       </section>}
+      {courseId === 'precalculus' && <section className="course-test-review" aria-labelledby="precalculus-review-heading">
+        <h2 id="precalculus-review-heading">Quiz Review Widgets</h2>
+        <p>Review Sections 1.6–1.7B: parent functions, shifts, reflections, stretches, and shrinks.</p>
+        <Link className="course-test-review-main" href="/apps/precalculus-1-6-1-7b-review"><strong>Sections 1.6–1.7B Review</strong><span>Start with the review-guide widget, then choose extra practice by topic.</span><span aria-hidden="true">→</span></Link>
+        <nav className="course-review-skill-links" aria-label="Precalculus review resources"><Link href="/courses/precalculus/quiz-review-sections-1-6-to-1-7">Paper review guide and worked answers <span aria-hidden="true">→</span></Link></nav>
+      </section>}
       <div className="modern-course-layout"><div>{courseUnits.map(unit => {
         const entries: ContentsEntry[] = [
           ...lessons.filter(lesson => lesson.course === courseId && lesson.unitSlug === unit.slug).map(lesson => ({ lesson, sortOrder: lesson.sortOrder ?? Number(lesson.number.match(/\d+/)?.[0] ?? 0) })),

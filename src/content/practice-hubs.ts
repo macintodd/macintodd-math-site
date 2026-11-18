@@ -1,6 +1,6 @@
 export type PracticeRow = {slug:string; title?:string; description:string; label?:string}
-export type PracticeSection = {id:string; title:string; description?:string; items:PracticeRow[]}
-export type PracticeHub = {slug:string; title:string; description:string; sections:PracticeSection[]}
+export type PracticeSection = {id:string; title:string; description?:string; featured?:boolean; items:PracticeRow[]}
+export type PracticeHub = {slug:string; title:string; description:string; resources?:{title:string;href:string}[]; sections:PracticeSection[]}
 const levels:PracticeRow[] = [
  {slug:'horizontal-vertical',title:'Horizontal & Vertical Lines',label:'Level 0',description:'Recognize horizontal and vertical lines, their equations, and slopes of zero or undefined.'},
  {slug:'write-linear-equation-level-1',title:'Given Slope & Y-Intercept',label:'Level 1',description:'Write a slope-intercept equation from the given slope and y-intercept.'},
@@ -46,11 +46,35 @@ export const practiceHubs:PracticeHub[] = [
   ]}
  ]},
  {slug:'unit-1b-test-practice',title:'Unit 1B Test Practice',description:'Review functions, slope, rate of change, graphing, and writing equations. Choose the skills you need; you do not need to complete every overlapping activity.',sections:[
-  {id:'review',title:'Begin with the review',items:[{slug:'unit-1b-day-1-review',description:'Work through Parts A and B of the Day 1 review with checks and hints. The online score is for self-evaluation.'},{slug:'unit-1b-day-2-review',description:'Check all 42 Day 2 review problems with hints, tappable graphs, free retries, and saved progress. Self-evaluation only.'}]},
+  {id:'review',title:'Review Guide Widgets',featured:true,items:[{slug:'unit-1b-day-1-review',description:'Work through Parts A and B of the Day 1 review with checks and hints. The online score is for self-evaluation.'},{slug:'unit-1b-day-2-review',description:'Check all 42 Day 2 review problems with hints, tappable graphs, free retries, and saved progress. Self-evaluation only.'}]},
   {id:'functions',title:'Day 1 · Function evaluation',items:[{slug:'function-evaluation',description:'Practice function notation and substituting inputs. Choose the function types assigned in class.'}]},
   {id:'slope',title:'Day 1 · Slope and rate of change',items:slopes},
   {id:'graph',title:'Day 1 · Lines, intercepts, and graphing',items:[levels[0],...graphing]},
   {id:'equations',title:'Day 2 · Write the equation',items:levels.slice(1)},
   {id:'support',title:'Need another guided example?',items:[guided[1],{slug:'unit-1b-lesson-4-practice',description:'For this test, practice Problems 1–13. Problems 14–16 are parallel-line extension work, outside this test’s scope.'}]}
+ ]}
+,
+ {slug:'precalculus-1-6-1-7b-review',title:'Precalculus · Sections 1.6–1.7B Review',description:'Start with the classroom review guide, then choose extra practice for parent functions, shifts, reflections, stretches, and shrinks. You do not need to complete every activity.',resources:[{title:'Blank review guide, worked answers, and lesson links →',href:'/courses/precalculus/quiz-review-sections-1-6-to-1-7'}],sections:[
+  {id:'review',title:'Review Guide Widget',featured:true,items:[{slug:'precalculus-quiz-review',label:'Start here',description:'All 30 questions from your Sections 1.6–1.7B review guide, including step and piecewise functions, parent graphs, transformations, and mapped points. Hints and free retries; self-evaluation only.'}]},
+  {id:'parents',title:'Section 1.6 · Parent functions',items:[
+   {slug:'graph-parent-functions',description:'Plot points and check the shapes of the linear, constant, quadratic, cubic, square-root, and absolute-value parents.'},
+   {slug:'function-families',description:'Recognize parent-function families from graphs and equations.'},
+   {slug:'function-evaluation',description:'Practice function notation and substitution. Select the function types you need, including greatest-integer functions.'}
+  ]},
+  {id:'rigid-notation',title:'Section 1.7A · Read shifts and reflections',items:[
+   {slug:'rigid-transformations/skill-1',description:'Identify translations and reflections from symbolic function notation.'},
+   {slug:'rigid-transformations/skill-2',description:'Identify a single rigid transformation and its distance using numerical notation.'},
+   {slug:'rigid-transformations/skill-3',description:'Read two transformations in order: reflections first, then translations.'}
+  ]},
+  {id:'rigid-graphs',title:'Section 1.7A · Connect graphs and notation',items:[
+   {slug:'rigid-transformations/skill-4',description:'Compare a parent graph and a transformed graph to identify one shift or reflection.'},
+   {slug:'rigid-transformations/skill-5',description:'Identify two rigid transformations from parent and transformed graphs.'},
+   {slug:'rigid-transformations/skill-6',description:'Read the transformations from graphs, then write their function notation.'}
+  ]},
+  {id:'scales',title:'Section 1.7B · Stretches, shrinks, and combined transformations',items:[
+   {slug:'transformation-scales',description:'Practice vertical and horizontal scales, reflections, shifts, factoring the input, and mixed transformations.'},
+   {slug:'parent-transformations',description:'Describe transformations in equations written with actual parent functions.'}
+  ]},
+  {id:'explore',title:'Explore before trying again',items:[{slug:'transformations',label:'Explorer',description:'Adjust the transformation controls and compare parent and transformed graphs, equations, and corresponding points.'}]}
  ]}
 ]

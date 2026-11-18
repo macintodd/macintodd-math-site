@@ -401,3 +401,11 @@ New scripts/test-pool-review-navigation.mjs runs the actual component with fresh
 ### Open pool lesson navigation verified live
 
 Both Vercel projects succeeded for a4669dd. Fetched live /apps/mathboard/session-1 and its current page bundle over HTTP 200; confirmed Section menu and no-teacher-code entry text, and no /api/mathboard/release reference. Owner/students should refresh an already-open tab once; existing locally saved sessions can resume. Physical iPad visual check remains owner confirmation.
+
+## Precalculus 1.6–1.7B review collection and featured review guides
+
+Added /apps/precalculus-1-6-1-7b-review using the compact title/description row format. Existing 30-question Precalculus Review & Learn widget is first, followed by Section 1.6 parent-function practice, Section 1.7A notation/graph rigid transformation skills 1–6, Section 1.7B scales/combined parent transformations, and the transformation explorer. Links to the published blank review, worked answers and lesson notes page. Added Quiz Review Widgets section above Precalculus index unit folders, linking to this collection and paper-review page. Main Practice Apps and shared collection nav automatically include it.
+
+Shared PracticeHub now supports featured sections rendered directly below the heading, before collection navigation/jump links. Unit 1B Test Practice features Day 1 then Day 2 Review & Learn as adjacent compact rows at the very top; Precalculus features its existing review-guide widget there. No new widget logic, student state or PDF changes. Existing Writing/Graphing collection order preserved.
+
+Expanded hub regression suite validates all four route/app references, featured ordering, adjacent Day 1/Day 2 rows, Precalculus review/resource coverage and unique section IDs. Regression, typecheck, lint, content, final build and diff check pass. Generated HTML confirms both Algebra 2 guides are the first rows, the Precalculus guide is first on its collection, and Precalculus index/Practice Apps discovery links exist. Live publication pending. Physical iPad visual check remains owner confirmation.
