@@ -2,7 +2,7 @@ import {generate,checkAnswer} from './problems.js';
 export function makeRound(seed,category=8,level=2,seconds=120){
  return {id:String(seed),category,level,seconds,status:'lobby',startedAt:0,players:{'fox-27':{uid:'',online:false,points:0},'owl-42':{uid:'',online:false,points:0}},processed:{},events:[]};
 }
-export function question(round){return generate(round.category,round.level,Number(round.id),{multipleChoice:false});}
+export function question(round){return generate(round.category,round.level,Number(round.seed??round.id),{multipleChoice:false});}
 export function settle(round,now){
  if(round.status!=='playing')return round;
  const expired=now>=round.startedAt+round.seconds*1000;

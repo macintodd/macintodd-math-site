@@ -25,7 +25,7 @@
         "commands": {
           "$name": {
             ".write": "auth != null && data.parent().parent().child('players').child($name).child('uid').val() === auth.uid",
-            ".validate": "newData.hasChildren(['id','type','roundId']) && newData.child('id').isString() && newData.child('id').val().length <= 80 && newData.child('roundId').isString() && (newData.child('type').val() === 'answer' || newData.child('type').val() === 'hint')",
+            ".validate": "newData.hasChildren(['id','type','roundId']) && newData.child('id').isString() && newData.child('id').val().length <= 80 && newData.child('roundId').isString() && (newData.child('type').val() === 'answer' || newData.child('type').val() === 'hint' || newData.child('type').val() === 'spin' || newData.child('type').val() === 'difficulty')",
             "answers": {
               "$field": {
                 ".validate": "($field === 'choice' || $field === 'direction' || $field === 'equation' || $field === 'expression' || $field === 'graph' || $field === 'meaning' || $field === 'slope' || $field === 'units' || $field === 'cost' || $field === 'input' || $field === 'rate' || $field === 'value' || $field === 'xIntercept' || $field === 'yIntercept') && ((newData.isString() && newData.val().length <= 200) || ($field === 'graph' && newData.hasChildren(['points','drawn']) && newData.child('drawn').isBoolean()))",
@@ -35,6 +35,9 @@
                   }
                 }
               }
+            },
+            "difficulty": {
+              ".validate": "newData.isNumber() && (newData.val() === 1 || newData.val() === 2 || newData.val() === 3 || newData.val() === 4)"
             }
           }
         }
