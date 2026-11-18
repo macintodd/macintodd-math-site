@@ -409,3 +409,7 @@ Added /apps/precalculus-1-6-1-7b-review using the compact title/description row 
 Shared PracticeHub now supports featured sections rendered directly below the heading, before collection navigation/jump links. Unit 1B Test Practice features Day 1 then Day 2 Review & Learn as adjacent compact rows at the very top; Precalculus features its existing review-guide widget there. No new widget logic, student state or PDF changes. Existing Writing/Graphing collection order preserved.
 
 Expanded hub regression suite validates all four route/app references, featured ordering, adjacent Day 1/Day 2 rows, Precalculus review/resource coverage and unique section IDs. Regression, typecheck, lint, content, final build and diff check pass. Generated HTML confirms both Algebra 2 guides are the first rows, the Precalculus guide is first on its collection, and Precalculus index/Practice Apps discovery links exist. Live publication pending. Physical iPad visual check remains owner confirmation.
+
+### Precalculus review collection verified live
+
+Custom-domain Vercel deployment succeeded for f572f02. Live HTTP 200 verification confirms Precalculus Review & Learn is the first activity on its new collection, Algebra 2 Day 1 and Day 2 are the first two adjacent activity rows above collection navigation, and Precalculus index/Practice Apps link to the new page. No owner setup needed. Existing open pages should be refreshed to see the new ordering.
