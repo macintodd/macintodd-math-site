@@ -8,9 +8,11 @@ import * as content from '../src/content/lessons.ts'
 import * as units from '../src/content/units.ts'
 import * as vocabulary from '../src/content/vocabulary.ts'
 import * as apps from '../src/content/practice-apps.ts'
+import * as precalculus from '../src/content/precalculus.ts'
 const testModule={exports:{}}
 const modules={
  'react/jsx-runtime':jsx,
+ '@/content/precalculus':precalculus,'./review-links.css':{},
  'next/navigation':{notFound(){throw Error('Unexpected missing lesson')}},
  'next/link':{__esModule:true,default:({children,...props})=>jsx.jsx('a',{...props,children})},
  '@/content/lessons':content,'@/content/units':units,'@/content/vocabulary':vocabulary,'@/content/practice-apps':apps,
@@ -37,3 +39,12 @@ for(const lesson of content.lessons){
  assert(!html.includes('<iframe'),lesson.slug+' video embeds are deferred')
 }
 console.log(`Passed all ${content.lessons.length} lesson layouts: reviewed/unavailable document positions, supporting PDFs, video coverage, assigned activity order, unique review links, new-tab launches and beta exclusion.`)
+
+const courseModule={exports:{}}
+vm.runInNewContext(ts.transpileModule(fs.readFileSync('src/app/courses/[course]/page.tsx','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,esModuleInterop:true}}).outputText,{module:courseModule,exports:courseModule.exports,require(name){assert(name in modules,name);return modules[name]}})
+for(const course of content.courses){
+ const html=renderToStaticMarkup(await courseModule.exports.default({params:Promise.resolve({course:course.id})}))
+ assert(!html.includes('href="/materials/'),course.id+' materials must be reached through lessons')
+ for(const lesson of content.lessons.filter(item=>item.course===course.id))assert(html.includes(`href="/courses/${course.id}/${lesson.slug}"`),lesson.slug+' lesson remains reachable')
+}
+console.log('Passed both course indexes: all lesson links remain and no direct document links are exposed.')
