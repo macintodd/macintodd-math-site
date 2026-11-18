@@ -25,6 +25,6 @@ r=playing();const submission={id:'repeat',roundId:r.id,type:'hint'};r=applyComma
 r=makeRound(seed);assert.equal(startRound(r,now).status,'lobby');r=playing();r=settle(r,now+121000);const final=structuredClone(r);assert.deepEqual(settle(r,now+131000),final)
 const q={fields:[{key:'n',type:'number',target:.5}]};assert.equal(checkAnswer(q,{n:'2/4'}).status,'simplify');assert.equal(checkAnswer(q,{n:'1/2'}).status,'correct')
 assert.equal(checkAnswer({fields:[{key:'equation',type:'equation',form:true,target:{m:2,b:3}}]},{equation:'2y=4x+6'}).status,'form')
-const rules=JSON.parse(fs.readFileSync('public/cardclash/database.rules.json'));assert.equal(rules.rules['.read'],false);assert.equal(rules.rules['.write'],false)
+const rules=JSON.parse(fs.readFileSync('public/cardclash/database.rules.json'));assert.equal(rules.rules['.read'],false);assert.equal(rules.rules['.write'],false);assert(!JSON.stringify(rules).includes('numChildren'))
 assert(!fs.readFileSync('public/cardclash/js/student.js','utf8').includes('firstName'));assert(!fs.readFileSync('public/cardclash/js/connection.js','utf8').includes('serviceAccount'))
 console.log(`Passed ${count} deterministic generator/answer/LaTeX cases; scoring examples, two-attempt lockout, duplicate/stale commands, deadline enforcement, lobby gate and idempotent settlement. Rules parse checked; live rules enforcement still requires Firebase testing.`)

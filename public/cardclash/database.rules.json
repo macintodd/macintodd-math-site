@@ -27,12 +27,11 @@
             ".write": "auth != null && data.parent().parent().child('players').child($name).child('uid').val() === auth.uid",
             ".validate": "newData.hasChildren(['id','type','roundId']) && newData.child('id').isString() && newData.child('id').val().length <= 80 && newData.child('roundId').isString() && (newData.child('type').val() === 'answer' || newData.child('type').val() === 'hint')",
             "answers": {
-              ".validate": "newData.numChildren() <= 8",
               "$field": {
-                ".validate": "(newData.isString() && newData.val().length <= 200) || (newData.hasChildren(['points','drawn']) && newData.child('points').numChildren() <= 2 && newData.child('drawn').isBoolean())",
+                ".validate": "($field === 'choice' || $field === 'direction' || $field === 'equation' || $field === 'expression' || $field === 'graph' || $field === 'meaning' || $field === 'slope' || $field === 'units' || $field === 'cost' || $field === 'input' || $field === 'rate' || $field === 'value' || $field === 'xIntercept' || $field === 'yIntercept') && ((newData.isString() && newData.val().length <= 200) || ($field === 'graph' && newData.hasChildren(['points','drawn']) && newData.child('drawn').isBoolean()))",
                 "points": {
                   "$index": {
-                    ".validate": "newData.hasChildren(['x','y']) && newData.child('x').isNumber() && newData.child('y').isNumber() && newData.child('x').val() >= -8 && newData.child('x').val() <= 8 && newData.child('y').val() >= -8 && newData.child('y').val() <= 8"
+                    ".validate": "($index === '0' || $index === '1') && newData.hasChildren(['x','y']) && newData.child('x').isNumber() && newData.child('y').isNumber() && newData.child('x').val() >= -8 && newData.child('x').val() <= 8 && newData.child('y').val() >= -8 && newData.child('y').val() <= 8"
                   }
                 }
               }
