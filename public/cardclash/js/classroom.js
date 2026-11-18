@@ -26,9 +26,10 @@ function finalize(source,now){
  room.nextSpinner=best[0]?.[0]||'';room.history??={};room.history[room.id]={number:room.roundNumber,category:room.round.category,level:room.round.level,winner:room.nextSpinner,results,completedAt:now};return room;
 }
 export function selection(source,now){const room=clone(source);if(room.status!=='review')return room;room.status='spinReady';room.phaseStartedAt=now;return room;}
-export function spin(source,now,seed){
+export function spin(source,now,seed,options={}){
  const room=clone(source);if(room.status!=='spinReady'||room.paused)return room;const names=connected(room),random=rng(seed);const category=1+Math.floor(random()*8),chooser=names.length?names[Math.floor(random()*names.length)]:'';
- room.spin={category,chooser,startedAt:now,duration:6500,angle:360*6+360-(category-.5)*45};room.status='spinning';return room;
+ const swipe=options.spinMethod==='swipe',power=swipe&&Number.isFinite(options.spinPower)?Math.max(0,Math.min(1,options.spinPower)):.5,direction=swipe&&options.spinDirection===-1?-1:1,turns=swipe?3+Math.round(power*12):6,startAngle=swipe&&Number.isFinite(options.spinStartAngle)?Math.max(-180,Math.min(180,options.spinStartAngle)):0;
+ room.spin={category,chooser,startedAt:now,duration:6500,angle:direction>0?360*turns+360-(category-.5)*45:-360*turns-(category-.5)*45,startAngle,method:swipe?'swipe':'button',power};room.status='spinning';return room;
 }
 export function tickClassroom(source,now,seed){
  let room=clone(source);if(room.paused)return room;
@@ -45,7 +46,7 @@ export function commandClassroom(source,name,command,now,seed){
  if(!['answer','hint','spin','difficulty'].includes(command.type))return room;
  room.processed??={};room.processed[name]=command.id;
  if(room.paused)return room;
- if(command.type==='spin'&&room.status==='spinReady'&&name===room.nextSpinner)return spin(room,now,seed);
+ if(command.type==='spin'&&room.status==='spinReady'&&name===room.nextSpinner)return spin(room,now,seed,command);
  if(command.type==='difficulty'&&room.status==='difficulty'&&name===room.spin.chooser)return beginRound(room,room.spin.category,command.difficulty,now,seed);
  if(room.status!=='playing'||!room.round.players[name]||!['answer','hint'].includes(command.type))return room;
  room.round=applyCommand(room.round,name,command,now);return finalize(room,now);

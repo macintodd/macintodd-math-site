@@ -1,4 +1,5 @@
 import {connect,friendlyError} from './connection.js';
+import {bindWheelSpin} from './wheel-input.js';
 import {categories,randomSeed} from './problems.js';
 import {makeClassroom,connected,standings,beginRound,selection,spin,tickClassroom,commandClassroom,pauseClassroom,resumeClassroom,endRound,finishClassroom,releaseClassPlayer} from './classroom.js';
 import {escape} from './ui.js';
@@ -15,7 +16,7 @@ function render(){
  $('endRound')?.addEventListener('click',()=>{if(window.confirm('End this round now? Unfinished answers earn no points; completed work is kept.'))mutate(room=>endRound(room.paused?resumeClassroom(room,c.now()):room,c.now()));});
  $('selectNext')?.addEventListener('click',()=>mutate(room=>selection(room,c.now())));
  $('endGame')?.addEventListener('click',()=>{if(window.confirm('End this class game and keep the final scores?'))mutate(room=>finishClassroom(room,c.now()));});
- document.querySelectorAll('[data-spin]').forEach(b=>{b.disabled=!!r.paused;b.onclick=()=>mutate(room=>spin(room,c.now(),randomSeed()));});
+ document.querySelectorAll('[data-spin]').forEach(b=>b.disabled=!!r.paused);bindWheelSpin($('host'),options=>mutate(room=>spin(room,c.now(),randomSeed(),options)));
  document.querySelectorAll('[data-difficulty]').forEach(b=>{b.disabled=!!r.paused;b.onclick=()=>mutate(room=>beginRound(room,room.spin.category,Number(b.dataset.difficulty),c.now(),randomSeed()));});
  if(r.spin)stopWheel=animateWheel($('host'),r.spin,()=>c.now(),r.paused?.at);
  document.querySelectorAll('[data-release]').forEach(b=>b.onclick=async()=>{if(!window.confirm(`Release ${b.dataset.release} for a device change? Close the old student page first. Scores and progress are kept.`))return;const ok=await mutate(room=>releaseClassPlayer(room,b.dataset.release));if(ok)status('Code released. Join from the new device with the same game code.');});

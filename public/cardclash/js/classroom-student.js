@@ -1,6 +1,7 @@
 import {connect,friendlyError} from './connection.js';
 import {question} from './round.js';
 import {categories} from './problems.js';
+import {bindWheelSpin} from './wheel-input.js';
 import {loadLocalName,saveLocalName} from './student-local.js';
 import {renderSelection,animateWheel,updateChoiceClock} from './classroom-view.js';
 import {escape,prose,math,renderMath,drawGraph,keypad,scratch,scratchTools,roundScoreMarkup} from './ui.js';
@@ -51,7 +52,7 @@ function render(){
  if(room.paused){$('game').innerHTML=header+'<p class="paused-message">Your teacher paused the game. Your work is saved on this page.</p>';status(`Game ${code}`);return;}
  if(['spinReady','spinning','difficulty'].includes(room.status)){
   $('game').innerHTML=header+renderSelection(room,name);
-  document.querySelectorAll('[data-spin]').forEach(b=>b.onclick=()=>{b.disabled=true;command('spin');});
+  bindWheelSpin($('game'),options=>command('spin',options));
   document.querySelectorAll('[data-difficulty]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-difficulty]').forEach(v=>v.disabled=true);command('difficulty',{difficulty:Number(b.dataset.difficulty)});});
   if(room.spin)stopWheel=animateWheel($('game'),room.spin,()=>c.now());
  }else $('game').innerHTML=header+`<section class="panel"><h2>${room.status==='lobby'?'You’re in!':'You’ll join the next round.'}</h2><p>Wait for your teacher. Keep this page open; the next problem will appear automatically.</p></section>`;
