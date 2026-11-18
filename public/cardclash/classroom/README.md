@@ -51,3 +51,25 @@ The teacher's CSV is generated locally. Scratch pixels, reflection ratings and c
 - A physical teacher/display/student iPad test is still needed for layout, native save menu, subscriptions/reconnection and apparent spinner synchronization. No native MathBoard bridge was changed.
 
 The host can show available names on the display during an active game for late arrivals. Offline reservations remain unavailable until the host releases them. Returning students use their original code even when it is no longer in the available list.
+
+## Wild cards and final classroom polish
+
+The new spinner has eight equal category sectors and one **18-degree wild-card sector (5% probability)**. Swipe/button locking, speed, direction and the shared animation remain. Old saved eight-sector spins are rendered using their legacy layout until they finish.
+
+Wild cards are selected randomly from:
+
+- **A point for your classmates:** everyone who has joined/played gets +1 except the spinner. Automatic.
+- **Pass out 5 points:** allocate up to five total points to classmates, one tap per point. Each trash button clears that recipient's draft allocation and refunds the pool.
+- **Share the lead:** transfer one point from the highest game score to the lowest; tied scores with no lower score cause no transfer. Automatic. Scores stay nonnegative.
+- **Give a classmate 2 points:** select one classmate for a two-point gift. Trash allows choosing someone else.
+- **Take away 3 points:** remove up to three total points from other players, limited by their current scores. No score can go below zero.
+
+Interactive cards give **20 seconds**. Draft snapshots are sent after every tap, with monotonically increasing revisions; they survive a page rejoin. Award points locks editing and commits once, then returns to the spinner. At timeout the latest saved allocation is committed and unused points disappear. A 1.5-second delivery grace handles taps sent before the visible deadline; it is not extra input time. An offline host processes on-time saved snapshots when it reconnects. Automatic cards display their result for a few seconds or until the actor/teacher presses Back to spinner.
+
+Only the actor can send wild-card actions; the teacher has an override. All recipient names, amounts, budgets, revisions, token IDs and phases are checked by the host. Old or duplicate Award requests cannot award again or accidentally spin. Students cannot force a wild-card draw. The teacher's **Wild-card spin (teacher)** button forces the small wedge for demonstrations and confirms that real game points will change. No new Firebase rules are needed: the existing spin command carries these validated actions.
+
+Math points and wild-card adjustments are stored separately; total game points drive standings. The teacher CSV and student completion image show the split. Correct-round counts and streaks are never changed by cards. The next spin defaults automatically after 30 seconds if a player does not spin, preventing an abandoned turn from holding up the class. Pause freezes card timers too. Ending a class commits saved allocations before producing records.
+
+The display game code is large, centered, gold, and stays at the top when scrolling. Teacher/display connection-loss banners make stalled updates visible. The allocation screen uses a compact student-only layout, a scrollable code-name grid, and a sticky budget/Award bar. Real student names remain local, including on this screen; shared views show codes only.
+
+Verification includes all five cards, exact wedge landing in both directions, 100 successive card cycles with score invariants, stale/invalid/duplicate/over-budget actions, partial timeout, pause/resume, late delivery, ending with pending drafts, rapid taps/trash and read-only spectator controls. A live Firebase test used temporary users to verify draft/undo/award, no double-award, display readback and partial timeout with the existing rules; its game and identities were removed. This is tested software, not a guarantee against every device/network failure; the first full classroom/iPad run still needs the teacher's observation.
