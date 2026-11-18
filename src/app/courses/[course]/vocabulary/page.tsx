@@ -16,7 +16,7 @@ export default async function VocabularyPage({ params }: { params: Promise<{ cou
   const courseLessons = lessons.filter(lesson => lesson.course === courseId)
   const terms = getCourseVocabulary(courseLessons)
   const letters = [...new Set(terms.map(term => term.term[0]))]
-  return <section className="course-index shell glossary-page">
+  return <section className="course-index shell glossary-page study-page">
     <nav className="book-breadcrumb" aria-label="Breadcrumb"><Link href="/">Classes</Link><span aria-hidden="true">/</span><Link href={`/courses/${courseId}`}>{course.title} contents</Link></nav>
     <div className="course-index-content">
       <h1>{course.title} vocabulary &amp; definitions</h1>

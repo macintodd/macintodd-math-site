@@ -11,7 +11,7 @@ export default function PracticeHub({hub}:{hub:Hub}) {
  if(!app)throw new Error(`Unknown practice app: ${item.slug}`)
  return <li key={item.slug}><Link className="practice-row" href={`/apps/${item.slug}`}><span className="practice-row-title">{item.label&&<span className="practice-row-label">{item.label}</span>}<strong>{item.title??app.title}</strong></span><span className="practice-row-description">{item.description}</span><span className="practice-row-arrow" aria-hidden="true">→</span></Link></li>
  })}</ul></section>}
- return <div className="shell course-page practice-hub"><nav className="breadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><Link href="/apps">Practice apps</Link><span>/</span><span>{hub.title}</span></nav>
+ return <div className="shell course-page practice-hub study-page"><nav className="breadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><Link href="/apps">Practice apps</Link><span>/</span><span>{hub.title}</span></nav>
  <header className="practice-hub-heading"><p className="eyebrow">PRACTICE COLLECTION</p><h1>{hub.title}</h1><p>{hub.description}</p></header>
  {hub.sections.filter(section=>section.featured).map(renderSection)}
  <PracticeHubNav current={hub.slug}/>

@@ -2,7 +2,9 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import './globals.css'
 import './theme.css'
-import {Brand} from '@/components/Brand'
+import './study-fonts.css'
+import './redesign.css'
+import {StudySketch} from '@/components/StudySketch'
 import {lessonBridgeBootstrap} from '@/lib/mathboard/lesson-bridge'
 import 'katex/dist/katex.min.css'
 
@@ -15,10 +17,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return <html lang="en"><head><script dangerouslySetInnerHTML={{__html:lessonBridgeBootstrap}}/></head><body>
     <a className="skip-link" href="#main">Skip to content</a>
     <header className="site-header"><div className="shell header-inner">
-      <Link className="brand" href="/" aria-label="MacIntodd Math home"><Brand/></Link>
+      <Link className="brand" href="/" aria-label="MacIntodd Math home"><span className="study-wordmark">macintodd.net</span></Link>
       <nav aria-label="Main navigation"><Link href="/courses/algebra-2">Algebra 2</Link><Link href="/courses/precalculus">Precalculus</Link><Link href="/apps">Practice apps</Link><Link href="/resources">Resources</Link></nav>
     </div></header>
     <main id="main" tabIndex={-1}>{children}</main>
-    <footer className="site-footer"><div className="shell footer-inner"><Link className="footer-brand" href="/">MacIntodd Math</Link><p>Algebra 2 · Precalculus<br />Notes, examples, and practice for your next step.</p><span>© {new Date().getFullYear()} Shawn Todd</span></div></footer>
+    <footer className="site-footer global-wave-footer"><StudySketch kind="wave"/><div className="shell footer-inner"><Link className="footer-brand" href="/">macintodd.net</Link><span>Mac’s Math · Algebra 2 &amp; Precalculus</span><span>© {new Date().getFullYear()} Shawn Todd</span></div></footer>
   </body></html>
 }

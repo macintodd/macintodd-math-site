@@ -1,67 +1,35 @@
-import { notFound } from 'next/navigation'
+import {notFound} from 'next/navigation'
 import Link from 'next/link'
-import { courses, lessons, getLesson } from '@/content/lessons'
-import { getUnit } from '@/content/units'
-import { BookReader } from '@/components/BookReader'
-import { LessonVocabulary } from '@/components/LessonVocabulary'
-import { getLessonVocabulary } from '@/content/vocabulary'
+import {courses,lessons,getLesson} from '@/content/lessons'
+import {getUnit} from '@/content/units'
 import {practiceApps} from '@/content/practice-apps'
+import {BookReader} from '@/components/BookReader'
+import {LessonVocabulary} from '@/components/LessonVocabulary'
+import {getLessonVocabulary} from '@/content/vocabulary'
 import {MathText} from '@/components/MathText'
-import { LessonVideo } from '@/components/LessonVideo'
+import {LessonVideo} from '@/components/LessonVideo'
 
-export function generateStaticParams() { return lessons.map(lesson => ({ course: lesson.course, lesson: lesson.slug })) }
-export async function generateMetadata({ params }: { params: Promise<{ course: string; lesson: string }> }) {
-  const p = await params
-  const lesson = getLesson(p.course, p.lesson)
-  return { title: lesson?.title ?? 'Lesson not found', description: lesson?.description }
+export function generateStaticParams(){return lessons.map(lesson=>({course:lesson.course,lesson:lesson.slug}))}
+export async function generateMetadata({params}:{params:Promise<{course:string;lesson:string}>}){
+ const p=await params, lesson=getLesson(p.course,p.lesson)
+ return {title:lesson?.title??'Lesson not found',description:lesson?.description}
 }
-const materialLabels = ['Blank Notes', 'Completed Notes', 'Blank Practice', 'Completed Practice']
-export default async function LessonPage({ params }: { params: Promise<{ course: string; lesson: string }> }) {
-  const p = await params
-  const lesson = getLesson(p.course, p.lesson)
-  if (!lesson) notFound()
-  const course = courses.find(c => c.id === lesson.course)!
-  const unit = getUnit(lesson.course, lesson.unitSlug)!
-  const courseLessons = lessons.filter(item => item.course === lesson.course)
-  const index = courseLessons.findIndex(item => item.slug === lesson.slug)
-  const previous = courseLessons[index - 1]
-  const next = courseLessons[index + 1]
-  const unitLessons = lessons.filter(item => item.course === lesson.course && item.unitSlug === lesson.unitSlug)
-  const lessonItems = unitLessons.map(item => <li className={item.followUpOf ? "unit-follow-up" : undefined} key={item.slug}>
-    <Link href={`/courses/${item.course}/${item.slug}`} aria-current={item.slug === lesson.slug ? 'page' : undefined}>
-      <span>{item.number}</span>{item.title}
-    </Link>
-  </li>)
-  return <div className="lesson-layout">
-    <aside className="lesson-sidebar">
-      <nav aria-label={`Unit ${unit.number} lessons`}>
-        <Link className="lesson-unit-link" href={`/courses/${lesson.course}/units/${unit.slug}`}>
-          <span>Unit {unit.number}</span><strong>{unit.title}</strong>
-        </Link>
-        <ol className="unit-lessons-desktop">{lessonItems}</ol>
-        <details className="unit-lessons-mobile">
-          <summary>Choose a lesson ({unitLessons.length})</summary>
-          <ol>{lessonItems}</ol>
-        </details>
-        <Link className="lesson-contents-link" href={`/courses/${lesson.course}`}>All {course.title} lessons →</Link>
-      </nav>
-    </aside>
-    <BookReader pagePickerLabel={lesson.reviewGuide || lesson.interactiveLesson || lesson.practiceActivities ? undefined : "Choose a video"} className="lesson-reader" label={`${lesson.title} lesson reader`}
-    breadcrumb={<><Link href="/">Classes</Link><span aria-hidden="true">/</span><Link href={`/courses/${lesson.course}`}>{course.title} contents</Link><span aria-hidden="true">/</span><Link href={`/courses/${lesson.course}/units/${unit.slug}`}>Unit {unit.number}</Link></>}
-    heading={<><div className="lesson-title-row"><div><p className="book-eyebrow">{lesson.unit} · {lesson.number}</p><h1>{lesson.title}</h1><nav id="materials" className="lesson-pdf-links" aria-label="Lesson PDFs">{lesson.materials.map((material, i) => material.file
-      ? <div className="lesson-material-group" key={material.kind}><a href={`/materials/${material.file}`} target="_blank" rel="noopener noreferrer" title={material.description} aria-label={`Open ${material.label ?? materialLabels[i]} PDF in a new tab`}>{material.label ?? materialLabels[i]}</a>{material.additional?.map(extra => <a className="lesson-extra-material" key={extra.file} href={`/materials/${extra.file}`} target="_blank" rel="noopener noreferrer" title={extra.description} aria-label={`Open ${extra.label} PDF in a new tab`}>{extra.label}</a>)}</div>
-      : <span className="material-unavailable" key={material.kind} title={material.unavailableReason}>{material.label ?? materialLabels[i]} <small>Not posted yet</small></span>)}</nav>{lesson.materialsNote && <p className="lesson-materials-note"><MathText>{lesson.materialsNote}</MathText></p>}</div><LessonVocabulary course={lesson.course} terms={getLessonVocabulary(lesson.slug)} /></div></>}
-    pages={lesson.practiceActivities ? [{id:'online-practice',label:'Online practice',content:<section className="lesson-review-guide lesson-online-practice"><h2>Online practice · Writing equations of lines</h2><p>Open the blank notes above. Choose the level your teacher assigns and use your notes or scratch paper to show your work.</p><ol>{lesson.practiceActivities.map(activity=>{const app=practiceApps.find(item=>item.slug===activity.slug)!;return <li key={activity.slug}><h3><Link href={`/apps/${app.slug}`}>{app.title} →</Link></h3><p>{activity.description}</p></li>})}</ol><p>When you finish an assigned activity, answer both reflection questions and save its named completion record for submission as directed by your teacher.</p></section>}] : lesson.interactiveLesson ? [{id:'mathboard',label:'Guided interactive lesson',content:<section className="mathboard-launch"><p className="eyebrow">UNIT 1B · LESSON 3</p><h2>{lesson.interactiveLesson.title}</h2><p>Explore a draining swimming pool, identify slope and starting volume, then graph lines. Session 1 pauses at two section checkpoints.</p><p>Open the lesson directly. Your name and progress save locally so you can resume on the same iPad.</p><div className="mb-actions"><Link className="mb-primary" href={lesson.interactiveLesson.href}>Open / resume Session 1 →</Link></div><p>After the guided lesson: <Link href="/apps/graph-linear">Slope-intercept graphing practice</Link>. Standard-form work belongs to Session 2.</p></section>}] : lesson.reviewGuide ? [{ id: 'review-plan', label: 'Review plan', content: <section className="lesson-review-guide">
-      <h2>Prepare for the test</h2>
-      <ol>{lesson.reviewGuide.instructions.map(instruction => <li key={instruction}>{instruction}</li>)}</ol>
-      <h2>Return to a lesson</h2>
-      <ul>{lesson.reviewGuide.lessonSlugs.map(slug => { const item = getLesson(lesson.course, slug); return item ? <li key={slug}><Link href={`/courses/${lesson.course}/${slug}`}>{item.number} — {item.title}</Link></li> : null })}</ul>
-      <h2>Extra practice</h2>
-      <p><a href={lesson.reviewGuide.practiceUrl} target="_blank" rel="noopener noreferrer">{lesson.reviewGuide.practiceTitle} ↗</a></p>
-      <p>{lesson.reviewGuide.practiceInstructions ?? 'Choose a topic, then try the “Your Turn” questions near the bottom of its page. Work on paper before checking each answer. No account is needed.'}</p>
-      <p className="review-privacy">{lesson.reviewGuide.privacyNote} {lesson.reviewGuide.privacyUrl && <a href={lesson.reviewGuide.privacyUrl} target="_blank" rel="noopener noreferrer">Read its privacy statement ↗</a>}</p>
-    </section> }] : lesson.videos.map(video => ({ id: video.id, label: video.title, content: <section className="book-video-section" aria-label={video.title}><LessonVideo video={video} /></section> }))}
-    previousHref={previous ? `/courses/${previous.course}/${previous.slug}` : `/courses/${lesson.course}/units/${unit.slug}#page=2`} previousLabel={previous ? 'Previous lesson' : 'Unit overview'}
-    nextHref={next ? `/courses/${next.course}/${next.slug}` : `/courses/${lesson.course}`} nextLabel={next ? 'Next lesson' : 'Contents'}
-  /></div>
+const materialLabels=['Blank Notes','Completed Notes','Assignment','Assignment Answers']
+export default async function LessonPage({params}:{params:Promise<{course:string;lesson:string}>}){
+ const p=await params, lesson=getLesson(p.course,p.lesson)
+ if(!lesson)notFound()
+ const course=courses.find(c=>c.id===lesson.course)!, unit=getUnit(lesson.course,lesson.unitSlug)!
+ const courseLessons=lessons.filter(item=>item.course===lesson.course), index=courseLessons.findIndex(item=>item.slug===lesson.slug)
+ const previous=courseLessons[index-1], next=courseLessons[index+1]
+ const relatedApps=practiceApps.filter(app=>!app.slug.startsWith('beta/')&&(app.lessons.some(ref=>ref.course===lesson.course&&ref.slug===lesson.slug)||lesson.practiceActivities?.some(activity=>activity.slug===app.slug)||`/apps/${app.slug}`===lesson.practiceApp||`/apps/${app.slug}`===lesson.interactiveLesson?.href))
+ const apps=(lesson.practiceActivities?lesson.practiceActivities.flatMap(activity=>{const app=practiceApps.find(item=>item.slug===activity.slug&&!item.slug.startsWith('beta/'));return app?[app]:[]}):relatedApps).filter(app=>`/apps/${app.slug}`!==lesson.reviewGuide?.practiceUrl)
+ const extras=lesson.materials.flatMap(material=>material.additional??[])
+ const terms=getLessonVocabulary(lesson.slug)
+ const guide=lesson.reviewGuide
+ return <div className="lesson-hub study-page"><BookReader className="lesson-reader study-lesson-reader" label={`${lesson.title} lesson resources`}
+  breadcrumb={<><Link href={`/courses/${lesson.course}/units/${unit.slug}`}>← Back to Unit {unit.number}</Link><span aria-hidden="true">/</span><Link href={`/courses/${lesson.course}`}>{course.title}</Link></>}
+  heading={<><p className="book-eyebrow">{course.title} · {lesson.unit} · {lesson.number}</p><h1>{lesson.title}</h1><nav id="materials" className="study-materials" aria-label="Lesson documents">{lesson.materials.map((material,i)=><div className="study-material" key={material.kind}>{material.file?<a href={`/materials/${material.file}`} target="_blank" rel="noopener noreferrer" title={material.description}><span aria-hidden="true">▤</span>{material.label??materialLabels[i]}<span className="sr-only"> (PDF, opens in a new tab)</span></a>:<span title={material.unavailableReason}>{material.label??materialLabels[i]}<small>Not posted yet</small></span>}</div>)}</nav>{lesson.materialsNote&&<p className="lesson-materials-note"><MathText>{lesson.materialsNote}</MathText></p>}</>}
+  pages={[{id:'resources',label:'Videos, webwidgets and supporting materials',content:<div className="lesson-resource-columns"><section className="lesson-videos"><h2>Lesson videos</h2><p className="resource-column-intro">Watch a lesson, pause, and work at your pace.</p>{lesson.videos.map(video=><LessonVideo key={video.id} video={video}/>)}{!lesson.videos.length&&<p className="study-empty">A video for this lesson has not been posted yet.</p>}{guide&&<section className="study-review"><h2>Prepare for the test</h2><ol>{guide.instructions.map(text=><li key={text}>{text}</li>)}</ol><h3>Return to a lesson</h3><ul>{guide.lessonSlugs.map(slug=>{const item=getLesson(lesson.course,slug);return item?<li key={slug}><Link href={`/courses/${lesson.course}/${slug}`}>{item.number} — {item.title}</Link></li>:null})}</ul></section>}</section><section className="lesson-support"><h2>Practice &amp; explore</h2><p className="resource-column-intro">Webwidgets open in a new tab. Keep your notes here.</p>{lesson.practiceActivities&&<p className="study-empty">Open your blank notes above and choose the level your teacher assigns. Finish both reflections and save your completion record when you finish.</p>}{apps.map(app=><a className="study-resource-card" key={app.slug} href={`/apps/${app.slug}`} target="_blank" rel="noopener noreferrer"><span className="study-card-kind">WEBWIDGET <span aria-hidden="true">↗</span></span><h3>{app.title}</h3><p>{lesson.practiceActivities?.find(activity=>activity.slug===app.slug)?.description??app.description}</p><span className="study-card-action">Open webwidget →<span className="sr-only"> (opens in a new tab)</span></span></a>)}{lesson.interactiveLesson&&!apps.some(app=>`/apps/${app.slug}`===lesson.interactiveLesson?.href)&&<a className="study-resource-card" href={lesson.interactiveLesson.href} target="_blank" rel="noopener noreferrer"><span className="study-card-kind">INTERACTIVE LESSON ↗</span><h3>{lesson.interactiveLesson.title}</h3><span className="study-card-action">Open lesson →</span></a>}{!apps.length&&!lesson.interactiveLesson&&<p className="study-empty">No webwidget is linked to this lesson yet.</p>}{extras.map(extra=><a className="study-resource-card" key={extra.file} href={`/materials/${extra.file}`} target="_blank" rel="noopener noreferrer"><span className="study-card-kind">SUPPORTING MATERIAL · PDF ↗</span><h3>{extra.label}</h3><p>{extra.description}</p></a>)}{guide&&<article className="study-resource-card"><span className="study-card-kind">EXTRA PRACTICE</span><h3><a href={guide.practiceUrl} target="_blank" rel="noopener noreferrer">{guide.practiceTitle} ↗</a></h3><p>{guide.practiceInstructions??'Choose a topic and work on paper before checking each answer. No account is needed.'}</p><p className="review-privacy">{guide.privacyNote} {guide.privacyUrl&&<a href={guide.privacyUrl} target="_blank" rel="noopener noreferrer">Privacy statement ↗</a>}</p></article>}{terms.length>0&&<LessonVocabulary course={lesson.course} terms={terms}/>}</section></div>}]}
+  previousHref={previous?`/courses/${previous.course}/${previous.slug}`:`/courses/${lesson.course}/units/${unit.slug}`} previousLabel={previous?'Previous lesson':'Unit overview'}
+  nextHref={next?`/courses/${next.course}/${next.slug}`:`/courses/${lesson.course}`} nextLabel={next?'Next lesson':'Contents'}/><div className="math-stamp" aria-hidden="true">MAC<br/>MATH</div></div>
 }

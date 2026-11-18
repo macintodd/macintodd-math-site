@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { courses, lessons, type Lesson } from '@/content/lessons'
 import { units } from '@/content/units'
-import {practiceApps} from '@/content/practice-apps'
 import { precalculusAssessments } from '@/content/precalculus'
 import './review-links.css'
 
@@ -18,10 +17,10 @@ export default async function CoursePage({ params }: { params: Promise<{ course:
   const course = courses.find(c => c.id === courseId)
   if (!course) notFound()
   const courseUnits = units.filter(unit => unit.course === courseId)
-  return <section className="course-index shell" aria-label={`${course.title} table of contents`}>
-    <nav className="book-breadcrumb" aria-label="Breadcrumb"><Link href="/">Classes</Link><span aria-hidden="true">/</span><span>{course.title}</span></nav>
+  return <section className="course-index shell study-page" aria-label={`${course.title} table of contents`}>
+    <nav className="book-breadcrumb" aria-label="Breadcrumb"><Link href="/">← Back to Home</Link><span aria-hidden="true">/</span><span>{course.title}</span></nav>
     <div className="course-index-content">
-      <header><p className="eyebrow">LEARN IT. TRY IT. MAKE IT CLICK.</p><h1>{course.title}</h1><p className="course-intro">Lesson notes, videos, and practice, organized by unit.</p><p className="course-glossary-link"><Link href={`/courses/${courseId}/vocabulary`}>Vocabulary &amp; definitions →</Link></p></header>
+      <header><p className="eyebrow">MAC’S MATH</p><h1>{course.title}</h1><p className="course-intro">Lesson notes, videos, and practice, organized by unit.</p><nav className="study-course-tabs" aria-label="Choose a course">{courses.map(item=><Link key={item.id} href={`/courses/${item.id}`} aria-current={item.id===courseId?'page':undefined}>{item.title}</Link>)}</nav><p className="course-glossary-link"><Link href={`/courses/${courseId}/vocabulary`}>Vocabulary &amp; definitions →</Link></p></header>
       {courseId === 'algebra-2' && <section className="course-test-review" aria-labelledby="test-review-heading">
         <h2 id="test-review-heading">Test Review Widgets</h2>
         <p>Preparing for the chapter test? Start with the Unit 1B review collection, then choose the skills you need to practice.</p>
@@ -46,11 +45,11 @@ export default async function CoursePage({ params }: { params: Promise<{ course:
             if (!('lesson' in entry)) return <li className="toc-assessment" key={entry.title}><span className="toc-lesson-number">Quiz</span><span className="toc-lesson-title">{entry.title}</span><small>In class</small></li>
             const lesson = entry.lesson
             return <li className={lesson.followUpOf ? 'toc-follow-up' : undefined} key={lesson.slug}>
-              <Link href={`/courses/${courseId}/${lesson.slug}`}><span className="toc-lesson-number">{lesson.followUpOf ? '↳' : lesson.indexLabel ?? `${unit.number}.${lesson.number.match(/\d+/)?.[0]}`}</span><span className="toc-lesson-title">{lesson.title}</span><span className="toc-leader" aria-hidden="true" /><span className="toc-read">Read <span aria-hidden="true">→</span></span></Link>
+              <Link href={`/courses/${courseId}/${lesson.slug}`}><span className="toc-lesson-number">{lesson.followUpOf ? '↳' : lesson.indexLabel ?? `${unit.number}.${lesson.number.match(/\d+/)?.[0]}`}</span><span className="toc-lesson-title">{lesson.title}</span><span className="toc-leader" aria-hidden="true" /><span className="toc-read">Open <span aria-hidden="true">→</span></span></Link><nav className="toc-materials" aria-label={`${lesson.title} documents`}>{lesson.materials.map((material,i)=>material.file?<a key={material.kind} href={`/materials/${material.file}`} target="_blank" rel="noopener noreferrer">{material.label??['Blank Notes','Completed Notes','Assignment','Assignment Answers'][i]}<span className="sr-only"> (PDF, opens in a new tab)</span></a>:<span key={material.kind} title={material.unavailableReason}>{material.label??['Blank Notes','Completed Notes','Assignment','Assignment Answers'][i]} · not posted</span>)}</nav>
             </li>
           })}</ol>
         </details>
-      })}</div><aside className="modern-course-aside"><h2>Try it for yourself</h2><p>Practice the skills from your class.</p>{practiceApps.filter(app=>!app.slug.startsWith('beta/')&&app.courses.includes(course.id)&&app.category==='Linear graphs and equations').slice(0,4).map(app=><Link key={app.slug} href={`/apps/${app.slug}`}>{app.title}<span aria-hidden="true">→</span></Link>)}<Link className="modern-text-link" href="/apps">Browse all practice apps →</Link><div className="modern-aside-note"><h3>Need a fresh start?</h3><p>Revisit a video or compare your work with the completed notes. Take it one step at a time.</p></div></aside></div>
+      })}</div></div>
     </div>
   </section>
 }
