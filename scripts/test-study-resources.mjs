@@ -10,9 +10,12 @@ import * as vocabulary from '../src/content/vocabulary.ts'
 import * as apps from '../src/content/practice-apps.ts'
 import * as precalculus from '../src/content/precalculus.ts'
 import {chapterReviews} from '../src/content/chapter-reviews.ts'
+const iconModule={exports:{}}
+vm.runInNewContext(ts.transpileModule(fs.readFileSync('src/components/DocumentIcon.tsx','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX}}).outputText,{module:iconModule,exports:iconModule.exports,require:()=>jsx})
 const testModule={exports:{}}
 const modules={
  'react/jsx-runtime':jsx,
+ '@/components/DocumentIcon':iconModule.exports,
  '@/content/chapter-reviews':{chapterReviews},
  '@/components/ChapterDisclosure':{ChapterDisclosure:({initialOpen,summary,children})=>jsx.jsxs('details',{open:initialOpen,children:[jsx.jsx('summary',{children:summary}),children]})},
  '@/components/StudySketch':{SketchFrame:()=>jsx.jsx('svg',{'aria-hidden':true})},
@@ -34,6 +37,7 @@ for(const lesson of content.lessons){
   else assert(html.includes('Not posted yet'),lesson.slug+' unavailable document')
   for(const extra of material.additional??[])assert(html.includes(`href="/materials/${extra.file}"`),lesson.slug+' supporting PDF')
  }
+ assert.equal((html.match(/data-note-state=/g)??[]).length,lesson.materials.length+lesson.materials.flatMap(material=>material.additional??[]).length,lesson.slug+' document icons')
  assert.equal((html.match(/data-video=/g)??[]).length,lesson.videos.length,lesson.slug+' all videos')
  assert(!html.includes('href="/apps/beta/'),lesson.slug+' beta exclusion')
  let lastIndex=-1

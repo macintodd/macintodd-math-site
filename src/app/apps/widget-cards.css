@@ -70,3 +70,15 @@
 @media(max-width:380px){.widget-card-main{grid-template-columns:94px minmax(0,1fr);padding:14px;gap:11px}.widget-thumbnail{width:94px;height:120px}.widget-thumbnail .activity-preview{transform:scale(.27);left:-2px;top:12px}.study-page .widget-card h3{font-size:21px}}
 
 .widget-thumbnail .katex{white-space:nowrap}
+
+/* Keep the directory heading and filters together, above a pencil divider. */
+.app-directory .breadcrumb{padding-top:18px;margin-bottom:14px}
+.app-directory .page-heading{padding-block:4px 8px;margin-bottom:0}
+.app-directory .page-heading .eyebrow{margin-bottom:6px}
+.app-directory .page-heading h1{margin:5px 0 10px}
+.app-directory .page-heading>p:last-child{margin-bottom:0}
+.app-directory .app-filters{margin-top:16px;margin-bottom:4px;padding:15px 18px}
+.directory-divider{margin:7px 0 12px}
+.directory-result-heading{margin-top:12px}
+.app-directory .app-count{margin-bottom:18px}
+@media(max-width:720px){.app-directory .breadcrumb{padding-top:14px;margin-bottom:12px}.app-directory .page-heading{padding-bottom:6px}.app-directory .app-filters{margin-top:14px}.directory-divider{margin-top:8px}}

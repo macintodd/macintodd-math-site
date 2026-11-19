@@ -99,3 +99,12 @@ body:has(.chapter-index)>.site-header{display:none}
 .chapter-practice-links{display:flex;flex-wrap:wrap;gap:12px 28px;margin:18px 0 30px}
 .chapter-practice-links a{display:inline-flex;align-items:center;min-height:44px;font:12px/1.5 var(--study-ui);color:var(--ink-saddle)}
 @media(max-width:700px){.chapter-row{grid-template-columns:minmax(0,1fr);gap:16px;margin-bottom:30px}.chapter-review-link{min-height:68px;justify-content:flex-start;padding:18px 23px;text-align:left;font-size:23px}}
+
+.document-sketch-icon{display:block;width:34px;height:45px;flex:0 0 34px;color:var(--ink-saddle);overflow:visible;text-decoration:none}
+.study-material>a{gap:9px}
+.study-material>.material-unavailable-content{flex-direction:row;align-items:center;gap:9px}
+.material-unavailable-label{display:flex;flex-direction:column;min-width:0}
+.material-unavailable-content .document-sketch-icon{opacity:.55}
+.study-pdf-kind{justify-content:flex-start;gap:10px}
+.sketch-divider{display:block;width:100%;height:10px;fill:none;stroke:#a88f70;stroke-width:1.05;pointer-events:none;overflow:visible}
+@media(max-width:740px){.document-sketch-icon{width:31px;height:42px;flex-basis:31px}.study-material>a,.study-material>.material-unavailable-content{gap:7px}}

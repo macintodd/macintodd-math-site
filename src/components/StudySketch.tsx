@@ -6,3 +6,5 @@ export function StudySketch({kind}:{kind:'radical'|'circle'|'wave'}){
  {kind==='circle'?<><path d="M26 67L128 65M78 115L79 17M27 69L127 67M80 115L77 19"/><path d="M78 29C121 26 131 99 78 103C29 106 29 30 78 29Z"/><path d="M80 30C128 30 124 106 76 102C29 101 32 28 80 30Z" strokeWidth="1.1"/><path d="M79 66L112 41M79 67L113 43" stroke="#0F3460" strokeWidth="2.5"/><path d="M92 66Q92 60 88 57M94 65Q94 60 90 57" stroke="#7C5332" strokeWidth="1.4"/></>:<><path d="M23 97L132 98M24 99L131 100M42 113L43 23M44 112L40 24M38 29L42 21L47 28M126 93L133 98L126 103"/><path d="M60 98C62 82 63 66 69 61S105 43 123 36M60 100C62 85 64 66 71 62S106 45 123 38" stroke="#0F3460" strokeWidth="2.6"/><circle cx="60" cy="98" r="4" fill="#7C5332" stroke="#7C5332"/></>}
  </g></svg>
 }
+
+export function SketchDivider({className=''}:{className?:string}){return <svg className={`sketch-divider ${className}`} viewBox="0 0 1000 12" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M3 5Q102 2 202 6T402 5T604 6T801 5L997 6"/><path d="M5 8L201 7Q307 4 403 8T604 7T802 8L995 7" opacity=".5"/></svg>}

@@ -20,7 +20,7 @@ assert(filterDirectoryApps(content.practiceApps,'Functions','precalculus','PAREN
 assert.equal(filterDirectoryApps(content.practiceApps,'Functions','','not-a-math-widget').length,0)
 const apps=content.practiceApps.map(app=>({...app,lessons:app.lessons.map(ref=>({key:`${ref.course}/${ref.slug}`,course:ref.course,href:`/courses/${ref.course}/${ref.slug}`,label:ref.slug}))}))
 const testModule={exports:{}}
-const modules={'react':React,'react/jsx-runtime':jsx,'@/content/practice-apps':content,'@/lib/practice-directory':directory,'./category-preference':{subscribeCategory:()=>()=>{},readCategory:()=>defaultCategory,rememberCategory:()=>{}},'./WidgetCard':{__esModule:true,default:({app})=>jsx.jsx('article',{children:jsx.jsx('a',{href:`/apps/${app.slug}`,children:app.title})})}}
+const modules={'@/components/StudySketch':{SketchDivider:()=>jsx.jsx('svg',{'aria-hidden':true})},'react':React,'react/jsx-runtime':jsx,'@/content/practice-apps':content,'@/lib/practice-directory':directory,'./category-preference':{subscribeCategory:()=>()=>{},readCategory:()=>defaultCategory,rememberCategory:()=>{}},'./WidgetCard':{__esModule:true,default:({app})=>jsx.jsx('article',{children:jsx.jsx('a',{href:`/apps/${app.slug}`,children:app.title})})}}
 vm.runInNewContext(ts.transpileModule(fs.readFileSync('src/app/apps/AppDirectory.tsx','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,esModuleInterop:true}}).outputText,{module:testModule,exports:testModule.exports,require(name){assert(name in modules,name);return modules[name]}})
 for(const category of ['Functions','beta','all']){
  const html=renderToStaticMarkup(jsx.jsx(testModule.exports.default,{apps,initialCategory:category}))
