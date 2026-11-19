@@ -9,9 +9,12 @@ import * as units from '../src/content/units.ts'
 import * as vocabulary from '../src/content/vocabulary.ts'
 import * as apps from '../src/content/practice-apps.ts'
 import * as precalculus from '../src/content/precalculus.ts'
+import {chapterReviews} from '../src/content/chapter-reviews.ts'
 const testModule={exports:{}}
 const modules={
  'react/jsx-runtime':jsx,
+ '@/content/chapter-reviews':{chapterReviews},
+ '@/components/ChapterDisclosure':{ChapterDisclosure:({initialOpen,summary,children})=>jsx.jsxs('details',{open:initialOpen,children:[jsx.jsx('summary',{children:summary}),children]})},
  '@/components/StudySketch':{SketchFrame:()=>jsx.jsx('svg',{'aria-hidden':true})},
  '@/content/precalculus':precalculus,'./review-links.css':{},
  'next/navigation':{notFound(){throw Error('Unexpected missing lesson')}},
@@ -46,6 +49,8 @@ vm.runInNewContext(ts.transpileModule(fs.readFileSync('src/app/courses/[course]/
 for(const course of content.courses){
  const html=renderToStaticMarkup(await courseModule.exports.default({params:Promise.resolve({course:course.id})}))
  assert(!html.includes('href="/materials/'),course.id+' materials must be reached through lessons')
+ assert.equal((html.match(/class="chapter-review"/g)??[]).length,units.units.filter(unit=>unit.course===course.id).length)
+ for(const [key,href] of Object.entries(chapterReviews).filter(([key])=>key.startsWith(course.id+'/')))assert(html.includes(`href="${href}"`),key+' matching review')
  for(const lesson of content.lessons.filter(item=>item.course===course.id))assert(html.includes(`href="/courses/${course.id}/${lesson.slug}"`),lesson.slug+' lesson remains reachable')
 }
 console.log('Passed both course indexes: all lesson links remain and no direct document links are exposed.')

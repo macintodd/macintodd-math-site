@@ -2,6 +2,15 @@
 
 The M4 Mac mini is the primary editing machine. The AI on the other Mac reviews changes on GitHub. Use GitHub `main` as the published source and follow [AGENTS.md](../AGENTS.md) for maintenance rules. Review the latest commits before starting work.
 
+## Sliding chapters and review columns · November 18, 2026
+
+- Added `ChapterDisclosure`, retaining native details/summary semantics while animating measured height over 360ms on open and close. Rapid repeated clicks reverse from the current visual height. Enter/Space continue to work. Reduced-motion preference skips animation. Animation cleanup runs on unmount; resting height is automatic for responsive content.
+- Each chapter now has a matching sketched review card in its own right column, with a 3:1 chapter/review width ratio. The only visible label is Test [unit number] Review. Cards stack beneath chapters on phones. Removed the larger bottom review panels and retained the supplemental Algebra 2 writing/graphing practice links below the list.
+- Published mappings are in `src/content/chapter-reviews.ts`: Algebra 2 1B → Unit 1B test practice collection; Precalculus 1 → published Unit 1 test-review lesson; Precalculus 1B → Sections 1.6–1.7B review collection. Algebra 2 1A has no published review, so its card is visibly subdued, unlinked and has an accessible not-posted explanation. Do not substitute unrelated review material.
+- Validation passed: typecheck, lint, content check, production build (existing advisory reminder recorded below), diff whitespace, all 37 lesson/resource layouts and both index/resource-map checks, and practice-hub regressions. Chrome at 1180×820 and 390×820 verified intermediate animated height, native keyboard activation, rapid reversal, reduced-motion behavior, 3:1 width/mobile stacking, valid review destinations, unavailable 1A and no PDF shortcuts/overflow. Desktop and phone screenshots reviewed.
+- MathBoard bridge/state, teaching widgets, scoring and languages are unchanged. Requested layout and animation work is complete. Adding a Chapter 1A review requires teacher-selected content; physical-device and framework-security follow-ups remain recorded below.
+- Deployment: publishing and live verification pending.
+
 ## Chapter-card indexes · November 18, 2026
 
 - Both course indexes now match the teacher’s chapter-card reference: Back to Home and handwritten domain at the top, a centered course title/instruction, separate white sketched chapter sheets, actual section counts and large serif lesson rows. Preserved published chapter/lesson titles, follow-up indentation, in-class assessment labels, all unit overview links and the current-unit opening states from content data. Review collections and course/vocabulary links now sit below the chapter list. No document shortcuts were reintroduced.
