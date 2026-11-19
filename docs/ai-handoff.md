@@ -2,6 +2,14 @@
 
 The M4 Mac mini is the primary editing machine. The AI on the other Mac reviews changes on GitHub. Use GitHub `main` as the published source and follow [AGENTS.md](../AGENTS.md) for maintenance rules. Review the latest commits before starting work.
 
+## Chapter-card indexes · November 18, 2026
+
+- Both course indexes now match the teacher’s chapter-card reference: Back to Home and handwritten domain at the top, a centered course title/instruction, separate white sketched chapter sheets, actual section counts and large serif lesson rows. Preserved published chapter/lesson titles, follow-up indentation, in-class assessment labels, all unit overview links and the current-unit opening states from content data. Review collections and course/vocabulary links now sit below the chapter list. No document shortcuts were reintroduced.
+- Native details/summary controls are styled as double-drawn Open Unit / Hide Sections buttons, cream when closed and navy when open, with sketched chevrons. No extra state or JavaScript is needed; keyboard/touch behavior remains native. Headers/buttons wrap cleanly on phones. The global header is hidden only on these index routes in favor of the reference’s compact top navigation.
+- Validation passed: typecheck, lint, content check, production build (after the previously recorded advisory reminder), diff whitespace, all 37 lesson/resource layouts plus both course indexes, and practice-hub regressions. Chrome checks at 1180×820 and 390×820 passed for both courses: click/Enter/Space toggle behavior and labels, no horizontal overflow, no direct PDF links, and successful navigation to lesson materials. Desktop and phone screenshots visually reviewed.
+- MathBoard mirroring, teaching apps, scoring, language and lesson resource layouts are unchanged. No requested index work remains unfinished. Existing physical-device and framework-security follow-ups remain recorded below.
+- Deployment: publishing and live verification pending.
+
 ## Pencil-style refinement · November 18, 2026
 
 - Matched the teacher’s screenshot reference more closely with double-drawn, imperfect rectangular home card edges, smaller multi-stroke graph doodles, graph-paper patches behind the white cards, and a flatter, compact navy/brown footer wave. Video/resource cards have less-rounded paper edges.

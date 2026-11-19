@@ -12,6 +12,7 @@ import * as precalculus from '../src/content/precalculus.ts'
 const testModule={exports:{}}
 const modules={
  'react/jsx-runtime':jsx,
+ '@/components/StudySketch':{SketchFrame:()=>jsx.jsx('svg',{'aria-hidden':true})},
  '@/content/precalculus':precalculus,'./review-links.css':{},
  'next/navigation':{notFound(){throw Error('Unexpected missing lesson')}},
  'next/link':{__esModule:true,default:({children,...props})=>jsx.jsx('a',{...props,children})},
