@@ -23,7 +23,7 @@ export function ChapterDisclosure({initialOpen=false,summary,children}:{initialO
   node.style.height='auto'
   const to=next?node.getBoundingClientRect().height:event.currentTarget.getBoundingClientRect().height
   node.style.overflow='hidden'
-  const motion=node.animate([{height:`${from}px`},{height:`${to}px`}],{duration:360,easing:'cubic-bezier(.22,1,.36,1)',fill:'both'})
+  const motion=node.animate([{height:`${from}px`},{height:`${to}px`}],{duration:560,easing:'cubic-bezier(.25,.1,.25,1)',fill:'both'})
   animation.current=motion
   motion.onfinish=()=>{
    if(animation.current!==motion)return
