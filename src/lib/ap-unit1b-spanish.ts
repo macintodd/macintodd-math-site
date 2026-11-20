@@ -1,5 +1,6 @@
 /** Local additions to the original AP rational-function translations. */
 export const apUnitSpanish=String.raw`
+Class survey: practice over the break →	Encuesta de clase: práctica durante el descanso →
 AP Precalculus · Sections 1.7–1.11B Practice	Precálculo AP · Práctica de las secciones 1.7–1.11B
 Sections 1.7A–1.11B	Secciones 1.7A–1.11B
 RATIONAL FUNCTIONS & EQUIVALENT FORMS · ORIGINAL AP-STYLE PRACTICE	FUNCIONES RACIONALES Y FORMAS EQUIVALENTES · PRÁCTICA ORIGINAL TIPO AP

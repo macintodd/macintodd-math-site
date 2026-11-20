@@ -493,3 +493,10 @@ New 22,400-question/40-template math/KaTeX/Spanish/resume/UI suite passes; origi
 ### AP 1.7–1.11B release verified live
 
 Both Vercel projects succeeded for 8d9687d. Live HTTP 200 verified for the new route with all seven topics, 28/14-question choices and resume instructions; confirmed discovery links on Functions directory and original AP widget. Safari navigated from the local preview to the public URL and visibly showed the clean student start screen with topics through 1.11B, scoring, identity fields and resume entry. Existing AP and new AP suites, save-image/copy tests and all production checks pass. No Firebase/database or owner setup needed. Physical iPad-specific Files/Photos destination remains browser-controlled.
+
+## APcalc live class survey · November 20, 2026
+
+- Added `/survey`, alias `/apps/apcalc-survey`, static page `/surveys/apcalc.html`, and links on both AP practice start pages. One question, two requested schedule options, case-insensitive APcalc code, live horizontal bars on right, responsive iPad/phone layout.
+- Anonymous Firebase named app isolates auth from Card Clash; no names/emails. Server-confirmed atomic immutable votes, browser cookie, persistence recovery, reconnect/error handling. No voting through MathBoard or student score storage added.
+- Published scoped rules in Firebase console; preserved all Card Clash permissions/data. Live disposable test branch verified totals and rejected duplicate/foreign/invalid votes and unauthenticated reads. Removed test votes/accounts and republished production-only rules. See `docs/apcalc-survey.md` and rules snapshot.
+- Survey interaction/model tests, typecheck, lint, content check passed. Production build passed on retry after the previously recorded Next.js security advisory; security upgrade remains a separate follow-up. AP regression tests (22,400 generated questions) passed. Safari preview confirmed Firebase Live/zero votes and right-side chart. Publication/live-domain verification pending below. MathBoard mirroring unchanged.
