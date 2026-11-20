@@ -481,3 +481,11 @@ Rebalanced both paper-aligned Algebra 2 review widgets to a 45% question / 55% t
 ### Wider Day 1/Day 2 review workspaces verified live
 
 Both Vercel projects succeeded for d2eb6aa. Retrieved each live review page and its linked CSS over HTTP 200; verified the new 45/55 column ratio and full-width keypad rule on both. Refresh already-open review tabs to receive the layout. Saved progress and scratch strokes were not migrated or altered.
+
+## AP practice expanded through 1.11B — Nov 20
+
+New independent widget /apps/ap-precalculus-1-7-1-11b covers teacher packets 1.7A/B, 1.8, 1.9, 1.10, 1.11A/B with seven topic checkboxes, 14 no-calculator + 14 calculator questions (28 mixed), original AP-style MCQs, +10/−5 and no streak. New templates cover multiplicity/holes/limits, equivalent forms, binomial theorem and quotient/remainder/slant behavior. Old /apps/ap-rational-practice and RAT1 bank/codes preserved; only a header link to the new app added. Catalog/preview, scorecard skill and local Spanish strings added. Uses existing AP layout and scratch/feedback/CompletionFlow; no redesign or course settings changed.
+
+APU1 code preserves seed/topic/mode/all checked choices/completion time and recomputes exact score, with initials/hour hash and typo checksum. Save on questions, break, missed-review and final reflection; progress PNG includes student/local date+time/points/tried/correct/missed/accuracy/topics/code. Copy and Photos preview/Files download via shared ResumeDialog, with corrected AP filename. Typical in-progress codes 27–41 characters, completed up to 53. No student network/storage added. Scratch/unsubmitted choices are not encoded. See docs/ap-precalculus-1-7-1-11b.md.
+
+New 22,400-question/40-template math/KaTeX/Spanish/resume/UI suite passes; original 30,000-question suite passes. Actual Safari verified answering, +10 score, named/date/code save dialog, generated image and return-by-code to next question with score/history preserved. Shared dialog mock confirms copy/fallback and named/dated/stat PNG download. Final regression, typecheck, lint, content check, production build and diff check pass, including the top-scroll adjustment. Publication/live verification pending. Physical iPad Photos menu remains owner check.
