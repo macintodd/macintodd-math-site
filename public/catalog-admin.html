@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MathBoard Catalog Admin</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f4f5f7; color: #1a1a2e; }
+
+    /* ── Auth Screen ───────────────────────────────────────────────── */
+    #login-view {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      min-height: 100vh; gap: 12px;
+    }
+    #login-view h1 { font-size: 1.6rem; margin-bottom: 8px; color: #1a2a4a; }
+    #login-view input {
+      width: 300px; padding: 10px 14px; border: 1px solid #ccc;
+      border-radius: 8px; font-size: 1rem;
+    }
+    #login-view button {
+      width: 300px; padding: 11px; background: #1a2a4a; color: #fff;
+      border: none; border-radius: 8px; font-size: 1rem; cursor: pointer;
+    }
+    #login-view button:hover { background: #243a60; }
+    #login-error { color: #c0392b; font-size: 0.85rem; max-width: 300px; text-align: center; }
+
+    /* ── App Shell ─────────────────────────────────────────────────── */
+    #app-view { display: none; max-width: 960px; margin: 0 auto; padding: 24px 20px 60px; }
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-bottom: 20px; border-bottom: 2px solid #d8dce6; margin-bottom: 28px;
+    }
+    header h1 { font-size: 1.4rem; color: #1a2a4a; }
+    header span { font-size: 0.85rem; color: #666; }
+    #logout-btn {
+      padding: 7px 16px; background: transparent; border: 1px solid #aaa;
+      border-radius: 6px; cursor: pointer; font-size: 0.85rem;
+    }
+    #logout-btn:hover { background: #eee; }
+
+    /* ── Card ──────────────────────────────────────────────────────── */
+    .card {
+      background: #fff; border-radius: 12px; padding: 28px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07); margin-bottom: 32px;
+    }
+    .card h2 { font-size: 1.1rem; color: #1a2a4a; margin-bottom: 20px; }
+
+    /* ── Form ──────────────────────────────────────────────────────── */
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-grid .full { grid-column: 1 / -1; }
+    .field { display: flex; flex-direction: column; gap: 5px; }
+    .field label { font-size: 0.8rem; font-weight: 600; color: #555; text-transform: uppercase; letter-spacing: 0.04em; }
+    .field input, .field select, .field textarea {
+      padding: 9px 12px; border: 1px solid #d0d4de; border-radius: 7px;
+      font-size: 0.95rem; font-family: inherit; background: #fafbfc;
+      transition: border-color 0.15s;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus {
+      outline: none; border-color: #3a6bbf; background: #fff;
+    }
+    .field textarea { min-height: 80px; resize: vertical; }
+    .field .hint { font-size: 0.75rem; color: #888; margin-top: 2px; }
+    .dim-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .checkbox-row { display: flex; align-items: center; gap: 8px; padding: 10px 0; }
+    .checkbox-row input[type=checkbox] { width: 16px; height: 16px; cursor: pointer; }
+    .checkbox-row label { font-size: 0.9rem; cursor: pointer; }
+    .form-actions { display: flex; gap: 10px; margin-top: 20px; }
+    .btn-primary {
+      padding: 10px 24px; background: #1a2a4a; color: #fff;
+      border: none; border-radius: 8px; font-size: 0.95rem; cursor: pointer;
+    }
+    .btn-primary:hover { background: #243a60; }
+    .btn-secondary {
+      padding: 10px 20px; background: transparent; border: 1px solid #aaa;
+      border-radius: 8px; font-size: 0.95rem; cursor: pointer;
+    }
+    .btn-secondary:hover { background: #f0f0f0; }
+
+    /* ── Scope Selector ────────────────────────────────────────────── */
+    .scope-group { display: flex; gap: 10px; }
+    .scope-opt {
+      flex: 1; border: 2px solid #d0d4de; border-radius: 10px; padding: 12px;
+      cursor: pointer; transition: all 0.15s; text-align: center; background: #fafbfc;
+    }
+    .scope-opt.selected { border-color: #3a6bbf; background: #eef3fc; }
+    .scope-opt .scope-label { font-weight: 700; font-size: 0.85rem; color: #1a2a4a; }
+    .scope-opt .scope-desc { font-size: 0.72rem; color: #666; margin-top: 3px; }
+    .scope-opt:hover { border-color: #7a9fd4; }
+
+    /* ── Catalog List ──────────────────────────────────────────────── */
+    #catalog-list { display: flex; flex-direction: column; gap: 10px; }
+    .cat-row {
+      background: #fff; border: 1px solid #e2e5ed; border-radius: 10px;
+      padding: 14px 16px; display: flex; align-items: flex-start; gap: 12px;
+    }
+    .cat-row-info { flex: 1; min-width: 0; }
+    .cat-row-title { font-weight: 600; font-size: 0.95rem; color: #1a2a4a; }
+    .cat-row-url { font-size: 0.75rem; color: #3a6bbf; word-break: break-all; margin-top: 2px; }
+    .cat-row-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+    .badge {
+      display: inline-block; padding: 2px 8px; border-radius: 20px;
+      font-size: 0.7rem; font-weight: 600;
+    }
+    .badge-published { background: #d4edda; color: #1a6b30; }
+    .badge-unpublished { background: #fce8e8; color: #a01010; }
+    .badge-global { background: #dbe8ff; color: #1a3a7a; }
+    .badge-private { background: #fff0cc; color: #7a5500; }
+    .badge-website { background: #e8e8e8; color: #555; }
+    .badge-category { background: #f0eefc; color: #4a3a8a; }
+    .cat-row-actions { display: flex; gap: 6px; flex-shrink: 0; }
+    .btn-sm {
+      padding: 5px 12px; border-radius: 6px; font-size: 0.8rem; cursor: pointer;
+      border: 1px solid #bbb; background: #f4f5f7;
+    }
+    .btn-sm:hover { background: #e8e9ec; }
+    .btn-danger { border-color: #e88; background: #fff0f0; color: #c00; }
+    .btn-danger:hover { background: #ffe0e0; }
+
+    .empty-state { text-align: center; color: #888; padding: 32px; font-size: 0.95rem; }
+    .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .section-header h2 { font-size: 1.1rem; color: #1a2a4a; }
+    #refresh-btn { font-size: 0.8rem; }
+
+    /* ── Notice banner ─────────────────────────────────────────────── */
+    .notice {
+      background: #fff8e6; border: 1px solid #f5c842; border-radius: 8px;
+      padding: 10px 14px; font-size: 0.82rem; color: #7a5500; margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Login ───────────────────────────────────────────────────────── -->
+<div id="login-view">
+  <h1>MathBoard Catalog Admin</h1>
+  <input id="email" type="email" placeholder="Email" autocomplete="email">
+  <input id="password" type="password" placeholder="Password" autocomplete="current-password">
+  <button id="login-btn">Sign In</button>
+  <div id="login-error"></div>
+  <p style="font-size:0.75rem;color:#888;margin-top:8px;">
+    Use the account you registered in Firebase Console → Authentication.
+  </p>
+</div>
+
+<!-- ── App ─────────────────────────────────────────────────────────── -->
+<div id="app-view">
+  <header>
+    <h1>MathBoard Catalog Admin</h1>
+    <div style="display:flex;align-items:center;gap:14px;">
+      <span id="user-email"></span>
+      <button id="logout-btn">Sign Out</button>
+    </div>
+  </header>
+
+  <!-- ── Add / Edit Form ─────────────────────────────────────────── -->
+  <div class="card" id="form-card">
+    <h2 id="form-title">Add Web Widget to Catalog</h2>
+    <div class="notice">
+      Widgets added here appear in MathBoard's Library drawer. The URL must load correctly on iPad Safari.
+      Set preferred dimensions to match the widget's natural size so students never need to scroll inside it.
+    </div>
+
+    <form id="widget-form">
+      <input type="hidden" id="doc-id">
+
+      <div class="form-grid">
+
+        <!-- Title -->
+        <div class="field full">
+          <label>Title *</label>
+          <input id="f-title" required placeholder="e.g., Multiplication Minute">
+        </div>
+
+        <!-- URL -->
+        <div class="field full">
+          <label>Widget URL *</label>
+          <input id="f-url" type="url" required placeholder="https://macintodd.net/apps/multiplication-minute">
+          <span class="hint">Full URL of the web widget. Must be HTTPS.</span>
+        </div>
+
+        <!-- Dimensions -->
+        <div class="field full">
+          <label>Preferred Size on Canvas (pixels)</label>
+          <div class="dim-row">
+            <div class="field">
+              <label>Width</label>
+              <input id="f-width" type="number" value="800" min="200" max="1600">
+            </div>
+            <div class="field">
+              <label>Height</label>
+              <input id="f-height" type="number" value="560" min="200" max="1200">
+            </div>
+          </div>
+          <span class="hint">Size the widget will occupy on the teacher/student canvas. Design your widget to fit this without internal scrolling.</span>
+        </div>
+
+        <!-- Category -->
+        <div class="field">
+          <label>Category *</label>
+          <select id="f-workflow">
+            <option value="bellRingerExitTicket">Bell Ringers &amp; Exit Slips</option>
+            <option value="conceptualInteractive">Concept Widgets</option>
+            <option value="assessment" selected>Practice</option>
+            <option value="skillDrill">Skill Drills</option>
+            <option value="lessonWidget">Lesson Widgets</option>
+            <option value="classPlay">Class Play</option>
+            <option value="tools">Tools</option>
+          </select>
+        </div>
+
+        <!-- Mode -->
+        <div class="field">
+          <label>Scoring Mode</label>
+          <select id="f-mode">
+            <option value="demo">Demo — no score</option>
+            <option value="scored">Scored — reports to Live Progress</option>
+          </select>
+        </div>
+
+        <!-- Topic -->
+        <div class="field">
+          <label>Topic *</label>
+          <input id="f-topic" required placeholder="e.g., Arithmetic, Algebra 2">
+        </div>
+
+        <!-- Course -->
+        <div class="field">
+          <label>Course (optional)</label>
+          <input id="f-course" placeholder="e.g., Algebra 2, Precalculus">
+          <span class="hint">Leave blank if the widget works across courses.</span>
+        </div>
+
+        <!-- Description -->
+        <div class="field full">
+          <label>Description</label>
+          <textarea id="f-description" placeholder="What does this widget do? What skills does it cover?"></textarea>
+        </div>
+
+        <!-- Tags -->
+        <div class="field full">
+          <label>Tags (comma-separated)</label>
+          <input id="f-tags" placeholder="algebra, multiplication, fluency, practice">
+        </div>
+
+        <!-- Scope -->
+        <div class="field full">
+          <label>Availability</label>
+          <div class="scope-group" id="scope-group">
+            <div class="scope-opt selected" data-scope="global">
+              <div class="scope-label">Global Catalog</div>
+              <div class="scope-desc">Visible to all MathBoard teachers</div>
+            </div>
+            <div class="scope-opt" data-scope="private">
+              <div class="scope-label">My Catalog Only</div>
+              <div class="scope-desc">Only visible in your MathBoard</div>
+            </div>
+            <div class="scope-opt" data-scope="website">
+              <div class="scope-label">Website Only</div>
+              <div class="scope-desc">Not added to MathBoard catalog</div>
+            </div>
+          </div>
+          <input type="hidden" id="f-scope" value="global">
+        </div>
+
+        <!-- Published toggle -->
+        <div class="field full">
+          <div class="checkbox-row">
+            <input type="checkbox" id="f-published" checked>
+            <label for="f-published">Published — visible in MathBoard catalog immediately</label>
+          </div>
+        </div>
+
+      </div><!-- end form-grid -->
+
+      <div class="form-actions">
+        <button type="submit" class="btn-primary" id="save-btn">Save to Catalog</button>
+        <button type="button" class="btn-secondary" id="clear-btn">Clear Form</button>
+      </div>
+      <div id="form-status" style="margin-top:10px;font-size:0.85rem;color:#1a6b30;"></div>
+    </form>
+  </div>
+
+  <!-- ── Catalog List ───────────────────────────────────────────── -->
+  <div class="card">
+    <div class="section-header">
+      <h2>Your Web Widget Catalog Entries</h2>
+      <button class="btn-sm" id="refresh-btn">↻ Refresh</button>
+    </div>
+    <div id="catalog-list"><div class="empty-state">Loading…</div></div>
+  </div>
+</div>
+
+<!-- ── Firebase SDK v10 (modular) ──────────────────────────────────── -->
+<script type="module">
+import { initializeApp }
+  from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged }
+  from "https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js";
+import { getFirestore, collection, doc, getDocs, setDoc, deleteDoc, serverTimestamp }
+  from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";
+
+// ─────────────────────────────────────────────────────────────────────────
+// Firebase config — project mathboard-b1c16
+// ACTION REQUIRED: get your web appId from Firebase Console →
+//   Project Settings → General → Your apps → Add app → Web (</>) →
+//   copy the appId value and paste it below.
+// ─────────────────────────────────────────────────────────────────────────
+const firebaseConfig = {
+  apiKey:            "AIzaSyAT0NrLTplWwWntM890VXvY5GZ4D9zhG38",
+  authDomain:        "mathboard-b1c16.firebaseapp.com",
+  projectId:         "mathboard-b1c16",
+  storageBucket:     "mathboard-b1c16.firebasestorage.app",
+  messagingSenderId: "1015184319782",
+  appId:             "1:1015184319782:web:e0924b3ca699351eb2cde7"   // ← only thing to fill in
+};
+
+const CATALOG = "mathtivityCatalog";
+
+const app  = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db   = getFirestore(app);
+
+// ── Auth ────────────────────────────────────────────────────────────────
+onAuthStateChanged(auth, user => {
+  if (user) {
+    document.getElementById("login-view").style.display  = "none";
+    document.getElementById("app-view").style.display    = "block";
+    document.getElementById("user-email").textContent    = user.email;
+    loadCatalog();
+  } else {
+    document.getElementById("login-view").style.display  = "flex";
+    document.getElementById("app-view").style.display    = "none";
+  }
+});
+
+document.getElementById("login-btn").addEventListener("click", async () => {
+  const email    = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+  const errEl    = document.getElementById("login-error");
+  errEl.textContent = "";
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+  } catch (e) {
+    errEl.textContent = e.message;
+  }
+});
+
+document.getElementById("logout-btn").addEventListener("click", () => signOut(auth));
+
+// ── Scope selector ──────────────────────────────────────────────────────
+document.querySelectorAll(".scope-opt").forEach(opt => {
+  opt.addEventListener("click", () => {
+    document.querySelectorAll(".scope-opt").forEach(o => o.classList.remove("selected"));
+    opt.classList.add("selected");
+    document.getElementById("f-scope").value = opt.dataset.scope;
+  });
+});
+
+// ── Form submit ─────────────────────────────────────────────────────────
+document.getElementById("widget-form").addEventListener("submit", async e => {
+  e.preventDefault();
+  await saveWidget();
+});
+
+document.getElementById("clear-btn").addEventListener("click", clearForm);
+document.getElementById("refresh-btn").addEventListener("click", loadCatalog);
+
+async function saveWidget() {
+  const statusEl = document.getElementById("form-status");
+  statusEl.textContent = "Saving…";
+  statusEl.style.color = "#555";
+
+  const title    = document.getElementById("f-title").value.trim();
+  const url      = document.getElementById("f-url").value.trim();
+  const width    = parseInt(document.getElementById("f-width").value)  || 800;
+  const height   = parseInt(document.getElementById("f-height").value) || 560;
+  const workflow = document.getElementById("f-workflow").value;
+  const mode     = document.getElementById("f-mode").value;
+  const topic    = document.getElementById("f-topic").value.trim();
+  const course   = document.getElementById("f-course").value.trim() || null;
+  const desc     = document.getElementById("f-description").value.trim() || null;
+  const tagsRaw  = document.getElementById("f-tags").value;
+  const scope    = document.getElementById("f-scope").value;
+  const published = document.getElementById("f-published").checked && scope !== "website";
+
+  const tags = tagsRaw.split(",").map(t => t.trim()).filter(Boolean);
+
+  // Slug-based doc ID, stable across edits
+  let docId = document.getElementById("doc-id").value;
+  if (!docId) {
+    const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    docId = "remote." + slug;
+    document.getElementById("doc-id").value = docId;
+  }
+
+  const data = {
+    // ── Fields read by MathtivityCatalogItem.init?(id:firestoreData:) ──
+    title,
+    topic,
+    course,
+    catalogKind:          "remoteWebApplet",   // new kind — MathBoard code handles this
+    activityType:         "multipleChoice",    // placeholder; unused for web applets
+    mode,
+    pedagogicalWorkflow:  workflow,
+    isPublished:          published,
+    schemaVersion:        1,
+    version:              1,
+    description:          desc,
+    tags,
+    // jsonStoragePath prefix signals MathBoard to load webAppletURL instead
+    jsonStoragePath:      `webapplet://${url}`,
+
+    // ── Extended fields for web applets ──
+    webAppletURL:    url,
+    preferredWidth:  width,
+    preferredHeight: height,
+    scope,           // "global" | "private" | "website"
+
+    updatedAt: serverTimestamp()
+  };
+
+  try {
+    await setDoc(doc(db, CATALOG, docId), data, { merge: true });
+    statusEl.textContent = `✓ Saved "${title}"`;
+    statusEl.style.color = "#1a6b30";
+    loadCatalog();
+  } catch (e) {
+    statusEl.textContent = "Error: " + e.message;
+    statusEl.style.color = "#c0392b";
+  }
+}
+
+// ── Load catalog list ───────────────────────────────────────────────────
+let cachedSnap = null;
+
+async function loadCatalog() {
+  const listEl = document.getElementById("catalog-list");
+  listEl.innerHTML = "<div class='empty-state'>Loading…</div>";
+  try {
+    const snap = await getDocs(collection(db, CATALOG));
+    cachedSnap = snap;
+    renderList(snap);
+  } catch (e) {
+    listEl.innerHTML = `<div class='empty-state' style='color:#c00'>Error: ${e.message}</div>`;
+  }
+}
+
+function renderList(snap) {
+  const listEl = document.getElementById("catalog-list");
+  const items = snap.docs
+    .map(d => ({ id: d.id, ...d.data() }))
+    .filter(d => d.catalogKind === "remoteWebApplet")
+    .sort((a, b) => (a.title || "").localeCompare(b.title || ""));
+
+  if (items.length === 0) {
+    listEl.innerHTML = "<div class='empty-state'>No web widgets in catalog yet. Add one above.</div>";
+    return;
+  }
+
+  listEl.innerHTML = "";
+  for (const item of items) {
+    const scopeBadgeClass = item.scope === "private" ? "badge-private"
+                          : item.scope === "website"  ? "badge-website"
+                          : "badge-global";
+    const scopeLabel = item.scope === "private" ? "My Catalog"
+                     : item.scope === "website"  ? "Website Only"
+                     : "Global";
+    const workflowLabel = {
+      bellRingerExitTicket:  "Bell Ringers & Exit Slips",
+      conceptualInteractive: "Concept Widgets",
+      assessment:            "Practice",
+      skillDrill:            "Skill Drills",
+      lessonWidget:          "Lesson Widgets",
+      classPlay:             "Class Play",
+      tools:                 "Tools"
+    }[item.pedagogicalWorkflow] || item.pedagogicalWorkflow;
+
+    const row = document.createElement("div");
+    row.className = "cat-row";
+    row.dataset.id = item.id;
+    row.innerHTML = `
+      <div class="cat-row-info">
+        <div class="cat-row-title">${escHtml(item.title || "(untitled)")}</div>
+        <div class="cat-row-url">${escHtml(item.webAppletURL || "")}</div>
+        <div class="cat-row-meta">
+          <span class="badge ${item.isPublished ? "badge-published" : "badge-unpublished"}">
+            ${item.isPublished ? "Published" : "Unpublished"}
+          </span>
+          <span class="badge ${scopeBadgeClass}">${scopeLabel}</span>
+          <span class="badge badge-category">${workflowLabel}</span>
+          <span class="badge" style="background:#f0f0f0;color:#555">
+            ${item.preferredWidth || "?"}×${item.preferredHeight || "?"}px
+          </span>
+        </div>
+      </div>
+      <div class="cat-row-actions">
+        <button class="btn-sm" data-edit="${item.id}">Edit</button>
+        <button class="btn-sm btn-danger" data-delete="${item.id}">Delete</button>
+      </div>
+    `;
+    listEl.appendChild(row);
+  }
+
+  listEl.querySelectorAll("[data-edit]").forEach(btn => {
+    btn.addEventListener("click", () => editItem(btn.dataset.edit));
+  });
+  listEl.querySelectorAll("[data-delete]").forEach(btn => {
+    btn.addEventListener("click", () => deleteItem(btn.dataset.delete, btn.closest(".cat-row")));
+  });
+}
+
+function editItem(id) {
+  if (!cachedSnap) return;
+  const docSnap = cachedSnap.docs.find(d => d.id === id);
+  if (!docSnap) return;
+  const d = docSnap.data();
+
+  document.getElementById("doc-id").value      = id;
+  document.getElementById("f-title").value     = d.title || "";
+  document.getElementById("f-url").value       = d.webAppletURL || "";
+  document.getElementById("f-width").value     = d.preferredWidth || 800;
+  document.getElementById("f-height").value    = d.preferredHeight || 560;
+  document.getElementById("f-workflow").value  = d.pedagogicalWorkflow || "assessment";
+  document.getElementById("f-mode").value      = d.mode || "demo";
+  document.getElementById("f-topic").value     = d.topic || "";
+  document.getElementById("f-course").value    = d.course || "";
+  document.getElementById("f-description").value = d.description || "";
+  document.getElementById("f-tags").value      = (d.tags || []).join(", ");
+  document.getElementById("f-published").checked = d.isPublished ?? true;
+
+  const scope = d.scope || "global";
+  document.getElementById("f-scope").value = scope;
+  document.querySelectorAll(".scope-opt").forEach(o => {
+    o.classList.toggle("selected", o.dataset.scope === scope);
+  });
+
+  document.getElementById("form-title").textContent = "Edit Widget";
+  document.getElementById("form-status").textContent = "";
+  document.getElementById("form-card").scrollIntoView({ behavior: "smooth" });
+}
+
+async function deleteItem(id, row) {
+  if (!confirm("Delete this catalog item? This cannot be undone.")) return;
+  try {
+    await deleteDoc(doc(db, CATALOG, id));
+    row.remove();
+    if (document.querySelectorAll(".cat-row").length === 0) {
+      document.getElementById("catalog-list").innerHTML =
+        "<div class='empty-state'>No web widgets in catalog yet. Add one above.</div>";
+    }
+  } catch (e) {
+    alert("Error deleting: " + e.message);
+  }
+}
+
+function clearForm() {
+  document.getElementById("doc-id").value = "";
+  document.getElementById("widget-form").reset();
+  document.getElementById("f-width").value  = 800;
+  document.getElementById("f-height").value = 560;
+  document.getElementById("f-scope").value  = "global";
+  document.querySelectorAll(".scope-opt").forEach(o => {
+    o.classList.toggle("selected", o.dataset.scope === "global");
+  });
+  document.getElementById("form-title").textContent = "Add Web Widget to Catalog";
+  document.getElementById("form-status").textContent = "";
+}
+
+function escHtml(str) {
+  return String(str)
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+</script>
+</body>
+</html>
