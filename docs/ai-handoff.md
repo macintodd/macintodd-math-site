@@ -2,6 +2,15 @@
 
 The M4 Mac mini is the primary editing machine. The AI on the other Mac reviews changes on GitHub. Use GitHub `main` as the published source and follow [AGENTS.md](../AGENTS.md) for maintenance rules. Review the latest commits before starting work.
 
+## Shared webwidget guidelines · November 24, 2026
+
+- Added the teacher-provided Version 2.0 guidelines verbatim as [docs/webwidget-Design-Guidelines.md](webwidget-Design-Guidelines.md). The original MathBoard project file remains untouched. This committed copy travels with GitHub clones and pulls on both Macs; no machine-specific source path is needed to work on this website.
+- Root `AGENTS.md` now requires reading the full guidelines before any widget creation, modification, review, or testing, including shared code outside the app routes. `src/app/apps/AGENTS.md` repeats the required-read link for agents working inside the widget tree. Future guideline revisions should update the one canonical copy and this handoff.
+- Teacher clarifications are recorded in root instructions: widgets alone determine their final score; MathBoard does not recalculate it. Counters/enrichment are optional. Both Demo and Scored catalog widgets can report completion, and MathBoard controls the displayed result. Preserve existing local-only data and reflection requirements unless the requested work changes them.
+- Application behavior, scoring implementations, MathBoard bridge/restoration/mirroring code, and snapshot schemas are unchanged. Existing physical iPad/projector verification remains pending. Existing widgets were not audited or migrated as part of this documentation task.
+- Validation: the committed guidelines match the supplied file byte for byte; required-read links resolve; `git diff --check` passed. Typecheck, lint, content check, and production build were attempted but stalled without completing; they were stopped, including a content-check retry outside the sandbox. These checks are not recorded as passed. No runtime files changed, so no affected widget regressions or browser checks were needed.
+- Publication: documentation/instructions only, committed for GitHub main so the laptop can pull the guidelines and instruction links. No application deployment is required for these instructions to take effect in updated checkouts. No widget implementation or MathBoard mirroring changes were made; broader check completion and the existing physical-device test remain follow-ups.
+
 ## Tonight’s complete redesign handoff · November 18, 2026
 
 The M4 remains the primary editor. The other Mac should review the pushed GitHub changes and read this summary plus `docs/site-redesign.md`; do not start from its old local checkout without checking main. The detailed sections below preserve the work and deployment history.
