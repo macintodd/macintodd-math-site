@@ -2,6 +2,8 @@
 
 **Version 2.0 — 2026-11-24**
 
+**Website clarification, November 24, 2026:** Catalog activity mode and result reporting are independent. Either Demo or Scored widgets may report completion. The widget alone determines its score; MathBoard receives it without recalculating it. Optional statistics may be omitted and are ignored when absent. These teacher clarifications supersede older scoring-mode descriptions.
+
 ---
 
 ## Overview
@@ -420,7 +422,7 @@ Every web widget is registered with a **Category** (internally `pedagogicalWorkf
 | **Class Play** | Completion or None | Whole-class game | Teacher-driven; student view mirrors teacher |
 | **Tools** | None | Utility / generator | Produces an artifact (number line, grid, spinner) |
 
-The scoring mode is also set in the catalog admin page as either **Demo** (no score collected) or **Scored** (reports to teacher live progress). Set it to match your type choice above.
+The catalog **Activity Mode** is either **Demo** or **Scored**. Choose it independently of category and reporting pattern. Either mode may report completion; the widget maker decides what result to report. The typical patterns in the category table are suggestions, not reporting restrictions.
 
 ---
 
@@ -433,9 +435,9 @@ Web widgets are registered via the MathBoard Catalog Admin page (see `webwidget-
 | **Title** | Shown in the catalog and on the teacher dashboard |
 | **URL** | The public HTTPS URL of your web app |
 | **Category** | The widget type — see "Choosing a Widget Type" above |
-| **Scoring Mode** | Demo (no score) or Scored (reports to live progress) |
+| **Activity Mode** | Demo or Scored; independent of category and reporting pattern |
 | **Preferred Width / Height** | Canvas widget size in points (e.g. 820 × 560) |
-| **Scope** | Global = all teachers; My Catalog Only = you only |
+| **Scope** | Global, Private (not enforced), or Website Only; unpublish drafts |
 
 ---
 
@@ -452,7 +454,7 @@ Web widgets are registered via the MathBoard Catalog Admin page (see `webwidget-
 - [ ] `isRestoring` flag covers both the data restoration and the subsequent render
 - [ ] `mathBoardAppletSetState` does **not** call `publish()` (no restoration echo)
 - [ ] `customState` contains everything needed to fully restore the student's session
-- [ ] Catalog admin page has **Scoring Mode** set to match the widget's tracking pattern
+- [ ] Catalog **Activity Mode** and category describe the activity; neither overrides its chosen reporting pattern
 
 **Scored widgets (Pattern 1) only**
 - [ ] `publishState` sends `score` and `maxScore` after every meaningful student action

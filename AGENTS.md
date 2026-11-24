@@ -8,6 +8,8 @@ Before creating, modifying, reviewing, or testing any webwidget, read [the MathB
 - Teacher clarification: the widget alone determines and reports its final score; MathBoard must not recalculate it. Progress counters and enrichment fields are optional. Either Demo or Scored catalog widgets may report completion; the widget maker decides what it reports, and MathBoard owns how the result is displayed.
 - Preserve existing widget behavior, local-only student-data rules, and completion/reflection requirements unless the requested work changes them. Adding these guidelines does not authorize a wholesale migration of existing widgets or new server uploads.
 
+For catalog registration or admin-page work, also read [docs/webwidget-CatalogAdmin-Spec.md](docs/webwidget-CatalogAdmin-Spec.md). Preserve stored `mode`/category values and existing entries; category and Activity Mode do not dictate reporting.
+
 ## Site maintenance rules
 
 - Publish only selected materials named in content-sources.json. Do not bulk-upload course folders, drafts, assessments, rosters, or student information.

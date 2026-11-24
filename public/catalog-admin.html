@@ -49,7 +49,7 @@
     /* ── Form ──────────────────────────────────────────────────────── */
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .form-grid .full { grid-column: 1 / -1; }
-    .field { display: flex; flex-direction: column; gap: 5px; }
+    .field { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
     .field label { font-size: 0.8rem; font-weight: 600; color: #555; text-transform: uppercase; letter-spacing: 0.04em; }
     .field input, .field select, .field textarea {
       padding: 9px 12px; border: 1px solid #d0d4de; border-radius: 7px;
@@ -126,6 +126,16 @@
     .notice {
       background: #fff8e6; border: 1px solid #f5c842; border-radius: 8px;
       padding: 10px 14px; font-size: 0.82rem; color: #7a5500; margin-bottom: 20px;
+    }
+    @media (max-width: 600px) {
+      #app-view { padding: 20px 12px 40px; }
+      header { flex-wrap: wrap; gap: 14px; }
+      header > div { flex-wrap: wrap; }
+      .card { padding: 18px; }
+      .form-grid { grid-template-columns: minmax(0, 1fr); }
+      .scope-group { flex-direction: column; }
+      .cat-row { flex-wrap: wrap; }
+      .cat-row-info { flex-basis: 100%; }
     }
   </style>
 </head>
@@ -207,15 +217,21 @@
             <option value="classPlay">Class Play</option>
             <option value="tools">Tools</option>
           </select>
+          <span class="hint">Choose where this widget belongs in the catalog. Category does not determine what results it reports.</span>
         </div>
 
         <!-- Mode -->
         <div class="field">
-          <label>Scoring Mode</label>
-          <select id="f-mode">
-            <option value="demo">Demo — no score</option>
-            <option value="scored">Scored — reports to Live Progress</option>
+          <label for="f-mode">Activity Mode</label>
+          <select id="f-mode" aria-describedby="mode-help">
+            <option value="demo">Demo</option>
+            <option value="scored">Scored</option>
           </select>
+          <span class="hint" id="mode-help">Choose the activity mode independently of its category. Both Demo and Scored widgets can report completion.</span>
+        </div>
+
+        <div class="field full">
+          <p class="hint">The widget decides whether to report a numeric score, completion, or no result. MathBoard receives the widget’s reported score without recalculating it. Question counts and other statistics are optional.</p>
         </div>
 
         <!-- Topic -->
@@ -252,8 +268,8 @@
               <div class="scope-desc">Visible to all MathBoard teachers</div>
             </div>
             <div class="scope-opt" data-scope="private">
-              <div class="scope-label">My Catalog Only</div>
-              <div class="scope-desc">Only visible in your MathBoard</div>
+              <div class="scope-label">Private (not enforced)</div>
+              <div class="scope-desc">May be visible to other teachers. Unpublish drafts.</div>
             </div>
             <div class="scope-opt" data-scope="website">
               <div class="scope-label">Website Only</div>
@@ -269,6 +285,7 @@
             <input type="checkbox" id="f-published" checked>
             <label for="f-published">Published — visible in MathBoard catalog immediately</label>
           </div>
+          <span class="hint">Uncheck Published to keep drafts out of the MathBoard catalog. This does not make the widget’s public URL private.</span>
         </div>
 
       </div><!-- end form-grid -->
@@ -463,7 +480,7 @@ function renderList(snap) {
     const scopeBadgeClass = item.scope === "private" ? "badge-private"
                           : item.scope === "website"  ? "badge-website"
                           : "badge-global";
-    const scopeLabel = item.scope === "private" ? "My Catalog"
+    const scopeLabel = item.scope === "private" ? "Private (not enforced)"
                      : item.scope === "website"  ? "Website Only"
                      : "Global";
     const workflowLabel = {
