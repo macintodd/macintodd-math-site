@@ -90,6 +90,14 @@ Earn your first star	Consigue tu primera estrella
 Earlier correct answers	Respuestas correctas anteriores
 Practice score	Puntuación de práctica
 Number correct	Número de respuestas correctas
+Start Skill Practice	Iniciar la práctica de la habilidad
+Goal:	Meta:
+Streak	Racha
+Score = longest streak out of 10.	Puntuación = la racha más larga, de un máximo de 10.
+A parent function and its transformation	Una función base y su transformación
+The dashed blue parent is y = x squared. The solid red child is reflected, vertically shrunk, shifted one unit left and three units up.	La función base azul discontinua es y = x al cuadrado. La función transformada roja continua está reflejada, comprimida verticalmente y trasladada una unidad a la izquierda y tres hacia arriba.
+Parent	Función base
+Transformed	Transformada
 All graphs with this shape are constant functions.	Todas las gráficas con esta forma son funciones constantes.
 All graphs with this shape are linear functions.	Todas las gráficas con esta forma son funciones lineales.
 All graphs with this shape are absolute value functions.	Todas las gráficas con esta forma son funciones de valor absoluto.

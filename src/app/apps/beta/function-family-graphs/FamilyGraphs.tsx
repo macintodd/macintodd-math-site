@@ -13,6 +13,8 @@ import FamilyGraph from './FamilyGraph'
 import StreakStars from './StreakStars'
 import StarRewards from './StarRewards'
 import {SketchFrame} from '@/components/StudySketch'
+import SkillWelcome, {SkillIdentityFields} from '@/components/practice/SkillWelcome'
+import TransformationPreview from './TransformationPreview'
 import {familyStarReducer, freshFamilyStarState} from '@/lib/function-family-stars'
 
 const subscribeDisplay = () => () => {}
@@ -98,20 +100,17 @@ export default function FamilyGraphs() {
   return <main className={`ffg-app ${displayOnly ? 'ffg-display' : ''}`} inert={displayOnly ? true : undefined}>
     <StarRewards state={state} restoreRevision={restoreRevision}/>
     {header}
-    {state.scene === 'welcome' ? <section className="ffg-welcome"><SketchFrame/>
-      <div className="ffg-welcome-copy"><span className="ffg-chip">{show('LOOK AT THE SHAPE')}</span><h2>{show('Different graphs. Familiar families.')}</h2>
-        <p>{show('Recognize constant, linear, absolute value, quadratic, and cubic functions by their graphs.')}</p>
-        <ul><li>{show('Build a streak of 10 correct answers. Your best streak is your score out of 10.')}</li><li>{show('Get a grade report whenever you are ready, even before a streak of 10.')}</li><li>{show('After a streak of 10, try the repeatable one-minute speed round.')}</li></ul>
-        <form onSubmit={event => {event.preventDefault(); dispatch({type: 'start', seed: Math.floor(Math.random() * 2 ** 32)})}}>
-          <div className="ffg-name-fields">{(['first', 'last', 'hour'] as const).map(field => <label key={field}>{show(field === 'first' ? 'First name' : field === 'last' ? 'Last name' : 'Class hour')}{field === 'hour' ? <select required name="hour" value={state.hour} onChange={event => dispatch({type: 'identity', field, value: event.target.value})}><option value="" disabled>—</option>{Array.from({length: 8}, (_, i) => <option key={i + 1} value={String(i + 1)} data-no-translate>{i + 1}</option>)}{state.hour && !/^[1-8]$/.test(state.hour) && <option value={state.hour} disabled data-no-translate>{state.hour}</option>}</select> : <input required maxLength={40} autoComplete="off" name={field} value={state[field]} onChange={event => dispatch({type: 'identity', field, value: event.target.value})}/>}</label>)}</div>
-          <button className="ffg-primary" type="submit">{show('Start graph practice →')}</button>
-        </form>
-        <p className="ffg-local-note">{show('Your name and report stay in this activity. There is no account or continue-later code.')}</p>
-      </div>
-      <aside className="ffg-series"><div className="ffg-series-art" aria-hidden="true"><svg viewBox="0 0 340 205"><path d="M22 166H320M170 20V190" fill="none" stroke="#a6b6c9" strokeWidth="1.5"/><path d="M55 25Q170 302 285 25" fill="none" stroke="#235eb3" strokeWidth="4"/><path d="M30 140L155 65L300 152" fill="none" stroke="#b77d3b" strokeWidth="3" strokeDasharray="7 6"/><circle cx="170" cy="164" r="5" fill="#235eb3"/></svg></div>
-        <h2>{show('Your transformation series')}</h2><ol><li aria-current="step"><b>{show('Identify Function Family from Graph')}</b><span>{show('You are here')}</span></li><li>{show('Identify Function Family from Equation')}<span>{show('Coming next')}</span></li><li>{show('Graphing Parent Functions')}<span>{show('Planned')}</span></li></ol>
-      </aside>
-    </section> : state.scene === 'ready' ? <section className="ffg-speed-ready"><SketchFrame/>
+    {state.scene === 'welcome' ? <SkillWelcome
+      eyebrow="LOOK AT THE SHAPE" catchphrase="Different graphs. Familiar families."
+      skill="Recognize constant, linear, absolute value, quadratic, and cubic functions by their graphs."
+      visual={<TransformationPreview/>}
+      goal={<p><span>{show('Streak')}</span><strong data-no-translate>10</strong></p>}
+      scoreNote={show('Score = longest streak out of 10.')}>
+      <form onSubmit={event => {event.preventDefault(); dispatch({type: 'start', seed: Math.floor(Math.random() * 2 ** 32)})}}>
+        <SkillIdentityFields value={state} onChange={(field, value) => dispatch({type: 'identity', field, value})}/>
+        <button className="skill-welcome-start" type="submit">{show('Start Skill Practice')}<span aria-hidden="true">→</span></button>
+      </form>
+    </SkillWelcome> : state.scene === 'ready' ? <section className="ffg-speed-ready"><SketchFrame/>
       <span className="ffg-chip">{show('10 IN A ROW · READY FOR MORE')}</span><h2>{show('One minute. One perfect run.')}</h2><p>{show('Identify as many graphs as you can in a row. The first miss or the end of the minute ends the round.')}</p>
       <div className="ffg-speed-rules"><span><b data-no-translate>60</b><span>{show('seconds')}</span></span><span><b data-no-translate>1</b><span>{show('miss ends the round')}</span></span><span><b aria-hidden="true">↻</b><span>{show('unlimited retries')}</span></span></div>
       <p>{show('After each correct answer, the equation appears briefly, then the next graph arrives. The timer keeps running.')}</p><p>{show('Your speed-round score is the number correct in a row. It does not change your practice grade.')}</p>

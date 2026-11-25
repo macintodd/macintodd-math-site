@@ -488,6 +488,25 @@ These visual standards do not authorize changes to a working MathBoard bridge. P
 ---
 <!-- END:macintodd-widget-presentation -->
 
+<!-- BEGIN:macintodd-widget-welcome -->
+## Standard macintodd.net Skill Practice Entry Screen
+
+**Added November 25, 2026.** Use this layout for new student-practice widgets that need a name and class hour, and for future requested entry-screen revisions. Do not add identity collection to tools/demos that do not need it or restyle unrelated widgets during another task.
+
+- Use a white sketched-paper sheet with the existing parchment, navy/brown ink and local notebook fonts. Keep the opening screen concise; remove long instructional lists, series menus and redundant fine print from this sheet.
+- In the main/left column, place the activity's catchphrase first, then a prominent, centered **Skill:** statement directly underneath. Use a large readable font and a short description of what the student will learn. Below it, show **First name**, **Last name**, and a required **Class hour** dropdown with an initially blank choice and values **1–8**.
+- Label the primary action **Start Skill Practice**. Use the shared fern-green palette tokens: `--ink-fern: #2F6B4F`, `--ink-fern-dark: #24563F` for hover, and white button text. Keep the sketched button edge, visible keyboard focus and a generous touch target.
+- In the right column, show a compact visual that accurately represents the skill. A transformation illustration must show an actual parent and transformed child of the same function family. Use line styles as well as color to distinguish them; for the first graph-family widget, the parent is dashed blue and the transformed child is solid red. Preserve accurate mathematical geometry and provide an accessible description.
+- Directly beneath that visual, label the completion requirements **Goal:**. Display the activity's real target(s) in large, short lines. A minimum total and a streak are separate requirements when both apply. **Never invent a five-answer streak or change scoring to fit the template.** This graph-identification drill specifically requires a streak of **10**; its score is its longest streak out of 10. Other widgets retain their own teacher-defined goals and reported result.
+- For scored activities, an optional small line along the bottom may explain the activity's actual scoring method. Keep the main goal prominent and distinguish it from the grade formula. Omit a numeric scoring formula for unscored/completion-only widgets.
+- Prioritize landscape iPads and embedded MathBoard dimensions: the skill, identity controls, goal and Start button should fit comfortably. On phones, stack the main content and visual/goal area with natural scrolling; do not shrink text to cram everything into the viewport.
+- Keep English/Spanish/tap-to-English behavior, required-field validation, local-only identity, and MathBoard restoration/publication behavior. The shared entry component must not own scoring or native state, publish on mount, upload identity, or add browser persistence.
+
+Repository implementation: `src/components/practice/SkillWelcome.tsx` and `skill-welcome.css`; `SkillIdentityFields` supplies the common controls. Pass the activity-specific visual, goals and optional score note as content; the calling widget owns the form, reducer and start action. The live reference is `/apps/beta/function-family-graphs`. This entry-screen standard does not yet standardize the trial star reward effects.
+
+---
+<!-- END:macintodd-widget-welcome -->
+
 ## Checklist Before Submitting a Widget
 
 **All widgets**

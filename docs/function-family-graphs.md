@@ -26,6 +26,14 @@ The teacher confirmed that the published widget integrates correctly with MathBo
 - The teacher reconfirmed that this pure-identification practice requires **ten correct in a row**. Do not substitute the five-answer streak used in other activities or a ten-total/five-streak gate. The teacher selected **best session streak, capped at 10**, for the grade. A miss resets the current streak without erasing the best. There is no fixed problem total and no resume/continue-later code or browser persistence. MathBoard can still restore its own saved session.
 - **Get grade report** is available as soon as practice starts, including a 0/10 report. Both five-star reflections are required before the named, dated local image is created using the shared CompletionFlow. Reflection answers do not change the grade. Returning to practice preserves the session; opening a later report uses a new completion timestamp and clears the old record/reflections.
 
+## Standard skill-entry screen
+
+The November 25 entry redesign uses shared `SkillWelcome` / `SkillIdentityFields`. The catchphrase remains **Different graphs. Familiar families.**; the skill is larger and centered beneath it. Removed the long three-bullet explanation, series list and redundant local-data footer from the screen; local-only behavior is unchanged. Names and the 1–8 hour dropdown remain required. The green button says **Start Skill Practice**; fern-green tokens are #2F6B4F / #24563F with white text.
+
+The right visual accurately compares dashed blue `y=x²` with solid red `y=−½(x+1)²+3`, including their vertices. Both are quadratic functions: reflected, vertically shrunk, shifted one left and three up. Geometry uses equal units. The **Goal:** below the visual shows **Streak 10**; the small bottom line says **Score = longest streak out of 10.** The teacher's written clarification explicitly preserves this drill's ten-in-a-row rule and scoring; the briefly suggested 10-total/five-streak rule and alternate formula were not implemented. Whole-page Spanish and native restoration of an unfinished identity form remain supported.
+
+This is the reference entry layout for future widgets. The shared component does not own a reducer, score, native bridge, storage or start action; other widgets supply their own real goals and scoring note. The standard is committed in the webwidget design guidelines and mirrored into the original MathBoard-project guideline file. Existing unrelated widgets are not migrated.
+
 ## Gold-star reward trial
 
 - Class hour is a required 1–8 dropdown; names remain local. Older restored hour text is preserved rather than silently rewritten.

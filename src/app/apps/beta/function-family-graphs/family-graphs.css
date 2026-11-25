@@ -165,3 +165,12 @@ body:has(.ffg-root) .site-header,body:has(.ffg-root) .site-footer{display:none}
 @keyframes ffg-feedback-pop{from{opacity:0;transform:translateX(-50%) translateY(-8px) scale(.94)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
 @keyframes ffg-equation-ink{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
 @media(prefers-reduced-motion:reduce){.ffg-equation-reveal.ffg-miss-reveal,.ffg-miss-reveal .ffg-revealed-equation{animation:none}}
+
+.ffg-transformation-preview{margin:0}
+.ffg-transformation-preview svg{display:block;width:100%;height:auto}
+.ffg-transformation-preview figcaption{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;font:600 15px/1.3 var(--study-ui)}
+.ffg-transformation-preview figcaption span{display:inline-flex;align-items:center;gap:7px}
+.ffg-transformation-preview figcaption span::before{content:'';width:24px;border-top:3px solid currentColor}
+.ffg-preview-parent{color:var(--ink-navy)}
+.ffg-transformation-preview figcaption .ffg-preview-parent::before{border-top-style:dashed}
+.ffg-preview-child{color:#b64f45}
