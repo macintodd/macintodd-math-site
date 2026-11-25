@@ -3,7 +3,7 @@ import {useWidgetLanguage} from '@/components/practice/BilingualWidget'
 import {readStarTrail} from '@/lib/function-family-stars'
 import type {GraphFamilyState} from '@/lib/function-family-graphs'
 
-function PencilStar({count}: {count?: number}) {
+export function PencilStar({count}: {count?: number}) {
   return <svg className={`ffg-pencil-star ${count === undefined ? 'ffg-star-current' : 'ffg-star-completed'}`} viewBox="0 0 60 60" aria-hidden="true" focusable="false">
     <path className="ffg-star-fill" d="M30 4L37 21L55 23L42 36L46 54L30 45L14 55L18 36L4 23L23 21Z"/>
     <path className="ffg-star-pencil" d="M29 5L36 22L54 24L40 36L45 52L30 43L15 54L19 35L6 24L24 22Z"/>

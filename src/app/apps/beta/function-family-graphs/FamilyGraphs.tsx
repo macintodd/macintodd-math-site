@@ -11,6 +11,7 @@ import {
 } from '@/lib/function-family-graphs'
 import FamilyGraph from './FamilyGraph'
 import StreakStars from './StreakStars'
+import StarRewards from './StarRewards'
 import {SketchFrame} from '@/components/StudySketch'
 import {familyStarReducer, freshFamilyStarState} from '@/lib/function-family-stars'
 
@@ -95,13 +96,14 @@ export default function FamilyGraphs() {
   </div>
 
   return <main className={`ffg-app ${displayOnly ? 'ffg-display' : ''}`} inert={displayOnly ? true : undefined}>
+    <StarRewards state={state} restoreRevision={restoreRevision}/>
     {header}
     {state.scene === 'welcome' ? <section className="ffg-welcome"><SketchFrame/>
       <div className="ffg-welcome-copy"><span className="ffg-chip">{show('LOOK AT THE SHAPE')}</span><h2>{show('Different graphs. Familiar families.')}</h2>
         <p>{show('Recognize constant, linear, absolute value, quadratic, and cubic functions by their graphs.')}</p>
         <ul><li>{show('Build a streak of 10 correct answers. Your best streak is your score out of 10.')}</li><li>{show('Get a grade report whenever you are ready, even before a streak of 10.')}</li><li>{show('After a streak of 10, try the repeatable one-minute speed round.')}</li></ul>
         <form onSubmit={event => {event.preventDefault(); dispatch({type: 'start', seed: Math.floor(Math.random() * 2 ** 32)})}}>
-          <div className="ffg-name-fields">{(['first', 'last', 'hour'] as const).map(field => <label key={field}>{show(field === 'first' ? 'First name' : field === 'last' ? 'Last name' : 'Class hour')}<input required maxLength={40} autoComplete="off" name={field} value={state[field]} onChange={event => dispatch({type: 'identity', field, value: event.target.value})}/></label>)}</div>
+          <div className="ffg-name-fields">{(['first', 'last', 'hour'] as const).map(field => <label key={field}>{show(field === 'first' ? 'First name' : field === 'last' ? 'Last name' : 'Class hour')}{field === 'hour' ? <select required name="hour" value={state.hour} onChange={event => dispatch({type: 'identity', field, value: event.target.value})}><option value="" disabled>—</option>{Array.from({length: 8}, (_, i) => <option key={i + 1} value={String(i + 1)} data-no-translate>{i + 1}</option>)}{state.hour && !/^[1-8]$/.test(state.hour) && <option value={state.hour} disabled data-no-translate>{state.hour}</option>}</select> : <input required maxLength={40} autoComplete="off" name={field} value={state[field]} onChange={event => dispatch({type: 'identity', field, value: event.target.value})}/>}</label>)}</div>
           <button className="ffg-primary" type="submit">{show('Start graph practice →')}</button>
         </form>
         <p className="ffg-local-note">{show('Your name and report stay in this activity. There is no account or continue-later code.')}</p>
@@ -117,7 +119,7 @@ export default function FamilyGraphs() {
       <button className="ffg-text-button" type="button" onClick={() => {dispatch({type: 'practice'}); dispatch({type: 'next'})}}>{show('Practice more graphs')}</button>
     </section> : <>
       <div className="ffg-progress"><SketchFrame/>
-        {isSpeed ? <><div className="ffg-timer" role="timer" aria-label={t('Seconds remaining')}><strong data-no-translate>{Math.ceil(state.speed.remainingMs / 1000)}</strong><span>{show('seconds left')}</span></div><div><span>{show('Speed-round score')}</span><strong data-no-translate>{state.speed.count}</strong></div><div><span>{show('Best speed round')}</span><strong data-no-translate>{Math.max(state.speed.best, state.speed.count)}</strong></div></> : <>
+        {isSpeed ? <><div className="ffg-timer" role="timer" aria-label={t('Seconds remaining')}><strong data-no-translate>{Math.ceil(state.speed.remainingMs / 1000)}</strong><span>{show('seconds left')}</span></div><div className="ffg-speed-count"><span>{show('Speed-round score')}</span><strong data-no-translate>{state.speed.count}</strong></div><div><span>{show('Best speed round')}</span><strong data-no-translate>{Math.max(state.speed.best, state.speed.count)}</strong></div></> : <>
           <StreakStars state={state}/><div className="ffg-total-correct"><span>{show('Number correct')}</span><strong data-no-translate>{state.practice.correct}</strong></div><div className="ffg-practice-score"><span>{show('Practice score')}</span><strong data-no-translate>{practiceScore}<small>/10</small></strong></div>
         </>}
         <button type="button" onClick={report}>{show('Get grade report')}</button>

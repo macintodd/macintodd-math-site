@@ -12,7 +12,7 @@ body:has(.ffg-root) .site-header,body:has(.ffg-root) .site-footer{display:none}
 .ffg-identity strong{font-size:17px;color:var(--ffg-ink);overflow-wrap:anywhere}
 .ffg-app button{font:600 16px/1.3 var(--study-ui);min-height:46px;padding:11px 18px;border:1px solid #bacbdc;border-radius:10px;background:#fff;color:var(--ffg-ink);cursor:pointer;touch-action:manipulation}
 .ffg-app button:hover:not(:disabled){border-color:var(--ffg-blue);background:#f0f5fc}
-.ffg-app button:focus-visible,.ffg-app input:focus-visible{outline:3px solid #e1a847;outline-offset:3px}
+.ffg-app button:focus-visible,.ffg-app input:focus-visible,.ffg-app select:focus-visible{outline:3px solid #e1a847;outline-offset:3px}
 .ffg-app button:disabled{cursor:default}
 .ffg-app .ffg-primary{background:var(--ffg-blue);border-color:var(--ffg-blue);color:white;box-shadow:0 3px 8px #235eb321}
 .ffg-app .ffg-primary:hover:not(:disabled){background:#1a4c93;color:white}
@@ -64,7 +64,7 @@ body:has(.ffg-root) .site-header,body:has(.ffg-root) .site-footer{display:none}
 .ffg-welcome-copy ul{padding-left:23px;color:var(--text-muted);line-height:1.5;font-size:16px;display:grid;gap:10px;margin:20px 0}
 .ffg-name-fields{display:grid;grid-template-columns:1fr 1fr .65fr;gap:10px;margin:24px 0 16px}
 .ffg-name-fields label{font-weight:700;font-size:13px;min-width:0}
-.ffg-name-fields input{width:100%;min-width:0;border:1px solid #b9cbdc;border-radius:8px;padding:12px 10px;min-height:48px;margin-top:6px;background:#fff;font:17px var(--study-ui);color:var(--ffg-ink)}
+.ffg-name-fields input,.ffg-name-fields select{width:100%;min-width:0;border:1px solid #b9cbdc;border-radius:8px;padding:12px 10px;min-height:48px;margin-top:6px;background:#fff;font:17px var(--study-ui);color:var(--ffg-ink)}
 .ffg-welcome-copy .ffg-local-note{font-size:12px;margin:16px 0 0}
 .ffg-series{border-left:1px solid #d7e2eb;padding-left:30px}
 .ffg-series-art{max-width:340px;margin:0 auto 15px}
@@ -146,3 +146,12 @@ body:has(.ffg-root) .site-header,body:has(.ffg-root) .site-footer{display:none}
 .ffg-total-correct strong{font:700 42px/.95 var(--study-hand);color:var(--ink-saddle)}
 @media(min-width:651px){.ffg-star-trail li{width:36px;height:36px;flex-basis:36px}}
 @media(max-width:650px){.ffg-progress:has(.ffg-star-board){grid-template-columns:1fr 1fr}.ffg-progress>.ffg-total-correct{grid-column:1;align-items:flex-start}.ffg-progress>.ffg-practice-score{grid-column:2;align-items:flex-end}.ffg-progress:has(.ffg-star-board)>button{grid-column:1/-1;justify-self:stretch}.ffg-total-correct strong{font-size:38px}.ffg-progress>.ffg-total-correct>span{text-align:left}}
+
+/* Local, transient celebration; no interaction blockers or snapshot/score changes. */
+.ffg-reward-layer{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:1000;contain:strict}
+.ffg-reward-layer *{pointer-events:none}
+.ffg-reward-source{display:none}
+.ffg-current-star .ffg-pencil-star{transform-origin:center}
+.ffg-falling-star{position:absolute;top:0;left:0;will-change:transform,opacity;filter:drop-shadow(0 2px 2px #8f612f25)}
+.ffg-name-fields select{cursor:pointer}
+@media(prefers-reduced-motion:reduce){.ffg-reward-layer{display:none}}

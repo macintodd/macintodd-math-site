@@ -26,6 +26,15 @@ The teacher confirmed that the published widget integrates correctly with MathBo
 - The teacher reconfirmed that this pure-identification practice requires **ten correct in a row**. Do not substitute the five-answer streak used in other activities or a ten-total/five-streak gate. The teacher selected **best session streak, capped at 10**, for the grade. A miss resets the current streak without erasing the best. There is no fixed problem total and no resume/continue-later code or browser persistence. MathBoard can still restore its own saved session.
 - **Get grade report** is available as soon as practice starts, including a 0/10 report. Both five-star reflections are required before the named, dated local image is created using the shared CompletionFlow. Reflection answers do not change the grade. Returning to practice preserves the session; opening a later report uses a new completion timestamp and clears the old record/reflections.
 
+## Gold-star reward trial
+
+- Class hour is a required 1–8 dropdown; names remain local. Older restored hour text is preserved rather than silently rewritten.
+- Each newly credited practice answer gives the new gold chart star a 390ms scale bounce, then one falling gold copy per current streak answer, capped at eight per answer. Copies are staggered by 100ms and fall for about 2.2–2.6 seconds; at most 24 copies may be alive during rapid answers. The same gold-star SVG is reused.
+- Speed answers get falling copies based on that round’s count and a small score bounce. Practice star history, scoring, ten-in-a-row goal and speed timing are unchanged. Misses and duplicate checks earn no animation.
+- Effects are decorative, viewport-wide, pointer-transparent and hidden from assistive technology. Reduced motion keeps the static stars. All animations are canceled when leaving for the report.
+- Effects are transient local presentation: no extra snapshot fields, no dispatch/publication on animation frames, and no replay on restoring a saved MathBoard slide or receiving a mirrored state. Earned stars, inputs, scores and positions continue through the existing bridge unchanged.
+- The teacher will review this visual trial before it becomes a shared reward-system standard. Do **not** add it to either shared webwidget guideline copy yet.
+
 ## Speed round
 
 After a streak of ten, the student may enter the speed round or get the practice report. The timer starts only when **Start 60-second round** is pressed. A correct answer adds one, displays its equation and parent for 650ms, then automatically advances. The clock continues during that reveal. The first miss or the 60-second deadline ends the round. A deadline check also runs in the answer handler, so a late tap cannot earn a point.
