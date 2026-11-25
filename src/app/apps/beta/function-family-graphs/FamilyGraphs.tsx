@@ -6,16 +6,19 @@ import {useWidgetLanguage} from '@/components/practice/BilingualWidget'
 import {installLessonBridge, type LessonMathBoardWindow} from '@/lib/mathboard/lesson-bridge'
 import type {CompletionDisplayState} from '@/lib/mathboard/display-mirror'
 import {
-  activeFamilyQuestion, familyIds, familyNames, familyHints, freshGraphFamilyState,
-  graphFamilyReducer, graphFamilySnapshot, readGraphFamilySnapshot, graphFamilySlug, graphFamilyTitle,
+  activeFamilyQuestion, familyIds, familyNames, familyHints,
+  graphFamilySnapshot, readGraphFamilySnapshot, graphFamilySlug, graphFamilyTitle,
 } from '@/lib/function-family-graphs'
 import FamilyGraph from './FamilyGraph'
+import StreakStars from './StreakStars'
+import {SketchFrame} from '@/components/StudySketch'
+import {familyStarReducer, freshFamilyStarState} from '@/lib/function-family-stars'
 
 const subscribeDisplay = () => () => {}
 const readDisplay = () => new URLSearchParams(window.location.search).get('mathboardDisplay') === '1'
 
 export default function FamilyGraphs() {
-  const [state, dispatch] = useReducer(graphFamilyReducer, undefined, freshGraphFamilyState)
+  const [state, dispatch] = useReducer(familyStarReducer, undefined, freshFamilyStarState)
   const displayOnly = useSyncExternalStore(subscribeDisplay, readDisplay, () => false)
   const [restoreRevision, setRestoreRevision] = useState(0)
   const [scrollY, setScrollY] = useState(0)
@@ -93,7 +96,7 @@ export default function FamilyGraphs() {
 
   return <main className={`ffg-app ${displayOnly ? 'ffg-display' : ''}`} inert={displayOnly ? true : undefined}>
     {header}
-    {state.scene === 'welcome' ? <section className="ffg-welcome">
+    {state.scene === 'welcome' ? <section className="ffg-welcome"><SketchFrame/>
       <div className="ffg-welcome-copy"><span className="ffg-chip">{show('LOOK AT THE SHAPE')}</span><h2>{show('Different graphs. Familiar families.')}</h2>
         <p>{show('Recognize constant, linear, absolute value, quadratic, and cubic functions by their graphs.')}</p>
         <ul><li>{show('Build a streak of 10 correct answers. Your best streak is your score out of 10.')}</li><li>{show('Get a grade report whenever you are ready, even before a streak of 10.')}</li><li>{show('After a streak of 10, try the repeatable one-minute speed round.')}</li></ul>
@@ -106,25 +109,25 @@ export default function FamilyGraphs() {
       <aside className="ffg-series"><div className="ffg-series-art" aria-hidden="true"><svg viewBox="0 0 340 205"><path d="M22 166H320M170 20V190" fill="none" stroke="#a6b6c9" strokeWidth="1.5"/><path d="M55 25Q170 302 285 25" fill="none" stroke="#235eb3" strokeWidth="4"/><path d="M30 140L155 65L300 152" fill="none" stroke="#b77d3b" strokeWidth="3" strokeDasharray="7 6"/><circle cx="170" cy="164" r="5" fill="#235eb3"/></svg></div>
         <h2>{show('Your transformation series')}</h2><ol><li aria-current="step"><b>{show('Identify Function Family from Graph')}</b><span>{show('You are here')}</span></li><li>{show('Identify Function Family from Equation')}<span>{show('Coming next')}</span></li><li>{show('Graphing Parent Functions')}<span>{show('Planned')}</span></li></ol>
       </aside>
-    </section> : state.scene === 'ready' ? <section className="ffg-speed-ready">
+    </section> : state.scene === 'ready' ? <section className="ffg-speed-ready"><SketchFrame/>
       <span className="ffg-chip">{show('10 IN A ROW · READY FOR MORE')}</span><h2>{show('One minute. One perfect run.')}</h2><p>{show('Identify as many graphs as you can in a row. The first miss or the end of the minute ends the round.')}</p>
       <div className="ffg-speed-rules"><span><b data-no-translate>60</b><span>{show('seconds')}</span></span><span><b data-no-translate>1</b><span>{show('miss ends the round')}</span></span><span><b aria-hidden="true">↻</b><span>{show('unlimited retries')}</span></span></div>
       <p>{show('After each correct answer, the equation appears briefly, then the next graph arrives. The timer keeps running.')}</p><p>{show('Your speed-round score is the number correct in a row. It does not change your practice grade.')}</p>
       <div className="ffg-actions"><button className="ffg-primary" type="button" onClick={() => dispatch({type: 'start-speed', now: Date.now()})}>{show('Start 60-second round →')}</button><button type="button" onClick={report}>{show('Get grade report')}</button></div>
       <button className="ffg-text-button" type="button" onClick={() => {dispatch({type: 'practice'}); dispatch({type: 'next'})}}>{show('Practice more graphs')}</button>
     </section> : <>
-      <div className="ffg-progress">
+      <div className="ffg-progress"><SketchFrame/>
         {isSpeed ? <><div className="ffg-timer" role="timer" aria-label={t('Seconds remaining')}><strong data-no-translate>{Math.ceil(state.speed.remainingMs / 1000)}</strong><span>{show('seconds left')}</span></div><div><span>{show('Speed-round score')}</span><strong data-no-translate>{state.speed.count}</strong></div><div><span>{show('Best speed round')}</span><strong data-no-translate>{Math.max(state.speed.best, state.speed.count)}</strong></div></> : <>
-          <div><span>{show('Current streak')}</span><strong data-no-translate>{state.practice.streak}</strong></div><div className="ffg-best"><span>{show('Best streak · practice score')}</span><div className="ffg-streak-dots" aria-hidden="true">{Array.from({length: 10}, (_, n) => <i key={n} className={n < practiceScore ? 'ffg-filled' : ''}/>)}</div><strong data-no-translate>{practiceScore}<small>/10</small></strong></div>
+          <StreakStars state={state}/><div className="ffg-practice-score"><span>{show('Practice score')}</span><strong data-no-translate>{practiceScore}<small>/10</small></strong></div>
         </>}
         <button type="button" onClick={report}>{show('Get grade report')}</button>
       </div>
       <section className="ffg-workspace" aria-label={t('Graph and family choices')}>
-        <div className="ffg-graph-card"><div className="ffg-graph-heading"><span>{show(isSpeed ? 'SPEED ROUND' : 'GRAPH PRACTICE')}</span><span><span>{show('Graph')}</span> <b data-no-translate>{(isSpeed ? state.speed.index : state.practice.index) + 1}</b></span></div><FamilyGraph question={question} reveal={right === true}/></div>
+        <div className="ffg-graph-card"><SketchFrame/><div className="ffg-graph-heading"><span>{show(isSpeed ? 'SPEED ROUND' : 'GRAPH PRACTICE')}</span><span><span>{show('Graph')}</span> <b data-no-translate>{(isSpeed ? state.speed.index : state.practice.index) + 1}</b></span></div><FamilyGraph question={question} reveal={right === true}/></div>
         <div className="ffg-answer-panel">
-          {state.scene === 'speed-result' ? <section className="ffg-round-result" aria-live="polite"><span className="ffg-chip">{show('ROUND OVER')}</span><h2>{show(state.speed.reason === 'time' ? 'Time is up!' : state.speed.reason === 'report' ? 'Round finished.' : 'One miss ends this round.')}</h2><p>{show('Your speed-round score')}</p><strong className="ffg-round-score" data-no-translate>{state.speed.count}</strong><p>{show('correct in a row')}</p>{state.speed.reason === 'miss' && <p><span>{show('This graph belongs to:')}</span> <b>{show(familyNames[question.family])}</b></p>}<div className="ffg-actions"><button className="ffg-primary" type="button" onClick={() => dispatch({type: 'start-speed', now: Date.now()})}>{show('Try the speed round again')}</button><button type="button" onClick={report}>{show('Get grade report')}</button><button type="button" onClick={() => {dispatch({type: 'practice'}); dispatch({type: 'next'})}}>{show('Practice more graphs')}</button></div></section> : <>
+          {state.scene === 'speed-result' ? <section className="ffg-round-result" aria-live="polite"><SketchFrame/><span className="ffg-chip">{show('ROUND OVER')}</span><h2>{show(state.speed.reason === 'time' ? 'Time is up!' : state.speed.reason === 'report' ? 'Round finished.' : 'One miss ends this round.')}</h2><p>{show('Your speed-round score')}</p><strong className="ffg-round-score" data-no-translate>{state.speed.count}</strong><p>{show('correct in a row')}</p>{state.speed.reason === 'miss' && <p><span>{show('This graph belongs to:')}</span> <b>{show(familyNames[question.family])}</b></p>}<div className="ffg-actions"><button className="ffg-primary" type="button" onClick={() => dispatch({type: 'start-speed', now: Date.now()})}>{show('Try the speed round again')}</button><button type="button" onClick={report}>{show('Get grade report')}</button><button type="button" onClick={() => {dispatch({type: 'practice'}); dispatch({type: 'next'})}}>{show('Practice more graphs')}</button></div></section> : <>
             <p className="ffg-eyebrow">{show('NAME THE FAMILY')}</p><h2>{show('Which family does this graph belong to?')}</h2>
-            <div className="ffg-choices" role="group" aria-label={t('Function families')}>{familyIds.map((family, i) => <button key={family} type="button" disabled={selected !== null} aria-pressed={selected === family} className={selected === family ? right ? 'ffg-choice-correct' : 'ffg-choice-wrong' : ''} onClick={() => dispatch({type: 'answer', family, now: Date.now()})}><span className="ffg-choice-letter" aria-hidden="true">{String.fromCharCode(65 + i)}</span><span>{show(familyNames[family])}</span>{selected === family && <b aria-hidden="true">{right ? '✓' : '×'}</b>}</button>)}</div>
+            <div className="ffg-choices" role="group" aria-label={t('Function families')}>{familyIds.map((family, i) => <button key={family} type="button" disabled={selected !== null} aria-pressed={selected === family} className={selected === family ? right ? 'ffg-choice-correct' : 'ffg-choice-wrong' : ''} onClick={() => dispatch({type: 'answer', family, now: Date.now()})}><SketchFrame/><span className="ffg-choice-letter" aria-hidden="true">{String.fromCharCode(65 + i)}</span><span>{show(familyNames[family])}</span>{selected === family && <b aria-hidden="true">{right ? '✓' : '×'}</b>}</button>)}</div>
             <div className={`ffg-feedback ${right === true ? 'ffg-feedback-correct' : right === false ? 'ffg-feedback-wrong' : ''}`} role="status" aria-live="polite">
               {selected === null ? <p>{show('Look at the shape, then choose its family.')}</p> : <><strong>{show(right ? 'Correct! Same family, even when the graph moves.' : 'Not quite. Your best streak is safe.')}</strong>{!right && <p><b>{show(familyNames[question.family])}</b><span> · </span>{show(familyHints[question.family])}</p>}</>}
             </div>

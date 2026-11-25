@@ -81,4 +81,11 @@ Practice score = your best correct streak, up to 10. A miss never erases your be
 Speed-round scores are separate from your practice grade.	Las puntuaciones de las rondas rápidas son independientes de tu calificación de práctica.
 Recognize constant, linear, absolute value, quadratic, and cubic function families from their graphs.	Reconocer las familias de funciones constantes, lineales, de valor absoluto, cuadráticas y cúbicas a partir de sus gráficas.
 How independently can you recognize constant, linear, absolute value, quadratic, and cubic function families from their graphs?	¿Con cuánta independencia puedes reconocer las familias de funciones constantes, lineales, de valor absoluto, cuadráticas y cúbicas a partir de sus gráficas?
+Your streaks	Tus rachas
+Completed streaks	Rachas terminadas
+Completed streak	Racha terminada
+Correct answer	Respuesta correcta
+Earn your first star	Consigue tu primera estrella
+Earlier correct answers	Respuestas correctas anteriores
+Practice score	Puntuación de práctica
 `
