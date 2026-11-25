@@ -102,7 +102,7 @@ export default function FamilyGraphs() {
     {header}
     {state.scene === 'welcome' ? <SkillWelcome
       eyebrow="LOOK AT THE SHAPE" catchphrase="Different graphs. Familiar families."
-      skill="Recognize constant, linear, absolute value, quadratic, and cubic functions by their graphs."
+      skill="Identify a function family from a graph"
       visual={<TransformationPreview/>}
       goal={<p><span>{show('Streak')}</span><strong data-no-translate>10</strong></p>}
       scoreNote={show('Score = longest streak out of 10.')}>

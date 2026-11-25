@@ -90,6 +90,7 @@ Earn your first star	Consigue tu primera estrella
 Earlier correct answers	Respuestas correctas anteriores
 Practice score	Puntuación de práctica
 Number correct	Número de respuestas correctas
+Identify a function family from a graph	Identifica la familia de una función a partir de su gráfica
 Start Skill Practice	Iniciar la práctica de la habilidad
 Goal:	Meta:
 Streak	Racha

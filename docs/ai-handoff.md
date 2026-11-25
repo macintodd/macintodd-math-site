@@ -2,6 +2,11 @@
 
 The M4 Mac mini is the primary editing machine. The AI on the other Mac reviews changes on GitHub. Use GitHub `main` as the published source and follow [AGENTS.md](../AGENTS.md) for maintenance rules. Review the latest commits before starting work.
 
+## Function-family widget · concise skill wording · November 25, 2026
+
+- Changed the entry statement to **Skill: Identify a function family from a graph**, preserving the shared Skill label/layout. Added the matching Spanish sentence. No scoring, questions, rewards, MathBoard fields/bridge/effects, input behavior or shared standards changed.
+- Validation: typecheck, lint, content check, function-family and beta-Spanish regressions, exact Spanish sentence lookup, production build (after the existing framework reminder), and diff whitespace passed using a temporary source snapshot with the existing locked dependencies. Deployment: pending publication/custom-domain verification.
+
 ## Function-family widget · standard skill-entry screen · November 25, 2026
 
 - Replaced the dense welcome copy with shared `SkillWelcome` / `SkillIdentityFields` (`src/components/practice/`): catchphrase, a larger centered skill statement, required first/last name and 1–8 hour dropdown, and a green **Start Skill Practice** button. Removed the three small instructional bullets, future-series list and local-data footer from the screen. Local-only identity handling is unchanged.
