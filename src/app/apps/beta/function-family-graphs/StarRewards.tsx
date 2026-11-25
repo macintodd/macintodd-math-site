@@ -62,14 +62,23 @@ export default function StarRewards({state, restoreRevision}: {state: GraphFamil
       star.append(prototype.cloneNode(true))
       overlay.append(star)
       const x = box.left + (box.width - size) / 2, y = box.top + (box.height - size) / 2
-      const endX = count === 1 ? Math.min(width - size - 12, x + 90) : 20 + (width - size - 40) * (i + .5) / count
-      const dx = endX - x, spin = i % 2 ? -42 : 48
-      track(star.animate([
-        {transform: `translate(${x}px, ${y}px) rotate(0deg) scale(1)`, opacity: 1},
-        {transform: `translate(${x + dx * .12}px, ${y - 28}px) rotate(-8deg) scale(1.12)`, opacity: 1, offset: .12},
-        {transform: `translate(${x + dx * .65}px, ${y + (height - y) * .42}px) rotate(${spin}deg) scale(1)`, opacity: .95, offset: .55},
-        {transform: `translate(${endX}px, ${height + 60}px) rotate(${spin * 1.5}deg) scale(.9)`, opacity: 0},
-      ], {duration: 2300 + (i % 3) * 180, delay: 126 + i * 70, easing: 'linear'}), () => star.remove())
+      // Random launch velocity, then constant gravity: no steered waypoints.
+      const scale = Math.max(.75, Math.min(1.1, width / 1024))
+      const speed = (330 + Math.random() * 190) * scale
+      const angle = (32 + Math.random() * 33) * Math.PI / 180
+      const vx = Math.cos(angle) * speed, vy = -Math.sin(angle) * speed, gravity = 700 * scale
+      const bottom = (-vy + Math.sqrt(vy * vy + 2 * gravity * (height + size - y))) / gravity
+      const right = (width + size - x) / vx
+      const flight = Math.max(.1, Math.min(bottom, right))
+      const spin = (Math.random() * 2 - 1) * 130
+      // Closely spaced samples keep a true parabola smooth in WKWebView/Chrome.
+      const samples = Math.ceil(flight * 40)
+      const frames = Array.from({length: samples + 1}, (_, step) => {
+        const offset = step / samples, time = flight * offset
+        const px = x + vx * time, py = y + vy * time + .5 * gravity * time * time
+        return {offset, transform: `translate(${px}px, ${py}px) rotate(${spin * time}deg) scale(1)`, opacity: 1}
+      })
+      track(star.animate(frames, {duration: flight * 1000, delay: 126 + i * 70, easing: 'linear'}), () => star.remove())
     })
   }, [state, restoreRevision])
 
