@@ -8,12 +8,13 @@ import {Math as Formula} from '@/components/Math'
 import {SketchFrame} from '@/components/StudySketch'
 import {installLessonBridge,type LessonMathBoardWindow} from '@/lib/mathboard/lesson-bridge'
 import type {CompletionDisplayState} from '@/lib/mathboard/display-mirror'
-import {familyIds,familyNames,parentEquations} from '@/lib/function-family-graphs'
+import {familyIds,familyNames} from '@/lib/function-family-graphs'
 import {equationFamilySlug,equationFamilyTitle} from '@/lib/function-family-equations'
 import {freshEquationState,equationReducer,activeEquationQuestion,equationStarDisplay,availableStreakKeeps,canKeepStreak,equationScore,equationSnapshot,readEquationSnapshot} from '@/lib/function-family-equation-state'
 import StreakStars from '../function-family-graphs/StreakStars'
 import StarRewards from '../function-family-graphs/StarRewards'
 import EquationInformation from './EquationInformation'
+import EquationGraph from './EquationGraph'
 const subscribe=()=>()=>{}
 const readDisplay=()=>new URLSearchParams(window.location.search).get('mathboardDisplay')==='1'
 export default function FamilyEquations(){
@@ -83,8 +84,9 @@ export default function FamilyEquations(){
    <div className="ffg-progress"><SketchFrame/><StreakStars state={stars}/><div className="ffg-total-correct"><span>{show('Number correct')}</span><strong data-no-translate>{state.parents.correct+state.advanced.correct}</strong></div><div className="ffg-practice-score"><span>{show('Practice score')}</span><strong data-no-translate>{score}<small>/10</small></strong></div><button type="button" onClick={report}>{show('Get grade report')}</button></div>
    <div className="fe-stage"><span className="ffg-chip">{show(advanced?'ADVANCED IDENTIFICATION':'PARENT IDENTIFICATION')}</span><span>{show('Goal: 10 in a row')}</span><button type="button" className={`fe-keep ${canKeepStreak(state)?'fe-keep-ready':''}`} disabled={!canKeepStreak(state)} onClick={()=>dispatch({type:'keep',now:Date.now()})}><span>{show('Streak Keep')}</span> <span data-no-translate>({availableStreakKeeps(state)})</span></button></div>
    <section className="ffg-workspace" aria-label={t('Equation and family choices')}>
-    <div className={`ffg-graph-card fe-equation-card ${right?'fe-equation-correct':''}`}><SketchFrame/><div className="ffg-graph-heading"><span>{show('READ THE EQUATION')}</span><span>{show('Equation')} <b data-no-translate>{stats.index+1}</b></span></div><div className={`fe-equation ${question.equation.length>30?'fe-long-equation':''}`} key={`${state.phase}-${stats.index}`}><Formula display>{question.equation}</Formula></div>
-     <div className="fe-answer-reveal" role="status" aria-live="polite">{stats.result&&<><p>{show('Family:')} <strong>{show(familyNames[question.family])}</strong></p><div><span>{show('Parent:')}</span><Formula>{parentEquations[question.family]}</Formula></div></>}</div>
+    <div className={`ffg-graph-card fe-equation-card ${stats.result?'fe-answered-graph':''} ${right?'fe-equation-correct':''}`}><SketchFrame/><div className="ffg-graph-heading"><span>{show(stats.result?'GRAPH AND EQUATION':'READ THE EQUATION')}</span><span>{show('Equation')} <b data-no-translate>{stats.index+1}</b></span></div>
+     {stats.result?<EquationGraph question={question}/>:<div className={`fe-equation ${question.equation.length>30?'fe-long-equation':''}`} key={`${state.phase}-${stats.index}`}><Formula display>{question.equation}</Formula></div>}
+     <div className="fe-answer-reveal" role="status" aria-live="polite">{stats.result&&<p>{show('Family:')} <strong>{show(familyNames[question.family])}</strong></p>}</div>
     </div>
     <div className="ffg-answer-panel"><p className="ffg-eyebrow">{show('NAME THE FAMILY')}</p><h2>{show('Which family does this equation belong to?')}</h2><div className="ffg-choices" role="group" aria-label={t('Function families')}>{familyIds.map((family,i)=><button key={family} type="button" disabled={stats.selected!==null||state.scene!=='practice'} aria-pressed={stats.selected===family} className={stats.result&&family===question.family?'ffg-choice-correct':stats.selected===family?'ffg-choice-wrong':''} onClick={()=>dispatch({type:'answer',family,now:Date.now()})}><SketchFrame/><span className="ffg-choice-letter" aria-hidden="true">{String.fromCharCode(65+i)}</span><span>{show(familyNames[family])}</span>{stats.result&&family===question.family&&<b aria-hidden="true">✓</b>}</button>)}</div>
      <div className={`ffg-feedback ${right?'ffg-feedback-correct':''}`} role="status" aria-live="polite"><p>{show(stats.result==='right'?'Correct! You found the family.':stats.result==='kept'?'Streak saved. Read the correct family, then try the next equation.':stats.result==='wrong'?'Not quite. Your best streak is safe.':'Read the equation, then choose its family.')}</p></div>

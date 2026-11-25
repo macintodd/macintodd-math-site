@@ -1,5 +1,11 @@
 /** Equation activity text; function names, symbols and student identity stay unchanged. */
-export const equationFamilySpanish = `2. Identify Function Family by Equation	2. Identifica la familia de una función por su ecuación
+export const equationFamilySpanish = `Graph of this equation	Gráfica de esta ecuación
+GRAPH AND EQUATION	GRÁFICA Y ECUACIÓN
+The horizontal axis is x and the vertical axis is y.	El eje horizontal es x y el eje vertical es y.
+Each grid square is	Cada cuadro de la cuadrícula representa
+unit.	unidad.
+units.	unidades.
+2. Identify Function Family by Equation	2. Identifica la familia de una función por su ecuación
 ALGEBRA 2 · FUNCTION FAMILIES	ÁLGEBRA 2 · FAMILIAS DE FUNCIONES
 Different equations. Familiar families.	Distintas ecuaciones. Familias conocidas.
 Read the equation	Lee la ecuación

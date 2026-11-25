@@ -26,3 +26,8 @@
 @media(max-width:700px){.fe-app .fe-stage{flex-wrap:wrap;gap:8px}.fe-stage .fe-keep{font-size:13px;padding:10px}.fe-equation-card{min-height:290px}.fe-equation{min-height:160px;font-size:24px}.fe-congratulations{padding:25px 20px}.fe-congratulations p{font-size:20px}}
 
 .fe-equation.fe-long-equation{font-size:clamp(20px,2.5vw,30px)}
+
+.fe-answered-graph .ffg-graph-frame{width:100%;max-width:390px;max-height:none}
+.fe-answered-graph .fe-answer-reveal{min-height:0;margin:3px 0 0;font-size:18px}
+.fe-revealed-graph .ffg-equation-reveal{top:8px;font-size:clamp(18px,2.2vw,25px);padding:7px 12px;max-width:99%}
+.fe-revealed-graph .fe-long-graph-equation{font-size:clamp(15px,1.9vw,21px)}

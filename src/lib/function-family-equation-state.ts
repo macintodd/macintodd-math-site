@@ -44,13 +44,13 @@ export function equationReducer(s:EquationState,action:EquationAction):EquationS
    const stats={...previous,naturalStreak,naturalBest:Math.max(previous.naturalBest,naturalStreak),selected:action.family,result:right?'right' as const:'wrong' as const,attempts:previous.attempts+1,correct:previous.correct+(right?1:0),streak,best:Math.max(previous.best,streak),completed:!right&&previous.streak?[...previous.completed,previous.streak]:previous.completed}
    // Award policy is supplied by the activity's teacher-approved rules below.
    const earns=earnsEquationKeep(s,stats,natural)
-   return {...s,[s.phase]:stats,advancedNaturalRun:natural,keepsEarned:s.keepsEarned+(earns?1:0),pendingKeep:!right&&previous.streak?{phase:s.phase,index:previous.index,streak:previous.streak,completedBefore:previous.completed.length}:null,multiUnlocked:s.multiUnlocked||s.phase==='advanced'&&streak>=5,nextAt:action.now+(right?1400:3000),completion:null}
+   return {...s,[s.phase]:stats,advancedNaturalRun:natural,keepsEarned:s.keepsEarned+(earns?1:0),pendingKeep:!right&&previous.streak?{phase:s.phase,index:previous.index,streak:previous.streak,completedBefore:previous.completed.length}:null,multiUnlocked:s.multiUnlocked||s.phase==='advanced'&&streak>=5,nextAt:action.now+(right?3000:4000),completion:null}
   }
   case 'keep':{
    if(!canKeepStreak(s))return s
    const pending=s.pendingKeep!
    const stats=s[pending.phase]
-   return {...s,[pending.phase]:{...stats,streak:pending.streak,completed:stats.completed.slice(0,pending.completedBefore),result:stats.index===pending.index?'kept':stats.result},keepsUsed:s.keepsUsed+1,pendingKeep:null,nextAt:stats.index===pending.index?action.now+1400:s.nextAt}
+   return {...s,[pending.phase]:{...stats,streak:pending.streak,completed:stats.completed.slice(0,pending.completedBefore),result:stats.index===pending.index?'kept':stats.result},keepsUsed:s.keepsUsed+1,pendingKeep:null,nextAt:stats.index===pending.index?action.now+3000:s.nextAt}
   }
   case 'tick':{
    if(s.scene!=='practice'||!s.nextAt||action.now<s.nextAt||s.infoOpen)return s
@@ -59,7 +59,7 @@ export function equationReducer(s:EquationState,action:EquationAction):EquationS
    return {...s,[s.phase]:{...stats,index:stats.index+1,selected:null,result:null},questionKind:s.phase==='parents'?'parent':s.multiUnlocked?'multi':'single',nextAt:0}
   }
   case 'report':return ['practice','parent-ready','complete'].includes(s.scene)?{...s,scene:'report',reportReturn:s.scene as EquationState['reportReturn'],completedAt:action.now,completion:null,infoOpen:false}:s
-  case 'return':return s.scene==='report'?{...s,scene:s.reportReturn,completion:null,nextAt:s.reportReturn==='practice'&&s[s.phase].selected!==null?action.now+1400:s.nextAt}:s
+  case 'return':return s.scene==='report'?{...s,scene:s.reportReturn,completion:null,nextAt:s.reportReturn==='practice'&&s[s.phase].selected!==null?action.now+3000:s.nextAt}:s
   case 'completion':return s.scene==='report'?{...s,completion:action.value}:s
   case 'restore':return action.value
  }
