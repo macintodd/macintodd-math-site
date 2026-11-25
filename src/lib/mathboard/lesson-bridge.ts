@@ -54,4 +54,4 @@ export function installLessonBridge(host:LessonMathBoardWindow):LessonBridge{
  return bridge
 }
 
-export const lessonBridgeBootstrap=`if(/^\\/apps\\/beta\\/function-family-graphs\\/?$/.test(window.location.pathname) || window.MathBoardApplet && /^\\/apps\\/beta\\/(?:parallel-perpendicular-lesson|parallel-lines)(?:\\/teacher)?\\/?$/.test(window.location.pathname)){(${installLessonBridge.toString()})(window)}`
+export const lessonBridgeBootstrap=`if(/^\\/apps\\/beta\\/function-family-(?:graphs|equations)\\/?$/.test(window.location.pathname) || window.MathBoardApplet && /^\\/apps\\/beta\\/(?:parallel-perpendicular-lesson|parallel-lines)(?:\\/teacher)?\\/?$/.test(window.location.pathname)){(${installLessonBridge.toString()})(window)}`

@@ -1,3 +1,4 @@
+import {equationFamilyInfo} from '../lib/function-family-equation-info.ts'
 import {familyGraphInfo} from '../lib/function-family-graph-info.ts'
 import {rigidSkills,skillTitles,skillGoals} from '../lib/rigid-skills.ts'
 export const appCategories=['Arithmetic foundations','Equations and factoring','Functions','Transformations','Linear graphs and equations','Games','Puzzles'] as const
@@ -8,6 +9,7 @@ export type PracticeApp={slug:string;title:string;description:string;description
 const a=(slug:string):LessonReference=>({course:'algebra-2',slug})
 const p=(slug:string):LessonReference=>({course:'precalculus',slug})
 export const practiceApps:PracticeApp[]=[
+ {slug:'beta/function-family-equations',title:'2. Identify Function Family by Equation',description:equationFamilyInfo.map(item=>`${item.label}: ${item.value}`).join(' '),descriptionBullets:equationFamilyInfo,category:'Transformations',courses:['algebra-2'],lessons:[],note:'Beta · parent and advanced identification · report any time · English / Español · MathBoard'},
  {slug:'beta/function-family-graphs',title:'1. Identify Function Family from Graph',description:familyGraphInfo.map(item=>`${item.label}: ${item.value}`).join(' '),descriptionBullets:familyGraphInfo,category:'Transformations',courses:['algebra-2'],lessons:[],note:'Beta · best streak /10 · report any time · 60-second speed round · English / Español · MathBoard'},
  {slug:'beta/card-clash-classroom',title:'Card Clash · Classroom Game',description:'One game code for the whole class, up to 40 animal code names, continuous rounds, cumulative standings and a synchronized winner’s category spinner. A random student chooses the next difficulty.',category:'Games',courses:['algebra-2'],lessons:[],note:'Beta · teacher host + student + shared display · updated Firebase rules required · two-player beta retained'},
  {slug:'beta/card-clash',title:'Card Clash · First Playable Round',description:'Two students join with animal code names and tackle the same random Algebra 2 problem. Hints, two attempts, teacher-checked scoring and worked solutions.',category:'Games',courses:['algebra-2'],lessons:[],note:'Beta · teacher-hosted Firebase round · database rules must be installed · full tournament still in development'},
