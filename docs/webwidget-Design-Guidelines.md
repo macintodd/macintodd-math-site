@@ -479,7 +479,7 @@ If the activity does not collect correctness data, omit the counter and streak d
 - Match macintodd.net's warm parchment, white paper surfaces, navy and brown ink, and restrained gold star accents. Keep success/error feedback clear and sufficiently contrasted.
 - Use the established local **Newsreader** headings, **Plus Jakarta Sans** body/UI text, and **Caveat** handwritten accents or equivalent bundled fonts when working outside the website repository. Keep long prompts readable; handwriting is an accent, not a reason to make text hard to read.
 - Prefer programmatic SVG for slightly imperfect pencil borders, double-drawn buttons/cards, stars, and dividers. Reuse shared assets where available; keep decorative marks deterministic and hidden from assistive technology.
-- Keep graphs, plotted points, axes, numerical values, and mathematical notation accurate. Do not distort mathematical geometry to make it look hand-drawn. Use appropriate typeset fractions and exponents. Equation overlays use a clean white background and leave important graph features visible.
+- Keep graphs, plotted points, axes, numerical values, and mathematical notation accurate. Do not distort mathematical geometry to make it look hand-drawn. Use appropriate typeset fractions and exponents. Correct-answer equation panels use a clean white background. Teacher-approved corrective handwriting may instead use transparent blue ink over the graph, with subtle text relief. Leave important graph features visible.
 - Prioritize landscape iPads with large prompts and touch-friendly controls. Keep header statistics compact so they do not crowd the graph. Adapt the progress bar and graph/answer columns for narrow screens without horizontal overflow. Honor reduced-motion preferences.
 - Scope presentation styles to the intended widget. Preserve clean-English/whole-page-Spanish behavior, local completion records, and existing data-handling rules.
 
@@ -493,8 +493,9 @@ These visual standards do not authorize changes to a working MathBoard bridge. P
 
 **Added November 25, 2026.** Use this layout for new student-practice widgets that need a name and class hour, and for future requested entry-screen revisions. Do not add identity collection to tools/demos that do not need it or restyle unrelated widgets during another task.
 
+- The first slide is the opening skill/identity screen. Keep the widget name in a navy Newsreader heading above the entry sheet, with the small information **i** alongside it (see the card/information standard below). Keep language controls available; use the appropriate hub/back link for the widget.
 - Use a white sketched-paper sheet with the existing parchment, navy/brown ink and local notebook fonts. Keep the opening screen concise; remove long instructional lists, series menus and redundant fine print from this sheet.
-- In the main/left column, place the activity's catchphrase at the top of the sheet, followed by a short subtitle (for this widget, **Look at the shape**). Beneath it, left-align the entire **Skill:** line in burnt orange (`--ink-copper: #A65324`), with the skill statement inline immediately after the colon. Make the label bold and the statement larger/heavier than body instructions (about 26–30px on landscape iPads, 24px on phones), with readable wrapping. Keep the short statement prominent: it is the learning goal. Below it, show **First name**, **Last name**, and a required **Class hour** dropdown with an initially blank choice and values **1–8**.
+- In the main/left column, place the activity's catchphrase at the top of the sheet, followed by a short subtitle (for this widget, **Look at the shape**). Beneath it, left-align a bold dark blue **Skill:** label (`--ink-navy: #0F3460`) and place the burnt orange skill statement (`--ink-copper: #A65324`) inline immediately after the colon. Use Caveat at about 30–32px for the label and Plus Jakarta Sans at weight 600 for the statement (about 26–30px on landscape iPads, 24px on phones), with readable wrapping. Keep the short statement prominent: it is the learning goal. Below it, show **First name**, **Last name**, and a required **Class hour** dropdown with an initially blank choice and values **1–8**.
 - Label the primary action **Start Skill Practice**. Keep it compact rather than full-width, with the sketched edge and at least a 44px touch target. Use the pale fern wash `--fern-wash: #E0E9E5` (hover `--fern-wash-hover: #D3E2DA`) and dark green lettering `--ink-fern-dark: #24563F`; retain `--ink-fern: #2F6B4F` as the palette's base green. Lighten the fill without reducing the opacity of the lettering or focus outline.
 - In the right column, show a compact visual that accurately represents the skill. A transformation illustration must show an actual parent and transformed child of the same function family. Use line styles as well as color to distinguish them; for the first graph-family widget, the parent is dashed blue and the transformed child is solid red. Preserve accurate mathematical geometry and provide an accessible description.
 - Directly beneath that visual, label the completion requirements **Goal:**. Display the activity's real target(s) in large, short lines. A minimum total and a streak are separate requirements when both apply. **Never invent a five-answer streak or change scoring to fit the template.** This graph-identification drill specifically requires a streak of **10**; its score is its longest streak out of 10. Other widgets retain their own teacher-defined goals and reported result.
@@ -502,10 +503,63 @@ These visual standards do not authorize changes to a working MathBoard bridge. P
 - Prioritize landscape iPads and embedded MathBoard dimensions: the skill, identity controls, goal and Start button should fit comfortably. On phones, stack the main content and visual/goal area with natural scrolling; do not shrink text to cram everything into the viewport.
 - Keep English/Spanish/tap-to-English behavior, required-field validation, local-only identity, and MathBoard restoration/publication behavior. The shared entry component must not own scoring or native state, publish on mount, upload identity, or add browser persistence.
 
-Repository implementation: `src/components/practice/SkillWelcome.tsx` and `skill-welcome.css`; `SkillIdentityFields` supplies the common controls. Pass the activity-specific visual, goals and optional score note as content; the calling widget owns the form, reducer and start action. The live reference is `/apps/beta/function-family-graphs`. This entry-screen standard does not yet standardize the trial star reward effects.
+Repository implementation: `src/components/practice/SkillWelcome.tsx` and `src/components/practice/skill-welcome.css`; `SkillIdentityFields` supplies the common controls. Pass the activity-specific visual, goals and optional score note as content; the calling widget owns the form, reducer and start action. The live reference is `/apps/beta/function-family-graphs`. The approved Star Launch achievement category is documented below.
 
 ---
 <!-- END:macintodd-widget-welcome -->
+
+<!-- BEGIN:macintodd-widget-cards -->
+## Online Widget Card and Information Window
+
+**Approved November 25, 2026.** Apply this design to new cards and requested card revisions. Preserve existing catalog visibility, categories, launch destinations and activity modes; do not bulk-migrate unrelated cards.
+
+- Use the shared sketched-paper card, an accurate compact preview, a navy Newsreader title, and the explicit Practice/Demonstration styling. Directory/topic collections use two columns on wide screens and one on phones. The Beta hub must show the same description even where its card layout differs. Keep experimental widgets in Beta/explicit All views until the teacher requests promotion.
+- Replace the main description paragraph with a real **bulleted list** covering three things: what is practiced, how the activity reports a result, and its special features. Keep all bullets visible rather than clipping the list to two lines. Use bold labels and short, readable values. Put longer supporting notes and lesson links in the expandable Details area.
+- For function-family activities, label the content bullet **Functions:** and list the actual families. For other subjects, use an accurate **Skills:** or **Content:** label. Do not copy this widget's five-family list into unrelated activities.
+- **Scoring:** explains the widget's actual reporting method. For completion-only or untracked tools, say completion-only or unscored rather than inventing a numerical grade. The card does not choose the formula, impose a streak goal or make optional MathBoard counters mandatory.
+- **Special Features:** briefly identifies relevant features such as a speed round. Keep the content specific to the activity; do not promise features that have not been implemented.
+- Next to the open widget's title, provide a small sketched **i** button with at least a 44px touch target. It opens a compact paper-styled information dialog containing the **same bullets**. Support an accessible name, keyboard operation, close button, Escape dismissal, focus return, English/Spanish and sensible phone sizing. Mirrored read-only views follow the teacher's open/closed state.
+- Keep one shared data source for the online card, expanded Details and information dialog. Keep search metadata accurate as well. Preserve full expanded descriptions for existing cards that still use paragraphs. Use native list semantics; never introduce nested links or place the information button inside a navigation link.
+- Include the dialog's open/closed state in the existing restorable widget state when MathBoard mirroring is supported. Keep restores quiet, preserve backward compatibility, and do not change scoring fields or rewrite a working bridge for a dialog.
+
+**Current reference — 1. Identify Function Family from Graph:**
+
+- **Functions:** constant, linear, absolute value, quadratic, cubic
+- **Scoring:** best streak/10
+- **Special Features:** 60-second speed round at end.
+
+Website implementation: `src/app/apps/WidgetCard.tsx` (`WidgetDescription`) and `src/content/practice-apps.ts` (`PracticeApp.descriptionBullets`); Beta and directory views use the same bullets. This widget's source is `src/lib/function-family-graph-info.ts`, reused by `src/app/apps/beta/function-family-graphs/FamilyGraphInformation.tsx`. Its existing optional `customState.state.infoOpen` restores the information window without changing native score/completion fields.
+
+---
+<!-- END:macintodd-widget-cards -->
+
+<!-- BEGIN:macintodd-widget-achievements -->
+## Achievement Categories
+
+**Approved November 25, 2026.** An achievement category identifies a **visual reward system**. It is separate from a math skill/category filter, MathBoard catalog Category (`pedagogicalWorkflow`), Activity Mode and score-reporting pattern. Register reward systems here as the teacher develops them; do not invent additional categories.
+
+| Approved category | Identifier | Reference |
+|---|---|---|
+| **Star Launch** | `star-launch` | Gold stars in `/apps/beta/function-family-graphs` |
+
+**Star Launch is currently the only approved achievement category.** The teacher will add variations within this category and develop other categories later. Different colors or parameter settings can be variations of Star Launch; they are not automatically new categories. Do not predefine extra variations or migrate unrelated widgets during another task. The identifier is for documentation/configuration when needed, not a required new MathBoard payload field.
+
+### Star Launch
+
+1. Trigger a reward only when the activity credits a new correct answer. Add the earned star to the current streak row; briefly bounce the new star and flash the current-run stars. Preserve the persistent numbered-streak behavior described above.
+2. At the flash, make copies appear **directly on their corresponding row stars**, using the stars' actual screen positions. The copies visibly pop off those stars. Do not spawn them at the top of the page or graph.
+3. For streak N, launch N copies subject to a clear cap. The current gold reference caps this at **eight per answer**, using the latest eight source stars for longer runs, and **24 live copies** during rapid answers. Previously finished numbered runs remain unchanged. A miss gives no launch; the next credited run starts again at one copy. Duplicate checks/taps must not duplicate the reward.
+4. Give each copy a varied initial speed and angle **up and to the right**, with optional gentle rotation, then let it follow a smooth projectile parabola under constant downward gravity until it exits the app. Use natural physical motion rather than rigid steered waypoints. The current reference varies initial speed 330–520 px/s and angle 32–65°, scaled for viewport size; exact implementation parameters live in `src/app/apps/beta/function-family-graphs/StarRewards.tsx`.
+5. Use the activity's approved star color. The current reference uses the existing gold sketched SVG; future colors/settings will be teacher-defined variations. Preserve accurate mathematical graphs underneath the decoration.
+6. Keep the stars in front of the app in a decorative, clipped viewport overlay with **pointer-events: none** and **aria-hidden**. Students can tap Next or answer again immediately. Do not add an animation lock, delay the lesson or change the speed-round timer for the reward.
+7. Honor reduced motion by retaining the static earned stars and omitting launches/flashes. Clean up finished/interrupted animations and respect the active-copy cap. Use browser animation APIs without per-frame React state or native publications.
+8. Reward presentation does not determine grades, question credit, completion or reflections. Use the activity's authoritative results and existing retry/hint rules; never recalculate the reported score from the falling stars. If the activity has no correctness data, do not fabricate counters or force this system onto it.
+9. Restore the earned stars, finished-run history, counts and current question through the existing state contract. **Do not replay old launches** on saved-slide restoration or incoming mirrored state; airborne copies are transient local decoration. Preserve no-echo behavior and never publish on animation frames. When an activity has no visible streak row, document an appropriate earned marker as its launch source; the current speed round uses its score display without modifying practice-star history.
+
+Current website reference: `src/app/apps/beta/function-family-graphs/StarRewards.tsx`, `src/app/apps/beta/function-family-graphs/StreakStars.tsx`, `src/lib/function-family-stars.ts` and the widget-local CSS. Preserve the working MathBoard bridge; document future variations with their owning widget while keeping the category name **Star Launch**.
+
+---
+<!-- END:macintodd-widget-achievements -->
 
 ## Checklist Before Submitting a Widget
 
