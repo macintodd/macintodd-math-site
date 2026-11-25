@@ -28,13 +28,22 @@ export default function StarRewards({state, restoreRevision}: {state: GraphFamil
       running.current.add(animation)
       animation.finished.catch(() => {}).finally(() => {running.current.delete(animation); remove?.()})
     }
-    const target = overlay.closest('.ffg-app')?.querySelector(practice ? '.ffg-current-star:last-child svg' : '.ffg-speed-count strong')
-    if (target) track(target.animate([
-      {transform: 'scale(.35)', opacity: .25}, {transform: 'scale(1.32)', opacity: 1, offset: .55},
-      {transform: 'scale(.92)', offset: .8}, {transform: 'scale(1)', opacity: 1},
-    ], {duration: 390, easing: 'ease-out'}))
-
+    const app = overlay.closest('.ffg-app')
+    const sources = Array.from(app?.querySelectorAll(practice ? '.ffg-current-star svg' : '.ffg-speed-count strong') ?? [])
+    // Measure before the flash/bounce: each copy starts on its own earned star.
+    const origins = sources.map(source => ({source, box: source.getBoundingClientRect()}))
     const count = Math.min(practice ? state.practice.streak : state.speed.count, 8)
+    const launching = practice ? origins.slice(-count) : Array.from({length: count}, () => origins[0])
+    const firstLaunch = practice ? Math.max(0, origins.length - count) : 0
+    origins.forEach(({source}, i) => {
+      const newest = i === origins.length - 1
+      track(source.animate([
+        {transform: newest ? 'scale(.4)' : 'scale(1)', filter: 'brightness(1)'},
+        {transform: newest ? 'scale(1.3)' : 'scale(1.12)', filter: 'brightness(1.8) drop-shadow(0 0 5px #efb82d)', offset: .3},
+        {transform: 'scale(.96)', filter: 'brightness(1.1)', offset: .75},
+        {transform: 'scale(1)', filter: 'brightness(1)'},
+      ], {duration: 420, delay: Math.max(0, i - firstLaunch) * 70, easing: 'ease-out'}))
+    })
     // Speed rounds can overlap effects; keep a hard ceiling on live copies too.
     while (overlay.querySelectorAll('.ffg-falling-star').length + count > 24) {
       const oldest = overlay.querySelector('.ffg-falling-star')
@@ -43,23 +52,25 @@ export default function StarRewards({state, restoreRevision}: {state: GraphFamil
       oldest.remove()
     }
     const width = window.innerWidth, height = window.innerHeight
-    for (let i = 0; i < count; i++) {
+    launching.forEach((origin, i) => {
+      if (!origin) return
+      const {box} = origin
       const star = document.createElement('span')
       star.className = 'ffg-falling-star'
-      const size = 30 + (i % 3) * 6
+      const size = practice ? box.width : 36
       star.style.width = star.style.height = `${size}px`
       star.append(prototype.cloneNode(true))
       overlay.append(star)
-      const x = count === 1 ? width * .52 : 24 + (width - 90) * (i + .4) / count
-      const drift = (i % 2 ? -1 : 1) * Math.min(35, width * .04)
-      const spin = i % 2 ? -42 : 48
+      const x = box.left + (box.width - size) / 2, y = box.top + (box.height - size) / 2
+      const endX = count === 1 ? Math.min(width - size - 12, x + 90) : 20 + (width - size - 40) * (i + .5) / count
+      const dx = endX - x, spin = i % 2 ? -42 : 48
       track(star.animate([
-        {transform: `translate(${x}px, -55px) rotate(-12deg) scale(.8)`, opacity: 0},
-        {transform: `translate(${x + drift * .25}px, ${height * .12}px) rotate(4deg) scale(1)`, opacity: .95, offset: .18},
-        {transform: `translate(${x + drift}px, ${height * .8}px) rotate(${spin}deg) scale(.95)`, opacity: .85, offset: .8},
-        {transform: `translate(${x}px, ${height + 60}px) rotate(${spin * 1.5}deg) scale(.85)`, opacity: 0},
-      ], {duration: 2200 + (i % 3) * 180, delay: i * 100, easing: 'linear', fill: 'both'}), () => star.remove())
-    }
+        {transform: `translate(${x}px, ${y}px) rotate(0deg) scale(1)`, opacity: 1},
+        {transform: `translate(${x + dx * .12}px, ${y - 28}px) rotate(-8deg) scale(1.12)`, opacity: 1, offset: .12},
+        {transform: `translate(${x + dx * .65}px, ${y + (height - y) * .42}px) rotate(${spin}deg) scale(1)`, opacity: .95, offset: .55},
+        {transform: `translate(${endX}px, ${height + 60}px) rotate(${spin * 1.5}deg) scale(.9)`, opacity: 0},
+      ], {duration: 2300 + (i % 3) * 180, delay: 126 + i * 70, easing: 'linear'}), () => star.remove())
+    })
   }, [state, restoreRevision])
 
   useEffect(() => {

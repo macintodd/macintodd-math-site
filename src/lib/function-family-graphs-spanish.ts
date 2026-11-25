@@ -40,6 +40,7 @@ Graph	Gráfica
 Graph to identify	Gráfica para identificar
 The horizontal axis is x and the vertical axis is y. Each grid square is one unit.	El eje horizontal es x y el eje vertical es y. Cada cuadro representa una unidad.
 Equation and parent function	Ecuación y función base
+Graph family and equation	Familia de la gráfica y ecuación
 Parent:	Función base:
 Each grid square is 1 unit.	Cada cuadro representa 1 unidad.
 ROUND OVER	RONDA TERMINADA
@@ -89,4 +90,9 @@ Earn your first star	Consigue tu primera estrella
 Earlier correct answers	Respuestas correctas anteriores
 Practice score	Puntuación de práctica
 Number correct	Número de respuestas correctas
+All graphs with this shape are constant functions.	Todas las gráficas con esta forma son funciones constantes.
+All graphs with this shape are linear functions.	Todas las gráficas con esta forma son funciones lineales.
+All graphs with this shape are absolute value functions.	Todas las gráficas con esta forma son funciones de valor absoluto.
+All graphs with this shape are quadratic (square) functions.	Todas las gráficas con esta forma son funciones cuadráticas (al cuadrado).
+All graphs with this shape are cubic functions.	Todas las gráficas con esta forma son funciones cúbicas.
 `

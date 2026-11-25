@@ -6,7 +6,7 @@ import {useWidgetLanguage} from '@/components/practice/BilingualWidget'
 import {installLessonBridge, type LessonMathBoardWindow} from '@/lib/mathboard/lesson-bridge'
 import type {CompletionDisplayState} from '@/lib/mathboard/display-mirror'
 import {
-  activeFamilyQuestion, familyIds, familyNames, familyHints,
+  activeFamilyQuestion, familyIds, familyNames,
   graphFamilySnapshot, readGraphFamilySnapshot, graphFamilySlug, graphFamilyTitle,
 } from '@/lib/function-family-graphs'
 import FamilyGraph from './FamilyGraph'
@@ -125,13 +125,13 @@ export default function FamilyGraphs() {
         <button type="button" onClick={report}>{show('Get grade report')}</button>
       </div>
       <section className="ffg-workspace" aria-label={t('Graph and family choices')}>
-        <div className="ffg-graph-card"><SketchFrame/><div className="ffg-graph-heading"><span>{show(isSpeed ? 'SPEED ROUND' : 'GRAPH PRACTICE')}</span><span><span>{show('Graph')}</span> <b data-no-translate>{(isSpeed ? state.speed.index : state.practice.index) + 1}</b></span></div><FamilyGraph question={question} reveal={right === true}/></div>
+        <div className="ffg-graph-card"><SketchFrame/><div className="ffg-graph-heading"><span>{show(isSpeed ? 'SPEED ROUND' : 'GRAPH PRACTICE')}</span><span><span>{show('Graph')}</span> <b data-no-translate>{(isSpeed ? state.speed.index : state.practice.index) + 1}</b></span></div><FamilyGraph question={question} reveal={right !== null} mistake={right === false}/></div>
         <div className="ffg-answer-panel">
           {state.scene === 'speed-result' ? <section className="ffg-round-result" aria-live="polite"><SketchFrame/><span className="ffg-chip">{show('ROUND OVER')}</span><h2>{show(state.speed.reason === 'time' ? 'Time is up!' : state.speed.reason === 'report' ? 'Round finished.' : 'One miss ends this round.')}</h2><p>{show('Your speed-round score')}</p><strong className="ffg-round-score" data-no-translate>{state.speed.count}</strong><p>{show('correct in a row')}</p>{state.speed.reason === 'miss' && <p><span>{show('This graph belongs to:')}</span> <b>{show(familyNames[question.family])}</b></p>}<div className="ffg-actions"><button className="ffg-primary" type="button" onClick={() => dispatch({type: 'start-speed', now: Date.now()})}>{show('Try the speed round again')}</button><button type="button" onClick={report}>{show('Get grade report')}</button><button type="button" onClick={() => {dispatch({type: 'practice'}); dispatch({type: 'next'})}}>{show('Practice more graphs')}</button></div></section> : <>
             <p className="ffg-eyebrow">{show('NAME THE FAMILY')}</p><h2>{show('Which family does this graph belong to?')}</h2>
             <div className="ffg-choices" role="group" aria-label={t('Function families')}>{familyIds.map((family, i) => <button key={family} type="button" disabled={selected !== null} aria-pressed={selected === family} className={selected === family ? right ? 'ffg-choice-correct' : 'ffg-choice-wrong' : ''} onClick={() => dispatch({type: 'answer', family, now: Date.now()})}><SketchFrame/><span className="ffg-choice-letter" aria-hidden="true">{String.fromCharCode(65 + i)}</span><span>{show(familyNames[family])}</span>{selected === family && <b aria-hidden="true">{right ? '✓' : '×'}</b>}</button>)}</div>
             <div className={`ffg-feedback ${right === true ? 'ffg-feedback-correct' : right === false ? 'ffg-feedback-wrong' : ''}`} role="status" aria-live="polite">
-              {selected === null ? <p>{show('Look at the shape, then choose its family.')}</p> : <><strong>{show(right ? 'Correct! Same family, even when the graph moves.' : 'Not quite. Your best streak is safe.')}</strong>{!right && <p><b>{show(familyNames[question.family])}</b><span> · </span>{show(familyHints[question.family])}</p>}</>}
+              {selected === null ? <p>{show('Look at the shape, then choose its family.')}</p> : <><strong>{show(right ? 'Correct! Same family, even when the graph moves.' : 'Not quite. Your best streak is safe.')}</strong></>}
             </div>
             {state.scene === 'practice' && selected !== null && (practiceScore >= 10 ? <div className="ffg-actions"><button className="ffg-primary" type="button" onClick={() => dispatch({type: 'ready'})}>{show('Try the speed round →')}</button><button type="button" onClick={report}>{show('Get grade report')}</button></div> : <button className="ffg-primary ffg-next" type="button" onClick={() => dispatch({type: 'next'})}>{show('Next graph →')}</button>)}
             {state.scene === 'speed' && right && <p className="ffg-speed-next">{show('Next graph arriving…')}</p>}
