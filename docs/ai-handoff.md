@@ -2,6 +2,12 @@
 
 The M4 Mac mini is the primary editing machine. The AI on the other Mac reviews changes on GitHub. Use GitHub `main` as the published source and follow [AGENTS.md](../AGENTS.md) for maintenance rules. Review the latest commits before starting work.
 
+## Function-family widget · prominent burnt orange skill · November 25, 2026
+
+- Made the entire inline learning-goal row burnt orange (#A65324, new --ink-copper palette token). Skill remains bold handwritten text; the statement now has weight 600 and larger type: about 26–30px on landscape iPads and 24px on phones, with a 30–32px label. Left alignment, wording, subtitle, diagram/goal and compact pale Start button remain intact.
+- Updated the shared entry standard in AGENTS.md, the canonical webwidget guidelines and the original MathBoard-project guideline section. The standard treats the skill as the prominent learning goal. Only the matching original-doc section is updated; MathBoard code and unrelated content remain untouched.
+- No scoring, questions, native fields/bridge/effects, information window, rewards, reports or identity behavior changed. Validation: typecheck, lint, content check (37 lessons/120 PDFs), function-family/stars and beta-Spanish regressions passed in a fresh temporary source snapshot with existing locked dependencies. Chrome entry checks passed desktop/iPad/1000×700 embedded/phone layouts, the exact burnt-orange color on label and statement, larger/heavier fonts, text contrast, clean wrapping, visible Start action, Spanish and quiet identity restoration. Screenshots reviewed; no page errors or data POSTs. Production build and diff whitespace passed after the existing framework reminder. Runtime JavaScript/native/scoring code is unchanged, tested CSS matches the permanent checkout, and both updated guideline sections match. Deployment: pending publication/custom-domain verification.
+
 ## Function-family widget · entry hierarchy and softer Start action · November 25, 2026
 
 - Moved **Different graphs. Familiar families.** to the top of the entry sheet, with **Look at the shape** immediately underneath as a subtitle instead of the old badge. The app-name header and information button remain above the sheet. The Skill row is left aligned: brown **Skill:** followed inline by blue **Identify a function family from a graph**, with readable wrapping on phones.
