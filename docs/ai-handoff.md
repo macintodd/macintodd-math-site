@@ -5,7 +5,7 @@ The M4 Mac mini is the primary editing machine. The AI on the other Mac reviews 
 ## Function-family widget · concise skill wording · November 25, 2026
 
 - Changed the entry statement to **Skill: Identify a function family from a graph**, preserving the shared Skill label/layout. Added the matching Spanish sentence. No scoring, questions, rewards, MathBoard fields/bridge/effects, input behavior or shared standards changed.
-- Validation: typecheck, lint, content check, function-family and beta-Spanish regressions, exact Spanish sentence lookup, production build (after the existing framework reminder), and diff whitespace passed using a temporary source snapshot with the existing locked dependencies. Deployment: pending publication/custom-domain verification.
+- Validation: typecheck, lint, content check, function-family and beta-Spanish regressions, exact Spanish sentence lookup, production build (after the existing framework reminder), and diff whitespace passed using a temporary source snapshot with the existing locked dependencies. Deployment: application commit `47609d8bf52979e6963dfcecdd322906d0ba6fee` is published on main. [Production macintodd-math-site-nhx6](https://vercel.com/shawns-projects-8713e706/macintodd-math-site-nhx6/GdHvHxHEfehxWDkNEiPSoEy2dkVG) passed; the duplicate project was still pending at verification time. The rendered HTML on `https://www.macintodd.net/apps/beta/function-family-graphs` was checked for the exact statement **Skill: Identify a function family from a graph**. Owned temporary source/build copy removed after verification. No requested work remains unfinished.
 
 ## Function-family widget · standard skill-entry screen · November 25, 2026
 
