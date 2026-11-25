@@ -27,9 +27,9 @@ let missed=answer(before,false);missed=next(missed);missed=answer(missed);assert
 let earning=reduce(intro,{type:'advanced'});for(let i=0;i<8;i++)earning=next(answer(earning));assert.equal(earning.keepsEarned,2);assert.equal(availableStreakKeeps(earning),2)
 assert.equal(equationScore(freshEquationState()),0)
 console.log('Passed both 10-answer gates, quiet snapshots, hidden progression latch, duplicate answers, phase star reset, Keep recovery/expiry/accounting, final reflections and invalid states.')
-// Literal early grades: partial parents scale to five; advanced can report below five.
+// Parent completion secures five points through every advanced answer/miss/report.
 let partial=start();for(let i=0;i<3;i++)partial=next(answer(partial));assert.equal(equationScore(partial),1.5)
-let low=reduce(intro,{type:'advanced'});low=next(answer(low));assert.equal(equationScore(low),1)
+let low=reduce(intro,{type:'advanced'});low=next(answer(low));assert.equal(equationScore(low),5)
 low=answer(low,false);low=reduce(low,{type:'keep',now});assert.equal(equationSnapshot(low,'en',0).longestStreak,10)
 assert.equal(low.advanced.naturalStreak,0);assert.equal(low.advanced.streak,1)
 // Early bootstrap registers this app with or without a native object, without changing the installer.
@@ -48,3 +48,24 @@ const {spanishText}=await import('../src/lib/beta-spanish.ts')
 const {equationFamilyInfo}=await import('../src/lib/function-family-equation-info.ts')
 for(const text of ['2. Identify Function Family by Equation','How independently can you identify constant, linear, absolute value, quadratic, and cubic function families from equations?',...equationFamilyInfo.map(x=>x.value)])assert.notEqual(spanishText(text),text,text)
 console.log('Passed partial/advanced grades, honest unassisted run counters, document-head route callback/queue, and new card/reflection Spanish.')
+
+let floor=reduce(intro,{type:'advanced'})
+for(let n=0;n<=10;n++){
+ assert.equal(equationScore(floor),Math.max(5,n))
+ const snap=equationSnapshot(floor,'en',0)
+ assert.equal(snap.score,Math.max(5,n));assert.equal(snap.scoreDisplay,`${Math.max(5,n)}/10`)
+ valid(floor)
+ if(n<10)floor=next(answer(floor))
+}
+let fallen=next(answer(before,false));assert.equal(equationScore(fallen),5)
+let six=next(answer(before));six=next(answer(six,false));assert.equal(equationScore(six),6)
+let early=reduce(low,{type:'report',now})
+early=reduce(early,{type:'completion',value:{confidence:4,difficulty:3,record:{image:'data:image/png;base64,old',language:'en',identity:'Test'},notice:false,error:''}})
+const oldRecord=equationSnapshot(early,'en',0);oldRecord.score=1;oldRecord.scoreDisplay='1/10'
+const restored=readEquationSnapshot(oldRecord)
+assert.equal(restored.score,5);assert.equal(restored.isComplete,false);assert.equal(restored.customState.state.completion.record,null)
+assert.equal(restored.customState.state.completion.confidence,4);assert.deepEqual(restored.customState.state.advanced,early.advanced)
+assert.equal(readEquationSnapshot(equationSnapshot(early,'en',0)).isComplete,true)
+console.log('Passed secured five-point minimum at advanced streaks 0–10, misses, native/report scores, compatible restoration and stale-score image invalidation.')
+let eightAnswered=start();for(let n=0;n<8;n++)eightAnswered=next(answer(eightAnswered,false))
+assert.equal(eightAnswered.parents.correct,0);assert.equal(eightAnswered.keepsEarned,1);assert.equal(canKeepStreak(eightAnswered),false)

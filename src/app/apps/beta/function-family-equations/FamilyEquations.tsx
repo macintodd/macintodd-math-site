@@ -69,7 +69,7 @@ export default function FamilyEquations(){
  const advanced=state.phase==='advanced'
  if(state.scene==='report')return <div className="ffg-report"><CompletionFlow key={`${state.completedAt}-${restoreRevision}`} slug={equationFamilySlug} name={`${state.first.trim()} ${state.last.trim()}`} hour={state.hour} completedAt={state.completedAt} score={`${score}/10`}
   stats={[{label:'Correct answers',value:state.parents.correct+state.advanced.correct},{label:'Equations answered',value:state.parents.attempts+state.advanced.attempts},{label:'Best parent streak',value:state.parents.best},{label:'Best advanced streak',value:state.advanced.best},{label:'Streak Keeps used',value:state.keepsUsed}]}
-  details={['Complete parents: 5/10; advanced: best streak/10.','Goal: 10 in a row with parents, then 10 in a row in advanced identification.','A Streak Keep saves a broken run; it does not turn a missed answer into a correct answer.']}
+  details={['Parents complete: 5/10 minimum; advanced best streak up to 10/10.','Goal: 10 in a row with parents, then 10 in a row in advanced identification.','A Streak Keep saves a broken run; it does not turn a missed answer into a correct answer.']}
   onReturn={()=>dispatch({type:'return',now:Date.now()})} readOnly={displayOnly} mirror={state.completion} onMirrorChange={completionChanged}/></div>
  return <main className={`ffg-app fe-app ${displayOnly?'ffg-display':''}`} inert={displayOnly?true:undefined}>
   <StarRewards state={stars} restoreRevision={restoreRevision}/>
@@ -77,7 +77,7 @@ export default function FamilyEquations(){
   {state.scene==='welcome'?<SkillWelcome catchphrase="Different equations. Familiar families." subtitle="Read the equation" skill="Identify a function family from an equation"
    visual={<div className="fe-welcome-equations" aria-label={t('Examples of parent function equations')}><Formula>{'f(x)=x^2'}</Formula><Formula>{String.raw`g(x)=\lvert x\rvert`}</Formula><Formula>{'h(x)=x^3'}</Formula></div>}
    goal={<><p><span>{show('Parents')}</span><strong>{show('10 in a row')}</strong></p><p><span>{show('Advanced')}</span><strong>{show('10 in a row')}</strong></p></>}
-   scoreNote={show('Complete parents: 5/10; advanced: best streak/10.')}>
+   scoreNote={show('Parents complete: 5/10 minimum; advanced best streak up to 10/10.')}>
    <form onSubmit={event=>{event.preventDefault();dispatch({type:'start',seed:Math.floor(Math.random()*2**32)})}}><SkillIdentityFields value={state} onChange={(field,value)=>dispatch({type:'identity',field,value})}/><button className="skill-welcome-start" type="submit">{show('Start Skill Practice')}<span aria-hidden="true">→</span></button></form>
   </SkillWelcome>:<>
    <div className="ffg-progress"><SketchFrame/><StreakStars state={stars}/><div className="ffg-total-correct"><span>{show('Number correct')}</span><strong data-no-translate>{state.parents.correct+state.advanced.correct}</strong></div><div className="ffg-practice-score"><span>{show('Practice score')}</span><strong data-no-translate>{score}<small>/10</small></strong></div><button type="button" onClick={report}>{show('Get grade report')}</button></div>

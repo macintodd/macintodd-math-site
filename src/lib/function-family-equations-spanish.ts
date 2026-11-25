@@ -35,6 +35,6 @@ Your parent round is complete. Aim for 10 in a row again.	Completaste la ronda d
 Start advanced identification	Comenzar identificación avanzada
 Identify constant, linear, absolute value, quadratic, and cubic function families from equations.	Identifica familias constantes, lineales, de valor absoluto, cuadráticas y cúbicas a partir de ecuaciones.
 How independently can you identify constant, linear, absolute value, quadratic, and cubic function families from equations?	¿Con cuánta independencia puedes identificar familias constantes, lineales, de valor absoluto, cuadráticas y cúbicas a partir de ecuaciones?
-Complete parents: 5/10; advanced: best streak/10.	Completa funciones base: 5/10; avanzado: mejor racha/10.
+Parents complete: 5/10 minimum; advanced best streak up to 10/10.	Funciones base completas: mínimo 5/10; mejor racha avanzada hasta 10/10.
 Star Launch and earned Streak Keeps.	Lanzamiento de estrellas y conservaciones de racha ganadas.
 `

@@ -101,9 +101,11 @@ export function readEquationSnapshot(value:unknown):EquationSnapshot|null {
  if(s.completion!==null){const c=s.completion;if(!object(c)||!count(c.confidence,5)||!count(c.difficulty,5)||typeof c.notice!=='boolean'||typeof c.error!=='string')return null
   if(c.record!==null&&(!object(c.record)||typeof c.record.image!=='string'||!c.record.image.startsWith('data:image/png;base64,')||typeof c.record.identity!=='string'||!['en','es'].includes(String(c.record.language))))return null
  }
- return equationSnapshot(s as unknown as EquationState,language as 'en'|'es',scrollY)
+ const state=s as unknown as EquationState
+ // A saved PNG from the earlier score policy must not disagree with the corrected grade.
+ const restored=state.completion?.record&&value.score!==equationScore(state)?{...state,completion:{...state.completion,record:null}}:state
+ return equationSnapshot(restored,language as 'en'|'es',scrollY)
 }
-/** Parent partial credit scales the best run to five points. Intro-only completion earns five;
- * once advanced is attempted, that round's best credited run is the grade (including below five). */
-export function equationScore(s:EquationState){return s.advanced.attempts?Math.min(10,s.advanced.best):s.parents.best>=10?5:Math.min(5,s.parents.best/2)}
+/** Completing parents secures five points; advanced best streak can raise it to ten. */
+export function equationScore(s:EquationState){return s.parents.best>=10?Math.min(10,Math.max(5,s.advanced.best)):Math.min(5,s.parents.best/2)}
 function earnsEquationKeep(s:EquationState,stats:EquationStats,natural:number){return s.phase==='parents'?stats.attempts===8:stats.result==='right'&&natural>0&&natural%8===0}
