@@ -13,6 +13,7 @@ for(const app of practiceApps){
  const html=renderToStaticMarkup(jsx.jsx(testModule.exports.default,{app,lessonLinks}))
  assert(html.includes(`href="/apps/${app.slug}"`));assert(html.includes(`data-preview="${app.slug}"`))
  assert(html.includes(`data-kind="${app.activityType==='demonstration'?'demonstration':'practice'}"`))
+ if(app.descriptionBullets){for(const item of app.descriptionBullets)assert(html.includes(`<strong>${item.label}:</strong> ${item.value}`));assert(html.includes('widget-description-bullets'));assert(!html.includes('<p class="widget-description">'),'Bullet descriptions replace the paragraph in the card and expanded details')}
  for(const link of lessonLinks)assert(html.includes(`href="${link.href}"`))
  assert(html.includes(lessonLinks.length?'Details &amp; lesson links':'Details'))
  let depth=0

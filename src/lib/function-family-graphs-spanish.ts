@@ -90,6 +90,14 @@ Earn your first star	Consigue tu primera estrella
 Earlier correct answers	Respuestas correctas anteriores
 Practice score	Puntuación de práctica
 Number correct	Número de respuestas correctas
+About this widget	Información de esta actividad
+Close information	Cerrar información
+Functions	Funciones
+Scoring	Calificación
+Special Features	Características especiales
+constant, linear, absolute value, quadratic, cubic	constante, lineal, valor absoluto, cuadrática, cúbica
+best streak/10	mejor racha/10
+60-second speed round at end.	Ronda rápida de 60 segundos al final.
 Identify a function family from a graph	Identifica la familia de una función a partir de su gráfica
 Start Skill Practice	Iniciar la práctica de la habilidad
 Goal:	Meta:

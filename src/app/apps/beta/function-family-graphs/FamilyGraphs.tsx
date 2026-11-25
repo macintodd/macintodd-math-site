@@ -10,6 +10,7 @@ import {
   graphFamilySnapshot, readGraphFamilySnapshot, graphFamilySlug, graphFamilyTitle,
 } from '@/lib/function-family-graphs'
 import FamilyGraph from './FamilyGraph'
+import FamilyGraphInformation from './FamilyGraphInformation'
 import StreakStars from './StreakStars'
 import StarRewards from './StarRewards'
 import {SketchFrame} from '@/components/StudySketch'
@@ -87,7 +88,7 @@ export default function FamilyGraphs() {
 
   function report() {if (!displayOnly) dispatch({type: 'report', now: Date.now()})}
   const identity = <div className="ffg-identity"><strong data-no-translate>{state.first} {state.last}</strong><span><span>{show('Class hour')}</span> <b data-no-translate>{state.hour}</b></span></div>
-  const header = <header className="ffg-header"><div><Link href="/apps/beta">{show('← Beta apps')}</Link><p className="ffg-eyebrow">{show('ALGEBRA 2 · FUNCTION TRANSFORMATIONS')}</p><h1>{show(graphFamilyTitle)}</h1></div>{state.scene !== 'welcome' && identity}</header>
+  const header = <header className="ffg-header"><div><Link href="/apps/beta">{show('← Beta apps')}</Link><p className="ffg-eyebrow">{show('ALGEBRA 2 · FUNCTION TRANSFORMATIONS')}</p><div className="ffg-title-row"><h1>{show(graphFamilyTitle)}</h1><FamilyGraphInformation open={state.infoOpen === true} onOpenChange={open => dispatch({type: 'info', open})} readOnly={displayOnly}/></div></div>{state.scene !== 'welcome' && identity}</header>
   if (state.scene === 'report') return <div className="ffg-report">
     <CompletionFlow key={`${state.completedAt}-${restoreRevision}`} slug={graphFamilySlug} name={`${state.first.trim()} ${state.last.trim()}`} hour={state.hour}
       completedAt={state.completedAt} score={`${practiceScore}/10`}

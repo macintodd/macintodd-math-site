@@ -5,7 +5,7 @@ import {
 
 /** Presentation only. The established score, timer, and native bridge stay unchanged. */
 export type StarTrail = {completed: number[]; earlierCorrect: number}
-export type FamilyStarState = GraphFamilyState & {starTrail?: StarTrail}
+export type FamilyStarState = GraphFamilyState & {starTrail?: StarTrail; infoOpen?: boolean}
 
 export function readStarTrail(state: GraphFamilyState): StarTrail {
   const earlierTotal = state.practice.correct - state.practice.streak
@@ -22,7 +22,8 @@ export function freshFamilyStarState(): FamilyStarState {
   return {...freshGraphFamilyState(), starTrail: {completed: [], earlierCorrect: 0}}
 }
 
-export function familyStarReducer(state: FamilyStarState, action: GraphFamilyAction): FamilyStarState {
+export function familyStarReducer(state: FamilyStarState, action: GraphFamilyAction | {type: 'info'; open: boolean}): FamilyStarState {
+  if (action.type === 'info') return state.infoOpen === action.open ? state : {...state, infoOpen: action.open}
   const next = graphFamilyReducer(state, action)
   if (next === state) return state
   if (action.type === 'restore') return {...next, starTrail: readStarTrail(next)}

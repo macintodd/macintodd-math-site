@@ -82,3 +82,8 @@
 .directory-result-heading{margin-top:12px}
 .app-directory .app-count{margin-bottom:18px}
 @media(max-width:720px){.app-directory .breadcrumb{padding-top:14px;margin-bottom:12px}.app-directory .page-heading{padding-bottom:6px}.app-directory .app-filters{margin-top:14px}.directory-divider{margin-top:8px}}
+
+.widget-description-bullets{margin:0;padding-left:17px;font:400 12px/1.55 var(--study-ui);color:var(--text-muted);list-style:disc}
+.widget-description-bullets li{margin:0 0 4px;padding-left:1px}
+.widget-description-bullets strong{font-weight:700;color:var(--ink-navy)}
+.beta-card .widget-description-bullets{font-size:14px;line-height:1.6;margin-bottom:14px}

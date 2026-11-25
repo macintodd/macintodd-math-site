@@ -1,13 +1,14 @@
+import {familyGraphInfo} from '../lib/function-family-graph-info.ts'
 import {rigidSkills,skillTitles,skillGoals} from '../lib/rigid-skills.ts'
 export const appCategories=['Arithmetic foundations','Equations and factoring','Functions','Transformations','Linear graphs and equations','Games','Puzzles'] as const
 export type AppCategory=typeof appCategories[number]
 export type AppCourse='algebra-2'|'precalculus'
 export type LessonReference={course:AppCourse;slug:string}
-export type PracticeApp={slug:string;title:string;description:string;category:AppCategory;courses:AppCourse[];lessons:LessonReference[];note?:string;activityType?:'practice'|'demonstration'}
+export type PracticeApp={slug:string;title:string;description:string;descriptionBullets?:readonly {label:string;value:string}[];category:AppCategory;courses:AppCourse[];lessons:LessonReference[];note?:string;activityType?:'practice'|'demonstration'}
 const a=(slug:string):LessonReference=>({course:'algebra-2',slug})
 const p=(slug:string):LessonReference=>({course:'precalculus',slug})
 export const practiceApps:PracticeApp[]=[
- {slug:'beta/function-family-graphs',title:'1. Identify Function Family from Graph',description:'Recognize constant, linear, absolute value, quadratic, and cubic graphs. Reveal each equation and parent, build a streak of ten, then try a repeatable one-minute speed round.',category:'Transformations',courses:['algebra-2'],lessons:[],note:'Beta · best streak /10 · report any time · 60-second speed round · English / Español · MathBoard'},
+ {slug:'beta/function-family-graphs',title:'1. Identify Function Family from Graph',description:familyGraphInfo.map(item=>`${item.label}: ${item.value}`).join(' '),descriptionBullets:familyGraphInfo,category:'Transformations',courses:['algebra-2'],lessons:[],note:'Beta · best streak /10 · report any time · 60-second speed round · English / Español · MathBoard'},
  {slug:'beta/card-clash-classroom',title:'Card Clash · Classroom Game',description:'One game code for the whole class, up to 40 animal code names, continuous rounds, cumulative standings and a synchronized winner’s category spinner. A random student chooses the next difficulty.',category:'Games',courses:['algebra-2'],lessons:[],note:'Beta · teacher host + student + shared display · updated Firebase rules required · two-player beta retained'},
  {slug:'beta/card-clash',title:'Card Clash · First Playable Round',description:'Two students join with animal code names and tackle the same random Algebra 2 problem. Hints, two attempts, teacher-checked scoring and worked solutions.',category:'Games',courses:['algebra-2'],lessons:[],note:'Beta · teacher-hosted Firebase round · database rules must be installed · full tournament still in development'},
  {slug:'precalculus-quiz-review',title:'Precalculus · Sections 1.6–1.7B Review & Learn',description:'All 30 questions from the classroom review: parent graphs, step and piecewise functions, transformations, mapped points, and sketches. Paid hints, free retries, and self-evaluation only.',category:'Functions',courses:['precalculus'],lessons:[p('quiz-review-sections-1-6-to-1-7')],note:'Exact review guide · 3 section buttons · hints −0.2 · save any screen · Spanish'},

@@ -26,6 +26,18 @@ The teacher confirmed that the published widget integrates correctly with MathBo
 - The teacher reconfirmed that this pure-identification practice requires **ten correct in a row**. Do not substitute the five-answer streak used in other activities or a ten-total/five-streak gate. The teacher selected **best session streak, capped at 10**, for the grade. A miss resets the current streak without erasing the best. There is no fixed problem total and no resume/continue-later code or browser persistence. MathBoard can still restore its own saved session.
 - **Get grade report** is available as soon as practice starts, including a 0/10 report. Both five-star reflections are required before the named, dated local image is created using the shared CompletionFlow. Reflection answers do not change the grade. Returning to practice preserves the session; opening a later report uses a new completion timestamp and clears the old record/reflections.
 
+## Public description and information window
+
+The Practice Apps card (Beta/All), its expanded Details and the Beta hub replace the paragraph with three bullets, sharing `src/lib/function-family-graph-info.ts`:
+
+- **Functions:** constant, linear, absolute value, quadratic, cubic
+- **Scoring:** best streak/10
+- **Special Features:** 60-second speed round at end.
+
+A sketched information **i** beside the widget title opens a small native dialog showing the same data, with a close button, Escape dismissal, focus return and full Spanish text. It remains available on the opening/practice/speed screens. Existing unrelated cards retain their paragraphs and complete expanded Details.
+
+`FamilyStarState.infoOpen` is optional presentation metadata. The existing native snapshot code carries it without changes to app/version or score/completion fields. Open/closed information windows restore via the unchanged bridge; readonly projector views cannot dismiss a mirrored window, and restoration never publishes an echo. Old snapshots without the field start closed. The core question/scoring/timer reducer, native publication effects, rewards and reports are unchanged.
+
 ## Standard skill-entry screen
 
 The November 25 entry redesign uses shared `SkillWelcome` / `SkillIdentityFields`. The catchphrase remains **Different graphs. Familiar families.**; the skill is larger and centered beneath it, reading **Skill: Identify a function family from a graph**. Removed the long three-bullet explanation, series list and redundant local-data footer from the screen; local-only behavior is unchanged. Names and the 1–8 hour dropdown remain required. The green button says **Start Skill Practice**; fern-green tokens are #2F6B4F / #24563F with white text.

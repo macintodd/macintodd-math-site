@@ -74,3 +74,19 @@ apply({type:'tick',now:61000})
 assert.deepEqual(readStarTrail(ui),trail,'Speed rounds do not modify practice-star history')
 for (const text of ['Your streaks','Completed streak','Earn your first star','Earlier correct answers','Practice score']) assert.notEqual(spanishText(text),text)
 console.log('Passed separate numbered runs, live stars, repeated/zero misses, unchanged core/native score fields, current and legacy snapshot restoration, speed independence, and Spanish labels.')
+
+// Opening information is restorable presentation, independent of the grade and timer.
+const unopened=freshFamilyStarState(), opened=familyStarReducer(unopened,{type:'info',open:true})
+assert.equal(opened.infoOpen,true)
+const openedSnapshot=graphFamilySnapshot(opened,'en',0), reopened=readGraphFamilySnapshot(JSON.parse(JSON.stringify(openedSnapshot)))
+assert(reopened)
+const restoredInfo=familyStarReducer(freshFamilyStarState(),{type:'restore',value:reopened.customState.state})
+assert.equal(restoredInfo.infoOpen,true)
+const dismissed=familyStarReducer(restoredInfo,{type:'info',open:false})
+assert.equal(dismissed.infoOpen,false)
+for(const current of [opened,dismissed]){
+ const native=JSON.parse(JSON.stringify(graphFamilySnapshot(current,'en',0)))
+ delete native.customState.state.infoOpen
+ assert.deepEqual(native,graphFamilySnapshot(unopened,'en',0),'Information must not change scores, counters, question state, timers or completion fields')
+}
+console.log('Passed optional information-dialog state restoration and unchanged native grading/timer fields.')
