@@ -1,7 +1,7 @@
 /** Local classroom translations; math, names, and numeric scores are not translated. */
 export const familyGraphSpanish = `1. Identify Function Family from Graph	1. Identifica la familia de una función a partir de su gráfica
 ALGEBRA 2 · FUNCTION TRANSFORMATIONS	ÁLGEBRA 2 · TRANSFORMACIONES DE FUNCIONES
-LOOK AT THE SHAPE	OBSERVA LA FORMA
+Look at the shape	Observa la forma
 Different graphs. Familiar families.	Distintas gráficas. Familias conocidas.
 Recognize constant, linear, absolute value, quadratic, and cubic functions by their graphs.	Reconoce las funciones constantes, lineales, de valor absoluto, cuadráticas y cúbicas por sus gráficas.
 Build a streak of 10 correct answers. Your best streak is your score out of 10.	Consigue una racha de 10 respuestas correctas. Tu mejor racha es tu puntuación de 10.

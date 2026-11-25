@@ -5,16 +5,16 @@ import {useWidgetLanguage} from './BilingualWidget'
 import './skill-welcome.css'
 
 /** Shared entry presentation. Identity, goals, scoring and native state belong to the caller. */
-export default function SkillWelcome({catchphrase, skill, visual, goal, scoreNote, children, eyebrow}: {
+export default function SkillWelcome({catchphrase, skill, visual, goal, scoreNote, children, subtitle}: {
   catchphrase: string; skill: string; visual: ReactNode; goal: ReactNode
-  scoreNote?: ReactNode; children: ReactNode; eyebrow?: string
+  scoreNote?: ReactNode; children: ReactNode; subtitle?: string
 }) {
   const {translate: t, displayText} = useWidgetLanguage(), show = displayText ?? t
   return <section className="skill-welcome">
     <SketchFrame/>
     <div className="skill-welcome-main">
-      {eyebrow && <span className="skill-welcome-eyebrow">{show(eyebrow)}</span>}
       <h2 className="skill-welcome-catchphrase">{show(catchphrase)}</h2>
+      {subtitle && <p className="skill-welcome-subtitle">{show(subtitle)}</p>}
       <div className="skill-welcome-skill"><h3>{show('Skill:')}</h3><p>{show(skill)}</p></div>
       {children}
     </div>

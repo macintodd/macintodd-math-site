@@ -102,7 +102,7 @@ export default function FamilyGraphs() {
     <StarRewards state={state} restoreRevision={restoreRevision}/>
     {header}
     {state.scene === 'welcome' ? <SkillWelcome
-      eyebrow="LOOK AT THE SHAPE" catchphrase="Different graphs. Familiar families."
+      subtitle="Look at the shape" catchphrase="Different graphs. Familiar families."
       skill="Identify a function family from a graph"
       visual={<TransformationPreview/>}
       goal={<p><span>{show('Streak')}</span><strong data-no-translate>10</strong></p>}
