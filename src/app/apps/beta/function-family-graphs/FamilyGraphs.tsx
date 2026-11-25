@@ -118,7 +118,7 @@ export default function FamilyGraphs() {
     </section> : <>
       <div className="ffg-progress"><SketchFrame/>
         {isSpeed ? <><div className="ffg-timer" role="timer" aria-label={t('Seconds remaining')}><strong data-no-translate>{Math.ceil(state.speed.remainingMs / 1000)}</strong><span>{show('seconds left')}</span></div><div><span>{show('Speed-round score')}</span><strong data-no-translate>{state.speed.count}</strong></div><div><span>{show('Best speed round')}</span><strong data-no-translate>{Math.max(state.speed.best, state.speed.count)}</strong></div></> : <>
-          <StreakStars state={state}/><div className="ffg-practice-score"><span>{show('Practice score')}</span><strong data-no-translate>{practiceScore}<small>/10</small></strong></div>
+          <StreakStars state={state}/><div className="ffg-total-correct"><span>{show('Number correct')}</span><strong data-no-translate>{state.practice.correct}</strong></div><div className="ffg-practice-score"><span>{show('Practice score')}</span><strong data-no-translate>{practiceScore}<small>/10</small></strong></div>
         </>}
         <button type="button" onClick={report}>{show('Get grade report')}</button>
       </div>

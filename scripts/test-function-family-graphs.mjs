@@ -39,6 +39,26 @@ for (let index = 0; index < 25; index++) {
   assert(!/NaN|Infinity|undefined/.test(path))
 }
 
+// Cumulative correctness is not the ten-in-a-row mastery gate.
+let cumulative = {...freshGraphFamilyState(), scene:'practice', first:'Test', last:'Learner', hour:'4', seed:71}
+const countedAnswer = right => {
+  const family = activeFamilyQuestion(cumulative).family
+  cumulative = graphFamilyReducer(cumulative,{type:'answer',family:right?family:familyIds.find(f=>f!==family),now:1})
+  cumulative = graphFamilyReducer(cumulative,{type:'next'})
+}
+for(let run=0;run<3;run++){for(let i=0;i<4;i++)countedAnswer(true);countedAnswer(false)}
+assert.equal(cumulative.practice.correct,12,'Number correct continues beyond ten and survives misses')
+assert.equal(cumulative.practice.best,4)
+assert.equal(graphFamilySnapshot(cumulative,'en',0).score,4,'The raw total does not replace the best-streak grade')
+assert.equal(graphFamilyReducer(cumulative,{type:'ready'}).scene,'practice')
+for(let i=0;i<5;i++)countedAnswer(true)
+assert.equal(cumulative.practice.correct,17)
+assert.equal(cumulative.practice.best,5)
+assert.equal(graphFamilyReducer(cumulative,{type:'ready'}).scene,'practice','Five in a row with more than ten total is still not mastery in this widget')
+for(let i=0;i<5;i++)countedAnswer(true)
+assert.equal(cumulative.practice.best,10)
+assert.equal(graphFamilyReducer(cumulative,{type:'ready'}).scene,'ready')
+
 let s = freshGraphFamilyState()
 const act = action => {s = graphFamilyReducer(s, action); return s}
 act({type: 'start', seed: 77}); assert.equal(s.scene, 'welcome')

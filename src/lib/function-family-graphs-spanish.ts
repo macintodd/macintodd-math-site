@@ -88,4 +88,5 @@ Correct answer	Respuesta correcta
 Earn your first star	Consigue tu primera estrella
 Earlier correct answers	Respuestas correctas anteriores
 Practice score	Puntuación de práctica
+Number correct	Número de respuestas correctas
 `

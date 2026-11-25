@@ -441,9 +441,58 @@ Web widgets are registered via the MathBoard Catalog Admin page (see `webwidget-
 
 ---
 
+<!-- BEGIN:macintodd-widget-presentation -->
+## macintodd.net Widget Presentation Standards
+
+**Added November 24, 2026.** Apply these standards to new macintodd.net webwidgets and future requested widget revisions. They define presentation and progress feedback, not a common scoring formula. Preserve each activity's documented scoring, retry rules, and completion goals unless the teacher requests a change. Do not retrofit unrelated existing widgets during another task.
+
+### Progress bar: stars, total correct, and grade
+
+For student practice that tracks correct answers, arrange the landscape header from left to right:
+
+1. The star trail for correct-answer streaks.
+2. **Number correct** — the cumulative count, shown as a plain integer with no denominator.
+3. **Practice Score** — the widget's own reported grade, with its applicable scale.
+4. **Get grade report** or the activity's existing report action.
+
+The total correct count and grade are different measures. For example, a student may have **Number correct: 14** and **Practice Score: 4/10**. Do not display the total as “14/10,” stop it at the target, or reset it after a miss. It continues increasing while the student works toward the activity's actual completion goal. Count accepted correct answers according to that widget's credit/retry rules; repeated taps or repeated checks of the same accepted answer must not add credit twice.
+
+When a widget has both a minimum-total goal and a streak goal, they are separate requirements and both must be satisfied for mastery. When it has only a streak goal, preserve that rule. **Do not assume that every widget requires a streak of five or ten.** The first Algebra 2 graph-family identification widget specifically requires **ten correct in a row**, and its grade remains its best streak capped at ten. Other widgets use the teacher's specified goals and their own grading methods. Raw totals remain uncapped in either case.
+
+Scored activities may still offer an early final report with the earned partial score. Distinguish reaching the mastery goal from explicitly finishing early; neither the raw count nor a decorative star alone should decide MathBoard's `isComplete` flag. Follow the activity's finish/reflection/record requirements.
+
+If the activity does not collect correctness data, omit the counter and streak display. Do not fabricate zero values or force scoring onto an unscored tool or demonstration. Optional runtime fields stay optional. MathBoard receives the widget's score and available data; it does not calculate a replacement grade from these displays.
+
+### Star behavior
+
+- Each qualifying correct answer adds one star to the current run, arranged left to right.
+- On an assessed miss that ends the current run, replace that run's individual stars with **one star bearing the run length**. Three correct then a miss becomes a single star numbered **3**.
+- Keep each earlier finished run as its own numbered star. Do not combine distinct streaks into one cumulative star. Three correct/miss/two correct/miss/one correct is **★3 ★2 ★**.
+- The next correct answer starts a new plain star immediately to the right of the finished-run stars.
+- Misses while the current run is zero create no zero-numbered stars. Follow the activity's documented retry and hint rules when determining whether an answer qualifies for a streak.
+- Keep the cumulative total, current streak, best streak, and grade conceptually separate. Stars are feedback; they do not impose a new grading formula.
+- Supply accessible text for the current streak and completed run lengths. Preserve legibility, touch targets and sensible wrapping on small screens.
+- Include the presentation history in the widget's existing restorable state so MathBoard displays and slide restoration reproduce the same numbered and current stars. Preserve backward compatibility: if an older saved session has only totals, retain those totals with a clear label instead of inventing missing streak lengths.
+
+### Shared notebook aesthetic
+
+- Match macintodd.net's warm parchment, white paper surfaces, navy and brown ink, and restrained gold star accents. Keep success/error feedback clear and sufficiently contrasted.
+- Use the established local **Newsreader** headings, **Plus Jakarta Sans** body/UI text, and **Caveat** handwritten accents or equivalent bundled fonts when working outside the website repository. Keep long prompts readable; handwriting is an accent, not a reason to make text hard to read.
+- Prefer programmatic SVG for slightly imperfect pencil borders, double-drawn buttons/cards, stars, and dividers. Reuse shared assets where available; keep decorative marks deterministic and hidden from assistive technology.
+- Keep graphs, plotted points, axes, numerical values, and mathematical notation accurate. Do not distort mathematical geometry to make it look hand-drawn. Use appropriate typeset fractions and exponents. Equation overlays use a clean white background and leave important graph features visible.
+- Prioritize landscape iPads with large prompts and touch-friendly controls. Keep header statistics compact so they do not crowd the graph. Adapt the progress bar and graph/answer columns for narrow screens without horizontal overflow. Honor reduced-motion preferences.
+- Scope presentation styles to the intended widget. Preserve clean-English/whole-page-Spanish behavior, local completion records, and existing data-handling rules.
+
+These visual standards do not authorize changes to a working MathBoard bridge. Preserve its guarded publication, early restore callback, no-echo behavior, and established score/completion reporting. Add only the widget state needed to restore new presentation features through the existing contract; do not change native integration merely to change the appearance.
+
+---
+<!-- END:macintodd-widget-presentation -->
+
 ## Checklist Before Submitting a Widget
 
 **All widgets**
+- [ ] Follows the macintodd.net notebook presentation standards when creating or revising a website widget
+- [ ] If correctness is tracked, total correct is uncapped and separate from the grade; stars restore without inventing missing history
 - [ ] Loads cleanly over HTTPS with no mixed-content errors
 - [ ] Usable on iPad-sized screens (1024 × 768 minimum) in portrait and landscape
 - [ ] No external authentication required — loads without a login prompt

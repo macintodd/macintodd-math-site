@@ -117,7 +117,7 @@ body:has(.ffg-root) .site-header,body:has(.ffg-root) .site-footer{display:none}
 .ffg-speed-rules>span{border-radius:4px 8px 5px 7px;border:1px solid #d9cdbb}
 .ffg-speed-rules b{font-family:var(--study-hand)}
 .ffg-root .completion-flow h1,.ffg-root .completion-flow h2{font-family:var(--study-serif);font-weight:500}
-.ffg-progress:has(.ffg-star-board){display:grid;grid-template-columns:minmax(0,1fr) auto auto;column-gap:22px;padding:6px 16px;min-height:74px}
+.ffg-progress:has(.ffg-star-board){display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;column-gap:18px;padding:6px 16px;min-height:74px}
 .ffg-progress>.ffg-star-board{display:block;min-width:0}
 .ffg-progress .ffg-star-heading{display:block;max-width:none;font:700 17px/1.1 var(--study-hand);color:var(--ink-saddle);margin:0 0 1px}
 .ffg-star-trail{display:flex;align-items:center;flex-wrap:wrap;gap:0 3px;list-style:none;padding:0;margin:0;min-height:42px}
@@ -139,3 +139,10 @@ body:has(.ffg-root) .site-header,body:has(.ffg-root) .site-footer{display:none}
 @media(max-width:900px){.ffg-header h1{font-size:28px}.ffg-progress:has(.ffg-star-board){column-gap:16px}.ffg-choices button{font-size:26px}}
 @media(max-width:650px){.ffg-header h1{font-size:27px}.ffg-identity strong{font-size:21px}.ffg-progress:has(.ffg-star-board){grid-template-columns:1fr auto;row-gap:7px;padding:10px 12px}.ffg-progress>.ffg-star-board{grid-column:1/-1}.ffg-progress>.ffg-practice-score{align-items:flex-start}.ffg-progress:has(.ffg-star-board)>button{font-size:13px}.ffg-star-trail li{width:39px;height:39px;flex-basis:39px}.ffg-star-trail{min-height:39px}.ffg-star-placeholder{min-height:39px}.ffg-answer-panel h2{font-size:29px}.ffg-choices button{font-size:27px}.ffg-feedback{min-height:0}.ffg-practice-score strong{font-size:38px}}
 @media(min-width:651px) and (max-height:720px){.ffg-header h1{font-size:27px}.ffg-progress:has(.ffg-star-board){min-height:70px;padding-block:5px}.ffg-choices button{font-size:24px}.ffg-answer-panel h2{font-size:27px}.ffg-graph-frame{max-height:calc(100dvh - 300px)}.ffg-feedback{min-height:35px}}
+
+/* The cumulative total has no denominator and remains separate from the grade. */
+.ffg-progress>.ffg-total-correct{display:flex;flex-direction:column;align-items:center;gap:0;min-width:92px}
+.ffg-progress>.ffg-total-correct>span{font-size:11px;max-width:112px;white-space:normal;text-align:center;line-height:1.2}
+.ffg-total-correct strong{font:700 42px/.95 var(--study-hand);color:var(--ink-saddle)}
+@media(min-width:651px){.ffg-star-trail li{width:36px;height:36px;flex-basis:36px}}
+@media(max-width:650px){.ffg-progress:has(.ffg-star-board){grid-template-columns:1fr 1fr}.ffg-progress>.ffg-total-correct{grid-column:1;align-items:flex-start}.ffg-progress>.ffg-practice-score{grid-column:2;align-items:flex-end}.ffg-progress:has(.ffg-star-board)>button{grid-column:1/-1;justify-self:stretch}.ffg-total-correct strong{font-size:38px}.ffg-progress>.ffg-total-correct>span{text-align:left}}
