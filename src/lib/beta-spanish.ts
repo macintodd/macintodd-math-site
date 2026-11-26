@@ -1,3 +1,4 @@
+import {parentLessonSpanish} from './parent-function-lesson-spanish.ts'
 import {equationFamilySpanish} from './function-family-equations-spanish.ts'
 import {familyGraphSpanish} from './function-family-graphs-spanish.ts'
 import {precalcReviewSpanish} from './precalc-review.ts'
@@ -430,7 +431,7 @@ All hints shown	Todas las pistas mostradas
 Given point and given line.	Punto dado y recta dada.
 `;
 const normalize=(s:string)=>s.replace(/&amp;/g,'&').replace(/\s+/g,' ').trim()
-const translations=new Map((transformationSpanish.trim()+'\n'+transformationConfidence.trim()+'\n'+completionSpanish.trim()+'\n'+rows.trim()+'\n'+equationSpanish.trim()+'\n'+scaleSpanish.trim()+'\n'+horizontalVerticalSpanish.trim()+'\n'+slopeTwoPointsSpanish.trim()+'\n'+parallelClassroomSpanish.trim()+'\n'+parallelDrawingSpanish.trim()+'\n'+apUnitSpanish.trim()+'\n'+rationalSpanish.trim()+'\n'+parentGraphSpanish.trim()+'\n'+linearWorksheetSpanish.trim()+'\n'+day2Spanish.trim()+'\n'+day2ReviewUiSpanish.trim()+'\n'+day1Spanish.trim()+'\n'+day1ReviewUiSpanish.trim()+'\n'+precalcReviewSpanish.trim()+'\n'+precalcReviewUiSpanish.trim()+'\n'+familyGraphSpanish.trim()+'\n'+equationFamilySpanish.trim()).split('\n').map(row=>{const i=row.indexOf('\t');return [normalize(row.slice(0,i)).toLowerCase(),row.slice(i+1)]}))
+const translations=new Map((transformationSpanish.trim()+'\n'+transformationConfidence.trim()+'\n'+completionSpanish.trim()+'\n'+rows.trim()+'\n'+equationSpanish.trim()+'\n'+scaleSpanish.trim()+'\n'+horizontalVerticalSpanish.trim()+'\n'+slopeTwoPointsSpanish.trim()+'\n'+parallelClassroomSpanish.trim()+'\n'+parallelDrawingSpanish.trim()+'\n'+apUnitSpanish.trim()+'\n'+rationalSpanish.trim()+'\n'+parentGraphSpanish.trim()+'\n'+linearWorksheetSpanish.trim()+'\n'+day2Spanish.trim()+'\n'+day2ReviewUiSpanish.trim()+'\n'+day1Spanish.trim()+'\n'+day1ReviewUiSpanish.trim()+'\n'+precalcReviewSpanish.trim()+'\n'+precalcReviewUiSpanish.trim()+'\n'+familyGraphSpanish.trim()+'\n'+equationFamilySpanish.trim()+'\n'+parentLessonSpanish.trim()).split('\n').map(row=>{const i=row.indexOf('\t');return [normalize(row.slice(0,i)).toLowerCase(),row.slice(i+1)]}))
 export function spanishText(value:string,context=''):string{
  const body=normalize(value);if(!body)return value
  let translated=translations.get(body.toLowerCase())

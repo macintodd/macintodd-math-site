@@ -1,3 +1,4 @@
+import {parentLessonInfo} from '../lib/parent-function-lesson.ts'
 import {equationFamilyInfo} from '../lib/function-family-equation-info.ts'
 import {familyGraphInfo} from '../lib/function-family-graph-info.ts'
 import {rigidSkills,skillTitles,skillGoals} from '../lib/rigid-skills.ts'
@@ -9,6 +10,7 @@ export type PracticeApp={slug:string;title:string;description:string;description
 const a=(slug:string):LessonReference=>({course:'algebra-2',slug})
 const p=(slug:string):LessonReference=>({course:'precalculus',slug})
 export const practiceApps:PracticeApp[]=[
+ {slug:'beta/graph-evaluate-parent-functions',title:'3. Graphing and Evaluating Parent Functions',description:parentLessonInfo.map(item=>`${item.label}: ${item.value}`).join(' '),descriptionBullets:parentLessonInfo,category:'Transformations',courses:['algebra-2'],lessons:[],note:'Beta · five families · two no-hint graphs each · recoverable evaluation points · local reports · MathBoard'},
  {slug:'beta/function-family-equations',title:'2. Identify Function Family by Equation',description:equationFamilyInfo.map(item=>`${item.label}: ${item.value}`).join(' '),descriptionBullets:equationFamilyInfo,category:'Transformations',courses:['algebra-2'],lessons:[],note:'Beta · parent and advanced identification · report any time · English / Español · MathBoard'},
  {slug:'beta/function-family-graphs',title:'1. Identify Function Family from Graph',description:familyGraphInfo.map(item=>`${item.label}: ${item.value}`).join(' '),descriptionBullets:familyGraphInfo,category:'Transformations',courses:['algebra-2'],lessons:[],note:'Beta · best streak /10 · report any time · 60-second speed round · English / Español · MathBoard'},
  {slug:'beta/card-clash-classroom',title:'Card Clash · Classroom Game',description:'One game code for the whole class, up to 40 animal code names, continuous rounds, cumulative standings and a synchronized winner’s category spinner. A random student chooses the next difficulty.',category:'Games',courses:['algebra-2'],lessons:[],note:'Beta · teacher host + student + shared display · updated Firebase rules required · two-player beta retained'},

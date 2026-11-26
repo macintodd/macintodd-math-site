@@ -1,0 +1,79 @@
+.pfl-app .pfl-paper{position:relative;isolation:isolate;min-width:0;background:#fff;border:1px solid transparent;border-radius:4px 9px 5px 7px;padding:16px;box-shadow:2px 3px 0 #b8aa9414,0 5px 15px #2c292608}
+.pfl-mastery{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:10px 0 12px}
+.pfl-mastery>div{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 10px;border:1px solid #d6c6b0;background:#fffdf8;border-radius:4px 8px 3px 7px;font-size:12px;line-height:1.3;min-width:0}
+.pfl-mastery strong{flex-shrink:0;color:#9f731d;font:700 21px var(--study-hand);white-space:nowrap}
+.pfl-mastery small{display:block;color:#73634c;font:11px var(--study-ui);text-align:center}
+.pfl-mastery .pfl-family-complete{border-color:#86ad98;background:#f0f7f1}
+.pfl-mode{display:flex;align-items:center;gap:15px;margin:10px 0 14px;flex-wrap:wrap}
+.pfl-mode>button{margin-left:auto;min-height:44px;font-size:14px;padding:9px 14px}
+.pfl-debt{font-size:14px;color:#a65324}
+.pfl-workspace{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:22px;align-items:start}
+.pfl-board-title{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:15px;color:#815631;min-height:35px}
+.pfl-board-title .math-inline{font-size:25px;color:#0f3460}
+.pfl-grid{display:block;width:100%;height:auto;max-height:460px;touch-action:none;user-select:none}
+.pfl-grid:focus-visible{outline:3px solid #d7a743;outline-offset:-7px;border-radius:4px}
+.pfl-grid text{font:12px Arial;fill:#435f76}
+.pfl-grid .pfl-axis{font:italic 18px Georgia}
+.pfl-grid .pfl-point-label{font:17px Arial;fill:#0f3460;stroke:white;stroke-width:3px;paint-order:stroke}
+.pfl-grid-note{margin:2px 0 0;color:#78664e;font:600 16px/1.25 var(--study-hand);text-align:center}
+.pfl-task h2,.pfl-board h2{font-size:28px;line-height:1.1;margin:0 0 14px}
+.pfl-task p,.pfl-board>p{font-size:16px;line-height:1.45;margin:8px 0 12px}
+.pfl-points{display:flex;flex-wrap:wrap;gap:6px;min-height:44px;margin:12px 0}
+.pfl-points button{min-height:44px;padding:8px 9px;font-size:14px;font-weight:500}
+.pfl-points p{font-size:15px;color:var(--ffg-muted)}
+.pfl-coordinates{padding:9px 12px;background:#f2f7f3;border-left:3px solid #2f6b4f;margin:10px 0}
+.pfl-coordinates p{font-size:14px;margin:2px 0 8px}
+.pfl-coordinates>div{display:flex;flex-wrap:wrap;gap:8px 14px;font:600 20px var(--study-hand);color:#187351}
+.pfl-feedback{font-size:16px;line-height:1.4;color:#8a6328;min-height:20px}
+.pfl-feedback p{margin:12px 0}
+.pfl-feedback-right{color:#187351}.pfl-feedback-wrong,.pfl-error{color:#9b4034}
+.pfl-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.pfl-actions button{min-height:46px;font-size:15px;padding:9px 14px}
+.pfl-actions .ffg-primary{font-size:23px}
+.pfl-welcome-visual{text-align:center;display:grid;gap:12px;font-size:29px;padding-top:5px}
+.pfl-welcome-visual svg{width:100%;max-width:290px;margin:auto;display:block}
+.pfl-app .skill-welcome-goal p{gap:8px;flex-wrap:wrap;font-size:17px}
+.pfl-app .skill-welcome-goal strong{font-size:27px}
+.pfl-eval-equation{font-size:34px;text-align:center;margin:18px 0 24px}
+.pfl-evaluation-workspace .pfl-board{min-height:370px}
+.pfl-evaluation-workspace .pfl-board h2{text-align:center;font-size:30px;margin:20px 0}
+.pfl-answer-label{display:block;font-size:15px;font-weight:700;margin:0 0 6px}
+.pfl-answer{display:block;width:100%;height:60px;font:600 34px var(--study-ui);text-align:center;border:2px solid #b9a58d;border-radius:5px 9px 3px 6px;background:#fffdf8;color:#0f3460;margin:0 0 16px}
+.pfl-answer:disabled{opacity:1;-webkit-text-fill-color:currentColor}
+.pfl-answer-right{border-color:#28815c;box-shadow:0 0 14px #28815c55;background:#f0f9f3;color:#145c3e}
+.pfl-answer-wrong{border-color:#bd4d40;background:#fff3f0;color:#8d382d}
+.pfl-keypad{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;max-width:350px;margin:auto}
+.pfl-keypad button{min-height:48px;font:600 27px var(--study-hand);background:#f8f4ed}
+.pfl-keypad .pfl-keypad-clear{grid-column:1/-1;font:600 15px var(--study-ui);min-height:44px}
+.pfl-worked{margin-top:18px;padding:10px 15px;border-left:3px solid #638eb1;background:#f5f8fb}
+.pfl-worked p{font-size:14px;margin:5px 0}
+.pfl-worked .math-display{font-size:23px;display:block;overflow-x:auto}
+.pfl-worked .katex-display{margin:.35em 0}
+.pfl-scratch{margin-top:22px}
+.pfl-scratch h2{font-size:26px;margin:0 0 10px}
+.pfl-scratch .scratch-tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.pfl-scratch .scratch-tools button{font-size:14px;min-height:44px;padding:8px 13px}
+.pfl-scratch .scratch-surface{display:block;width:100%;height:240px;border:1px solid #d8d4c7;background:white;touch-action:none}
+.pfl-scratch .slope-small{font-size:12px;color:var(--ffg-muted)}
+.pfl-complete{max-width:800px;margin:25px auto;text-align:center;padding:30px!important}
+.pfl-complete>span{font-size:48px;color:#b88a2b;letter-spacing:10px}
+.pfl-complete h2{font-size:40px;margin:15px 0}
+.pfl-complete p{font-size:20px;line-height:1.5}
+.pfl-complete>strong{display:block;font:700 58px var(--study-hand);margin:15px 0}
+@media(max-width:760px){.pfl-workspace{grid-template-columns:1fr;gap:18px}.pfl-mastery{grid-template-columns:repeat(3,minmax(0,1fr))}.pfl-mastery>div{flex-wrap:wrap;font-size:12px;gap:4px}.pfl-grid{max-height:none}.pfl-mode{gap:8px}.pfl-mode .ffg-chip{font-size:15px}.pfl-mode>button{font-size:12px}.pfl-task h2{font-size:27px}.pfl-eval-equation{font-size:30px}.pfl-app .ffg-identity{min-width:80px}.pfl-app .ffg-header{gap:8px}.pfl-app .ffg-identity strong{font-size:21px}.pfl-keypad{max-width:none}.pfl-worked .math-display{font-size:21px}}
+
+@media(min-width:761px){
+ .pfl-app{padding-top:12px}
+ .pfl-compact-header{margin-bottom:6px}
+ .pfl-compact-header>div:first-child{display:flex;align-items:center;gap:13px}
+ .pfl-compact-header .ffg-eyebrow{display:none}
+ .pfl-compact-header h1{font-size:25px;line-height:1.1}
+ .pfl-compact-header .ffg-identity strong{font-size:21px}
+ .pfl-app .ffg-progress{margin-bottom:8px}
+ .pfl-mastery{margin:8px 0;gap:7px}
+ .pfl-mastery>div{padding:6px 10px}
+ .pfl-mastery strong{font-size:24px;line-height:1}
+ .pfl-mode{margin:4px 0 8px}
+ .pfl-grid{max-height:clamp(360px,calc(100dvh - 370px),380px)}
+ .pfl-app .pfl-paper{padding:12px 14px}
+}

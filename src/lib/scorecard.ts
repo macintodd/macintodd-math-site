@@ -2,6 +2,7 @@ import {skillGoals,skillTitles,type RigidSkill} from './rigid-skills.ts'
 import {practiceApps} from '@/content/practice-apps'
 export const reportColors={activity:'#174d8c',student:'#653d91',score:'#087366',text:'#111111',muted:'#425466',paper:'#ffffff'}
 const skills:Record<string,string>={
+ 'beta/graph-evaluate-parent-functions':'Graph and evaluate constant, linear, absolute value, quadratic, and cubic parent functions.',
  'beta/function-family-equations':'Identify constant, linear, absolute value, quadratic, and cubic function families from equations.',
  'beta/function-family-graphs':'Recognize constant, linear, absolute value, quadratic, and cubic function families from their graphs.',
  'precalculus-quiz-review':'Evaluate step and piecewise functions, identify parent graphs, and describe, graph, and write function transformations.',
